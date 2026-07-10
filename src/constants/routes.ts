@@ -9,6 +9,7 @@ import {
   Activity,
   Mail,
   Settings,
+  MessageSquare,
 } from "lucide-react";
 
 export const NAVIGATION_ROUTES = [
@@ -42,7 +43,11 @@ export const NAVIGATION_ROUTES = [
     href: "/articles",
     icon: BookOpen,
   },
-
+  {
+    name: "Guestbook",
+    href: "/guestbook",
+    icon: MessageSquare,
+  },
   {
     name: "Timeline",
     href: "/timeline",
