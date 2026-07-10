@@ -17,12 +17,12 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
   return (
     <div className="flex flex-col gap-4">
       {/* Main Large Image */}
-      <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-border shadow-sm">
+      <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-border shadow-sm bg-secondary/5 flex items-center justify-center">
         <Image 
           src={mainImage} 
           alt={`${title} Preview`}
           fill
-          className="object-cover"
+          className="object-contain p-2"
           sizes="(max-width: 1200px) 100vw, 1200px"
           priority
         />
