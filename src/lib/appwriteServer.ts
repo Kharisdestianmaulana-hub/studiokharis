@@ -12,8 +12,8 @@ export async function fetchGuestbookMessages() {
         "X-Appwrite-Project": APPWRITE_PROJECT_ID,
         "Content-Type": "application/json",
       },
-      // Cache with revalidation
-      next: { revalidate: 10, tags: ["guestbook"] },
+      // Disable cache so new messages appear immediately
+      cache: "no-store",
     });
 
     if (!response.ok) {
