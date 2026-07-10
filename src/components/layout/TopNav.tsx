@@ -2,8 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Search, Mail } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { Search } from "lucide-react";
 import { MobileDrawer } from "./MobileDrawer";
 import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "@/components/ui/button";
@@ -20,26 +19,6 @@ export function TopNav({ profileData }: { profileData?: any }) {
       </div>
 
       <div className="flex items-center gap-2">
-        <div className="hidden sm:flex items-center gap-2 mr-2">
-          <Button variant="ghost" size="icon" asChild className="text-muted hover:text-foreground">
-            <Link href="https://github.com" target="_blank" rel="noreferrer" title="GitHub">
-              <FaGithub className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
-            </Link>
-          </Button>
-          <Button variant="ghost" size="icon" asChild className="text-muted hover:text-foreground">
-            <Link href="https://linkedin.com" target="_blank" rel="noreferrer" title="LinkedIn">
-              <FaLinkedin className="h-5 w-5" />
-              <span className="sr-only">LinkedIn</span>
-            </Link>
-          </Button>
-          <Button variant="ghost" size="icon" asChild className="text-muted hover:text-foreground">
-            <Link href="mailto:hello@example.com" title="Email">
-              <Mail className="h-5 w-5" />
-              <span className="sr-only">Email</span>
-            </Link>
-          </Button>
-        </div>
         <div className="lg:hidden">
           <ThemeToggle />
         </div>
