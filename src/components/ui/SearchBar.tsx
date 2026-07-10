@@ -83,7 +83,7 @@ export function SearchBar() {
   };
 
   return (
-    <div ref={containerRef} className="relative hidden md:flex w-full max-w-sm">
+    <div ref={containerRef} className="relative flex w-full max-w-sm ml-2 md:ml-0">
       <form 
         onSubmit={handleSubmit}
         className={cn(
