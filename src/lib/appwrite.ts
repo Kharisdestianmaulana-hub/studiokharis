@@ -58,3 +58,28 @@ export function getAppwriteImageUrl(fileId: string): string {
   if (fileId.startsWith("http")) return fileId;
   return `${APPWRITE_ENDPOINT}/storage/buckets/${APPWRITE_IMAGES_BUCKET_ID}/files/${fileId}/view?project=${APPWRITE_PROJECT_ID}`;
 }
+
+export function getAppwriteDownloadUrl(fileId: string): string {
+  if (!fileId) return "";
+  if (fileId.startsWith("http")) return fileId;
+  return `${APPWRITE_ENDPOINT}/storage/buckets/${APPWRITE_IMAGES_BUCKET_ID}/files/${fileId}/download?project=${APPWRITE_PROJECT_ID}`;
+}
+
+export async function fetchFilesFromHub() {
+  if (!APPWRITE_PROJECT_ID || !APPWRITE_IMAGES_BUCKET_ID) return [];
+  const url = `${APPWRITE_ENDPOINT}/storage/buckets/${APPWRITE_IMAGES_BUCKET_ID}/files`;
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "X-Appwrite-Project": APPWRITE_PROJECT_ID,
+      },
+      next: { revalidate: 60 },
+    });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return data.files || [];
+  } catch (error) {
+    console.error("Error fetching files from Hub:", error);
+    return [];
+  }
+}

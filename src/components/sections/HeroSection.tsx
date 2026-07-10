@@ -4,7 +4,7 @@ import { ArrowRight, Download, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe, FaEnvelope, FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 import { getProfileData } from "@/data/profile";
 import { getSocialLinks } from "@/data/socials";
 
@@ -48,7 +48,7 @@ export async function HeroSection({ hideButtons = false }: { hideButtons?: boole
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="rounded-xl h-12 px-6">
-              <Link href="/resume.pdf" target="_blank" className="flex items-center gap-2">
+              <Link href={profileData.resumeUrl} target="_blank" className="flex items-center gap-2">
                 <Download className="w-4 h-4" />
                 Resume
               </Link>
@@ -63,6 +63,9 @@ export async function HeroSection({ hideButtons = false }: { hideButtons?: boole
             else if (p.includes("linkedin")) Icon = FaLinkedin;
             else if (p.includes("twitter") || p.includes("x")) Icon = FaTwitter;
             else if (p.includes("instagram")) Icon = FaInstagram;
+            else if (p.includes("mail") || p.includes("email")) Icon = FaEnvelope;
+            else if (p.includes("whatsapp") || p.includes("wa")) Icon = FaWhatsapp;
+            else if (p.includes("phone") || p.includes("call") || p.includes("tel")) Icon = FaPhoneAlt;
             
             return (
               <Button key={social.name} variant="ghost" size="icon" asChild className="rounded-xl text-muted hover:text-foreground">

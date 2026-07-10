@@ -1,4 +1,4 @@
-import { fetchFromHub, getAppwriteImageUrl } from "@/lib/appwrite";
+import { fetchFromHub, fetchFilesFromHub, getAppwriteImageUrl, getAppwriteDownloadUrl } from "@/lib/appwrite";
 
 export interface Bio {
   $id: string;
@@ -15,6 +15,14 @@ export async function getProfileData() {
   const documents = await fetchFromHub("public_bio");
   const bio = documents.length > 0 ? (documents[0] as Bio) : null;
   
+  // Fetch files to find the latest resume PDF
+  const files = await fetchFilesFromHub();
+  // Filter for PDF files and sort by creation date descending
+  const resumeFiles = files.filter((f: any) => f.name.toLowerCase().endsWith('.pdf'))
+                           .sort((a: any, b: any) => new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime());
+  
+  const resumeUrl = resumeFiles.length > 0 ? getAppwriteDownloadUrl(resumeFiles[0].$id) : "/resume.pdf";
+  
   if (!bio) {
     return {
       name: "User",
@@ -29,6 +37,7 @@ export async function getProfileData() {
       about: "I am a professional.",
       github_url: "",
       linkedin_url: "",
+      resumeUrl,
     };
   }
 
@@ -47,5 +56,6 @@ export async function getProfileData() {
     about: bio.about,
     github_url: bio.github_url,
     linkedin_url: bio.linkedin_url,
+    resumeUrl,
   };
 }
