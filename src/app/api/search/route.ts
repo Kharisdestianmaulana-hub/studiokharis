@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { fetchFromHub } from '@/lib/appwrite';
+import { getProjects } from '@/data/projects';
+import { getArticles } from '@/data/articles';
 
 export const revalidate = 60; // Cache for 60 seconds
 
@@ -10,26 +11,26 @@ export async function GET(request: Request) {
     
     // Fetch all needed data in parallel
     const [projects, articles] = await Promise.all([
-      fetchFromHub('public_projects', []),
-      fetchFromHub('public_articles', [])
+      getProjects(),
+      getArticles()
     ]);
 
     let results = [
       ...projects.map((p: any) => ({
-        id: p.$id,
+        id: p.id,
         title: p.title,
         description: p.description,
         type: 'Project',
-        url: `/projects/${p.$id}`,
-        imageUrl: p.thumbnail_url || p.image_url,
+        url: `/projects/${p.id}`,
+        imageUrl: p.thumbnail,
       })),
       ...articles.map((a: any) => ({
-        id: a.$id,
+        id: a.id,
         title: a.title,
-        description: a.excerpt || a.content?.substring(0, 100),
+        description: a.excerpt,
         type: 'Article',
         url: `/articles/${a.slug}`,
-        imageUrl: a.thumbnail_url,
+        imageUrl: a.cover,
       })),
     ];
 
