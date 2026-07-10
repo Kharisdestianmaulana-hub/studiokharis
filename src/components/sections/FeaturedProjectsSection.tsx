@@ -2,7 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getProjects } from "@/data/projects";
-import { ProjectCard } from "@/components/shared/ProjectCard";
+import { ProjectsGrid } from "./ProjectsGrid";
 
 export async function FeaturedProjectsSection({ showAll = false }: { showAll?: boolean }) {
   const projectsData = await getProjects();
@@ -29,11 +29,7 @@ export async function FeaturedProjectsSection({ showAll = false }: { showAll?: b
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {featuredProjects.map((project: any) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+      <ProjectsGrid projects={featuredProjects} />
       
       {!showAll && (
         <div className="mt-6 md:hidden">

@@ -6,13 +6,23 @@ import { FaGithub } from "react-icons/fa";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
-export function ProjectCard({ project }: { project: any }) {
+export function ProjectCard({ project, isListView = false }: { project: any, isListView?: boolean }) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Card className="group bg-surface border-border overflow-hidden rounded-[16px] hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-          <Link href={`/projects/${project.id}`} className="block aspect-[16/9] w-full bg-secondary/10 relative overflow-hidden border-b border-border">
+        <Card className={cn(
+          "group bg-surface border-border overflow-hidden rounded-[16px] hover:-translate-y-1 hover:shadow-md transition-all duration-300",
+          isListView ? "flex flex-col md:flex-row" : "flex flex-col"
+        )}>
+          <Link 
+            href={`/projects/${project.id}`} 
+            className={cn(
+              "block bg-secondary/10 relative overflow-hidden",
+              isListView ? "aspect-[16/9] w-full md:w-1/3 md:border-r md:border-b-0 border-b border-border shrink-0" : "aspect-[16/9] w-full border-b border-border"
+            )}
+          >
             {project.thumbnail ? (
               <Image 
                 src={project.thumbnail} 
@@ -27,7 +37,7 @@ export function ProjectCard({ project }: { project: any }) {
               </div>
             )}
           </Link>
-          <CardContent className="p-6">
+          <CardContent className={cn("p-6 flex flex-col flex-1", isListView && "justify-center")}>
             <div className="flex justify-between items-start gap-4 mb-4">
               <div className="flex flex-col gap-1">
                 <Link href={`/projects/${project.id}`}>
@@ -41,7 +51,7 @@ export function ProjectCard({ project }: { project: any }) {
                   <span>{new Date(project.date).toLocaleDateString("en-US", { month: "short", year: "numeric" })}</span>
                 </div>
               </div>
-              <Badge variant="outline" className="text-xs bg-transparent">
+              <Badge variant="outline" className="text-xs bg-transparent shrink-0">
                 {project.status}
               </Badge>
             </div>
