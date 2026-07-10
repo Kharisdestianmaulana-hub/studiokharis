@@ -36,13 +36,18 @@ export async function createGuestbookMessage(data: { name: string; message: stri
 
   const url = `${APPWRITE_ENDPOINT}/databases/${APPWRITE_DATABASE_ID}/collections/${GUESTBOOK_COLLECTION_ID}/documents`;
   
+  const headers: Record<string, string> = {
+    "X-Appwrite-Project": APPWRITE_PROJECT_ID,
+    "Content-Type": "application/json",
+  };
+
+  if (APPWRITE_API_KEY) {
+    headers["X-Appwrite-Key"] = APPWRITE_API_KEY;
+  }
+
   const response = await fetch(url, {
     method: "POST",
-    headers: {
-      "X-Appwrite-Project": APPWRITE_PROJECT_ID,
-      "X-Appwrite-Key": APPWRITE_API_KEY,
-      "Content-Type": "application/json",
-    },
+    headers,
     body: JSON.stringify({
       documentId: "unique()",
       data,
