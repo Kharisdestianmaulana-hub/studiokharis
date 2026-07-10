@@ -21,25 +21,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
       isCollapsed ? "w-[80px]" : "w-[280px]"
     )}>
       {/* Top Profile / Header & Toggle */}
-      <div className="p-4 flex flex-col gap-4">
-        <div className={cn("flex w-full", isCollapsed ? "justify-center" : "justify-end")}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8 shrink-0 text-muted hover:text-foreground"
-                onClick={() => setIsCollapsed(!isCollapsed)}
-              >
-                {isCollapsed ? <PanelLeft className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="right">
-              {isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-            </TooltipContent>
-          </Tooltip>
-        </div>
-
+      <div className={cn("p-4 flex", isCollapsed ? "flex-col items-center gap-4" : "items-center justify-between")}>
         {!isCollapsed && (
           <div className="flex items-center gap-3 overflow-hidden px-1">
             <Avatar className="h-10 w-10 border border-border shrink-0">
@@ -52,7 +34,23 @@ export function Sidebar({ profileData }: { profileData?: any }) {
             </div>
           </div>
         )}
-        
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn("h-8 w-8 shrink-0 text-muted hover:text-foreground", !isCollapsed && "ml-2")}
+              onClick={() => setIsCollapsed(!isCollapsed)}
+            >
+              {isCollapsed ? <PanelLeft className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="right">
+            {isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+          </TooltipContent>
+        </Tooltip>
+
         {isCollapsed && (
           <Avatar className="h-10 w-10 border border-border shrink-0 mx-auto">
             <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} />
