@@ -41,10 +41,6 @@ export async function createGuestbookMessage(data: { name: string; message: stri
     "Content-Type": "application/json",
   };
 
-  if (APPWRITE_API_KEY) {
-    headers["X-Appwrite-Key"] = APPWRITE_API_KEY;
-  }
-
   const response = await fetch(url, {
     method: "POST",
     headers,
