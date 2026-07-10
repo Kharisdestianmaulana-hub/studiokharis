@@ -26,9 +26,6 @@ export async function HeroSection({ hideButtons = false }: { hideButtons?: boole
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
             {profileData.name}
           </h1>
-          <h2 className="text-xl md:text-2xl text-muted font-medium">
-            {profileData.role}
-          </h2>
         </div>
       </div>
 
