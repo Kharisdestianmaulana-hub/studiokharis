@@ -1,6 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import { getArticles } from "@/data/articles";
 import { ArticleCard } from "@/components/shared/ArticleCard";
 
@@ -23,22 +23,34 @@ export async function ArticlesSection() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {articlesData.map((article: any) => (
-          <Link href={`/articles/${article.slug}`} key={article.id} className="block h-full">
-            <ArticleCard article={article} />
-          </Link>
-        ))}
-      </div>
-      
-      <div className="mt-6 md:hidden">
-        <Link 
-          href="/articles" 
-          className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-xl py-3 hover:bg-secondary/10 transition-colors"
-        >
-          View all articles <ArrowRight className="w-4 h-4" />
-        </Link>
-      </div>
+      {articlesData.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed rounded-2xl border-border bg-secondary/5 w-full">
+          <BookOpen className="w-12 h-12 text-muted-foreground mb-4 opacity-50" />
+          <h3 className="text-lg font-medium">No articles yet</h3>
+          <p className="text-muted-foreground mt-1 max-w-sm">
+            I'm currently working on some exciting content. Check back soon for new articles!
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {articlesData.map((article: any) => (
+              <Link href={`/articles/${article.slug}`} key={article.id} className="block h-full">
+                <ArticleCard article={article} />
+              </Link>
+            ))}
+          </div>
+          
+          <div className="mt-6 md:hidden">
+            <Link 
+              href="/articles" 
+              className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-xl py-3 hover:bg-secondary/10 transition-colors"
+            >
+              View all articles <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </>
+      )}
     </section>
   );
 }
