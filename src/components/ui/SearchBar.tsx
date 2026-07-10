@@ -16,6 +16,7 @@ export function SearchBar() {
   
   const debouncedQuery = useDebounce(query, 300);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
@@ -26,6 +27,18 @@ export function SearchBar() {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Keyboard shortcut Ctrl+K / Cmd+K to focus search
+  React.useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
   }, []);
 
   // Fetch results when debounced query changes
@@ -80,6 +93,7 @@ export function SearchBar() {
       >
         <Search className="w-4 h-4 text-muted-foreground shrink-0" />
         <input
+          ref={inputRef}
           type="text"
           value={query}
           onChange={(e) => {
@@ -87,14 +101,22 @@ export function SearchBar() {
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          placeholder="Search projects, articles..."
+          placeholder="Search..."
           className="flex-1 h-full px-2 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
         />
+        {!query && (
+          <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.4rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex text-muted-foreground">
+            <span className="text-xs">⌘</span>K
+          </kbd>
+        )}
         {query && (
           <button 
             type="button"
-            onClick={() => setQuery("")}
-            className="p-1 hover:bg-muted rounded-md text-muted-foreground"
+            onClick={() => {
+              setQuery("");
+              inputRef.current?.focus();
+            }}
+            className="p-1 hover:bg-muted rounded-md text-muted-foreground absolute right-2"
           >
             <X className="w-3 h-3" />
           </button>
