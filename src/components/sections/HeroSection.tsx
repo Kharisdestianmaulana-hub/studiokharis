@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe, FaEnvelope, FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 import { getProfileData } from "@/data/profile";
 import { getSocialLinks } from "@/data/socials";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export async function HeroSection({ hideButtons = false }: { hideButtons?: boolean } = {}) {
   const profileData = await getProfileData();
@@ -38,18 +39,29 @@ export async function HeroSection({ hideButtons = false }: { hideButtons?: boole
       <div className="flex flex-wrap items-center gap-4">
         {!hideButtons && (
           <>
-            <Button size="lg" className="rounded-xl h-12 px-6">
-              <Link href="/projects" className="flex items-center gap-2">
-                View Projects
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="rounded-xl h-12 px-6">
-              <Link href={profileData.resumeUrl} target="_blank" className="flex items-center gap-2">
-                <Download className="w-4 h-4" />
-                Resume
-              </Link>
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button size="lg" className="rounded-xl h-12 px-6" asChild>
+                  <Link href="/projects" className="flex items-center gap-2">
+                    View Projects
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>View all my projects</TooltipContent>
+            </Tooltip>
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button size="lg" variant="outline" className="rounded-xl h-12 px-6" asChild>
+                  <Link href={profileData.resumeUrl} target="_blank" className="flex items-center gap-2">
+                    <Download className="w-4 h-4" />
+                    Resume
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Download my resume</TooltipContent>
+            </Tooltip>
           </>
         )}
         <div className="flex items-center gap-2 ml-2">
@@ -65,11 +77,16 @@ export async function HeroSection({ hideButtons = false }: { hideButtons?: boole
             else if (p.includes("phone") || p.includes("call") || p.includes("tel")) Icon = FaPhoneAlt;
             
             return (
-              <Button key={social.name} variant="ghost" size="icon" asChild className="rounded-xl text-muted hover:text-foreground">
-                <a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
-                  <Icon className="w-5 h-5" />
-                </a>
-              </Button>
+              <Tooltip key={social.name}>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon" asChild className="rounded-xl text-muted hover:text-foreground">
+                    <a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
+                      <Icon className="w-5 h-5" />
+                    </a>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>{social.name}</TooltipContent>
+              </Tooltip>
             );
           })}
         </div>
