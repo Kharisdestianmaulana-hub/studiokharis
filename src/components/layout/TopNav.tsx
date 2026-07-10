@@ -6,7 +6,7 @@ import { Search } from "lucide-react";
 import { MobileDrawer } from "./MobileDrawer";
 import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "@/components/ui/button";
-import { SearchBar } from "@/components/ui/SearchBar";
+import { CommandMenu } from "@/components/shared/CommandMenu";
 
 export function TopNav({ profileData }: { profileData?: any }) {
   return (
@@ -15,7 +15,7 @@ export function TopNav({ profileData }: { profileData?: any }) {
         {/* Mobile Drawer Trigger */}
         <MobileDrawer profileData={profileData} />
         
-        <SearchBar />
+        <CommandMenu />
       </div>
 
       <div className="flex items-center gap-2">

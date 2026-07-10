@@ -1,5 +1,6 @@
 import { AboutSection } from "@/components/sections/AboutSection";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { ScrollReveal } from "@/components/shared/ScrollReveal";
 
 export const metadata = {
   title: "About | Studiokharis",
@@ -9,8 +10,12 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="flex flex-col gap-16 pb-16 pt-2">
-      <HeroSection hideButtons={true} />
-      <AboutSection />
+      <ScrollReveal delay={0.1}>
+        <HeroSection hideButtons={true} />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <AboutSection />
+      </ScrollReveal>
     </div>
   );
 }
