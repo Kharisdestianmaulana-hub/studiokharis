@@ -4,28 +4,58 @@ import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Send, ExternalLink } from "lucide-react";
+import { Send, ExternalLink, Calendar, MapPin } from "lucide-react";
 import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
-import { getSocialLinks } from "@/data/socials";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Invalid email address." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  name: z.string().min(2, { message: "Name is required." }),
+  company: z.string().optional(),
+  service: z.string().min(2, { message: "Service is required." }),
+  email: z.string().email({ message: "Invalid email." }),
+  message: z.string().min(5, { message: "Please provide a few more details." }),
 });
 
 export function ContactSection({ socialsData }: { socialsData: any[] }) {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  
+  const [time, setTime] = React.useState<string>("");
+
+  React.useEffect(() => {
+    // Update time every second
+    const updateClock = () => {
+      const now = new Date();
+      // Format to WIB (UTC+7)
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: "Asia/Jakarta",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      };
+      setTime(now.toLocaleTimeString("en-US", options));
+    };
+
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      company: "",
+      service: "",
       email: "",
       message: "",
     },
@@ -43,79 +73,124 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
     }, 1500);
   }
 
+  // Helper for input classes to look like a mad-libs blank
+  const blankInputClass = "inline-flex h-8 w-[200px] border-b-2 border-dashed border-foreground/30 bg-transparent px-2 py-1 text-center text-foreground placeholder:text-muted-foreground/50 focus-visible:outline-none focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50 transition-colors mx-1";
+  
+  // Custom error class
+  const errorClass = "border-danger text-danger placeholder:text-danger/50";
+
   return (
     <section id="contact" className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both">
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2">
           <h3 className="text-2xl font-bold tracking-tight text-foreground">Get in Touch</h3>
           <p className="text-muted text-sm md:text-base max-w-xl">
-            Have a question or want to work together? Leave a message below.
+            Let's build something amazing together. Fill in the blanks or book a call directly.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           <Card className="lg:col-span-3 bg-surface border-border overflow-hidden rounded-[16px]">
-            <CardContent className="p-6 md:p-8">
-              <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="name" className="text-sm font-medium text-foreground">Name</label>
-                    <Input 
-                      id="name" 
-                      placeholder="John Doe" 
-                      {...form.register("name")}
-                      className="bg-background border-border"
-                    />
-                    {form.formState.errors.name && (
-                      <p className="text-xs text-danger">{form.formState.errors.name.message}</p>
-                    )}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
-                    <Input 
-                      id="email" 
-                      placeholder="john@example.com" 
-                      {...form.register("email")}
-                      className="bg-background border-border"
-                    />
-                    {form.formState.errors.email && (
-                      <p className="text-xs text-danger">{form.formState.errors.email.message}</p>
-                    )}
-                  </div>
-                </div>
+            <CardContent className="p-6 md:p-8 flex flex-col justify-between h-full">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col h-full gap-8">
                 
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="message" className="text-sm font-medium text-foreground">Message</label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="Tell me about your project..." 
-                    className="min-h-[150px] bg-background border-border resize-y"
-                    {...form.register("message")}
+                {/* Mad Libs Form */}
+                <div className="text-2xl md:text-3xl font-medium leading-[2] md:leading-[2.2] text-secondary-text">
+                  Hi Kharis! My name is
+                  <input
+                    {...form.register("name")}
+                    placeholder="your name"
+                    className={`${blankInputClass} ${form.formState.errors.name ? errorClass : ''}`}
+                    style={{ width: "220px" }}
                   />
-                  {form.formState.errors.message && (
-                    <p className="text-xs text-danger">{form.formState.errors.message.message}</p>
-                  )}
+                  and I work at
+                  <input
+                    {...form.register("company")}
+                    placeholder="company (optional)"
+                    className={blankInputClass}
+                    style={{ width: "280px" }}
+                  />
+                  . I'd love to work with you on
+                  <span className="inline-block mx-1 align-middle">
+                    <Select onValueChange={(v) => form.setValue("service", v)} defaultValue={form.getValues("service")}>
+                      <SelectTrigger className={`h-8 border-b-2 border-t-0 border-l-0 border-r-0 border-dashed border-foreground/30 bg-transparent rounded-none focus:ring-0 focus:border-primary w-[260px] text-lg text-foreground px-2 py-0 ${form.formState.errors.service ? errorClass : ''}`}>
+                        <SelectValue placeholder="select a service" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="a new website">a new website</SelectItem>
+                        <SelectItem value="a mobile app">a mobile app</SelectItem>
+                        <SelectItem value="ui/ux design">ui/ux design</SelectItem>
+                        <SelectItem value="consulting">consulting</SelectItem>
+                        <SelectItem value="something else">something else</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </span>
+                  . You can reach me at
+                  <input
+                    {...form.register("email")}
+                    placeholder="your email address"
+                    className={`${blankInputClass} ${form.formState.errors.email ? errorClass : ''}`}
+                    style={{ width: "320px" }}
+                  />
+                  . Here are some more details about the project:
+                  <input
+                    {...form.register("message")}
+                    placeholder="brief project details..."
+                    className={`${blankInputClass} ${form.formState.errors.message ? errorClass : ''}`}
+                    style={{ width: "100%", maxWidth: "100%", marginTop: "8px" }}
+                  />
                 </div>
                 
-                <Button 
-                  type="submit" 
-                  disabled={isSubmitting} 
-                  className="w-full sm:w-auto self-start rounded-xl px-8"
-                >
-                  {isSubmitting ? (
-                    "Sending..."
-                  ) : (
-                    <>
-                      Send Message
-                      <Send className="w-4 h-4 ml-2" />
-                    </>
-                  )}
-                </Button>
+                <div className="flex flex-wrap items-center gap-4 mt-auto pt-4">
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting} 
+                    className="rounded-xl px-8 h-12"
+                  >
+                    {isSubmitting ? (
+                      "Sending..."
+                    ) : (
+                      <>
+                        Send Message
+                        <Send className="w-4 h-4 ml-2" />
+                      </>
+                    )}
+                  </Button>
+                  <a href="https://cal.com/riray" target="_blank" rel="noreferrer">
+                    <Button type="button" variant="outline" className="rounded-xl px-8 h-12 border-primary/20 hover:bg-primary/5">
+                      Book a 15-min call
+                      <Calendar className="w-4 h-4 ml-2 text-primary" />
+                    </Button>
+                  </a>
+                </div>
               </form>
             </CardContent>
           </Card>
           
           <div className="lg:col-span-2 flex flex-col gap-6">
+            {/* Availability & Time Card */}
+            <Card className="bg-surface border-border overflow-hidden rounded-[16px]">
+              <CardContent className="p-6 flex flex-col gap-5">
+                <div className="flex items-center gap-3">
+                  <div className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                  </div>
+                  <span className="text-sm font-medium text-foreground">Available for new projects</span>
+                </div>
+                
+                <div className="flex items-center justify-between border-t border-border/50 pt-4 mt-1">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <MapPin className="w-4 h-4" />
+                    <span className="text-sm">Local time (WIB)</span>
+                  </div>
+                  <span className="font-mono text-sm font-medium text-foreground">
+                    {time || "Loading..."}
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+
             <Card className="bg-surface border-border overflow-hidden rounded-[16px] h-full">
               <CardContent className="p-6 md:p-8 flex flex-col h-full gap-6">
                 <div>
