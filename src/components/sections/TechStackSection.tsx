@@ -1,6 +1,7 @@
 import * as React from "react";
 import { getTechStack } from "@/data/tech-stack";
 import { TechStackClient } from "./TechStackClient";
+import { WorkspaceSetup } from "./WorkspaceSetup";
 
 export async function TechStackSection() {
   const techStackData = await getTechStack();
@@ -15,6 +16,7 @@ export async function TechStackSection() {
         </div>
 
         <TechStackClient techStackData={techStackData} />
+        <WorkspaceSetup />
       </div>
     </section>
   );
