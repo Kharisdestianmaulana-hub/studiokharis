@@ -5,9 +5,7 @@ import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { HoverBadge } from "@/components/ui/HoverBadge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { RichText } from "@/components/ui/RichText";
 import { cn } from "@/lib/utils";
 
 export function ProjectCard({ project, isListView = false }: { project: any, isListView?: boolean }) {
@@ -58,14 +56,15 @@ export function ProjectCard({ project, isListView = false }: { project: any, isL
               </Badge>
             </div>
             
-            <RichText 
-              content={project.description} 
-              className="text-sm text-secondary-text mb-6 line-clamp-2" 
-            />
+            <p className="text-sm text-secondary-text mb-6 line-clamp-2">
+              {project.description}
+            </p>
             
             <div className="flex flex-wrap gap-2 mb-6">
               {project.techStack.map((tech: any) => (
-                <HoverBadge key={tech} tech={tech} />
+                <Badge key={tech} variant="secondary" className="bg-secondary/10 text-secondary-text hover:bg-secondary/20 rounded-md font-normal text-xs">
+                  {tech}
+                </Badge>
               ))}
             </div>
             
