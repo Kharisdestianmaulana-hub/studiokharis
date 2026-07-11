@@ -29,7 +29,7 @@ export async function FeaturedProjectsSection({ showAll = false }: { showAll?: b
         )}
       </div>
 
-      <ProjectsGrid projects={featuredProjects} />
+      <ProjectsGrid projects={featuredProjects} showFilters={showAll} />
       
       {!showAll && (
         <div className="mt-6 md:hidden">
