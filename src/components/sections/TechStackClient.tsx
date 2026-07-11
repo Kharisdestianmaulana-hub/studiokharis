@@ -9,7 +9,7 @@ import {
 import { 
   SiFlutter, SiTypescript, SiExpress, SiMongodb, SiPostgresql, 
   SiMysql, SiFirebase, SiTailwindcss, SiNextdotjs, SiGodotengine,
-  SiDjango, SiFastapi, SiGraphql, SiRedis
+  SiDjango, SiFastapi, SiGraphql, SiRedis, SiFigma, SiUnity, SiCsharp, SiAppwrite, SiAdobeillustrator, SiAdobephotoshop
 } from "react-icons/si";
 import { Code2 } from "lucide-react";
 import { TechStackCategory, TechStackItem } from "@/data/tech-stack";
@@ -33,7 +33,8 @@ const getTechIcon = (name: string) => {
     case normalized.includes("python"): return { icon: FaPython, color: "#3776AB" };
     case normalized.includes("django"): return { icon: SiDjango, color: "#092E20" };
     case normalized.includes("fastapi"): return { icon: SiFastapi, color: "#009688" };
-    case normalized.includes("java"): return { icon: FaJava, color: "#007396" };
+    case normalized.includes("java") && !normalized.includes("javascript"): return { icon: FaJava, color: "#007396" };
+    case normalized.includes("c#"): return { icon: SiCsharp, color: "#239120" };
     case normalized.includes("php"): return { icon: FaPhp, color: "#777BB4" };
     case normalized.includes("mongo"): return { icon: SiMongodb, color: "#47A248" };
     case normalized.includes("postgres"): return { icon: SiPostgresql, color: "#336791" };
@@ -45,6 +46,11 @@ const getTechIcon = (name: string) => {
     case normalized.includes("aws"): return { icon: FaAws, color: "#232F3E" };
     case normalized.includes("git"): return { icon: FaGithub, color: "#181717" };
     case normalized.includes("gd script") || normalized.includes("godot"): return { icon: SiGodotengine, color: "#478CBF" };
+    case normalized.includes("figma"): return { icon: SiFigma, color: "#F24E1E" };
+    case normalized.includes("unity"): return { icon: SiUnity, color: "#000000" };
+    case normalized.includes("appwrite"): return { icon: SiAppwrite, color: "#FD366E" };
+    case normalized.includes("illustrator"): return { icon: SiAdobeillustrator, color: "#FF9A00" };
+    case normalized.includes("photoshop"): return { icon: SiAdobephotoshop, color: "#31A8FF" };
     default: return { icon: Code2, color: "var(--color-accent)" };
   }
 };
