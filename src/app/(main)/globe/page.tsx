@@ -18,17 +18,6 @@ export default async function GlobePage() {
       size: 0.1, // Fixed size for each marker
     }));
 
-  // Let's add some default markers for aesthetics if the database is mostly empty
-  const defaultMarkers: { location: [number, number], size: number }[] = [
-    { location: [-6.2088, 106.8456], size: 0.1 }, // Jakarta
-    { location: [37.7749, -122.4194], size: 0.05 }, // San Francisco
-    { location: [51.5074, -0.1278], size: 0.05 }, // London
-    { location: [35.6762, 139.6503], size: 0.05 }, // Tokyo
-    { location: [1.3521, 103.8198], size: 0.1 }, // Singapore
-  ];
-
-  const allMarkers = [...defaultMarkers, ...markers];
-
   return (
     <div className="flex flex-col gap-8 pb-16 pt-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
       <div className="flex flex-col items-center text-center gap-4 max-w-2xl mx-auto px-4">
@@ -39,7 +28,7 @@ export default async function GlobePage() {
         </p>
       </div>
 
-      <GlobeSection markers={allMarkers} />
+      <GlobeSection markers={markers} />
     </div>
   );
 }

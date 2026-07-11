@@ -5,6 +5,9 @@ import createGlobe from "cobe";
 
 export function GlobeSection({ markers }: { markers: { location: [number, number], size: number }[] }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pointerInteracting = useRef<number | null>(null);
+  const pointerInteractionMovement = useRef(0);
+  const fadeMask = "radial-gradient(circle at center, transparent 30%, black 100%)";
 
   useEffect(() => {
     let phi = 0;
@@ -26,9 +29,11 @@ export function GlobeSection({ markers }: { markers: { location: [number, number
       glowColor: [1, 1, 1],
       markers: markers,
       onRender: (state: any) => {
-        // Rotate globe automatically
-        state.phi = phi;
-        phi += 0.003;
+        // If not interacting, auto-rotate
+        if (pointerInteracting.current === null) {
+          phi += 0.003;
+        }
+        state.phi = phi + pointerInteractionMovement.current;
       }
     } as any);
 
@@ -39,16 +44,36 @@ export function GlobeSection({ markers }: { markers: { location: [number, number
 
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-[60vh] relative overflow-hidden">
-      <div className="absolute inset-0 bg-background/50 z-10 pointer-events-none" style={{ maskImage: "radial-gradient(circle at center, transparent 30%, black 100%)", WebkitMaskImage: "radial-gradient(circle at center, transparent 30%, black 100%)" }} />
+      <div className="absolute inset-0 bg-background/50 z-10 pointer-events-none" style={{ maskImage: fadeMask, WebkitMaskImage: fadeMask }} />
       <div className="relative w-full max-w-[600px] aspect-square flex items-center justify-center opacity-90 transition-opacity duration-1000">
         <canvas
           ref={canvasRef}
+          onPointerDown={(e) => {
+            pointerInteracting.current = e.clientX;
+            canvasRef.current!.style.cursor = 'grabbing';
+          }}
+          onPointerUp={() => {
+            pointerInteracting.current = null;
+            canvasRef.current!.style.cursor = 'grab';
+          }}
+          onPointerOut={() => {
+            pointerInteracting.current = null;
+            canvasRef.current!.style.cursor = 'grab';
+          }}
+          onPointerMove={(e) => {
+            if (pointerInteracting.current !== null) {
+              const delta = e.clientX - pointerInteracting.current;
+              pointerInteracting.current = e.clientX;
+              pointerInteractionMovement.current += delta / 200;
+            }
+          }}
           style={{
             width: "100%",
             height: "100%",
             contain: "layout paint size",
             opacity: 1,
             transition: "opacity 1s ease",
+            cursor: "grab",
           }}
         />
       </div>
