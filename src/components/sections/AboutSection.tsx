@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { getProfileData } from "@/data/profile";
+import { RichText } from "@/components/ui/RichText";
 import { MapPin, Link as LinkIcon, Mail } from "lucide-react";
 
 export async function AboutSection() {
@@ -14,7 +15,7 @@ export async function AboutSection() {
           <CardContent className="p-6 md:p-8 flex flex-col md:flex-row gap-8">
             <div className="flex-1 flex flex-col gap-6">
               <div className="text-secondary-text leading-relaxed space-y-4 whitespace-pre-wrap">
-                <div dangerouslySetInnerHTML={{ __html: profileData.about }} />
+                <RichText content={profileData.about} />
               </div>
             </div>
             
