@@ -24,6 +24,8 @@ const config = {
         ring: "var(--color-accent)",
         background: "var(--color-background)",
         foreground: "var(--color-primary-text)",
+        surface: "var(--color-surface)",
+        "secondary-text": "var(--color-secondary-text)",
         primary: {
           DEFAULT: "var(--color-primary)",
           foreground: "var(--color-surface)",
