@@ -119,6 +119,10 @@ export function PageTransition() {
       
       // Wait for blocks to fully cover screen (1000ms), then navigate!
       const tNav = setTimeout(() => {
+        // Preemptively update lastPathname so the Back/Forward watcher ignores this route change
+        const targetPath = pendingRoute.split('?')[0].split('#')[0];
+        lastPathname.current = targetPath;
+        
         router.push(pendingRoute);
         setPendingRoute(null);
         
