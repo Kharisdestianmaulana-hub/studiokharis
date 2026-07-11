@@ -126,8 +126,13 @@ export async function fetchGlobeCoordinates() {
 
     const data = await response.json();
     return data.documents.map((doc: any) => ({
+      id: doc.$id,
       latitude: doc.latitude,
-      longitude: doc.longitude
+      longitude: doc.longitude,
+      name: doc.name,
+      message: doc.message,
+      avatarUrl: doc.avatarUrl,
+      createdAt: doc.$createdAt,
     }));
   } catch (error) {
     console.error("Error fetching globe coordinates:", error);
