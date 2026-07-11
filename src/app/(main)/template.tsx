@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useSettingsStore } from "@/store/settingsStore";
 import { ReactNode } from "react";
+import { PageTransition } from "@/components/layout/PageTransition";
 
 export default function Template({ children }: { children: ReactNode }) {
   const { reducedMotion } = useSettingsStore();
@@ -12,14 +13,8 @@ export default function Template({ children }: { children: ReactNode }) {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className="w-full h-full"
-    >
-      {children}
-    </motion.div>
+    <div className="w-full h-full relative">
+      <PageTransition>{children}</PageTransition>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { DynamicFavicon } from "@/components/layout/DynamicFavicon";
-
+import { RouteTracker } from "@/components/layout/RouteTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   }
 };
 
+import { StoryPrologModal } from "@/components/layout/StoryPrologModal";
+import { StoryOverlay } from "@/components/layout/StoryOverlay";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased min-h-screen bg-background text-foreground">
+        <RouteTracker />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -43,8 +47,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <DynamicFavicon />
+          <StoryPrologModal />
           {children}
-          <Toaster />
+          <StoryOverlay />
+          <Toaster position="bottom-right" />
 
         </ThemeProvider>
       </body>

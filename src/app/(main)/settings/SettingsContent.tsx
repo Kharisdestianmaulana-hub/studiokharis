@@ -1,10 +1,11 @@
 "use client";
 
 import { useSettingsStore, AccentColor } from "@/store/settingsStore";
+import { useStoryStore } from "@/store/useStoryStore";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Moon, Sun, Monitor, Type, EyeOff, LayoutGrid, List, RefreshCw } from "lucide-react";
+import { Moon, Sun, Monitor, Type, EyeOff, LayoutGrid, List, RefreshCw, BookOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -207,16 +208,32 @@ export function SettingsContent() {
           <CardContent>
             <div className="flex flex-col gap-3 items-start">
               <p className="text-sm text-secondary-text">
-                Your settings are saved locally on your device. You can reset them to default at any time.
+                Ulangi kembali pengalaman naratif Visual Novel dari awal, atau atur ulang semua preferensi Anda ke bawaan pabrik.
               </p>
-              <Button 
-                variant="destructive" 
-                onClick={resetSettings}
-                className="gap-2 mt-2"
-              >
-                <RefreshCw className="w-4 h-4" />
-                Reset All Settings
-              </Button>
+              
+              <div className="flex flex-wrap gap-3 mt-2">
+                <Button 
+                  variant="outline" 
+                  onClick={() => {
+                    useStoryStore.getState().setHasChosen(false);
+                    useStoryStore.getState().resetStory();
+                    window.location.href = "/";
+                  }}
+                  className="gap-2 border-border hover:bg-secondary/20 hover:text-foreground"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  Restart Story Mode
+                </Button>
+                
+                <Button 
+                  variant="destructive" 
+                  onClick={resetSettings}
+                  className="gap-2"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  Reset All Settings
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>

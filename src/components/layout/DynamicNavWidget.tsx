@@ -48,6 +48,7 @@ export function DynamicNavWidget() {
   // Format breadcrumbs: e.g., /projects/123 -> ["projects", "123"] -> "projects"
   const paths = pathname.split('/').filter(Boolean);
   const currentPath = paths.length > 0 ? paths[0] : "home";
+  const displayPath = currentPath === "globe" ? "visitor map" : currentPath.replace('-', ' ');
 
   return (
     <div className="hidden lg:flex items-center text-sm ml-4 relative h-6 overflow-hidden min-w-[250px]">
@@ -60,7 +61,7 @@ export function DynamicNavWidget() {
       >
         <span className="text-foreground font-medium">Kharis</span>
         <ChevronRight className="w-3 h-3 mx-1" />
-        <span className="capitalize">{currentPath.replace('-', ' ')}</span>
+        <span className="capitalize">{displayPath}</span>
       </div>
 
       {/* State 1: Location & Time */}

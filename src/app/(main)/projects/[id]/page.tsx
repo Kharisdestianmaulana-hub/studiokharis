@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import { getProjects } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { ProjectGallery } from "@/components/shared/ProjectGallery";
+import { SetTransitionTitle } from "@/components/layout/SetTransitionTitle";
 
 export async function generateStaticParams() {
   const projects = await getProjects();
@@ -27,6 +28,7 @@ export default async function ProjectDetailPage(props: { params: Promise<{ id: s
 
   return (
     <article className="flex flex-col gap-8 pb-16 pt-8 animate-in fade-in duration-700">
+      <SetTransitionTitle title={`Project / ${project.title}`} />
       <Link 
         href="/projects" 
         className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors w-fit"

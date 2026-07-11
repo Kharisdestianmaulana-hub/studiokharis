@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { MobileDrawer } from "./MobileDrawer";
-import { ThemeToggle } from "./ThemeToggle";
 import { DynamicNavWidget } from "./DynamicNavWidget";
 import { DynamicLogo } from "./DynamicLogo";
 import { Button } from "@/components/ui/button";
@@ -32,9 +31,7 @@ export function TopNav({ profileData }: { profileData?: any }) {
 
       {/* Right Section */}
       <div className="flex items-center gap-2 md:min-w-[200px] justify-end">
-        <div className="lg:hidden">
-          <ThemeToggle />
-        </div>
+        {/* Placeholder for future actions if needed */}
       </div>
     </header>
   );
