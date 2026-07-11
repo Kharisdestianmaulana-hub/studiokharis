@@ -123,7 +123,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
             key={`${pathname}-${i}`}
             custom={i}
             variants={blockVariants}
-            initial="animate"
+            initial="initial"
             animate={seqPhase === 5 ? "exit" : "animate"}
             className="flex-1 bg-background shadow-[0_0_15px_rgba(0,0,0,0.5)] border-y border-foreground/10"
           />
