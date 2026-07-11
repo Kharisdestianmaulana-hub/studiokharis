@@ -1,10 +1,12 @@
 import * as React from "react";
 import { getTechStack } from "@/data/tech-stack";
+import { getProjects } from "@/data/projects";
 import { TechStackClient } from "./TechStackClient";
 import { WorkspaceSetup } from "./WorkspaceSetup";
 
 export async function TechStackSection() {
   const techStackData = await getTechStack();
+  const projects = await getProjects();
   return (
     <section id="tech-stack" className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200 fill-mode-both">
       <div className="flex flex-col gap-4">
@@ -15,7 +17,7 @@ export async function TechStackSection() {
           </p>
         </div>
 
-        <TechStackClient techStackData={techStackData} />
+        <TechStackClient techStackData={techStackData} projects={projects} />
         <WorkspaceSetup />
       </div>
     </section>
