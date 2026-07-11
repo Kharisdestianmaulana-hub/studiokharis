@@ -40,7 +40,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
             <Button
               variant="ghost"
               size="icon"
-              className={cn("h-8 w-8 shrink-0 text-muted hover:text-foreground", !isCollapsed && "ml-2")}
+              className={cn("h-8 w-8 shrink-0 text-muted hover:text-white", !isCollapsed && "ml-2")}
               onClick={() => setIsCollapsed(!isCollapsed)}
             >
               {isCollapsed ? <PanelLeft className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}

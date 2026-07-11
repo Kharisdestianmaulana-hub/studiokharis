@@ -13,7 +13,7 @@ export async function AboutSection() {
         <Card className="bg-surface border-border overflow-hidden rounded-[16px]">
           <CardContent className="p-6 md:p-8 flex flex-col md:flex-row gap-8">
             <div className="flex-1 flex flex-col gap-6">
-              <div className="text-secondary-text leading-relaxed space-y-4">
+              <div className="text-secondary-text leading-relaxed space-y-4 whitespace-pre-wrap">
                 <div dangerouslySetInnerHTML={{ __html: profileData.about }} />
               </div>
             </div>

@@ -31,7 +31,7 @@ export function MobileDrawer({ profileData }: { profileData?: any }) {
       <SheetContent side="left" className="w-[280px] p-0 flex flex-col border-r border-border bg-background">
         <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
         <div className="p-6 pb-2">
-          <div className="flex items-center gap-3">
+          <Link href="/about" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <Avatar className="h-10 w-10 border border-border">
               <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} />
               <AvatarFallback>{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
@@ -40,7 +40,7 @@ export function MobileDrawer({ profileData }: { profileData?: any }) {
               <span className="font-semibold text-sm text-foreground line-clamp-1">{profileData?.name || "User"}</span>
               <span className="text-xs text-muted line-clamp-1">{profileData?.role || "Developer"}</span>
             </div>
-          </div>
+          </Link>
         </div>
         <div className="flex-1 overflow-y-auto py-4 px-4 scrollbar-none">
           <nav className="flex flex-col gap-1">
