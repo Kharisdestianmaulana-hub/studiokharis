@@ -12,9 +12,6 @@ const blockVariants: Variants = {
   initial: (i: number) => ({
     x: i % 2 === 0 ? "100%" : "-100%",
   }),
-  cover: {
-    x: "0%",
-  },
   animate: (i: number) => ({
     x: "0%",
     transition: {
@@ -65,14 +62,20 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       }
       
       setTitles({ prev: "", next: welcomeText });
-      setSeqPhase(3); // Start at phase 3 to show the text
       
-      const t4 = setTimeout(() => setSeqPhase(4), 1200);
+      // Phase 0: blocks animate in
+      setSeqPhase(0);
+      
+      // Phase 3: blocks are in, show next text
+      const t3 = setTimeout(() => setSeqPhase(3), 1000);
+      // Phase 4: hide next text
+      const t4 = setTimeout(() => setSeqPhase(4), 2200);
+      // Phase 5: blocks animate out
       const t5 = setTimeout(() => {
         setSeqPhase(5);
         setIsInitial(false);
-      }, 2000);
-      return () => { clearTimeout(t4); clearTimeout(t5); };
+      }, 3000);
+      return () => { clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
       
     } else if (previousPath !== pathname) {
       // Actual navigation
@@ -82,15 +85,21 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         next: getPageName(pathname, transitionTitle)
       });
       
+      // Phase 0: Blocks animate IN (text is hidden)
       setSeqPhase(0);
-      const t1 = setTimeout(() => setSeqPhase(1), 500);
-      const t2 = setTimeout(() => setSeqPhase(2), 1500);
-      const t3 = setTimeout(() => setSeqPhase(3), 2000);
-      const t4 = setTimeout(() => setSeqPhase(4), 2500);
-      const t5 = setTimeout(() => setSeqPhase(5), 3200);
+      // Phase 1: Blocks are fully IN, show prev text
+      const t1 = setTimeout(() => setSeqPhase(1), 1000);
+      // Phase 2: Hide prev text
+      const t2 = setTimeout(() => setSeqPhase(2), 2000);
+      // Phase 3: Show next text
+      const t3 = setTimeout(() => setSeqPhase(3), 2500);
+      // Phase 4: Hide next text
+      const t4 = setTimeout(() => setSeqPhase(4), 3500);
+      // Phase 5: Blocks animate OUT
+      const t5 = setTimeout(() => setSeqPhase(5), 4300);
       return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
     } else {
-      // Just open directly if same page refresh but previousPath wasn't empty (edge case)
+      // Just open directly if same page refresh but previousPath wasn't empty
       setIsInitial(false);
       setTitles({ prev: "", next: getPageName(pathname, transitionTitle) });
       setSeqPhase(5);
@@ -106,10 +115,10 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className="fixed inset-0 z-[100] pointer-events-none flex flex-col">
-        {seqPhase < 5 && (
+        {seqPhase > 0 && seqPhase < 5 && (
           <div className="absolute inset-0 z-[101] flex items-center justify-center">
             <AnimatePresence mode="wait">
-              {seqPhase < 2 && !isInitial && (
+              {seqPhase === 1 && !isInitial && (
                 <motion.div
                   key="prev-text"
                   initial={{ y: -50, opacity: 0 }}
@@ -121,7 +130,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
                   {titles.prev}
                 </motion.div>
               )}
-              {seqPhase >= 3 && seqPhase < 5 && (
+              {seqPhase === 3 && (
                 <motion.div
                   key="new-text"
                   initial={{ y: -50, opacity: 0 }}
@@ -142,8 +151,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
             key={`${pathname}-${i}`}
             custom={i}
             variants={blockVariants}
-            initial={isInitial ? "cover" : "initial"}
-            animate={seqPhase === 5 ? "exit" : (isInitial ? "cover" : "animate")}
+            initial="initial"
+            animate={seqPhase === 5 ? "exit" : "animate"}
             className="flex-1 bg-background shadow-[0_0_15px_rgba(0,0,0,0.5)] border-y border-foreground/10"
           />
         ))}
