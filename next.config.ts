@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'sgp.cloud.appwrite.io',
+        hostname: '**',
       },
     ],
   },

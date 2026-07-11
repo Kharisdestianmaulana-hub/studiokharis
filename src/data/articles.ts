@@ -21,6 +21,7 @@ export async function getArticles() {
   return documents.map((doc: Article) => ({
     id: doc.$id,
     title: doc.title,
+    content: doc.content,
     excerpt: doc.content.substring(0, 150) + "...", // basic excerpt fallback
     category: Array.isArray(doc.tags) ? (doc.tags[0] || "Blog") : (typeof doc.tags === "string" ? doc.tags.split(",")[0].trim() : "Blog"),
     date: doc.$createdAt,
