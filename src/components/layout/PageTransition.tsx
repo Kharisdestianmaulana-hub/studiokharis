@@ -64,12 +64,12 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const [seqPhase, setSeqPhase] = React.useState(0);
   const [isInitial, setIsInitial] = React.useState(true);
   
-  const isFirstMount = React.useRef(true);
-  
   React.useEffect(() => {
-    if (isFirstMount.current) {
-      isFirstMount.current = false;
-      // Initial page load (fresh visit, new tab, or hard refresh)
+    const hasDoneInitial = sessionStorage.getItem('studiokharis_initial_done');
+    
+    if (!hasDoneInitial) {
+      sessionStorage.setItem('studiokharis_initial_done', 'true');
+      // Initial page load (fresh visit, new tab)
       const hasVisited = localStorage.getItem('studiokharis_visited');
       const welcomeText = hasVisited ? "WELCOME BACK" : "WELCOME";
       if (!hasVisited) {
@@ -77,6 +77,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       }
       
       setTitles({ prev: "", next: welcomeText });
+      setIsInitial(true);
       
       // Phase 0: blocks animate in
       setSeqPhase(0);
@@ -92,11 +93,16 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       }, 3000);
       return () => { clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
       
-    } else if (previousPath !== pathname) {
+    } else {
       // Actual navigation within the app
       setIsInitial(false);
+      
+      // Wait for RouteTracker to set previousPath if it's identical to pathname initially?
+      // Since template remounts, previousPath should already be the old path from Zustand persist!
+      const prev = previousPath === pathname ? "/" : previousPath; // fallback just in case
+      
       setTitles({
-        prev: getPageName(previousPath, ""), 
+        prev: getPageName(prev, ""), 
         next: getPageName(pathname, transitionTitle)
       });
       
@@ -113,11 +119,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       // Phase 5: Blocks animate OUT
       const t5 = setTimeout(() => setSeqPhase(5), 4300);
       return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
-    } else {
-      // Just open directly if same page refresh but not first mount (should rarely happen with Next.js router)
-      setIsInitial(false);
-      setTitles({ prev: "", next: getPageName(pathname, transitionTitle) });
-      setSeqPhase(5);
     }
   }, [pathname, previousPath, transitionTitle]);
 
