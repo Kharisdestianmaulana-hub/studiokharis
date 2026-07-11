@@ -23,7 +23,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
       {/* Top Profile / Header & Toggle */}
       <div className={cn("p-4 flex", isCollapsed ? "flex-col items-center gap-4" : "items-center justify-between")}>
         {!isCollapsed && (
-          <div className="flex items-center gap-3 overflow-hidden px-1">
+          <Link href="/about" className="flex items-center gap-3 overflow-hidden px-1 hover:opacity-80 transition-opacity cursor-pointer">
             <Avatar className="h-10 w-10 border border-border shrink-0">
               <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} />
               <AvatarFallback>{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
@@ -32,7 +32,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
               <span className="font-semibold text-sm text-foreground line-clamp-1">{profileData?.name || "User"}</span>
               <span className="text-xs text-muted line-clamp-1">{profileData?.role || "Developer"}</span>
             </div>
-          </div>
+          </Link>
         )}
 
         <Tooltip>
@@ -52,10 +52,12 @@ export function Sidebar({ profileData }: { profileData?: any }) {
         </Tooltip>
 
         {isCollapsed && (
-          <Avatar className="h-10 w-10 border border-border shrink-0 mx-auto">
-            <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} />
-            <AvatarFallback>{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
-          </Avatar>
+          <Link href="/about" className="mx-auto hover:opacity-80 transition-opacity cursor-pointer">
+            <Avatar className="h-10 w-10 border border-border shrink-0">
+              <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} />
+              <AvatarFallback>{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
+            </Avatar>
+          </Link>
         )}
       </div>
 

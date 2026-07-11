@@ -20,11 +20,6 @@ export const NAVIGATION_ROUTES = [
     icon: Home,
   },
   {
-    name: "About",
-    href: "/about",
-    icon: User,
-  },
-  {
     name: "Projects",
     href: "/projects",
     icon: Code2,
