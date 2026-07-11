@@ -31,14 +31,27 @@ const blockVariants: Variants = {
 };
 
 const getPageName = (path: string, customTitle: string) => {
-  if (customTitle && path.includes(customTitle.split('/')[0].trim().toLowerCase())) return customTitle;
   if (path === "/") return "Home";
-  if (path === "/globe") return "Visitor Map";
+  
+  // Exact matches for base sections to avoid using stale custom titles when going back to list pages
+  const exactSections: Record<string, string> = {
+    "/articles": "Articles",
+    "/projects": "Projects",
+    "/experience": "Experience",
+    "/tech-stack": "Tech Stack",
+    "/contact": "Contact",
+    "/guestbook": "Guestbook",
+    "/globe": "Visitor Map",
+    "/about": "About",
+    "/timeline": "Timeline",
+  };
+  if (exactSections[path]) return exactSections[path];
+
+  if (customTitle && path.includes(customTitle.split('/')[0].trim().toLowerCase())) return customTitle;
   
   const segments = path.split('/').filter(Boolean);
   const name = segments[0];
   if (!name) return "Home";
-  if (name === "globe") return "Visitor Map";
   
   return name.charAt(0).toUpperCase() + name.slice(1).replace('-', ' ');
 };
