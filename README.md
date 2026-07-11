@@ -20,36 +20,6 @@ A highly aesthetic, dynamic, and interactive developer portfolio built by [Khari
 - **Database / CMS**: [Appwrite](https://appwrite.io/)
 - **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
 
-## 🚀 Getting Started
-
-To run this project locally, follow these steps:
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/Kharisdestianmaulana-hub/studiokharis.git
-cd studiokharis
-```
-
-### 2. Install dependencies
-```bash
-npm install
-```
-
-### 3. Setup Environment Variables
-Create a `.env.local` file in the root directory and add your Appwrite configurations (refer to the internal API Integration Guide):
-```env
-NEXT_PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
-NEXT_PUBLIC_APPWRITE_PROJECT_ID=your_project_id
-# ...other collection IDs
-```
-
-### 4. Run the development server
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
