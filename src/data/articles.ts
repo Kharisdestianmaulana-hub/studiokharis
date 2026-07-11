@@ -13,7 +13,7 @@ export interface Article {
 
 export async function getArticles() {
   const documents = await fetchFromHub("public_articles", [
-    { method: "equal", attribute: "target_website", values: ["portfolio"] },
+    { method: "equal", attribute: "target_website", values: ["portfolio", "studiokharis.works"] },
     { method: "equal", attribute: "is_published", values: [true] },
     { method: "orderDesc", attribute: "$createdAt" }
   ]);
