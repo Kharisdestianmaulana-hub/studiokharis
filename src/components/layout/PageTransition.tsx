@@ -76,6 +76,7 @@ export function PageTransition() {
 
   const hasStartedAnimation = React.useRef(false);
   const lastPathname = React.useRef(pathname);
+  const expectedPathname = React.useRef<string | null>(null);
 
   React.useEffect(() => {
     if (hasStartedAnimation.current) return;
@@ -119,9 +120,9 @@ export function PageTransition() {
       
       // Wait for blocks to fully cover screen (1000ms), then navigate!
       const tNav = setTimeout(() => {
-        // Preemptively update lastPathname so the Back/Forward watcher ignores this route change
+        // Preemptively set expectedPathname so the Back/Forward watcher ignores the intermediate state
         const targetPath = pendingRoute.split('?')[0].split('#')[0];
-        lastPathname.current = targetPath;
+        expectedPathname.current = targetPath;
         
         router.push(pendingRoute);
         setPendingRoute(null);
@@ -141,6 +142,18 @@ export function PageTransition() {
   // Watch for Back/Forward navigation (pathname changed without pendingRoute)
   React.useEffect(() => {
     if (hasStartedAnimation.current && !pendingRoute && pathname !== lastPathname.current) {
+      if (expectedPathname.current) {
+        if (pathname !== expectedPathname.current) {
+          // Still waiting for router.push to finish updating pathname. Ignore.
+          return;
+        } else {
+          // The programmatic navigation has finished.
+          expectedPathname.current = null;
+          lastPathname.current = pathname;
+          return;
+        }
+      }
+
       // It's a popstate (Back/Forward) or an unintercepted navigation
       lastPathname.current = pathname;
       setIsInitial(false);
