@@ -15,7 +15,7 @@ export default async function MainLayout({
   
   return (
     <SettingsProvider>
-      <TooltipProvider delayDuration={1500}>
+      <TooltipProvider delayDuration={0}>
         <div className="flex min-h-screen w-full">
           <Sidebar profileData={profileData} />
           <div className="flex flex-col flex-1 min-w-0">

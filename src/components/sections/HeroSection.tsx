@@ -79,7 +79,7 @@ export async function HeroSection({ hideButtons = false }: { hideButtons?: boole
             return (
               <Tooltip key={social.name}>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" asChild className="rounded-xl text-muted hover:text-foreground">
+                  <Button variant="ghost" size="icon" asChild className="rounded-xl text-muted hover:text-white">
                     <a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
                       <Icon className="w-5 h-5" />
                     </a>

@@ -11,14 +11,23 @@ import { SearchBar } from "@/components/ui/SearchBar";
 export function TopNav({ profileData }: { profileData?: any }) {
   return (
     <header className="sticky top-0 z-20 w-full h-[72px] border-b border-border bg-background/80 backdrop-blur-md flex items-center justify-between px-4 lg:px-8">
-      <div className="flex flex-1 items-center gap-2 md:gap-4 md:flex-none">
-        {/* Mobile Drawer Trigger */}
+      {/* Left Section */}
+      <div className="flex items-center gap-2 w-full md:w-auto md:min-w-[200px]">
         <MobileDrawer profileData={profileData} />
-        
-        <SearchBar />
+        <div className="md:hidden flex-1">
+          <SearchBar />
+        </div>
       </div>
 
-      <div className="flex items-center gap-2">
+      {/* Center Section (Desktop Search) */}
+      <div className="hidden md:flex flex-1 justify-center max-w-2xl px-4">
+        <div className="w-full max-w-lg">
+          <SearchBar />
+        </div>
+      </div>
+
+      {/* Right Section */}
+      <div className="flex items-center gap-2 md:min-w-[200px] justify-end">
         <div className="lg:hidden">
           <ThemeToggle />
         </div>

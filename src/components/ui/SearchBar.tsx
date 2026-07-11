@@ -105,8 +105,8 @@ export function SearchBar() {
           className="flex-1 h-full px-2 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
         />
         {!query && (
-          <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.4rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex text-muted-foreground">
-            <span className="text-xs">⌘</span>K
+          <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.4rem] hidden h-6 select-none items-center gap-1 rounded border border-border bg-background px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex text-primary-text">
+            <span className="text-xs">Ctrl</span> K
           </kbd>
         )}
         {query && (
