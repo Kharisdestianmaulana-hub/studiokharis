@@ -64,63 +64,56 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const [seqPhase, setSeqPhase] = React.useState(0);
   const [isInitial, setIsInitial] = React.useState(true);
   
+  const [isInitialLoad] = React.useState(() => {
+    if (typeof window === 'undefined') return false;
+    return !sessionStorage.getItem('studiokharis_initial_done');
+  });
+
+  const hasStartedAnimation = React.useRef(false);
+
   React.useEffect(() => {
-    const hasDoneInitial = sessionStorage.getItem('studiokharis_initial_done');
-    
-    if (!hasDoneInitial) {
+    if (hasStartedAnimation.current) return;
+    hasStartedAnimation.current = true;
+
+    if (isInitialLoad) {
       sessionStorage.setItem('studiokharis_initial_done', 'true');
-      // Initial page load (fresh visit, new tab)
+      
       const hasVisited = localStorage.getItem('studiokharis_visited');
       const welcomeText = hasVisited ? "WELCOME BACK" : "WELCOME";
-      if (!hasVisited) {
-        localStorage.setItem('studiokharis_visited', 'true');
-      }
+      if (!hasVisited) localStorage.setItem('studiokharis_visited', 'true');
       
       setTitles({ prev: "", next: welcomeText });
       setIsInitial(true);
       
-      // Phase 0: blocks animate in
       setSeqPhase(0);
-      
-      // Phase 3: blocks are in, show next text
       const t3 = setTimeout(() => setSeqPhase(3), 1000);
-      // Phase 4: hide next text
       const t4 = setTimeout(() => setSeqPhase(4), 2200);
-      // Phase 5: blocks animate out
       const t5 = setTimeout(() => {
         setSeqPhase(5);
         setIsInitial(false);
       }, 3000);
-      return () => { clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
       
+      return () => { clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
     } else {
-      // Actual navigation within the app
       setIsInitial(false);
       
-      // Wait for RouteTracker to set previousPath if it's identical to pathname initially?
-      // Since template remounts, previousPath should already be the old path from Zustand persist!
-      const prev = previousPath === pathname ? "/" : previousPath; // fallback just in case
+      const prev = previousPath === pathname ? "/" : previousPath;
       
       setTitles({
         prev: getPageName(prev, ""), 
         next: getPageName(pathname, transitionTitle)
       });
       
-      // Phase 0: Blocks animate IN (text is hidden)
       setSeqPhase(0);
-      // Phase 1: Blocks are fully IN, show prev text
       const t1 = setTimeout(() => setSeqPhase(1), 1000);
-      // Phase 2: Hide prev text
       const t2 = setTimeout(() => setSeqPhase(2), 2000);
-      // Phase 3: Show next text
       const t3 = setTimeout(() => setSeqPhase(3), 2500);
-      // Phase 4: Hide next text
       const t4 = setTimeout(() => setSeqPhase(4), 3500);
-      // Phase 5: Blocks animate OUT
       const t5 = setTimeout(() => setSeqPhase(5), 4300);
+      
       return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
     }
-  }, [pathname, previousPath, transitionTitle]);
+  }, []); // Run exactly once per mount
 
   React.useEffect(() => {
     if (transitionTitle && !isInitial) {
