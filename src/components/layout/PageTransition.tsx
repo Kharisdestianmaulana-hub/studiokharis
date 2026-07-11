@@ -108,10 +108,9 @@ export function PageTransition() {
   React.useEffect(() => {
     if (pendingRoute) {
       setIsInitial(false);
-      const prev = previousPath === pathname ? "/" : previousPath;
       
       setTitles({
-        prev: getPageName(prev, ""), 
+        prev: getPageName(pathname, ""), 
         next: getPageName(pendingRoute, transitionTitle)
       });
 
@@ -137,7 +136,7 @@ export function PageTransition() {
       
       return () => clearTimeout(tNav);
     }
-  }, [pendingRoute, previousPath, pathname, transitionTitle, router, setPendingRoute]);
+  }, [pendingRoute, pathname, transitionTitle, router, setPendingRoute]);
 
   // Watch for Back/Forward navigation (pathname changed without pendingRoute)
   React.useEffect(() => {
@@ -155,12 +154,12 @@ export function PageTransition() {
       }
 
       // It's a popstate (Back/Forward) or an unintercepted navigation
+      const prevPath = lastPathname.current;
       lastPathname.current = pathname;
       setIsInitial(false);
-      const prev = previousPath === pathname ? "/" : previousPath;
       
       setTitles({
-        prev: getPageName(prev, ""), 
+        prev: getPageName(prevPath, ""), 
         next: getPageName(pathname, transitionTitle)
       });
       
@@ -174,7 +173,7 @@ export function PageTransition() {
       
       return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
     }
-  }, [pathname, transitionTitle, pendingRoute, previousPath]);
+  }, [pathname, transitionTitle, pendingRoute]);
 
   React.useEffect(() => {
     if (transitionTitle && !isInitial && !pendingRoute) {
