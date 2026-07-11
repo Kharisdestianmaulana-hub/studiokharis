@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import { MobileDrawer } from "./MobileDrawer";
 import { ThemeToggle } from "./ThemeToggle";
 import { DynamicNavWidget } from "./DynamicNavWidget";
+import { DynamicLogo } from "./DynamicLogo";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "@/components/ui/SearchBar";
 
@@ -15,6 +16,7 @@ export function TopNav({ profileData }: { profileData?: any }) {
       {/* Left Section */}
       <div className="flex items-center gap-2 w-full md:w-auto md:min-w-[250px]">
         <MobileDrawer profileData={profileData} />
+        <DynamicLogo />
         <DynamicNavWidget />
         <div className="md:hidden flex-1">
           <SearchBar />

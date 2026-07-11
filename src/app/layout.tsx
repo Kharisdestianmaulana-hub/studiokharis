@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { DynamicFavicon } from "@/components/layout/DynamicFavicon";
 
 
 const geistSans = Geist({
@@ -16,8 +17,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Professional Portfolio",
-  description: "Senior Software Engineer Portfolio",
+  title: {
+    default: "Kharis - Full Stack Developer",
+    template: "%s | Kharis"
+  },
+  description: "Portfolio of Kharis, a passionate Full Stack Developer specializing in React, Next.js, and modern web technologies.",
+  icons: {
+    // We provide a fallback, but DynamicFavicon will handle theme switching on the client
+    icon: "/logo-light.webp" 
+  }
 };
 
 export default function RootLayout({
@@ -34,6 +42,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <DynamicFavicon />
           {children}
           <Toaster />
 
