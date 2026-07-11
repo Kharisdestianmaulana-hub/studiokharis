@@ -6,6 +6,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { MapPin, Globe2 } from "lucide-react";
 
 // Fix leaflet marker icon issues in Next.js
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -51,7 +52,7 @@ export default function MapSection({ messages }: { messages: any[] }) {
       <div className="w-full lg:w-1/3 bg-background flex flex-col h-1/2 lg:h-full border-b lg:border-b-0 lg:border-r border-border overflow-hidden z-10">
         <div className="p-4 bg-secondary/20 border-b border-border shadow-sm">
           <h3 className="font-semibold text-lg flex items-center gap-2">
-            📍 Visitor Locations
+            <MapPin className="w-5 h-5 text-primary" /> Visitor Locations
           </h3>
           <p className="text-xs text-muted-foreground mt-1">Click a message to fly to their location</p>
         </div>
@@ -59,7 +60,7 @@ export default function MapSection({ messages }: { messages: any[] }) {
         <div className="overflow-y-auto flex-1 p-4 space-y-4 bg-secondary/5">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center p-4">
-              <span className="text-4xl mb-2">🌍</span>
+              <Globe2 className="w-12 h-12 mb-3 text-muted-foreground/50" />
               <p className="text-sm text-muted-foreground">No visitor locations recorded yet. Be the first to sign the guestbook!</p>
             </div>
           ) : (

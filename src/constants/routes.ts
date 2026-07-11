@@ -10,7 +10,7 @@ import {
   Mail,
   Settings,
   MessageSquare,
-  Globe,
+  Map,
 } from "lucide-react";
 
 export const NAVIGATION_ROUTES = [
@@ -45,9 +45,9 @@ export const NAVIGATION_ROUTES = [
     icon: BookOpen,
   },
   {
-    name: "Globe",
+    name: "Visitor Map",
     href: "/globe",
-    icon: Globe,
+    icon: Map,
   },
   {
     name: "Guestbook",
