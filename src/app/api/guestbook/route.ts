@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createGuestbookMessage, enforceGuestbookLimit } from "@/lib/appwriteServer";
 import { cookies } from "next/headers";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 // Anti-spam configuration
 const MAX_MESSAGES_PER_DAY = 3;
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
 
     // 4. Invalidate Next.js cache so the new message appears immediately
     revalidatePath("/guestbook");
-    revalidateTag("globe");
+    revalidatePath("/globe");
 
     // 5. Fire and forget rolling deletion in the background 
     // (Wait, serverless functions might freeze before this finishes. Let's await it to be safe, but with a small limit so it's fast).
