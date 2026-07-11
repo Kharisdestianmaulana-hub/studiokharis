@@ -29,7 +29,7 @@ export async function fetchGuestbookMessages() {
   }
 }
 
-export async function createGuestbookMessage(data: { name: string; message: string; avatarUrl: string }) {
+export async function createGuestbookMessage(data: { name: string; message: string; avatarUrl: string; latitude?: number; longitude?: number }) {
   if (!APPWRITE_API_KEY) {
     console.warn("APPWRITE_API_KEY is not set! Creation might fail if permissions are restricted.");
   }
@@ -107,5 +107,30 @@ export async function enforceGuestbookLimit(limit: number = 40000) {
     }
   } catch (error) {
     console.error("Failed to enforce guestbook limit:", error);
+  }
+}
+
+export async function fetchGlobeCoordinates() {
+  const url = `${APPWRITE_ENDPOINT}/databases/${APPWRITE_DATABASE_ID}/collections/${GUESTBOOK_COLLECTION_ID}/documents?queries[]=${encodeURIComponent(JSON.stringify({ method: "isNotNull", values: ["latitude"] }))}&queries[]=${encodeURIComponent(JSON.stringify({ method: "isNotNull", values: ["longitude"] }))}&queries[]=${encodeURIComponent(JSON.stringify({ method: "limit", values: [1000] }))}`;
+  
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "X-Appwrite-Project": APPWRITE_PROJECT_ID,
+        "Content-Type": "application/json",
+      },
+      next: { revalidate: 60, tags: ["globe"] },
+    });
+
+    if (!response.ok) return [];
+
+    const data = await response.json();
+    return data.documents.map((doc: any) => ({
+      latitude: doc.latitude,
+      longitude: doc.longitude
+    }));
+  } catch (error) {
+    console.error("Error fetching globe coordinates:", error);
+    return [];
   }
 }

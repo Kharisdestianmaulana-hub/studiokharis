@@ -46,11 +46,16 @@ export async function POST(request: Request) {
       );
     }
 
+    // Capture Vercel IP headers for the Globe feature
+    const latitude = parseFloat(request.headers.get("x-vercel-ip-latitude") || "0");
+    const longitude = parseFloat(request.headers.get("x-vercel-ip-longitude") || "0");
+
     // 2. Save to Appwrite
     const result = await createGuestbookMessage({
       name,
       message,
-      avatarUrl
+      avatarUrl,
+      ...(latitude && longitude ? { latitude, longitude } : {})
     });
 
     // 3. Update Cookies
