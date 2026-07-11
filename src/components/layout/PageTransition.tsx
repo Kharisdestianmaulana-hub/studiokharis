@@ -152,6 +152,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="text-4xl md:text-6xl font-black text-foreground tracking-widest uppercase text-center px-4"
                 >
+                  {!isInitial && <span className="text-muted-foreground mr-3 text-2xl md:text-4xl">TO</span>}
                   {titles.next}
                 </motion.div>
               )}
