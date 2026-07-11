@@ -111,7 +111,7 @@ export async function enforceGuestbookLimit(limit: number = 40000) {
 }
 
 export async function fetchGlobeCoordinates() {
-  const url = `${APPWRITE_ENDPOINT}/databases/${APPWRITE_DATABASE_ID}/collections/${GUESTBOOK_COLLECTION_ID}/documents?queries[]=${encodeURIComponent(JSON.stringify({ method: "isNotNull", values: ["latitude"] }))}&queries[]=${encodeURIComponent(JSON.stringify({ method: "isNotNull", values: ["longitude"] }))}&queries[]=${encodeURIComponent(JSON.stringify({ method: "limit", values: [1000] }))}`;
+  const url = `${APPWRITE_ENDPOINT}/databases/${APPWRITE_DATABASE_ID}/collections/${GUESTBOOK_COLLECTION_ID}/documents?queries[]=${encodeURIComponent(JSON.stringify({ method: "limit", values: [1000] }))}`;
   
   try {
     const response = await fetch(url, {
