@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Send, ExternalLink, Calendar, MapPin } from "lucide-react";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe, FaWhatsapp, FaEnvelope, FaPhone } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -157,9 +157,9 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                     )}
                   </Button>
                   <a href="https://cal.com/riray" target="_blank" rel="noreferrer">
-                    <Button type="button" variant="outline" className="rounded-xl px-8 h-12 border-primary/20 hover:bg-primary/5">
+                    <Button type="button" variant="outline" className="rounded-xl px-8 h-12 border-primary/20 bg-transparent hover:bg-transparent text-foreground hover:text-accent hover:border-accent transition-colors group">
                       Book a 15-min call
-                      <Calendar className="w-4 h-4 ml-2 text-primary" />
+                      <Calendar className="w-4 h-4 ml-2 text-primary group-hover:text-accent transition-colors" />
                     </Button>
                   </a>
                 </div>
@@ -170,7 +170,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
           <div className="lg:col-span-2 flex flex-col gap-6">
             {/* Availability & Time Card */}
             <Card className="bg-surface border-border overflow-hidden rounded-[16px]">
-              <CardContent className="p-6 flex flex-col gap-5">
+              <CardContent className="p-6 pb-6 flex flex-col gap-5">
                 <div className="flex items-center gap-3">
                   <div className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -203,11 +203,15 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                 <div className="flex flex-col gap-3 mt-auto">
                   {socialsData.map((social: any) => {
                     let Icon = FaGlobe;
-                    const p = social.platformName;
+                    const p = social.platformName?.toLowerCase() || "";
                     if (p.includes("github")) Icon = FaGithub;
                     else if (p.includes("linkedin")) Icon = FaLinkedin;
                     else if (p.includes("twitter") || p.includes("x")) Icon = FaTwitter;
                     else if (p.includes("instagram")) Icon = FaInstagram;
+                    else if (p.includes("whatsapp") || p.includes("wa")) Icon = FaWhatsapp;
+                    else if (p.includes("email") || p.includes("mail")) Icon = FaEnvelope;
+                    else if (p.includes("phone") || p.includes("call")) Icon = FaPhone;
+                    
                     return (
                       <a 
                         key={social.name}
