@@ -7,6 +7,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export interface HoverLinkData {
   id: string;
@@ -20,15 +21,21 @@ export interface HoverLinkData {
 interface HoverLinkProps {
   children: React.ReactNode;
   data: HoverLinkData;
+  noUnderline?: boolean;
+  className?: string;
 }
 
-export function HoverLink({ children, data }: HoverLinkProps) {
+export function HoverLink({ children, data, noUnderline, className }: HoverLinkProps) {
   return (
     <HoverCard openDelay={200} closeDelay={100}>
       <HoverCardTrigger asChild>
         <Link 
           href={data.url}
-          className="relative inline-block font-semibold text-foreground hover:text-accent transition-colors duration-200 cursor-pointer decoration-accent/30 hover:decoration-accent decoration-2 underline-offset-4 border-b border-dashed border-muted-foreground/50 hover:border-accent"
+          className={cn(
+            "relative inline-block font-semibold text-foreground hover:text-accent transition-colors duration-200 cursor-pointer",
+            !noUnderline && "decoration-accent/30 hover:decoration-accent decoration-2 underline-offset-4 border-b border-dashed border-muted-foreground/50 hover:border-accent",
+            className
+          )}
         >
           {children}
         </Link>

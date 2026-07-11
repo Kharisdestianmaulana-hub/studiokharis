@@ -3,38 +3,15 @@
 import * as React from "react";
 import { HoverLink, HoverLinkData } from "./HoverLink";
 
+import { useSearchDictionary } from "@/hooks/useSearchDictionary";
+
 interface RichTextProps {
   content: string;
   className?: string;
 }
 
-// Global cache to prevent multiple fetches
-let globalDictionary: HoverLinkData[] | null = null;
-let fetchPromise: Promise<HoverLinkData[]> | null = null;
-
 export function RichText({ content, className }: RichTextProps) {
-  const [dictionary, setDictionary] = React.useState<HoverLinkData[] | null>(globalDictionary);
-
-  React.useEffect(() => {
-    if (dictionary) return;
-
-    if (!fetchPromise) {
-      fetchPromise = fetch('/api/search')
-        .then(res => res.json())
-        .then(data => {
-          // Sort by length descending to match longer phrases first (e.g., "Next.js" before "Next")
-          const sorted = (data as HoverLinkData[]).sort((a, b) => b.title.length - a.title.length);
-          globalDictionary = sorted;
-          return sorted;
-        })
-        .catch(err => {
-          console.error("Failed to fetch search dictionary for RichText", err);
-          return [];
-        });
-    }
-
-    fetchPromise.then(setDictionary);
-  }, [dictionary]);
+  const dictionary = useSearchDictionary();
 
   if (!dictionary || dictionary.length === 0) {
     // Fallback before dictionary loads: render basic text with basic line breaks support
