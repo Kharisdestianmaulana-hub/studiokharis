@@ -12,12 +12,15 @@ const blockVariants: Variants = {
   initial: (i: number) => ({
     x: i % 2 === 0 ? "100%" : "-100%",
   }),
+  cover: {
+    x: "0%",
+  },
   animate: (i: number) => ({
     x: "0%",
     transition: {
       duration: 0.5,
       ease: [0.76, 0, 0.24, 1],
-      delay: i * 0.05, // Fast stagger for entry as well
+      delay: i * 0.05, 
     },
   }),
   exit: (i: number) => ({
@@ -25,7 +28,7 @@ const blockVariants: Variants = {
     transition: {
       duration: 0.5,
       ease: [0.76, 0, 0.24, 1],
-      delay: i * 0.05, // Fast stagger for exit
+      delay: i * 0.05, 
     },
   }),
 };
@@ -35,7 +38,6 @@ const getPageName = (path: string, customTitle: string) => {
   if (path === "/") return "Home";
   if (path === "/globe") return "Visitor Map";
   
-  // Clean up any trailing / or ID parameters if it's a known section but we don't have a custom title
   const segments = path.split('/').filter(Boolean);
   const name = segments[0];
   if (!name) return "Home";
@@ -49,13 +51,32 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const previousPath = useStoryStore((state) => state.previousPath);
   const transitionTitle = useStoryStore((state) => state.transitionTitle);
   
-  // We need to capture the titles at the start of the transition so they don't change mid-animation
   const [titles, setTitles] = React.useState({ prev: "", next: "" });
   const [seqPhase, setSeqPhase] = React.useState(0);
+  const [isInitial, setIsInitial] = React.useState(true);
   
   React.useEffect(() => {
-    // Only play long sequence if paths are different (actual navigation)
-    if (previousPath !== pathname && previousPath !== "") {
+    if (previousPath === "") {
+      // Initial load
+      const hasVisited = localStorage.getItem('studiokharis_visited');
+      const welcomeText = hasVisited ? "WELCOME BACK" : "WELCOME";
+      if (!hasVisited) {
+        localStorage.setItem('studiokharis_visited', 'true');
+      }
+      
+      setTitles({ prev: "", next: welcomeText });
+      setSeqPhase(3); // Start at phase 3 to show the text
+      
+      const t4 = setTimeout(() => setSeqPhase(4), 1200);
+      const t5 = setTimeout(() => {
+        setSeqPhase(5);
+        setIsInitial(false);
+      }, 2000);
+      return () => { clearTimeout(t4); clearTimeout(t5); };
+      
+    } else if (previousPath !== pathname) {
+      // Actual navigation
+      setIsInitial(false);
       setTitles({
         prev: getPageName(previousPath, ""), 
         next: getPageName(pathname, transitionTitle)
@@ -69,27 +90,26 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       const t5 = setTimeout(() => setSeqPhase(5), 3200);
       return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
     } else {
-      // Just open directly if same page (e.g. initial load or refresh)
+      // Just open directly if same page refresh but previousPath wasn't empty (edge case)
+      setIsInitial(false);
       setTitles({ prev: "", next: getPageName(pathname, transitionTitle) });
       setSeqPhase(5);
     }
-  }, [pathname, previousPath]); // Deliberately omit transitionTitle to prevent restarting timers
+  }, [pathname, previousPath]);
 
-  // Update next title dynamically if transitionTitle arrives late
   React.useEffect(() => {
-    if (transitionTitle) {
+    if (transitionTitle && !isInitial) {
       setTitles(t => ({ ...t, next: getPageName(pathname, transitionTitle) }));
     }
-  }, [transitionTitle, pathname]);
+  }, [transitionTitle, pathname, isInitial]);
 
   return (
     <>
       <div className="fixed inset-0 z-[100] pointer-events-none flex flex-col">
-        {/* The Text Overlay */}
         {seqPhase < 5 && (
           <div className="absolute inset-0 z-[101] flex items-center justify-center">
             <AnimatePresence mode="wait">
-              {seqPhase < 2 && (
+              {seqPhase < 2 && !isInitial && (
                 <motion.div
                   key="prev-text"
                   initial={{ y: -50, opacity: 0 }}
@@ -117,14 +137,13 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           </div>
         )}
 
-        {/* The Comb Blocks */}
         {Array.from({ length: numBlocks }).map((_, i) => (
           <motion.div
             key={`${pathname}-${i}`}
             custom={i}
             variants={blockVariants}
-            initial="initial"
-            animate={seqPhase === 5 ? "exit" : "animate"}
+            initial={isInitial ? "cover" : "initial"}
+            animate={seqPhase === 5 ? "exit" : (isInitial ? "cover" : "animate")}
             className="flex-1 bg-background shadow-[0_0_15px_rgba(0,0,0,0.5)] border-y border-foreground/10"
           />
         ))}
