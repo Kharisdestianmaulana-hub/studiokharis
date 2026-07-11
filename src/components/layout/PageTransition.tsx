@@ -219,7 +219,7 @@ export function PageTransition() {
 
         {Array.from({ length: numBlocks }).map((_, i) => (
           <motion.div
-            key={`${pathname}-${i}`}
+            key={i}
             custom={i}
             variants={blockVariants}
             initial="initial"
