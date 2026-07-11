@@ -12,19 +12,20 @@ const blockVariants: Variants = {
   initial: (i: number) => ({
     x: i % 2 === 0 ? "100%" : "-100%",
   }),
-  animate: {
+  animate: (i: number) => ({
     x: "0%",
     transition: {
       duration: 0.5,
       ease: [0.76, 0, 0.24, 1],
+      delay: i * 0.05, // Fast stagger for entry as well
     },
-  },
+  }),
   exit: (i: number) => ({
     x: i % 2 === 0 ? "100%" : "-100%",
     transition: {
       duration: 0.5,
       ease: [0.76, 0, 0.24, 1],
-      delay: i * 0.05, // Fast stagger for horizontal comb effect
+      delay: i * 0.05, // Fast stagger for exit
     },
   }),
 };
