@@ -3,8 +3,9 @@ import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { getArticles } from "@/data/articles";
 import { ArticleCard } from "@/components/shared/ArticleCard";
+import { ArticleLink } from "@/components/shared/ArticleLink";
 
-export async function ArticlesSection() {
+export async function ArticlesSection({ hideViewAll = false }: { hideViewAll?: boolean }) {
   const articlesData = await getArticles();
   return (
     <section id="articles" className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">
@@ -15,12 +16,14 @@ export async function ArticlesSection() {
             My thoughts on software engineering, design, and architecture.
           </p>
         </div>
-        <Link 
-          href="/articles" 
-          className="hidden md:flex items-center gap-1.5 text-sm font-medium text-muted hover:text-foreground transition-colors"
-        >
-          View all <ArrowRight className="w-4 h-4" />
-        </Link>
+        {!hideViewAll && (
+          <Link 
+            href="/articles" 
+            className="hidden md:flex items-center gap-1.5 text-sm font-medium text-muted hover:text-foreground transition-colors"
+          >
+            View all <ArrowRight className="w-4 h-4" />
+          </Link>
+        )}
       </div>
 
       {articlesData.length === 0 ? (
@@ -35,20 +38,20 @@ export async function ArticlesSection() {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {articlesData.map((article: any) => (
-              <Link href={`/articles/${article.slug}`} key={article.id} className="block h-full">
-                <ArticleCard article={article} />
-              </Link>
+              <ArticleLink key={article.id} article={article} />
             ))}
           </div>
           
-          <div className="mt-6 md:hidden">
-            <Link 
-              href="/articles" 
-              className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-xl py-3 hover:bg-secondary/10 transition-colors"
-            >
-              View all articles <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+          {!hideViewAll && (
+            <div className="mt-6 md:hidden">
+              <Link 
+                href="/articles" 
+                className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-xl py-3 hover:bg-secondary/10 transition-colors"
+              >
+                View all articles <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          )}
         </>
       )}
     </section>

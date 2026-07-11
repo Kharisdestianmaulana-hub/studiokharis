@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Clock, Image as ImageIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -9,6 +10,21 @@ export function ArticleCard({ article }: { article: any }) {
     <Tooltip>
       <TooltipTrigger asChild>
         <Card className="group bg-surface border-border overflow-hidden rounded-[16px] hover:-translate-y-1 hover:shadow-md transition-all duration-300 h-full flex flex-col cursor-pointer">
+          {article.cover ? (
+            <div className="relative w-full aspect-[16/9] overflow-hidden bg-muted">
+              <Image 
+                src={article.cover} 
+                alt={article.title} 
+                fill 
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
+          ) : (
+            <div className="relative w-full aspect-[16/9] overflow-hidden bg-secondary/5 flex items-center justify-center">
+              <ImageIcon className="w-8 h-8 text-muted/30" />
+            </div>
+          )}
           <CardContent className="p-6 flex flex-col h-full">
             <div className="flex items-center gap-2 text-xs text-muted mb-3">
               <span className="font-medium text-accent">{article.category}</span>

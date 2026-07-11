@@ -8,7 +8,7 @@ export const metadata = {
 export default function ArticlesPage() {
   return (
     <div className="flex flex-col gap-16 pb-16 pt-2">
-      <ArticlesSection />
+      <ArticlesSection hideViewAll={true} />
     </div>
   );
 }
