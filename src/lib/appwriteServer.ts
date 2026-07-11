@@ -119,7 +119,7 @@ export async function fetchGlobeCoordinates() {
         "X-Appwrite-Project": APPWRITE_PROJECT_ID,
         "Content-Type": "application/json",
       },
-      next: { revalidate: 60, tags: ["globe"] },
+      cache: "no-store",
     });
 
     if (!response.ok) return [];
