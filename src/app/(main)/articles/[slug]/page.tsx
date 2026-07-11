@@ -64,7 +64,7 @@ export default async function ArticleDetailPage(props: { params: Promise<{ slug:
       {/* Render Markdown or HTML content here */}
       <div className="prose prose-neutral dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-img:rounded-xl prose-a:text-accent mt-8">
         {/* Placeholder if we don't have a markdown parser yet, we can safely render html or pre-wrap text */}
-        <div dangerouslySetInnerHTML={{ __html: article.content || `<p class="text-lg text-secondary-text whitespace-pre-wrap">${article.excerpt || "Article content goes here..."}</p>` }} />
+        <div className="whitespace-pre-wrap text-lg text-secondary-text leading-relaxed" dangerouslySetInnerHTML={{ __html: article.content || article.excerpt || "Article content goes here..." }} />
       </div>
     </article>
   );
