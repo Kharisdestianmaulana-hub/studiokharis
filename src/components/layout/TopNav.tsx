@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { Search } from "lucide-react";
 import { MobileDrawer } from "./MobileDrawer";
 import { DynamicNavWidget } from "./DynamicNavWidget";

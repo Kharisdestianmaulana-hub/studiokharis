@@ -1,6 +1,6 @@
 import { fetchFromHub } from "@/lib/appwrite";
 import { Highlighter } from "@/components/ui/Highlighter";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, SearchX } from "lucide-react";

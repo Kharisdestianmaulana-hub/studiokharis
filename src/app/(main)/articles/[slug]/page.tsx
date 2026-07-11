@@ -1,6 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { getArticles } from "@/data/articles";

@@ -55,10 +55,15 @@ const getPageName = (path: string, customTitle: string) => {
   return name.charAt(0).toUpperCase() + name.slice(1).replace('-', ' ');
 };
 
-export function PageTransition({ children }: { children: React.ReactNode }) {
+import { useRouter } from "next/navigation";
+
+export function PageTransition() {
+  const router = useRouter();
   const pathname = usePathname();
   const previousPath = useStoryStore((state) => state.previousPath);
   const transitionTitle = useStoryStore((state) => state.transitionTitle);
+  const pendingRoute = useStoryStore((state) => state.pendingRoute);
+  const setPendingRoute = useStoryStore((state) => state.setPendingRoute);
   
   const [titles, setTitles] = React.useState({ prev: "", next: "" });
   const [seqPhase, setSeqPhase] = React.useState(0);
@@ -70,6 +75,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   });
 
   const hasStartedAnimation = React.useRef(false);
+  const lastPathname = React.useRef(pathname);
 
   React.useEffect(() => {
     if (hasStartedAnimation.current) return;
@@ -94,9 +100,46 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       }, 3000);
       
       return () => { clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
-    } else {
+    }
+  }, []); // Run exactly once per mount
+
+  // Watch for pending routes (intercepted Link clicks)
+  React.useEffect(() => {
+    if (pendingRoute) {
       setIsInitial(false);
+      const prev = previousPath === pathname ? "/" : previousPath;
       
+      setTitles({
+        prev: getPageName(prev, ""), 
+        next: getPageName(pendingRoute, transitionTitle)
+      });
+
+      // Phase 0: Blocks animate IN
+      setSeqPhase(0);
+      
+      // Wait for blocks to fully cover screen (1000ms), then navigate!
+      const tNav = setTimeout(() => {
+        router.push(pendingRoute);
+        setPendingRoute(null);
+        
+        // Continue animation sequence AFTER route change
+        setSeqPhase(1);
+        setTimeout(() => setSeqPhase(2), 1000);
+        setTimeout(() => setSeqPhase(3), 1500);
+        setTimeout(() => setSeqPhase(4), 2500);
+        setTimeout(() => setSeqPhase(5), 3300);
+      }, 1000);
+      
+      return () => clearTimeout(tNav);
+    }
+  }, [pendingRoute, previousPath, pathname, transitionTitle, router, setPendingRoute]);
+
+  // Watch for Back/Forward navigation (pathname changed without pendingRoute)
+  React.useEffect(() => {
+    if (hasStartedAnimation.current && !pendingRoute && pathname !== lastPathname.current) {
+      // It's a popstate (Back/Forward) or an unintercepted navigation
+      lastPathname.current = pathname;
+      setIsInitial(false);
       const prev = previousPath === pathname ? "/" : previousPath;
       
       setTitles({
@@ -104,6 +147,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         next: getPageName(pathname, transitionTitle)
       });
       
+      // Since it's instant, just do the normal sequence
       setSeqPhase(0);
       const t1 = setTimeout(() => setSeqPhase(1), 1000);
       const t2 = setTimeout(() => setSeqPhase(2), 2000);
@@ -113,13 +157,13 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       
       return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
     }
-  }, []); // Run exactly once per mount
+  }, [pathname, transitionTitle, pendingRoute, previousPath]);
 
   React.useEffect(() => {
-    if (transitionTitle && !isInitial) {
+    if (transitionTitle && !isInitial && !pendingRoute) {
       setTitles(t => ({ ...t, next: getPageName(pathname, transitionTitle) }));
     }
-  }, [transitionTitle, pathname, isInitial]);
+  }, [transitionTitle, pathname, isInitial, pendingRoute]);
 
   return (
     <>
@@ -167,7 +211,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           />
         ))}
       </div>
-      {children}
     </>
   );
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { Star, GitFork, BookOpen, Scale } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { FaGithub } from "react-icons/fa";

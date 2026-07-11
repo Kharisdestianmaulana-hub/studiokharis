@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink, Calendar, Tag } from "lucide-react";
 import { FaGithub } from "react-icons/fa";

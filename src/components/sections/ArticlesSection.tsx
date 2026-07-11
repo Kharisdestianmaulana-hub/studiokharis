@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { getArticles } from "@/data/articles";
 import { ArticleCard } from "@/components/shared/ArticleCard";

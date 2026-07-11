@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { ArrowRight } from "lucide-react";
 import { getOpenSource } from "@/data/oss";
 import { RepositoryCard } from "@/components/shared/RepositoryCard";

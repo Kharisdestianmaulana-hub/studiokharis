@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { usePathname } from "next/navigation";
 import { NAVIGATION_ROUTES, BOTTOM_ROUTES } from "@/constants/routes";
 import { cn } from "@/lib/utils";

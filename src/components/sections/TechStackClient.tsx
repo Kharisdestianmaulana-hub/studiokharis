@@ -14,7 +14,7 @@ import {
 import { TbBrandCSharp, TbBrandAdobeIllustrator, TbBrandAdobePhotoshop } from "react-icons/tb";
 import { Code2, X, ExternalLink } from "lucide-react";
 import { TechStackCategory, TechStackItem } from "@/data/tech-stack";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import Image from "next/image";
 import { AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
