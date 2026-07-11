@@ -23,7 +23,7 @@ export function StoryPrologModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md animate-in fade-in duration-700">
-      <div className="bg-surface/95 border border-border rounded-2xl p-8 max-w-lg w-[90%] shadow-2xl backdrop-blur-xl animate-in zoom-in-95 duration-500 delay-300 fill-mode-both">
+      <div className="bg-white/95 dark:bg-[#18181B]/95 border border-border rounded-2xl p-8 max-w-lg w-[90%] shadow-2xl backdrop-blur-xl animate-in zoom-in-95 duration-500 delay-300 fill-mode-both">
         <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
           Selamat datang di dunia Kharis.
         </h2>

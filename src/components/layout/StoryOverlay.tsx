@@ -95,7 +95,7 @@ export function StoryOverlay() {
         exit={{ y: 100, opacity: 0 }}
         className="fixed inset-x-0 bottom-6 z-50 flex justify-center lg:pl-[280px] pointer-events-none"
       >
-        <div className="bg-background/80 backdrop-blur-xl border border-border rounded-2xl shadow-2xl overflow-hidden p-6 relative group w-[90%] max-w-3xl pointer-events-auto">
+        <div className="bg-[#FAFAFA]/80 dark:bg-[#09090B]/80 backdrop-blur-xl border border-border rounded-2xl shadow-2xl overflow-hidden p-6 relative group w-[90%] max-w-3xl pointer-events-auto">
           {/* Controls */}
           <div className="absolute top-4 right-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
             <Button variant="ghost" size="sm" onClick={resetStory} className="h-8 text-xs text-muted hover:text-foreground">

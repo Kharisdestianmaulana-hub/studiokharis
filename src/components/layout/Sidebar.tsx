@@ -17,7 +17,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
 
   return (
     <aside className={cn(
-      "hidden lg:flex flex-col h-screen sticky top-0 border-r border-border bg-background/50 backdrop-blur-xl z-30 transition-all duration-300",
+      "hidden lg:flex flex-col h-screen sticky top-0 border-r border-border bg-[#FAFAFA]/50 dark:bg-[#09090B]/50 backdrop-blur-xl z-30 transition-all duration-300",
       isCollapsed ? "w-[80px]" : "w-[280px]"
     )}>
       {/* Top Profile / Header & Toggle */}
