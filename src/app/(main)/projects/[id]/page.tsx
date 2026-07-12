@@ -24,9 +24,21 @@ export async function generateMetadata(props: { params: Promise<{ id: string }> 
   
   if (!project) return { title: "Project Not Found" };
   
+  const description = project.description?.substring(0, 160) || "Project details";
   return {
     title: project.title,
-    description: project.description?.substring(0, 160) || "Project details",
+    description: description,
+    openGraph: {
+      title: project.title,
+      description: description,
+      images: [{ url: project.thumbnail, width: 1200, height: 630, alt: project.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: description,
+      images: [project.thumbnail],
+    },
   };
 }
 

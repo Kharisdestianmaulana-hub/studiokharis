@@ -21,9 +21,21 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   
   if (!article) return { title: "Article Not Found" };
   
+  const description = article.content?.substring(0, 160) || "Read this article";
   return {
     title: article.title,
-    description: article.content?.substring(0, 160) || "Read this article",
+    description: description,
+    openGraph: {
+      title: article.title,
+      description: description,
+      images: [{ url: article.cover, width: 1200, height: 630, alt: article.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: description,
+      images: [article.cover],
+    },
   };
 }
 
