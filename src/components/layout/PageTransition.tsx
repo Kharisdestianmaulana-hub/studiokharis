@@ -101,6 +101,9 @@ export function PageTransition() {
       }, 3000);
       
       return () => { clearTimeout(t3); clearTimeout(t4); clearTimeout(t5); };
+    } else {
+      setSeqPhase(5);
+      setIsInitial(false);
     }
   }, []); // Run exactly once per mount
 
