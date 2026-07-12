@@ -20,7 +20,8 @@ export async function getProjects() {
   ]);
   
   return documents.map((doc: Project) => ({
-    id: doc.$id,
+    originalId: doc.$id,
+    id: doc.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
     title: doc.title,
     description: doc.content_body,
     thumbnail: getAppwriteImageUrl(doc.cover_image_id),

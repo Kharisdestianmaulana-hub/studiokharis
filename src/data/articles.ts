@@ -27,7 +27,7 @@ export async function getArticles() {
     tags: Array.isArray(doc.tags) ? doc.tags : (typeof doc.tags === "string" ? doc.tags.split(",").map((t: string) => t.trim()).filter(Boolean) : ["Blog"]),
     date: doc.$createdAt,
     readingTime: "5 min read", // derived or mapped if possible
-    slug: doc.$id, // or mapped from title
+    slug: doc.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
     cover: getAppwriteImageUrl(doc.cover_image),
   }));
 }
