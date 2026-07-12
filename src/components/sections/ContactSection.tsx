@@ -169,8 +169,8 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
           
           <div className="lg:col-span-2 flex flex-col gap-6">
             {/* Availability & Time Card */}
-            <Card className="bg-surface border-border overflow-hidden rounded-[16px]">
-              <CardContent className="p-6 pb-6 flex flex-col gap-5">
+            <Card className="bg-surface border-border overflow-hidden rounded-[16px] shrink-0">
+              <CardContent className="p-6 flex flex-col gap-5">
                 <div className="flex items-center gap-3">
                   <div className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -191,7 +191,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
               </CardContent>
             </Card>
 
-            <Card className="bg-surface border-border overflow-hidden rounded-[16px] h-full">
+            <Card className="bg-surface border-border overflow-hidden rounded-[16px] flex-1">
               <CardContent className="p-6 md:p-8 flex flex-col h-full gap-6">
                 <div>
                   <h4 className="font-semibold text-lg text-foreground mb-2">Connect with me</h4>
