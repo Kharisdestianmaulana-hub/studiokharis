@@ -9,6 +9,7 @@ import { getProjects } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { ProjectGallery } from "@/components/shared/ProjectGallery";
 import { SetTransitionTitle } from "@/components/layout/SetTransitionTitle";
+import { ShareButtons } from "@/components/shared/ShareButtons";
 
 export async function generateStaticParams() {
   const projects = await getProjects();
@@ -82,27 +83,32 @@ export default async function ProjectDetailPage(props: { params: Promise<{ id: s
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
-          {project.github && (
-            <Link 
-              href={project.github} 
-              target="_blank" 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border text-sm font-medium hover:bg-secondary/10 transition-colors"
-            >
-              <FaGithub className="w-4 h-4" />
-              Source Code
-            </Link>
-          )}
-          {project.liveDemo && (
-            <Link 
-              href={project.liveDemo} 
-              target="_blank" 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
-            >
-              <ExternalLink className="w-4 h-4" />
-              Live Demo
-            </Link>
-          )}
+        <div className="flex flex-wrap gap-4 items-center justify-between w-full mt-2">
+          <div className="flex items-center gap-4">
+            {project.github && (
+              <a 
+                href={project.github} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border text-sm font-medium hover:bg-secondary/10 transition-colors"
+              >
+                <FaGithub className="w-4 h-4" />
+                Source Code
+              </a>
+            )}
+            {project.liveDemo && (
+              <a 
+                href={project.liveDemo} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Live Demo
+              </a>
+            )}
+          </div>
+          <ShareButtons url={`/projects/${project.id}`} title={project.title} />
         </div>
       </header>
 
