@@ -26,8 +26,10 @@ export function ArticleCard({ article }: { article: any }) {
             </div>
           )}
           <CardContent className="p-6 flex flex-col h-full">
-            <div className="flex items-center gap-2 text-xs text-muted mb-3">
-              <span className="font-medium text-accent">{article.category}</span>
+            <div className="flex items-center gap-2 text-xs text-muted mb-3 flex-wrap">
+              <span className="font-medium text-accent">
+                {article.tags && article.tags.length > 0 ? article.tags.join(', ') : article.category}
+              </span>
               <span>•</span>
               <span>{new Date(article.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
             </div>

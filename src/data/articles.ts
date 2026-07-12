@@ -24,6 +24,7 @@ export async function getArticles() {
     content: doc.content,
     excerpt: doc.content.substring(0, 150) + "...", // basic excerpt fallback
     category: Array.isArray(doc.tags) ? (doc.tags[0] || "Blog") : (typeof doc.tags === "string" ? doc.tags.split(",")[0].trim() : "Blog"),
+    tags: Array.isArray(doc.tags) ? doc.tags : (typeof doc.tags === "string" ? doc.tags.split(",").map((t: string) => t.trim()).filter(Boolean) : ["Blog"]),
     date: doc.$createdAt,
     readingTime: "5 min read", // derived or mapped if possible
     slug: doc.$id, // or mapped from title

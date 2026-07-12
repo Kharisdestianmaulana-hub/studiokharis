@@ -47,9 +47,13 @@ export default async function ArticleDetailPage(props: { params: Promise<{ slug:
 
       <header className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
-          <Badge variant="secondary" className="w-fit bg-secondary/10 text-secondary-text border-transparent">
-            {article.category}
-          </Badge>
+          <div className="flex flex-wrap gap-2">
+            {article.tags && article.tags.map((tag: string, index: number) => (
+              <Badge key={index} variant="secondary" className="w-fit bg-secondary/10 text-secondary-text border-transparent">
+                {tag}
+              </Badge>
+            ))}
+          </div>
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground leading-tight">
             {article.title}
           </h1>
