@@ -3,7 +3,7 @@
 import * as React from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useStoryStore } from "@/store/useStoryStore";
+import { useTransitionStore } from "@/store/useTransitionStore";
 
 // Comb transition requires many strips
 const numBlocks = 12;
@@ -60,10 +60,10 @@ import { useRouter } from "next/navigation";
 export function PageTransition() {
   const router = useRouter();
   const pathname = usePathname();
-  const previousPath = useStoryStore((state) => state.previousPath);
-  const transitionTitle = useStoryStore((state) => state.transitionTitle);
-  const pendingRoute = useStoryStore((state) => state.pendingRoute);
-  const setPendingRoute = useStoryStore((state) => state.setPendingRoute);
+  const previousPath = useTransitionStore((state) => state.previousPath);
+  const transitionTitle = useTransitionStore((state) => state.transitionTitle);
+  const pendingRoute = useTransitionStore((state) => state.pendingRoute);
+  const setPendingRoute = useTransitionStore((state) => state.setPendingRoute);
   
   const [titles, setTitles] = React.useState({ prev: "", next: "" });
   const [seqPhase, setSeqPhase] = React.useState(0);

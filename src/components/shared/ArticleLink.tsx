@@ -3,10 +3,10 @@
 import * as React from "react";
 import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { ArticleCard } from "./ArticleCard";
-import { useStoryStore } from "@/store/useStoryStore";
+import { useTransitionStore } from "@/store/useTransitionStore";
 
 export function ArticleLink({ article }: { article: any }) {
-  const setTransitionTitle = useStoryStore(state => state.setTransitionTitle);
+  const setTransitionTitle = useTransitionStore(state => state.setTransitionTitle);
   return (
     <Link 
       href={`/articles/${article.slug}`} 

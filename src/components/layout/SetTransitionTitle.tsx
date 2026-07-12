@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
-import { useStoryStore } from "@/store/useStoryStore";
+import { useTransitionStore } from "@/store/useTransitionStore";
 
 export function SetTransitionTitle({ title }: { title: string }) {
   useEffect(() => {
-    useStoryStore.getState().setTransitionTitle(title);
+    useTransitionStore.getState().setTransitionTitle(title);
     return () => {
-      // Clear title on unmount if needed, but not strictly necessary since next page sets it or default logic applies
-      useStoryStore.getState().setTransitionTitle("");
+      useTransitionStore.getState().setTransitionTitle("");
     };
   }, [title]);
   
