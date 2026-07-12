@@ -7,8 +7,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { useTransitionStore } from "@/store/useTransitionStore";
 
 export function ProjectCard({ project, isListView = false }: { project: any, isListView?: boolean }) {
+  const setTransitionTitle = useTransitionStore(state => state.setTransitionTitle);
+
+  const handleClick = () => {
+    setTransitionTitle(project.title);
+  };
+
   return (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -18,6 +25,7 @@ export function ProjectCard({ project, isListView = false }: { project: any, isL
         )}>
           <Link 
             href={`/projects/${project.id}`} 
+            onClick={handleClick}
             className={cn(
               "block bg-secondary/10 relative overflow-hidden",
               isListView ? "aspect-[16/9] w-full md:w-1/3 md:border-r md:border-b-0 border-b border-border shrink-0" : "aspect-[16/9] w-full border-b border-border"

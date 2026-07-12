@@ -46,13 +46,35 @@ const getPageName = (path: string, customTitle: string) => {
   };
   if (exactSections[path]) return exactSections[path];
 
-  if (customTitle && path.includes(customTitle.split('/')[0].trim().toLowerCase())) return customTitle;
-  
   const segments = path.split('/').filter(Boolean);
   const name = segments[0];
   if (!name) return "Home";
   
-  return name.charAt(0).toUpperCase() + name.slice(1).replace('-', ' ');
+  const sectionName = name.charAt(0).toUpperCase() + name.slice(1).replace('-', ' ');
+  
+  if (customTitle) {
+    return `${sectionName} / ${customTitle}`;
+  }
+  
+  // Try to use document title if available and it matches the section (only for the page we are currently on)
+  if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+    if (path === window.location.pathname) {
+      const docTitle = document.title.split(' | ')[0];
+      if (docTitle && docTitle !== 'Kharis' && !exactSections[path]) {
+        return `${sectionName} / ${docTitle}`;
+      }
+    }
+  }
+
+  // Fallback to segment 1 if no custom title
+  if (segments[1]) {
+    const formattedSlug = segments[1].replace(/-/g, ' ');
+    // uppercase first letters
+    const titleCase = formattedSlug.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    return `${sectionName} / ${titleCase}`;
+  }
+  
+  return sectionName;
 };
 
 import { useRouter } from "next/navigation";
