@@ -28,8 +28,6 @@ export const metadata: Metadata = {
   }
 };
 
-import { StoryPrologModal } from "@/components/layout/StoryPrologModal";
-import { StoryOverlay } from "@/components/layout/StoryOverlay";
 import { PageTransition } from "@/components/layout/PageTransition";
 
 export default function RootLayout({
@@ -48,12 +46,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <DynamicFavicon />
-          <StoryPrologModal />
           <PageTransition />
           {children}
-          <StoryOverlay />
           <Toaster position="bottom-right" />
-
         </ThemeProvider>
       </body>
     </html>
