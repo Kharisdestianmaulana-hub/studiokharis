@@ -1,26 +1,20 @@
 import * as React from "react";
 import { getProjects } from "@/data/projects";
-import { getExperiences } from "@/data/experience";
+import { getTechStack } from "@/data/tech-stack";
+import { getArticles } from "@/data/articles";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, Code2, Users } from "lucide-react";
+import { Layers, Code2, BookOpen } from "lucide-react";
 
 export async function StatsSection() {
-  const projects = await getProjects();
-  const experiences = await getExperiences();
+  const [projects, techStack, articles] = await Promise.all([
+    getProjects(),
+    getTechStack(),
+    getArticles()
+  ]);
   
-  // Calculate years of experience precisely
-  let earliestYear = new Date().getFullYear();
-  if (experiences.length > 0) {
-    experiences.forEach((exp: any) => {
-      const match = exp.duration.match(/\b(19|20)\d{2}\b/);
-      if (match) {
-        const year = parseInt(match[0]);
-        if (year < earliestYear) earliestYear = year;
-      }
-    });
-  }
-  const yearsExp = new Date().getFullYear() - earliestYear;
   const projectsCount = projects.length;
+  const techStackCount = techStack.reduce((total, category) => total + category.items.length, 0);
+  const articlesCount = articles.length;
 
   const stats = [
     {
@@ -30,16 +24,16 @@ export async function StatsSection() {
       description: "Delivered with excellence",
     },
     {
-      label: "Years Experience",
-      value: `${yearsExp}`,
-      icon: Trophy,
-      description: "Proven track record",
+      label: "Technologies Mastered",
+      value: `${techStackCount}+`,
+      icon: Layers,
+      description: "Tools in our arsenal",
     },
     {
-      label: "Client Satisfaction",
-      value: "100%",
-      icon: Users,
-      description: "Consistent 5-star ratings",
+      label: "Published Articles",
+      value: `${articlesCount}`,
+      icon: BookOpen,
+      description: "Insights and tutorials",
     },
   ];
 
