@@ -13,6 +13,19 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
+  const articles = await getArticles();
+  const article = articles.find((a: any) => a.slug === params.slug);
+  
+  if (!article) return { title: "Article Not Found" };
+  
+  return {
+    title: article.title,
+    description: article.content?.substring(0, 160) || "Read this article",
+  };
+}
+
 export default async function ArticleDetailPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
   const articles = await getArticles();

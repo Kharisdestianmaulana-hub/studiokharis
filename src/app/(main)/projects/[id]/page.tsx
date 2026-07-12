@@ -17,6 +17,19 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  const projects = await getProjects();
+  const project = projects.find((p: any) => p.id === params.id);
+  
+  if (!project) return { title: "Project Not Found" };
+  
+  return {
+    title: project.title,
+    description: project.description?.substring(0, 160) || "Project details",
+  };
+}
+
 export default async function ProjectDetailPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const projects = await getProjects();
@@ -28,7 +41,7 @@ export default async function ProjectDetailPage(props: { params: Promise<{ id: s
 
   return (
     <article className="flex flex-col gap-8 pb-16 pt-8 animate-in fade-in duration-700">
-      <SetTransitionTitle title={`Project / ${project.title}`} />
+      <SetTransitionTitle title={project.title} />
       <Link 
         href="/projects" 
         className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors w-fit"

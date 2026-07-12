@@ -11,7 +11,7 @@ export function ArticleLink({ article }: { article: any }) {
     <Link 
       href={`/articles/${article.slug}`} 
       className="block h-full"
-      onClick={() => setTransitionTitle(`Articles / ${article.title}`)}
+      onClick={() => setTransitionTitle(article.title)}
     >
       <ArticleCard article={article} />
     </Link>
