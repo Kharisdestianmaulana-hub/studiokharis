@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { getArticles } from "@/data/articles";
 import { Badge } from "@/components/ui/badge";
+import { ShareButtons } from "@/components/shared/ShareButtons";
 
 export async function generateStaticParams() {
   const articles = await getArticles();
@@ -57,10 +58,13 @@ export default async function ArticleDetailPage(props: { params: Promise<{ slug:
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground leading-tight">
             {article.title}
           </h1>
-          <div className="flex flex-wrap items-center gap-4 text-sm text-muted">
-            <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {new Date(article.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
-            <span>•</span>
-            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {article.readingTime}</span>
+          <div className="flex flex-wrap items-center justify-between gap-4 w-full">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-muted">
+              <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {new Date(article.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+              <span>•</span>
+              <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {article.readingTime}</span>
+            </div>
+            <ShareButtons url={`/articles/${article.slug}`} title={article.title} />
           </div>
         </div>
       </header>
