@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/sections/HeroSection";
-import { AboutSection } from "@/components/sections/AboutSection";
+import { StatsSection } from "@/components/sections/StatsSection";
+import { TechMarqueeSection } from "@/components/sections/TechMarqueeSection";
 import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { TechStackSection } from "@/components/sections/TechStackSection";
@@ -18,7 +19,10 @@ export default async function Home() {
         <HeroSection />
       </ScrollReveal>
       <ScrollReveal delay={0.1}>
-        <AboutSection />
+        <StatsSection />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <TechMarqueeSection />
       </ScrollReveal>
       <ScrollReveal delay={0.1}>
         <FeaturedProjectsSection />
