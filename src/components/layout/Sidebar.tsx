@@ -28,9 +28,14 @@ export function Sidebar({ profileData }: { profileData?: any }) {
               <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} />
               <AvatarFallback>{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
             </Avatar>
-            <div className="flex flex-col">
+            <div className="flex flex-col overflow-hidden w-full">
               <span className="font-semibold text-sm text-foreground line-clamp-1">{profileData?.name || "User"}</span>
-              <span className="text-xs text-muted line-clamp-1">{profileData?.role || "Developer"}</span>
+              <div className="overflow-hidden relative w-full mask-edges">
+                <div className="flex w-max animate-marquee hover-pause text-xs text-muted">
+                  <span className="pr-8">{profileData?.tagline || "Developer"}</span>
+                  <span className="pr-8">{profileData?.tagline || "Developer"}</span>
+                </div>
+              </div>
             </div>
           </Link>
         )}
