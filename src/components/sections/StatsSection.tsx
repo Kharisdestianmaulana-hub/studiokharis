@@ -8,28 +8,30 @@ export async function StatsSection() {
   const projects = await getProjects();
   const experiences = await getExperiences();
   
-  // Calculate years of experience
+  // Calculate years of experience precisely
   let earliestYear = new Date().getFullYear();
-  experiences.forEach((exp: any) => {
-    const match = exp.duration.match(/\b(19|20)\d{2}\b/);
-    if (match) {
-      const year = parseInt(match[0]);
-      if (year < earliestYear) earliestYear = year;
-    }
-  });
-  const yearsExp = Math.max(1, new Date().getFullYear() - earliestYear);
-  const projectsCount = Math.max(10, projects.length); // Fallback to 10+ if db is small
+  if (experiences.length > 0) {
+    experiences.forEach((exp: any) => {
+      const match = exp.duration.match(/\b(19|20)\d{2}\b/);
+      if (match) {
+        const year = parseInt(match[0]);
+        if (year < earliestYear) earliestYear = year;
+      }
+    });
+  }
+  const yearsExp = new Date().getFullYear() - earliestYear;
+  const projectsCount = projects.length;
 
   const stats = [
     {
       label: "Projects Completed",
-      value: `${projectsCount}+`,
+      value: `${projectsCount}`,
       icon: Code2,
       description: "Delivered with excellence",
     },
     {
       label: "Years Experience",
-      value: `${yearsExp}+`,
+      value: `${yearsExp}`,
       icon: Trophy,
       description: "Proven track record",
     },

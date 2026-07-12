@@ -7,7 +7,7 @@ import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe, FaEnvelope, FaWh
 import { getProfileData } from "@/data/profile";
 import { getSocialLinks } from "@/data/socials";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { DynamicLogo } from "@/components/layout/DynamicLogo";
+import { HeroLogo } from "@/components/sections/HeroLogo";
 
 export async function HeroSection({ hideButtons = false }: { hideButtons?: boolean } = {}) {
   const profileData = await getProfileData();
@@ -16,15 +16,7 @@ export async function HeroSection({ hideButtons = false }: { hideButtons?: boole
     <section className="flex flex-col items-start gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
         <div className="flex items-center justify-center p-2 rounded-2xl bg-secondary/5 border border-border shadow-sm">
-          <div className="relative w-20 h-20 md:w-28 md:h-28 flex items-center justify-center">
-            {/* Using a larger wrapper for DynamicLogo, but DynamicLogo has fixed w-8 md:w-9.
-                To make it bigger without altering the component, we can use CSS scale, or better yet, just 
-                re-implement the dynamic logo here for the hero. Since DynamicLogo is a client component, 
-                let's just wrap it in a scaled div. */}
-            <div className="scale-[2.5] md:scale-[3] origin-center">
-              <DynamicLogo />
-            </div>
-          </div>
+          <HeroLogo />
         </div>
         
         <div className="flex flex-col gap-2">
