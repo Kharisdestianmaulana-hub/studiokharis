@@ -43,23 +43,35 @@ export async function GET() {
       'Accept': 'application/vnd.github.v3+json',
     };
 
-    // Fetch repositories
-    const reposResponse = await fetch(
-      `https://api.github.com/users/${username}/repos?sort=updated&per_page=100&type=owner`,
-      { headers }
-    );
+    // Fetch all repositories (paginate if needed)
+    let allRepos: GitHubRepo[] = [];
+    let page = 1;
+    let hasMore = true;
 
-    if (!reposResponse.ok) {
-      throw new Error(`GitHub API error: ${reposResponse.statusText}`);
+    while (hasMore) {
+      const reposResponse = await fetch(
+        `https://api.github.com/users/${username}/repos?sort=updated&per_page=100&page=${page}&type=owner`,
+        { headers }
+      );
+
+      if (!reposResponse.ok) {
+        throw new Error(`GitHub API error: ${reposResponse.statusText}`);
+      }
+
+      const repos: GitHubRepo[] = await reposResponse.json();
+      
+      if (repos.length === 0) {
+        hasMore = false;
+      } else {
+        allRepos = [...allRepos, ...repos];
+        page++;
+      }
     }
 
-    const repos: GitHubRepo[] = await reposResponse.json();
-
-    // Filter: only original repos (not forks), sort by pushed_at, take top 10
-    const filteredRepos = repos
+    // Filter: only original repos (not forks), sort by pushed_at
+    const filteredRepos = allRepos
       .filter(repo => !repo.fork)
-      .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
-      .slice(0, 10);
+      .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime());
 
     // Fetch commits for each repo
     const reposWithCommits = await Promise.all(
