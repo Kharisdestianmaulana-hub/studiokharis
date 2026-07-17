@@ -9,6 +9,7 @@ export function DynamicNavWidget() {
   const pathname = usePathname();
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [time, setTime] = React.useState<Date | null>(null);
+  const [displayPath, setDisplayPath] = React.useState("home");
 
   // Handle client-side clock rendering to avoid hydration mismatch
   React.useEffect(() => {
@@ -26,9 +27,14 @@ export function DynamicNavWidget() {
     return () => clearInterval(interval);
   }, []);
 
-  // Reset to breadcrumbs on navigation
+  // Reset to breadcrumbs on navigation and update displayPath
   React.useEffect(() => {
     setActiveIndex(0);
+    
+    const paths = pathname.split('/').filter(Boolean);
+    const currentPath = paths.length > 0 ? paths[0] : "home";
+    const newDisplayPath = currentPath === "globe" ? "visitor map" : currentPath.replace('-', ' ');
+    setDisplayPath(newDisplayPath);
   }, [pathname]);
 
   if (!time) return null; // Avoid hydration errors
@@ -44,11 +50,6 @@ export function DynamicNavWidget() {
   if (hour >= 12 && hour < 17) greeting = { text: "Good Afternoon", icon: Sun };
   else if (hour >= 17 && hour < 22) greeting = { text: "Good Evening", icon: Moon };
   else if (hour >= 22 || hour < 5) greeting = { text: "Late night coding?", icon: Terminal };
-
-  // Format breadcrumbs: e.g., /projects/123 -> ["projects", "123"] -> "projects"
-  const paths = pathname.split('/').filter(Boolean);
-  const currentPath = paths.length > 0 ? paths[0] : "home";
-  const displayPath = currentPath === "globe" ? "visitor map" : currentPath.replace('-', ' ');
 
   return (
     <div className="hidden lg:flex items-center text-sm ml-4 relative h-6 overflow-hidden min-w-[250px]">
