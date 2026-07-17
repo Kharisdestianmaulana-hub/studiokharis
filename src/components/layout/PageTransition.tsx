@@ -4,6 +4,7 @@ import * as React from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useTransitionStore } from "@/store/useTransitionStore";
+import { useTransitionPhaseStore } from "@/store/transitionPhaseStore";
 
 // Comb transition requires many strips
 const numBlocks = 12;
@@ -43,6 +44,7 @@ const getPageName = (path: string, customTitle: string) => {
     "/globe": "Visitor Map",
     "/about": "About",
     "/timeline": "Timeline",
+    "/settings": "Settings",
   };
   if (exactSections[path]) return exactSections[path];
 
@@ -86,6 +88,7 @@ export function PageTransition() {
   const transitionTitle = useTransitionStore((state) => state.transitionTitle);
   const pendingRoute = useTransitionStore((state) => state.pendingRoute);
   const setPendingRoute = useTransitionStore((state) => state.setPendingRoute);
+  const setSeqPhaseStore = useTransitionPhaseStore((state) => state.setSeqPhase);
   
   const [titles, setTitles] = React.useState({ prev: "", next: "" });
   const [seqPhase, setSeqPhase] = React.useState(0);
@@ -99,6 +102,11 @@ export function PageTransition() {
   const hasStartedAnimation = React.useRef(false);
   const lastPathname = React.useRef(pathname);
   const expectedPathname = React.useRef<string | null>(null);
+
+  // Sync seqPhase to store
+  React.useEffect(() => {
+    setSeqPhaseStore(seqPhase);
+  }, [seqPhase, setSeqPhaseStore]);
 
   React.useEffect(() => {
     if (hasStartedAnimation.current) return;

@@ -4,12 +4,14 @@ import * as React from "react";
 import { usePathname } from "next/navigation";
 import { MapPin, Clock, ChevronRight, Terminal, Sun, Moon, Coffee } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTransitionPhaseStore } from "@/store/transitionPhaseStore";
 
 export function DynamicNavWidget() {
   const pathname = usePathname();
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [time, setTime] = React.useState<Date | null>(null);
   const [displayPath, setDisplayPath] = React.useState("home");
+  const seqPhase = useTransitionPhaseStore((state) => state.seqPhase);
 
   // Handle client-side clock rendering to avoid hydration mismatch
   React.useEffect(() => {
@@ -38,6 +40,11 @@ export function DynamicNavWidget() {
   }, [pathname]);
 
   if (!time) return null; // Avoid hydration errors
+
+  // Hide during transition animation
+  if (seqPhase !== 5) {
+    return null;
+  }
 
   const formattedTime = time.toLocaleTimeString('en-US', { 
     hour: 'numeric', 
