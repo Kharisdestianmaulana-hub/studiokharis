@@ -25,7 +25,12 @@ interface Repository {
   commits: Commit[];
 }
 
-export function TimelineClient() {
+interface TimelineClientProps {
+  limit?: number;
+  repoNames?: string[];
+}
+
+export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
   const [repos, setRepos] = React.useState<Repository[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
@@ -41,7 +46,18 @@ export function TimelineClient() {
           throw new Error('Failed to fetch GitHub data');
         }
 
-        const data = await response.json();
+        let data: Repository[] = await response.json();
+
+        // Filter by repoNames if provided
+        if (repoNames && repoNames.length > 0) {
+          data = data.filter(repo => repoNames.includes(repo.name));
+        }
+
+        // Apply limit if provided
+        if (limit) {
+          data = data.slice(0, limit);
+        }
+
         setRepos(data);
         setError(null);
       } catch (err) {
@@ -53,7 +69,7 @@ export function TimelineClient() {
     };
 
     fetchGitHubData();
-  }, []);
+  }, [limit, repoNames]);
 
   const toggleRepo = (repoId: number) => {
     setExpandedRepos(prev => {

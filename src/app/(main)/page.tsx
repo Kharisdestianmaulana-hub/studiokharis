@@ -37,7 +37,10 @@ export default async function Home() {
         <ArticlesSection />
       </ScrollReveal>
       <ScrollReveal delay={0.1}>
-        <TimelineSection />
+        <TimelineSection 
+          repoNames={["flowdesk", "flowdeskweb", "ShiftOS", "dfc-cirebon", "H-W"]}
+          showTitle={false}
+        />
       </ScrollReveal>
       <ScrollReveal delay={0.1}>
         <ContactSection socialsData={socialsData} />
