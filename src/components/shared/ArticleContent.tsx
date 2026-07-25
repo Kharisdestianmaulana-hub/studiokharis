@@ -22,16 +22,27 @@ function formatContent(text: string) {
   const blocks = text.split(/\n\n+/);
   
   const formattedBlocks = blocks.map(block => {
-    // If a block has a single newline, the first part might be a heading
     const parts = block.split(/\n/);
+    
+    // Case 1: Heading is separated from paragraph by a single newline
     if (parts.length >= 2) {
       const firstLine = parts[0].trim();
-      // If it looks like a title (no ending punctuation, short, not already markdown)
-      if (firstLine.length > 0 && firstLine.length < 80 && !firstLine.match(/[.!?:]$/) && !firstLine.match(/^[#*\-]/)) {
+      if (firstLine.length > 0 && firstLine.length < 80 && !firstLine.match(/[.,!?:]$/) && !firstLine.match(/^[#*\-]/)) {
         parts[0] = `## ${firstLine}`;
+        return parts.join('\n\n'); 
+      }
+    } 
+    // Case 2: Heading is in its own isolated block (user pressed Enter twice)
+    else if (parts.length === 1) {
+      const line = parts[0].trim();
+      // If the block is a single short line without ending punctuation, treat it as a heading
+      // Exception for quotes starting with "
+      if (line.length > 0 && line.length < 80 && !line.match(/[.,!?:]$/) && !line.match(/^[#*\-]/) && !line.startsWith('"')) {
+        return `## ${line}`;
       }
     }
-    // Rejoin with double newlines so ReactMarkdown treats them as separate blocks
+    
+    // Default: Rejoin with double newlines so ReactMarkdown treats them as separate paragraphs (if there were single newlines inside)
     return parts.join('\n\n'); 
   });
   
