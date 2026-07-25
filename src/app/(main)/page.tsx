@@ -7,11 +7,14 @@ import { TechStackSection } from "@/components/sections/TechStackSection";
 import { ArticlesSection } from "@/components/sections/ArticlesSection";
 import { TimelineSection } from "@/components/sections/TimelineSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { RoadmapsSection } from "@/components/sections/RoadmapsSection";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 import { getSocialLinks } from "@/data/socials";
+import { getRoadmaps } from "@/data/roadmaps";
 
 export default async function Home() {
   const socialsData = await getSocialLinks();
+  const roadmapsData = await getRoadmaps();
   
   return (
     <div className="flex flex-col gap-16 pb-16">
@@ -41,6 +44,9 @@ export default async function Home() {
           repoNames={["flowdesk", "flowdeskweb", "ShiftOS", "dfc-cirebon", "H-W"]}
           showTitle={false}
         />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <RoadmapsSection roadmaps={roadmapsData} />
       </ScrollReveal>
       <ScrollReveal delay={0.1}>
         <ContactSection socialsData={socialsData} />
