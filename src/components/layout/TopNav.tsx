@@ -8,6 +8,7 @@ import { DynamicNavWidget } from "./DynamicNavWidget";
 import { DynamicLogo } from "./DynamicLogo";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "@/components/ui/SearchBar";
+import { VisitorCounter } from "@/components/shared/VisitorCounter";
 
 export function TopNav({ profileData }: { profileData?: any }) {
   return (
@@ -31,7 +32,7 @@ export function TopNav({ profileData }: { profileData?: any }) {
 
       {/* Right Section */}
       <div className="flex items-center gap-2 md:min-w-[200px] justify-end">
-        {/* Placeholder for future actions if needed */}
+        <VisitorCounter />
       </div>
     </header>
   );
