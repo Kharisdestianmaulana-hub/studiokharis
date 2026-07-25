@@ -12,7 +12,7 @@ export function VisitorCounter({ className }: { className?: string }) {
 
     async function fetchCount() {
       try {
-        const hasVisited = sessionStorage.getItem("studiokharis_visited");
+        const hasVisited = localStorage.getItem("studiokharis_visited");
         // If not visited in this session, increment (/up). Otherwise, just get current count
         const action = hasVisited ? "" : "/up";
         
@@ -24,7 +24,7 @@ export function VisitorCounter({ className }: { className?: string }) {
         if (mounted && data && typeof data.count === 'number') {
           setCount(data.count);
           if (!hasVisited) {
-            sessionStorage.setItem("studiokharis_visited", "true");
+            localStorage.setItem("studiokharis_visited", "true");
           }
         }
       } catch (err) {
