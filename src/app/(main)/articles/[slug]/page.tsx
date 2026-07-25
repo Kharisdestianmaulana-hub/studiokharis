@@ -6,6 +6,8 @@ import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { getArticles } from "@/data/articles";
 import { Badge } from "@/components/ui/badge";
 import { ShareButtons } from "@/components/shared/ShareButtons";
+import { ReadingProgress } from "@/components/shared/ReadingProgress";
+import { ArticleContent } from "@/components/shared/ArticleContent";
 
 export async function generateStaticParams() {
   const articles = await getArticles();
@@ -49,9 +51,11 @@ export default async function ArticleDetailPage(props: { params: Promise<{ slug:
   }
 
   return (
-    <article className="flex flex-col gap-8 pb-16 pt-8 animate-in fade-in duration-700">
-      <Link 
-        href="/articles" 
+    <>
+      <ReadingProgress />
+      <article className="flex flex-col gap-8 pb-16 pt-8 animate-in fade-in duration-700">
+        <Link 
+          href="/articles" 
         className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors w-fit"
       >
         <ArrowLeft className="w-4 h-4" />
@@ -94,11 +98,8 @@ export default async function ArticleDetailPage(props: { params: Promise<{ slug:
         </div>
       )}
 
-      {/* Render Markdown or HTML content here */}
-      <div className="prose prose-neutral dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-img:rounded-xl prose-a:text-accent mt-8">
-        {/* Placeholder if we don't have a markdown parser yet, we can safely render html or pre-wrap text */}
-        <div className="whitespace-pre-wrap text-lg text-secondary-text leading-relaxed" dangerouslySetInnerHTML={{ __html: article.content || article.excerpt || "Article content goes here..." }} />
-      </div>
+      <ArticleContent content={article.content || article.excerpt || "Article content goes here..."} />
     </article>
+    </>
   );
 }

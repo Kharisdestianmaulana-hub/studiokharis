@@ -13,7 +13,7 @@ const accentColors = {
 
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
-  const { accentColor, reducedMotion, textSize } = useSettingsStore();
+  const { accentColor, customColor, reducedMotion, textSize } = useSettingsStore();
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
@@ -24,9 +24,14 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     if (!mounted) return;
     
     // Apply accent color
-    const colors = accentColors[accentColor] || accentColors.blue;
     const isDark = resolvedTheme === "dark";
-    document.documentElement.style.setProperty("--color-accent", isDark ? colors.dark : colors.light);
+    
+    if (accentColor === 'custom') {
+      document.documentElement.style.setProperty("--color-accent", customColor);
+    } else {
+      const colors = accentColors[accentColor as keyof typeof accentColors] || accentColors.blue;
+      document.documentElement.style.setProperty("--color-accent", isDark ? colors.dark : colors.light);
+    }
 
     // Apply reduced motion
     if (reducedMotion) {
@@ -42,7 +47,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
       document.documentElement.classList.remove("text-large");
     }
     
-  }, [mounted, accentColor, reducedMotion, textSize, resolvedTheme]);
+  }, [mounted, accentColor, customColor, reducedMotion, textSize, resolvedTheme]);
 
   // To prevent hydration errors, we can still render children but we must be careful with what relies on the store directly in the UI.
   return <>{children}</>;

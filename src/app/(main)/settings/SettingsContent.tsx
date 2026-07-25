@@ -4,7 +4,7 @@ import { useSettingsStore, AccentColor } from "@/store/settingsStore";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Moon, Sun, Monitor, Type, EyeOff, LayoutGrid, List, RefreshCw } from "lucide-react";
+import { Moon, Sun, Monitor, Type, EyeOff, LayoutGrid, List, RefreshCw, Pipette } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -14,10 +14,12 @@ export function SettingsContent() {
   
   const { 
     accentColor, 
+    customColor,
     reducedMotion, 
     textSize, 
     projectsView, 
     setAccentColor, 
+    setCustomColor,
     setReducedMotion, 
     setTextSize, 
     setProjectsView, 
@@ -44,7 +46,6 @@ export function SettingsContent() {
     { id: "blue", label: "Blue", colorClass: "bg-blue-500" },
     { id: "green", label: "Green", colorClass: "bg-green-500" },
     { id: "purple", label: "Purple", colorClass: "bg-purple-500" },
-    { id: "orange", label: "Orange", colorClass: "bg-orange-500" },
   ];
 
   return (
@@ -107,6 +108,25 @@ export function SettingsContent() {
                     )}
                   />
                 ))}
+                
+                <div className="relative">
+                  <input
+                    type="color"
+                    value={customColor}
+                    onChange={(e) => setCustomColor(e.target.value)}
+                    className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"
+                    title="Custom Color"
+                  />
+                  <div
+                    className={cn(
+                      "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 ring-offset-2 ring-offset-background cursor-pointer",
+                      "bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500",
+                      accentColor === 'custom' ? "ring-2 ring-foreground scale-110" : "hover:scale-105 opacity-80 hover:opacity-100"
+                    )}
+                  >
+                    <Pipette className="w-4 h-4 text-white drop-shadow-md" />
+                  </div>
+                </div>
               </div>
             </div>
             
