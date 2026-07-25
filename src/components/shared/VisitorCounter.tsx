@@ -13,10 +13,9 @@ export function VisitorCounter({ className }: { className?: string }) {
     async function fetchCount() {
       try {
         const hasVisited = localStorage.getItem("studiokharis_visited");
-        // If not visited in this session, increment (/up). Otherwise, just get current count
-        const action = hasVisited ? "" : "/up";
+        const action = hasVisited ? "" : "?action=up";
         
-        const res = await fetch(`https://api.counterapi.dev/v1/studiokharis/views${action}`);
+        const res = await fetch(`/api/views${action}`);
         if (!res.ok) return;
         
         const data = await res.json();
@@ -32,7 +31,6 @@ export function VisitorCounter({ className }: { className?: string }) {
       }
     }
 
-    // Delay slightly to prevent blocking the main thread during hydration
     const timer = setTimeout(fetchCount, 500);
 
     return () => {
@@ -43,9 +41,9 @@ export function VisitorCounter({ className }: { className?: string }) {
 
   if (count === null) {
     return (
-      <div className={cn("flex items-center gap-1.5 text-xs font-medium text-transparent bg-secondary/10 px-2.5 py-1.5 rounded-full animate-pulse", className)}>
-        <Eye className="w-3.5 h-3.5 opacity-0" />
-        <span>----</span>
+      <div className={cn("flex items-center gap-1.5 text-xs font-medium text-muted bg-secondary/20 px-2.5 py-1.5 rounded-full animate-pulse border border-border/30", className)}>
+        <Eye className="w-3.5 h-3.5" />
+        <span>...</span>
       </div>
     );
   }
