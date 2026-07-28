@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 import { Joyride, STATUS, Step } from "react-joyride";
+import { useTheme } from "next-themes";
 
 interface TourContextType {
   runTour: boolean;
@@ -18,6 +19,8 @@ const TourContext = createContext<TourContextType>({
 export const useTour = () => useContext(TourContext);
 
 export function TourProvider({ children }: { children: React.ReactNode }) {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
   const [runTour, setRunTour] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [tourKey, setTourKey] = useState(0);
@@ -123,26 +126,26 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         styles={{
           options: {
             zIndex: 10000,
-            primaryColor: "var(--color-accent)",
-            textColor: "var(--color-primary-text)",
-            backgroundColor: "var(--color-surface)",
-            arrowColor: "var(--color-surface)",
+            primaryColor: isDark ? "#3B82F6" : "#2563EB",
+            textColor: isDark ? "#FAFAFA" : "#111827",
+            backgroundColor: isDark ? "#18181B" : "#FFFFFF",
+            arrowColor: isDark ? "#18181B" : "#FFFFFF",
             overlayColor: "rgba(0, 0, 0, 0.6)",
           },
           tooltipContainer: {
             textAlign: "left",
           },
           buttonNext: {
-            backgroundColor: "var(--color-accent)",
-            color: "var(--color-surface)",
+            backgroundColor: isDark ? "#3B82F6" : "#2563EB",
+            color: isDark ? "#18181B" : "#FFFFFF",
             borderRadius: "0.5rem",
           },
           buttonBack: {
             marginRight: 10,
-            color: "var(--color-muted)",
+            color: isDark ? "#A1A1AA" : "#6B7280",
           },
           buttonSkip: {
-            color: "var(--color-muted)",
+            color: isDark ? "#A1A1AA" : "#6B7280",
           },
         } as any}
       />
