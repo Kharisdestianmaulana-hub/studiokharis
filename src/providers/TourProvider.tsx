@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-import { Joyride, STATUS, Step } from "react-joyride";
-import { useTheme } from "next-themes";
+import { Joyride, STATUS, Step, TooltipRenderProps } from "react-joyride";
+import { X } from "lucide-react";
 
 interface TourContextType {
   runTour: boolean;
@@ -18,9 +18,51 @@ const TourContext = createContext<TourContextType>({
 
 export const useTour = () => useContext(TourContext);
 
+const CustomTooltip = ({
+  index,
+  step,
+  backProps,
+  closeProps,
+  primaryProps,
+  tooltipProps,
+}: TooltipRenderProps) => {
+  return (
+    <div
+      {...tooltipProps}
+      className="bg-[#FAFAFA] dark:bg-[#18181B] border border-border p-4 rounded-xl shadow-xl w-80 max-w-[90vw] flex flex-col gap-4 relative"
+    >
+      <button
+        {...closeProps}
+        className="absolute top-2 right-2 p-1 text-muted hover:text-foreground transition-colors"
+      >
+        <X className="w-4 h-4" />
+      </button>
+
+      <div className="mt-2">{step.content}</div>
+      <div className="flex items-center justify-between mt-2">
+        {index > 0 ? (
+          <button
+            {...backProps}
+            className="text-sm font-medium text-muted hover:text-foreground transition-colors px-3 py-1.5"
+          >
+            {backProps.title}
+          </button>
+        ) : (
+          <div />
+        )}
+        
+        <button
+          {...primaryProps}
+          className="bg-[var(--color-accent)] text-white px-4 py-1.5 rounded-md text-sm font-medium hover:opacity-90 transition-opacity"
+        >
+          {primaryProps.title}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export function TourProvider({ children }: { children: React.ReactNode }) {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
   const [runTour, setRunTour] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [tourKey, setTourKey] = useState(0);
@@ -123,29 +165,11 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         continuous
         {...({ showProgress: true, showSkipButton: true } as any)}
         callback={handleJoyrideCallback}
+        tooltipComponent={CustomTooltip}
         styles={{
           options: {
             zIndex: 10000,
-            primaryColor: isDark ? "#3B82F6" : "#2563EB",
-            textColor: isDark ? "#FAFAFA" : "#111827",
-            backgroundColor: isDark ? "#18181B" : "#FFFFFF",
-            arrowColor: isDark ? "#18181B" : "#FFFFFF",
             overlayColor: "rgba(0, 0, 0, 0.6)",
-          },
-          tooltipContainer: {
-            textAlign: "left",
-          },
-          buttonNext: {
-            backgroundColor: isDark ? "#3B82F6" : "#2563EB",
-            color: isDark ? "#18181B" : "#FFFFFF",
-            borderRadius: "0.5rem",
-          },
-          buttonBack: {
-            marginRight: 10,
-            color: isDark ? "#A1A1AA" : "#6B7280",
-          },
-          buttonSkip: {
-            color: isDark ? "#A1A1AA" : "#6B7280",
           },
         } as any}
       />
