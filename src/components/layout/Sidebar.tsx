@@ -38,7 +38,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
       {/* Top Profile / Header & Toggle */}
       <div className={cn("p-4 flex", isCollapsed ? "flex-col items-center gap-4" : "items-center justify-between")}>
         {!isCollapsed && (
-          <Link href="/about" className="flex items-center gap-3 overflow-hidden px-1 hover:opacity-80 transition-opacity cursor-pointer">
+          <Link href="/about" id="tour-profile" className="flex items-center gap-3 overflow-hidden px-1 hover:opacity-80 transition-opacity cursor-pointer">
             <Avatar className="h-10 w-10 border border-border shrink-0">
               <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} />
               <AvatarFallback>{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
@@ -72,7 +72,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
         </Tooltip>
 
         {isCollapsed && (
-          <Link href="/about" className="mx-auto hover:opacity-80 transition-opacity cursor-pointer">
+          <Link href="/about" id="tour-profile" className="mx-auto hover:opacity-80 transition-opacity cursor-pointer">
             <Avatar className="h-10 w-10 border border-border shrink-0">
               <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} />
               <AvatarFallback>{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
@@ -83,13 +83,14 @@ export function Sidebar({ profileData }: { profileData?: any }) {
 
       {/* Main Navigation */}
       <div className="flex-1 overflow-y-auto py-2 px-3 scrollbar-none">
-        <nav id="tour-sidebar" className="flex flex-col gap-2">
+        <nav className="flex flex-col gap-2">
           {NAVIGATION_ROUTES.map((route) => {
             const Icon = route.icon;
             const isActive = pathname === route.href || (route.href !== "/" && pathname.startsWith(route.href));
 
             const LinkContent = (
               <Link
+                id={`tour-nav-${route.name.toLowerCase().replace(/\s+/g, '-')}`}
                 href={route.href}
                 className={cn(
                   "flex items-center rounded-md text-sm transition-all duration-200",
@@ -125,6 +126,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
             const Icon = route.icon;
             const LinkContent = (
               <Link
+                id={`tour-nav-${route.name.toLowerCase().replace(/\s+/g, '-')}`}
                 href={route.href}
                 className={cn(
                   "flex items-center rounded-md text-sm text-secondary-text hover:bg-secondary/5 hover:text-foreground transition-all duration-200",

@@ -93,11 +93,61 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       placement: "center",
     },
     {
-      target: "#tour-sidebar",
+      target: "#tour-profile",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">Navigation Menu</h4>
-          <p className="text-sm text-muted">Explore my articles, projects, and experiences easily from here.</p>
+          <h4 className="font-bold text-foreground">About Me</h4>
+          <p className="text-sm text-muted">Get to know more about who I am and my background.</p>
+        </div>
+      ),
+      placement: "right",
+    },
+    {
+      target: "#tour-nav-home",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-bold text-foreground">Home</h4>
+          <p className="text-sm text-muted">Return to the main dashboard anytime.</p>
+        </div>
+      ),
+      placement: "right",
+    },
+    {
+      target: "#tour-nav-projects",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-bold text-foreground">Projects</h4>
+          <p className="text-sm text-muted">Explore the portfolio of work I've built.</p>
+        </div>
+      ),
+      placement: "right",
+    },
+    {
+      target: "#tour-nav-experience",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-bold text-foreground">Experience</h4>
+          <p className="text-sm text-muted">My professional journey and career history.</p>
+        </div>
+      ),
+      placement: "right",
+    },
+    {
+      target: "#tour-nav-articles",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-bold text-foreground">Articles</h4>
+          <p className="text-sm text-muted">Read my thoughts and tutorials on software development.</p>
+        </div>
+      ),
+      placement: "right",
+    },
+    {
+      target: "#tour-nav-contact",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-bold text-foreground">Contact</h4>
+          <p className="text-sm text-muted">Let's connect! Reach out to me here.</p>
         </div>
       ),
       placement: "right",
