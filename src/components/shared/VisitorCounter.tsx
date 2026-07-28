@@ -14,8 +14,9 @@ export function VisitorCounter({ className }: { className?: string }) {
       try {
         const hasVisited = localStorage.getItem("studiokharis_visited");
         const action = hasVisited ? "" : "?action=up";
+        const urlParams = action ? `${action}&t=${Date.now()}` : `?t=${Date.now()}`;
         
-        const res = await fetch(`/api/views${action}`);
+        const res = await fetch(`/api/views${urlParams}`);
         if (!res.ok) return;
         
         const data = await res.json();
