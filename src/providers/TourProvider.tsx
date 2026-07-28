@@ -20,6 +20,7 @@ export const useTour = () => useContext(TourContext);
 export function TourProvider({ children }: { children: React.ReactNode }) {
   const [runTour, setRunTour] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [tourKey, setTourKey] = useState(0);
 
   useEffect(() => {
     setIsMounted(true);
@@ -99,6 +100,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
   };
 
   const startTour = () => {
+    setTourKey(prev => prev + 1);
     setRunTour(true);
   };
 
@@ -112,6 +114,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
     <TourContext.Provider value={{ runTour, startTour, stopTour }}>
       {/* @ts-ignore - react-joyride typings are incomplete in this version */}
       <Joyride
+        key={tourKey}
         steps={steps}
         run={runTour}
         continuous
@@ -120,26 +123,26 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         styles={{
           options: {
             zIndex: 10000,
-            primaryColor: "hsl(var(--primary))",
-            textColor: "hsl(var(--foreground))",
-            backgroundColor: "hsl(var(--surface))",
-            arrowColor: "hsl(var(--surface))",
+            primaryColor: "var(--color-accent)",
+            textColor: "var(--color-primary-text)",
+            backgroundColor: "var(--color-surface)",
+            arrowColor: "var(--color-surface)",
             overlayColor: "rgba(0, 0, 0, 0.6)",
           },
           tooltipContainer: {
             textAlign: "left",
           },
           buttonNext: {
-            backgroundColor: "hsl(var(--primary))",
-            color: "hsl(var(--primary-foreground))",
+            backgroundColor: "var(--color-accent)",
+            color: "var(--color-surface)",
             borderRadius: "0.5rem",
           },
           buttonBack: {
             marginRight: 10,
-            color: "hsl(var(--muted))",
+            color: "var(--color-muted)",
           },
           buttonSkip: {
-            color: "hsl(var(--muted))",
+            color: "var(--color-muted)",
           },
         } as any}
       />
