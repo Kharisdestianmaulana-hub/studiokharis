@@ -76,6 +76,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
     if (!hasSeenTour) {
       const timer = setTimeout(() => {
         setRunTour(true);
+        localStorage.setItem("studiokharis_tour_seen", "true");
       }, 1500);
       return () => clearTimeout(timer);
     }
