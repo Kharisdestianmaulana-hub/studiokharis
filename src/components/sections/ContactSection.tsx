@@ -27,7 +27,6 @@ const formSchema = z.object({
 });
 
 export function ContactSection({ socialsData }: { socialsData: any[] }) {
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [time, setTime] = React.useState<string>("");
 
   React.useEffect(() => {
@@ -52,6 +51,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
     defaultValues: {
       name: "",
       company: "",
@@ -61,16 +61,24 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
     },
   });
 
+  const { isValid, isSubmitting } = form.formState;
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast.success("Message sent successfully!", {
-        description: "Thanks for reaching out. I'll get back to you soon.",
-      });
-      form.reset();
-    }, 1500);
+    const subject = encodeURIComponent(`New Project Inquiry from ${values.name}`);
+    let bodyText = `Hi Kharis,\n\nMy name is ${values.name}`;
+    if (values.company) {
+      bodyText += ` and I work at ${values.company}`;
+    }
+    bodyText += `. I'd love to work with you on ${values.service}.\n\nYou can reach me at ${values.email}.\n\nHere are some more details about the project:\n${values.message}`;
+    
+    const body = encodeURIComponent(bodyText);
+    
+    // Open default email client
+    window.location.href = `mailto:kharisdestianm23@gmail.com?subject=${subject}&body=${body}`;
+    
+    toast.success("Opening your email app...", {
+      description: "Please send the email from your default client.",
+    });
   }
 
   // Helper for input classes to look like a mad-libs blank
@@ -144,7 +152,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                 <div className="flex flex-wrap items-center gap-4 mt-auto pt-4">
                   <Button 
                     type="submit" 
-                    disabled={isSubmitting} 
+                    disabled={!isValid || isSubmitting} 
                     className="rounded-xl px-8 h-12"
                   >
                     {isSubmitting ? (
@@ -156,10 +164,10 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                       </>
                     )}
                   </Button>
-                  <a href="https://cal.com/riray" target="_blank" rel="noreferrer">
+                  <a href="https://cal.com/riray/brief" target="_blank" rel="noreferrer">
                     <Button type="button" variant="outline" className="rounded-xl px-8 h-12 border-primary/20 bg-transparent hover:bg-transparent text-foreground hover:text-accent hover:border-accent transition-colors group">
-                      Book a 15-min call
-                      <Calendar className="w-4 h-4 ml-2 text-primary group-hover:text-accent transition-colors" />
+                      Schedule a call 
+                      <Calendar className="w-4 h-4 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
                     </Button>
                   </a>
                 </div>
