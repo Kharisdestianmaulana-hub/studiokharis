@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { usePathname } from "next/navigation";
 import { NAVIGATION_ROUTES, BOTTOM_ROUTES } from "@/constants/routes";
@@ -14,6 +14,21 @@ import { PanelLeftClose, PanelLeft } from "lucide-react";
 export function Sidebar({ profileData }: { profileData?: any }) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    const stored = localStorage.getItem("studiokharis_sidebar_collapsed");
+    if (stored === "true") {
+      setIsCollapsed(true);
+    }
+  }, []);
+
+  const toggleSidebar = () => {
+    const newState = !isCollapsed;
+    setIsCollapsed(newState);
+    localStorage.setItem("studiokharis_sidebar_collapsed", String(newState));
+  };
 
   return (
     <aside className={cn(
@@ -46,7 +61,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
               variant="ghost"
               size="icon"
               className={cn("h-8 w-8 shrink-0 text-muted hover:text-white", !isCollapsed && "ml-2")}
-              onClick={() => setIsCollapsed(!isCollapsed)}
+              onClick={toggleSidebar}
             >
               {isCollapsed ? <PanelLeft className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
             </Button>
