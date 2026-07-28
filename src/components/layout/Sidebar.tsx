@@ -83,7 +83,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
 
       {/* Main Navigation */}
       <div className="flex-1 overflow-y-auto py-2 px-3 scrollbar-none">
-        <nav className="flex flex-col gap-2">
+        <nav id="tour-sidebar" className="flex flex-col gap-2">
           {NAVIGATION_ROUTES.map((route) => {
             const Icon = route.icon;
             const isActive = pathname === route.href || (route.href !== "/" && pathname.startsWith(route.href));

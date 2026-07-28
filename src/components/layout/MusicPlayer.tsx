@@ -57,7 +57,7 @@ export function MusicPlayer() {
   };
 
   return (
-    <div className={cn(
+    <div id="tour-music" className={cn(
       "fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-2 transition-all duration-300",
     )}>
       {/* Expanded Controls */}
