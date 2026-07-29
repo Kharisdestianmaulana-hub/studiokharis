@@ -45,6 +45,8 @@ export function PhysicsNameTag({ profileData }: { profileData: any }) {
         // Constrain to 0 so it always springs back to the center
         dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
         dragElastic={0.6}
+        // Lower damping means it will swing back and forth multiple times like a pendulum
+        dragTransition={{ bounceStiffness: 100, bounceDamping: 3 }}
         whileDrag={{ 
           scale: 1.05, 
           boxShadow: "0 25px 50px -12px rgba(0,0,0,0.4)",
