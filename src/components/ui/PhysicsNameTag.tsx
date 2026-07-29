@@ -12,13 +12,17 @@ export function PhysicsNameTag({ profileData }: { profileData: any }) {
   // Rotate opposite to the drag direction to simulate hanging physics
   // When pulled right (x is positive), the bottom swings right, so it rotates counter-clockwise (negative)
   const rotate = useTransform(x, [-200, 200], [25, -25]);
+  
+  // 3D Tilt Effect: mapping drag x,y to 3D rotation
+  const rotateY = useTransform(x, [-200, 200], [-30, 30]);
+  const rotateX = useTransform(y, [-200, 200], [30, -30]);
 
   // The distance between the anchor (pin) and the name tag hole is 80px (mt-[80px]) + 16px (p-4) = 96px
   // We add this offset so the line always connects from (0,0) to the moving hole.
   const stringY = useTransform(y, (latestY) => latestY + 96);
 
   return (
-    <div className="relative w-48 h-[250px] flex flex-col items-center hidden lg:flex mt-4">
+    <div className="relative w-48 h-[250px] flex flex-col items-center hidden lg:flex mt-4" style={{ perspective: 1200 }}>
       {/* Anchor Pin */}
       <div className="absolute top-0 w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-600 shadow-inner z-10 border border-zinc-400 dark:border-zinc-500" />
 
@@ -41,8 +45,13 @@ export function PhysicsNameTag({ profileData }: { profileData: any }) {
         // Constrain to 0 so it always springs back to the center
         dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
         dragElastic={0.6}
-        style={{ x, y, rotate }}
-        className="mt-[80px] w-48 bg-white/90 dark:bg-[#18181B]/90 backdrop-blur-md border border-border rounded-xl shadow-2xl p-4 flex flex-col items-center cursor-grab active:cursor-grabbing z-20"
+        whileDrag={{ 
+          scale: 1.05, 
+          boxShadow: "0 25px 50px -12px rgba(0,0,0,0.4)",
+          cursor: "grabbing"
+        }}
+        style={{ x, y, rotate, rotateX, rotateY }}
+        className="mt-[80px] w-48 bg-white/90 dark:bg-[#18181B]/90 backdrop-blur-md border border-border rounded-xl shadow-2xl p-4 flex flex-col items-center cursor-grab z-20"
       >
         {/* Hole for the lanyard */}
         <div className="w-4 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 shadow-inner mb-4" />
