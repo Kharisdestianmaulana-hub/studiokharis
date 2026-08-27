@@ -3,6 +3,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { TopNav } from "@/components/layout/TopNav";
 import { Footer } from "@/components/layout/Footer";
 import { MusicPlayer } from "@/components/layout/MusicPlayer";
+import { BackToTop } from "@/components/layout/BackToTop";
 import { getProfileData } from "@/data/profile";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SettingsProvider } from "@/providers/SettingsProvider";
@@ -30,6 +31,7 @@ export default async function MainLayout({
             </div>
           </div>
           <MusicPlayer />
+          <BackToTop />
         </TourProvider>
       </TooltipProvider>
     </SettingsProvider>

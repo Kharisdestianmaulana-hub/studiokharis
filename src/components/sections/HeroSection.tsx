@@ -14,7 +14,7 @@ export async function HeroSection({
   const socialsData = await getSocialLinks();
   
   return (
-    <section className="relative w-full h-[80vh] min-h-[600px] flex items-end justify-center animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <section className="relative w-full h-[80vh] min-h-[600px] flex items-end justify-center pb-24 md:pb-0 animate-in fade-in slide-in-from-bottom-8 duration-700">
       
       {/* Background Marquee Text */}
       <div className="absolute top-1/2 -translate-y-1/2 w-[200vw] left-1/2 -translate-x-1/2 flex items-center overflow-hidden pointer-events-none z-0">

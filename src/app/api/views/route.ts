@@ -8,8 +8,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const action = searchParams.get("action") === "up" ? "/up" : "";
     
-    // Proxy request to the global counter API
-    const res = await fetch(`https://api.counterapi.dev/v1/studiokharis/views${action}`, {
+    // Proxy request to the global counter API v2
+    const res = await fetch(`https://api.counterapi.dev/v2/kharis-destian-maulanas-team-5266/visitor-counter-kharis${action}`, {
       cache: "no-store",
     });
     
@@ -17,8 +17,12 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Failed to fetch counter" }, { status: 500 });
     }
     
-    const data = await res.json();
-    return NextResponse.json(data, {
+    const json = await res.json();
+    
+    // counterapi v2 returns data inside a nested object and uses up_count
+    const count = json?.data?.up_count || 0;
+    
+    return NextResponse.json({ count }, {
       headers: {
         "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
         "Pragma": "no-cache",
