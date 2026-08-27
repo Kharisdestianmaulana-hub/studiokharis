@@ -70,13 +70,12 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setIsMounted(true);
     // Check if the user has seen the tour before
-    const hasSeenTour = localStorage.getItem("studiokharis_tour_seen");
+    const hasSeenTour = localStorage.getItem("has_seen_tour_v2");
     
     // Auto-start for new visitors after a short delay
     if (!hasSeenTour) {
       const timer = setTimeout(() => {
         setRunTour(true);
-        localStorage.setItem("studiokharis_tour_seen", "true");
       }, 1500);
       return () => clearTimeout(timer);
     }
@@ -191,7 +190,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
 
     if (finishedStatuses.includes(status)) {
       setRunTour(false);
-      localStorage.setItem("studiokharis_tour_seen", "true");
+      localStorage.setItem("has_seen_tour_v2", "true");
     }
   };
 

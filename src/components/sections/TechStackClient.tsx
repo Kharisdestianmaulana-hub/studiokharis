@@ -142,23 +142,54 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
 
   return (
     <>
-      <div className="flex flex-col gap-16 mt-8">
-        {techStackData.map((category) => (
-          <div key={category.category} className="flex flex-col gap-8">
-            <div className="flex items-center gap-4">
-              <h4 className="text-xl md:text-2xl font-bold tracking-widest uppercase text-foreground">
-                {category.category}
-              </h4>
-              <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-12">
+        {/* Left Side: Unified Tech Grid */}
+        <div className="lg:col-span-5 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-4 gap-4">
+          {techStackData.flatMap(c => c.items).map((tech, index) => {
+            const { icon: Icon, color } = getTechIcon(tech.name);
+            return (
+              <motion.div
+                key={tech.name}
+                onClick={() => setSelectedTech(tech)}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="group relative flex items-center justify-center p-4 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all cursor-pointer aspect-square"
+                title={`${tech.name} - ${tech.proficiency}%`}
+              >
+                <Icon className="w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: color === "#000000" ? "var(--color-primary-text)" : color }} />
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Right Side: Category Text Columns */}
+        <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {techStackData.map((category, idx) => (
+            <div key={category.category} className="flex flex-col p-8 rounded-3xl bg-secondary/5 border border-border/50 hover:bg-secondary/10 transition-colors">
+              <div className="flex justify-between items-start mb-6">
+                <span className="text-4xl md:text-5xl font-light text-foreground">{String(idx + 1).padStart(2, '0')}</span>
+                <h4 className="text-sm md:text-base font-bold tracking-widest uppercase text-right max-w-[120px] leading-tight text-foreground/80">
+                  {category.category}
+                </h4>
+              </div>
+              
+              {/* Fake Icon just for the aesthetic matching the design */}
+              <div className="w-12 h-12 bg-surface rounded-xl border border-border flex items-center justify-center mb-6">
+                <Code2 className="w-6 h-6 text-foreground" />
+              </div>
+
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {category.items.map(tech => (
+                  <span key={tech.name} className="text-xs md:text-sm font-medium px-3 py-1.5 bg-surface border border-border/50 rounded-lg text-muted-foreground">
+                    {tech.name}
+                  </span>
+                ))}
+              </div>
             </div>
-            
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-              {category.items.map((tech, i) => (
-                <TechNode key={tech.name} tech={tech} index={i} onClick={() => setSelectedTech(tech)} />
-              ))}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Tech Projects Modal */}
