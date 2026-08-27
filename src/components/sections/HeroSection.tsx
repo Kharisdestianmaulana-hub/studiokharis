@@ -31,7 +31,7 @@ export async function HeroSection({
       {/* Center Image */}
       <div className="relative z-10 w-full max-w-3xl flex justify-center items-end h-full">
         <img 
-          src="/images/hero-profile.png" 
+          src="/images/hero-profile.webp" 
           alt={profileData.name}
           className="object-contain h-[90%] md:h-[100%] max-h-[85vh] object-bottom drop-shadow-2xl pointer-events-none"
         />
