@@ -21,7 +21,7 @@ export async function HeroSection({
         <div className="flex flex-nowrap whitespace-nowrap animate-marquee w-max" style={{ animationDuration: '40s' }}>
           {/* We repeat the name horizontally to ensure it loops smoothly without wrapping */}
           {Array(4).fill(profileData.name).map((name, i) => (
-            <h1 key={i} className="text-[12rem] md:text-[20rem] lg:text-[25rem] font-black uppercase tracking-tighter mx-8 text-foreground leading-none whitespace-nowrap">
+            <h1 key={i} className="text-[12rem] md:text-[20rem] lg:text-[25rem] font-black uppercase tracking-tighter mx-8 text-background [-webkit-text-stroke:2px_#000] dark:[-webkit-text-stroke:2px_#fff] leading-none whitespace-nowrap">
               {name}
             </h1>
           ))}
