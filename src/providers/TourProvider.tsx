@@ -76,6 +76,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
     if (!hasSeenTour) {
       const timer = setTimeout(() => {
         setRunTour(true);
+        // Mark as seen immediately so it doesn't auto-run again if they just refresh
+        localStorage.setItem("has_seen_tour_v2", "true");
       }, 1500);
       return () => clearTimeout(timer);
     }

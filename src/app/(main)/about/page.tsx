@@ -1,5 +1,4 @@
 import { AboutSection } from "@/components/sections/AboutSection";
-import { HeroSection } from "@/components/sections/HeroSection";
 import { ScrollReveal } from "@/components/shared/ScrollReveal";
 
 export const metadata = {
@@ -9,11 +8,8 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col gap-16 pb-16 pt-2">
-      <ScrollReveal delay={0.1}>
-        <HeroSection hideButtons={true} variant="personal" />
-      </ScrollReveal>
-      <ScrollReveal delay={0.1}>
+    <div className="flex flex-col gap-16 pb-16 pt-8 w-full">
+      <ScrollReveal delay={0.1} className="w-full">
         <AboutSection />
       </ScrollReveal>
     </div>
