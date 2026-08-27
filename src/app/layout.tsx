@@ -37,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="antialiased min-h-screen bg-background text-foreground">
+      <body className="font-sans antialiased min-h-screen bg-background text-foreground">
         <RouteTracker />
         <ThemeProvider
           attribute="class"
