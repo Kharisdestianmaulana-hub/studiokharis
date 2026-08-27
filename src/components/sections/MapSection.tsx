@@ -44,10 +44,10 @@ export default function MapSection({ messages }: { messages: any[] }) {
   const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
   return (
-    <div className="flex flex-col lg:flex-row gap-0 h-[80vh] w-full mt-8 rounded-xl overflow-hidden border border-border shadow-lg">
+    <div className="flex flex-col-reverse lg:flex-row gap-0 h-[80vh] w-full mt-8 rounded-xl overflow-hidden border border-border shadow-lg">
       
       {/* Sidebar List */}
-      <div className="w-full lg:w-1/3 bg-background flex flex-col h-1/2 lg:h-full border-b lg:border-b-0 lg:border-r border-border overflow-hidden z-10">
+      <div className="w-full lg:w-1/3 bg-background flex flex-col h-1/2 lg:h-full border-t lg:border-t-0 lg:border-r border-border overflow-hidden z-10">
         <div className="p-4 bg-secondary/20 border-b border-border shadow-sm">
           <h3 className="font-semibold text-lg flex items-center gap-2">
             <MapPin className="w-5 h-5 text-primary" /> Visitor Locations
