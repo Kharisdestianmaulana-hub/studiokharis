@@ -19,7 +19,7 @@ export default async function MainLayout({
     <SettingsProvider>
       <TooltipProvider delayDuration={0}>
         <TourProvider>
-          <div className="flex min-h-screen w-full">
+          <div className="flex min-h-screen w-full overflow-x-clip">
             <Sidebar profileData={profileData} />
             <div className="flex flex-col flex-1 min-w-0">
               <TopNav profileData={profileData} />

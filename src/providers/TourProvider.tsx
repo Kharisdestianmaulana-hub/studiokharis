@@ -205,26 +205,25 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
     setRunTour(false);
   };
 
-  if (!isMounted) return <>{children}</>;
-
   return (
     <TourContext.Provider value={{ runTour, startTour, stopTour }}>
-      {/* @ts-ignore - react-joyride typings are incomplete in this version */}
-      <Joyride
-        key={tourKey}
-        steps={steps}
-        run={runTour}
-        continuous
-        {...({ showProgress: true, showSkipButton: true } as any)}
-        callback={handleJoyrideCallback}
-        tooltipComponent={CustomTooltip}
-        styles={{
-          options: {
-            zIndex: 10000,
-            overlayColor: "rgba(0, 0, 0, 0.6)",
-          },
-        } as any}
-      />
+      {isMounted && (
+        <Joyride
+          key={tourKey}
+          steps={steps}
+          run={runTour}
+          continuous
+          {...({ showProgress: true, showSkipButton: true } as any)}
+          callback={handleJoyrideCallback}
+          tooltipComponent={CustomTooltip}
+          styles={{
+            options: {
+              zIndex: 10000,
+              overlayColor: "rgba(0, 0, 0, 0.6)",
+            },
+          } as any}
+        />
+      )}
       {children}
     </TourContext.Provider>
   );
