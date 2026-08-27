@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Search, X, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTransitionStore } from "@/store/useTransitionStore";
 import { useDebounce } from "@/hooks/useDebounce";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -13,6 +14,8 @@ export function SearchBar() {
   const [query, setQuery] = React.useState("");
   const [results, setResults] = React.useState<any[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const setPendingRoute = useTransitionStore((state) => state.setPendingRoute);
+  const setTransitionTitle = useTransitionStore((state) => state.setTransitionTitle);
   
   const debouncedQuery = useDebounce(query, 300);
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -72,14 +75,16 @@ export function SearchBar() {
     e.preventDefault();
     if (query.trim()) {
       setIsOpen(false);
-      router.push(`/search?q=${encodeURIComponent(query)}`);
+      setTransitionTitle("Search Results");
+      setPendingRoute(`/search?q=${encodeURIComponent(query)}`);
     }
   };
 
-  const handleSelect = (url: string) => {
+  const handleSelect = (url: string, title: string) => {
     setIsOpen(false);
     setQuery("");
-    router.push(url);
+    setTransitionTitle(title);
+    setPendingRoute(url);
   };
 
   return (
@@ -136,7 +141,7 @@ export function SearchBar() {
               {results.map((result) => (
                 <li key={`${result.type}-${result.id}`}>
                   <button
-                    onClick={() => handleSelect(result.url)}
+                    onClick={() => handleSelect(result.url, result.title)}
                     className="w-full text-left px-4 py-2 hover:bg-accent/10 flex items-center justify-between group transition-colors"
                   >
                     <div className="flex items-center gap-3 overflow-hidden">
@@ -155,7 +160,8 @@ export function SearchBar() {
                 <button
                   onClick={() => {
                     setIsOpen(false);
-                    router.push(`/search?q=${encodeURIComponent(query)}`);
+                    setTransitionTitle("Search Results");
+                    setPendingRoute(`/search?q=${encodeURIComponent(query)}`);
                   }}
                   className="w-full text-center py-2 text-xs font-medium text-accent hover:bg-accent/10 rounded-md transition-colors"
                 >
