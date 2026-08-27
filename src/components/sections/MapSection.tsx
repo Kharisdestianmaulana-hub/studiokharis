@@ -40,10 +40,8 @@ export default function MapSection({ messages }: { messages: any[] }) {
 
   if (!mounted) return <div className="w-full h-[60vh] flex items-center justify-center border rounded-xl animate-pulse bg-secondary/10 mt-8" />;
 
-  // CartoDB tiles are very clean. Dark Matter for dark mode, Positron for light mode.
-  const tileUrl = resolvedTheme === "dark" 
-    ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-    : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+  // Use standard OpenStreetMap tiles
+  const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
   return (
     <div className="flex flex-col lg:flex-row gap-0 h-[80vh] w-full mt-8 rounded-xl overflow-hidden border border-border shadow-lg">
@@ -95,10 +93,11 @@ export default function MapSection({ messages }: { messages: any[] }) {
           center={[20, 0]} 
           zoom={2.5} 
           scrollWheelZoom={true} 
+          className={resolvedTheme === "dark" ? "map-dark-mode" : ""}
           style={{ height: '100%', width: '100%', zIndex: 0 }}
         >
           <TileLayer
-            attribution='&copy; <a href="https://carto.com/">CartoDB</a>'
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url={tileUrl}
           />
           

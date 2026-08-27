@@ -49,6 +49,14 @@
     scroll-behavior: auto !important;
   }
 
+  .leaflet-container {
+  z-index: 0 !important;
+}
+
+.map-dark-mode .leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
   .text-large {
     font-size: 110%;
   }
