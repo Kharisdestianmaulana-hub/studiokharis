@@ -52,56 +52,58 @@ export function ArticlesClient({
       )}
 
       {viewMode === "list" ? (
-        <div className="flex flex-col border-y border-border divide-y divide-border">
+        <div className="flex flex-col border-y-[3px] border-foreground divide-y-[3px] divide-foreground">
           {articlesData.map((article: any, index: number) => (
-            <div key={article.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center group py-12">
+            <div key={article.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center group py-12 md:py-16">
               <div className={`flex flex-col ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}>
-                <div className="flex justify-between items-start mb-2">
+                <div className="flex justify-between items-start mb-6">
                   <Link href={`/articles/${article.slug}`}>
-                    <h4 className="text-2xl font-bold text-foreground group-hover:text-accent transition-colors">
+                    <h4 className="text-3xl md:text-5xl font-black tracking-tighter text-foreground uppercase group-hover:text-accent transition-colors leading-tight">
                       {article.title}
                     </h4>
                   </Link>
-                  <span className="text-sm font-medium text-muted whitespace-nowrap ml-4">
+                  <span className="text-xs md:text-sm font-black text-foreground whitespace-nowrap ml-4 border-[2px] border-foreground px-3 py-1.5 uppercase tracking-widest">
                     {new Date(article.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </span>
                 </div>
                 
                 {article.tags && article.tags.length > 0 && (
-                  <p className="text-accent text-sm font-semibold mb-4">
-                    {article.tags.join(" • ")}
-                  </p>
+                  <div className="flex flex-wrap gap-2 text-foreground text-xs font-bold uppercase tracking-widest mb-6">
+                    {article.tags.map((tag: string) => (
+                      <span key={tag} className="border-[2px] border-current px-2.5 py-1">#{tag}</span>
+                    ))}
+                  </div>
                 )}
                 
-                <p className="text-muted leading-relaxed mb-6 text-sm md:text-base">
+                <p className="text-muted-foreground font-medium leading-relaxed mb-8 text-sm md:text-base border-l-[3px] border-foreground pl-4 md:pl-6 py-1">
                   {stripHtml(article.content).substring(0, 200)}...
                 </p>
                 
                 <Link 
                   href={`/articles/${article.slug}`} 
-                  className="text-sm font-bold uppercase tracking-widest text-foreground hover:text-accent flex items-center gap-2 w-fit"
+                  className="w-full text-center text-sm font-black uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 py-4 transition-none flex items-center justify-center gap-2"
                 >
-                  Read Article <ArrowRight className="w-4 h-4" />
+                  READ ARTICLE <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
               
-              <Link href={`/articles/${article.slug}`} className={`relative aspect-video rounded-none-2xl overflow-hidden bg-secondary/10 border border-border/50 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}>
+              <Link href={`/articles/${article.slug}`} className={`relative aspect-[4/3] w-full overflow-hidden bg-foreground border-[3px] border-foreground ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}>
                 <img 
                   src={article.cover || '/placeholder.svg'} 
                   alt={article.title} 
-                  className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700" 
+                  className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0 opacity-90 group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal" 
                 />
               </Link>
             </div>
           ))}
           
           {!hideViewAll && (
-            <div className="mt-6 md:hidden">
+            <div className="mt-6 md:hidden py-6">
               <Link 
                 href="/articles" 
-                className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-none py-3 hover:bg-secondary/10 transition-colors"
+                className="w-full text-center text-sm font-black uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 py-4 transition-none flex items-center justify-center gap-2"
               >
-                View All Articles <ArrowRight className="w-4 h-4" />
+                VIEW ALL ARTICLES <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
           )}
@@ -110,43 +112,43 @@ export function ArticlesClient({
         /* GRID VIEW */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {articlesData.map((article: any) => (
-            <div key={article.id} className="group flex flex-col h-full bg-surface border border-border rounded-none-2xl overflow-hidden hover:shadow-md transition-all duration-300">
-              <Link href={`/articles/${article.slug}`} className="relative aspect-video w-full overflow-hidden bg-secondary/10 border-b border-border/50">
+            <div key={article.id} className="group flex flex-col h-full bg-background border-[3px] border-foreground overflow-hidden hover:-translate-y-2 transition-transform duration-300">
+              <Link href={`/articles/${article.slug}`} className="relative aspect-video w-full overflow-hidden bg-foreground border-b-[3px] border-foreground">
                 <img 
                   src={article.cover || '/placeholder.svg'} 
                   alt={article.title} 
-                  className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700" 
+                  className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0 opacity-90 group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal" 
                 />
               </Link>
-              <div className="flex flex-col flex-1 p-6">
-                <div className="flex justify-between items-start mb-3 gap-2">
+              <div className="flex flex-col flex-1 p-6 md:p-8">
+                <div className="flex justify-between items-start mb-6 gap-2">
                   <Link href={`/articles/${article.slug}`}>
-                    <h4 className="text-xl font-bold text-foreground group-hover:text-accent transition-colors line-clamp-2">
+                    <h4 className="text-2xl font-black uppercase tracking-tighter text-foreground group-hover:text-accent transition-colors line-clamp-3 leading-tight">
                       {article.title}
                     </h4>
                   </Link>
                 </div>
                 
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-6">
                   {article.tags && article.tags.length > 0 && (
-                    <p className="text-accent text-xs font-semibold line-clamp-1">
-                      {article.tags[0]}
+                    <p className="text-foreground border-[2px] border-current px-2 py-1 text-xs font-bold uppercase tracking-widest line-clamp-1">
+                      #{article.tags[0]}
                     </p>
                   )}
-                  <span className="text-xs font-medium text-muted whitespace-nowrap">
+                  <span className="text-xs font-black border-[2px] border-foreground px-2 py-1 uppercase text-foreground whitespace-nowrap">
                     {new Date(article.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </span>
                 </div>
                 
-                <p className="text-muted text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
-                  {stripHtml(article.content).substring(0, 150)}...
+                <p className="text-muted-foreground font-medium text-sm leading-relaxed mb-8 flex-1 line-clamp-3 border-l-[3px] border-foreground pl-4 py-1">
+                  {stripHtml(article.content).substring(0, 120)}...
                 </p>
                 
                 <Link 
                   href={`/articles/${article.slug}`} 
-                  className="mt-auto text-sm font-bold uppercase tracking-widest text-foreground hover:text-accent flex items-center gap-2 w-fit"
+                  className="mt-auto w-full text-center text-sm font-black uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 py-4 transition-none flex items-center justify-center gap-2"
                 >
-                  Read Article <ArrowRight className="w-4 h-4" />
+                  READ ARTICLE <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
             </div>
