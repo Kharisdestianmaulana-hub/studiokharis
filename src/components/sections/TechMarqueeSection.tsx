@@ -15,7 +15,7 @@ export async function TechMarqueeSection() {
   const marqueeItems = [...allTechs, ...allTechs, ...allTechs];
 
   return (
-    <section className="py-12 overflow-hidden">
+    <section className="py-12">
       <div className="flex flex-col gap-8 md:gap-16">
         <div className="flex flex-col gap-2">
           <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-foreground uppercase">Technologies I Use</h3>
@@ -24,9 +24,10 @@ export async function TechMarqueeSection() {
           </p>
         </div>
         
-        <div className="relative w-full overflow-hidden flex items-center bg-foreground text-background border-y-[3px] border-foreground py-6 md:py-8 transform -rotate-2 scale-105 my-8 shadow-2xl z-10">
+        {/* Break out of container to span full width */}
+        <div className="w-[200vw] relative left-1/2 -translate-x-1/2 flex items-center bg-foreground text-background border-y-[3px] border-foreground py-6 md:py-8 transform -rotate-2 my-8 shadow-2xl z-10 overflow-hidden">
           {/* Marquee track */}
-          <div className="flex w-max animate-marquee hover-pause">
+          <div className="flex w-max animate-marquee hover-pause" style={{ animationDuration: '40s' }}>
             <div className="flex gap-8 md:gap-16 items-center whitespace-nowrap px-6 md:px-12">
               {marqueeItems.map((tech, index) => {
                 const { icon: Icon } = getTechIcon(tech.name);
