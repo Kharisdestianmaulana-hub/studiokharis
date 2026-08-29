@@ -15,34 +15,31 @@ export async function TechMarqueeSection() {
   const marqueeItems = [...allTechs, ...allTechs, ...allTechs];
 
   return (
-    <section className="py-2 overflow-hidden">
-      <div className="flex flex-col gap-6">
+    <section className="py-12 overflow-hidden">
+      <div className="flex flex-col gap-8 md:gap-16">
         <div className="flex flex-col gap-2">
-          <h3 className="text-2xl font-bold tracking-tight text-foreground">Technologies I Use</h3>
-          <p className="text-muted text-sm md:text-base">
-            Modern tools for modern problems.
+          <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-foreground uppercase">Technologies I Use</h3>
+          <p className="text-muted-foreground font-bold tracking-widest uppercase text-xs md:text-sm">
+            MODERN TOOLS FOR MODERN PROBLEMS.
           </p>
         </div>
         
-        <div className="relative w-full overflow-hidden flex items-center bg-transparent border-y border-border py-8">
-          {/* Fading edges for smooth transition */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-background to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-background to-transparent z-10"></div>
-          
+        <div className="relative w-full overflow-hidden flex items-center bg-foreground text-background border-y-[3px] border-foreground py-6 md:py-8 transform -rotate-2 scale-105 my-8 shadow-2xl z-10">
           {/* Marquee track */}
           <div className="flex w-max animate-marquee hover-pause">
-            <div className="flex gap-12 md:gap-24 items-center whitespace-nowrap px-6 md:px-12">
+            <div className="flex gap-8 md:gap-16 items-center whitespace-nowrap px-6 md:px-12">
               {marqueeItems.map((tech, index) => {
-                const { icon: Icon, color } = getTechIcon(tech.name);
+                const { icon: Icon } = getTechIcon(tech.name);
                 return (
                   <div 
                     key={`${tech.name}-${index}`} 
-                    className="flex items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity cursor-default"
+                    className="flex items-center gap-4 md:gap-6 group cursor-default"
                   >
-                    <Icon className="w-8 h-8 md:w-10 md:h-10 transition-colors" style={{ color }} />
-                    <span className="font-semibold text-lg md:text-xl text-muted-foreground group-hover:text-foreground transition-colors">
+                    <Icon className="w-10 h-10 md:w-12 md:h-12" />
+                    <span className="font-black text-2xl md:text-4xl uppercase tracking-widest">
                       {tech.name}
                     </span>
+                    <span className="text-2xl md:text-4xl font-black opacity-30 ml-4 md:ml-10">///</span>
                   </div>
                 );
               })}

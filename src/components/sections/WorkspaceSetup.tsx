@@ -6,13 +6,13 @@ import { TbBrandVscode } from "react-icons/tb";
 export function WorkspaceSetup() {
   return (
     <div className="flex flex-col gap-6 mt-16 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">
-      <div className="flex flex-col gap-2">
-        <h3 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-3">
-          <MonitorSmartphone className="w-6 h-6 text-accent" />
+      <div className="flex flex-col gap-2 border-b-[3px] border-foreground pb-4">
+        <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase flex items-center gap-4">
+          <MonitorSmartphone className="w-8 h-8 md:w-12 md:h-12" />
           Workspace & Setup
         </h3>
-        <p className="text-muted-foreground text-sm md:text-base max-w-xl">
-          A glimpse into my daily development environment and the tools I use to bring ideas to life.
+        <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm">
+          A GLIMPSE INTO MY DAILY DEVELOPMENT ENVIRONMENT AND THE TOOLS I USE TO BRING IDEAS TO LIFE.
         </p>
       </div>
 

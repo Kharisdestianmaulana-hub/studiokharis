@@ -88,12 +88,12 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
   const errorClass = "border-danger text-danger placeholder:text-danger/50";
 
   return (
-    <section id="contact" className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both">
+    <section id="contact" className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both mt-16">
       <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-2">
-          <h3 className="text-2xl font-bold tracking-tight text-foreground">Get in Touch</h3>
-          <p className="text-muted text-sm md:text-base max-w-xl">
-            Let's build something amazing together. Fill in the blanks or book a call directly.
+        <div className="flex flex-col gap-2 border-b-[3px] border-foreground pb-4">
+          <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase">Get in Touch</h3>
+          <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm">
+            LET'S BUILD SOMETHING AMAZING TOGETHER. FILL IN THE BLANKS OR BOOK A CALL DIRECTLY.
           </p>
         </div>
 

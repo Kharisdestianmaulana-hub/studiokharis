@@ -167,7 +167,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
         {/* Right Side: Category Text Columns */}
         <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 border-[3px] border-foreground bg-foreground gap-[3px]">
           {techStackData.map((category, idx) => {
-            const isDark = idx === 1 || idx === 2; // Checkerboard: 0=bg, 1=fg, 2=fg, 3=bg (so it alternates across 2 columns)
+            const isDark = (idx % 4 === 1) || (idx % 4 === 2); // Checkerboard for 2 columns
             const bgClass = isDark ? "bg-foreground text-background" : "bg-background text-foreground";
             
             return (
