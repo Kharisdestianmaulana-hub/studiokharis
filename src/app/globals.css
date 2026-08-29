@@ -7,6 +7,7 @@
     --color-primary: #111827;
     --color-secondary: #374151;
     --color-accent: #000000;
+    --color-accent-foreground: #FFFFFF;
     --color-background: #FAFAFA;
     --color-surface: #FFFFFF;
     --color-border: #E5E7EB;
@@ -27,6 +28,7 @@
     --color-secondary-text: #D4D4D8;
     --color-muted: #A1A1AA;
     --color-accent: #FFFFFF;
+    --color-accent-foreground: #000000;
     --color-primary: #FAFAFA;
     --color-secondary: #D4D4D8;
   }

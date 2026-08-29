@@ -48,7 +48,7 @@ const config = {
         },
         accent: {
           DEFAULT: "var(--color-accent)",
-          foreground: "var(--color-surface)",
+          foreground: "var(--color-accent-foreground)",
         },
         popover: {
           DEFAULT: "var(--color-surface)",

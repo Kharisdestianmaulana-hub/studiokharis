@@ -53,7 +53,7 @@ const CustomTooltip = ({
         
         <button
           {...primaryProps}
-          className="bg-[var(--color-accent)] text-white px-4 py-1.5 rounded-none text-sm font-medium hover:opacity-90 transition-opacity"
+          className="bg-[var(--color-accent)] text-accent-foreground px-4 py-1.5 rounded-none text-sm font-medium hover:opacity-90 transition-opacity"
         >
           {primaryProps.title}
         </button>

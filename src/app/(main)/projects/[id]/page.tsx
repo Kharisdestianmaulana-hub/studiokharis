@@ -101,7 +101,7 @@ export default async function ProjectDetailPage(props: { params: Promise<{ id: s
                 href={project.liveDemo} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/90 transition-colors"
               >
                 <ExternalLink className="w-4 h-4" />
                 Live Demo

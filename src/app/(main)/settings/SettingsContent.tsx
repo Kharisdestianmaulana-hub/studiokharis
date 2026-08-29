@@ -61,21 +61,21 @@ export function SettingsContent() {
                 <Button 
                   variant={theme === "light" ? "default" : "outline"}
                   onClick={() => setTheme("light")}
-                  className={cn("gap-2", theme === "light" && "bg-accent text-white hover:bg-accent/90 border-transparent")}
+                  className={cn("gap-2", theme === "light" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
                 >
                   <Sun className="w-4 h-4" /> Light
                 </Button>
                 <Button 
                   variant={theme === "dark" ? "default" : "outline"}
                   onClick={() => setTheme("dark")}
-                  className={cn("gap-2", theme === "dark" && "bg-accent text-white hover:bg-accent/90 border-transparent")}
+                  className={cn("gap-2", theme === "dark" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
                 >
                   <Moon className="w-4 h-4" /> Dark
                 </Button>
                 <Button 
                   variant={theme === "system" ? "default" : "outline"}
                   onClick={() => setTheme("system")}
-                  className={cn("gap-2", theme === "system" && "bg-accent text-white hover:bg-accent/90 border-transparent")}
+                  className={cn("gap-2", theme === "system" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
                 >
                   <Monitor className="w-4 h-4" /> System
                 </Button>
@@ -102,14 +102,14 @@ export function SettingsContent() {
                 <Button 
                   variant={textSize === "normal" ? "default" : "outline"}
                   onClick={() => setTextSize("normal")}
-                  className={cn("gap-2", textSize === "normal" && "bg-accent text-white hover:bg-accent/90 border-transparent")}
+                  className={cn("gap-2", textSize === "normal" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
                 >
                   <Type className="w-4 h-4" /> Normal
                 </Button>
                 <Button 
                   variant={textSize === "large" ? "default" : "outline"}
                   onClick={() => setTextSize("large")}
-                  className={cn("gap-2", textSize === "large" && "bg-accent text-white hover:bg-accent/90 border-transparent")}
+                  className={cn("gap-2", textSize === "large" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
                 >
                   <Type className="w-5 h-5" /> Large
                 </Button>
@@ -123,14 +123,14 @@ export function SettingsContent() {
                 <Button 
                   variant={!reducedMotion ? "default" : "outline"}
                   onClick={() => setReducedMotion(false)}
-                  className={cn("gap-2", !reducedMotion && "bg-accent text-white hover:bg-accent/90 border-transparent")}
+                  className={cn("gap-2", !reducedMotion && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
                 >
                   Default (Animated)
                 </Button>
                 <Button 
                   variant={reducedMotion ? "default" : "outline"}
                   onClick={() => setReducedMotion(true)}
-                  className={cn("gap-2", reducedMotion && "bg-accent text-white hover:bg-accent/90 border-transparent")}
+                  className={cn("gap-2", reducedMotion && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
                 >
                   <EyeOff className="w-4 h-4" /> Reduce Motion
                 </Button>
@@ -155,14 +155,14 @@ export function SettingsContent() {
                 <Button 
                   variant={projectsView === "grid" ? "default" : "outline"}
                   onClick={() => setProjectsView("grid")}
-                  className={cn("gap-2", projectsView === "grid" && "bg-accent text-white hover:bg-accent/90 border-transparent")}
+                  className={cn("gap-2", projectsView === "grid" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
                 >
                   <LayoutGrid className="w-4 h-4" /> Grid
                 </Button>
                 <Button 
                   variant={projectsView === "list" ? "default" : "outline"}
                   onClick={() => setProjectsView("list")}
-                  className={cn("gap-2", projectsView === "list" && "bg-accent text-white hover:bg-accent/90 border-transparent")}
+                  className={cn("gap-2", projectsView === "list" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
                 >
                   <List className="w-4 h-4" /> List
                 </Button>
