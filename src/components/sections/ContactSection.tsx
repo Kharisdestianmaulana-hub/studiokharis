@@ -81,8 +81,8 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
     });
   }
 
-  // Helper for input classes to look like a mad-libs blank
-  const blankInputClass = "inline-flex h-8 w-[200px] border-b-2 border-dashed border-foreground/30 bg-transparent px-2 py-1 text-center text-foreground placeholder:text-muted-foreground/50 focus-visible:outline-none focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50 transition-colors mx-1";
+  // Helper for input classes to look like a legal contract blank
+  const blankInputClass = "inline-flex h-10 w-[200px] border-b-[3px] border-solid border-foreground bg-transparent px-2 py-1 text-center font-bold text-foreground placeholder:font-normal placeholder:text-muted focus-visible:outline-none focus-visible:border-accent disabled:cursor-not-allowed disabled:opacity-50 transition-colors mx-1";
   
   // Custom error class
   const errorClass = "border-danger text-danger placeholder:text-danger/50";
@@ -97,148 +97,135 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          <Card className="lg:col-span-3 bg-surface border-border overflow-hidden rounded-none-[16px]">
-            <CardContent className="p-6 md:p-8 flex flex-col justify-between h-full">
-              <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col h-full gap-8">
-                
-                {/* Mad Libs Form */}
-                <div className="text-2xl md:text-3xl font-medium leading-[2] md:leading-[2.2] text-secondary-text">
-                  Hi Kharis! My name is
-                  <input
-                    {...form.register("name")}
-                    placeholder="your name"
-                    className={`${blankInputClass} ${form.formState.errors.name ? errorClass : ''}`}
-                    style={{ width: "220px" }}
-                  />
-                  and I work at
-                  <input
-                    {...form.register("company")}
-                    placeholder="company (optional)"
-                    className={blankInputClass}
-                    style={{ width: "280px" }}
-                  />
-                  . I'd love to work with you on
-                  <span className="inline-block mx-1 align-middle">
-                    <Select onValueChange={(v) => form.setValue("service", v)} defaultValue={form.getValues("service")}>
-                      <SelectTrigger className={`h-8 border-b-2 border-t-0 border-l-0 border-r-0 border-dashed border-foreground/30 bg-transparent rounded-none-none focus:ring-0 focus:border-primary w-[260px] text-lg text-foreground px-2 py-0 ${form.formState.errors.service ? errorClass : ''}`}>
-                        <SelectValue placeholder="select a service" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="a new website">a new website</SelectItem>
-                        <SelectItem value="a mobile app">a mobile app</SelectItem>
-                        <SelectItem value="ui/ux design">ui/ux design</SelectItem>
-                        <SelectItem value="consulting">consulting</SelectItem>
-                        <SelectItem value="something else">something else</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </span>
-                  . You can reach me at
-                  <input
-                    {...form.register("email")}
-                    placeholder="your email address"
-                    className={`${blankInputClass} ${form.formState.errors.email ? errorClass : ''}`}
-                    style={{ width: "320px" }}
-                  />
-                  . Here are some more details about the project:
-                  <input
-                    {...form.register("message")}
-                    placeholder="brief project details..."
-                    className={`${blankInputClass} ${form.formState.errors.message ? errorClass : ''}`}
-                    style={{ width: "100%", maxWidth: "100%", marginTop: "8px" }}
-                  />
-                </div>
-                
-                <div className="flex flex-wrap items-center gap-4 mt-auto pt-4">
-                  <Button 
-                    type="submit" 
-                    disabled={!isValid || isSubmitting} 
-                    className="rounded-none px-8 h-12"
-                  >
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="w-4 h-4 ml-2" />
-                      </>
-                    )}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 pt-8 border-t-[3px] border-foreground">
+          <div className="lg:col-span-3 flex flex-col justify-between h-full">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col h-full gap-12">
+              
+              {/* Mad Libs Form */}
+              <div className="text-3xl md:text-5xl font-black tracking-tight leading-[1.8] md:leading-[2] text-foreground">
+                Hi Kharis! My name is
+                <input
+                  {...form.register("name")}
+                  placeholder="YOUR NAME"
+                  className={`${blankInputClass} ${form.formState.errors.name ? errorClass : ''}`}
+                  style={{ width: "240px" }}
+                />
+                and I work at
+                <input
+                  {...form.register("company")}
+                  placeholder="COMPANY (OPTIONAL)"
+                  className={blankInputClass}
+                  style={{ width: "340px" }}
+                />
+                . I'd love to work with you on
+                <span className="inline-block mx-1 align-middle">
+                  <Select onValueChange={(v) => form.setValue("service", v)} defaultValue={form.getValues("service")}>
+                    <SelectTrigger className={`h-10 border-b-[3px] border-t-0 border-l-0 border-r-0 border-solid border-foreground bg-transparent rounded-none focus:ring-0 focus:border-accent w-[300px] text-2xl md:text-3xl font-bold text-foreground px-2 py-0 ${form.formState.errors.service ? errorClass : ''}`}>
+                      <SelectValue placeholder="SELECT A SERVICE" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-none border-[3px] border-foreground font-bold">
+                      <SelectItem value="a new website">A NEW WEBSITE</SelectItem>
+                      <SelectItem value="a mobile app">A MOBILE APP</SelectItem>
+                      <SelectItem value="ui/ux design">UI/UX DESIGN</SelectItem>
+                      <SelectItem value="consulting">CONSULTING</SelectItem>
+                      <SelectItem value="something else">SOMETHING ELSE</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </span>
+                . You can reach me at
+                <input
+                  {...form.register("email")}
+                  placeholder="YOUR EMAIL"
+                  className={`${blankInputClass} ${form.formState.errors.email ? errorClass : ''}`}
+                  style={{ width: "360px" }}
+                />
+                . Here are some more details about the project:
+                <input
+                  {...form.register("message")}
+                  placeholder="BRIEF PROJECT DETAILS..."
+                  className={`${blankInputClass} ${form.formState.errors.message ? errorClass : ''}`}
+                  style={{ width: "100%", maxWidth: "100%", marginTop: "16px" }}
+                />
+              </div>
+              
+              <div className="flex flex-wrap items-center gap-4 mt-auto">
+                <Button 
+                  type="submit" 
+                  disabled={!isValid || isSubmitting} 
+                  className="rounded-none px-8 h-14 bg-foreground text-background font-bold tracking-widest uppercase hover:bg-foreground/90 transition-none"
+                >
+                  {isSubmitting ? (
+                    "SENDING..."
+                  ) : (
+                    <>
+                      SEND MESSAGE
+                      <Send className="w-5 h-5 ml-3" />
+                    </>
+                  )}
+                </Button>
+                <a href="https://cal.com/riray/brief" target="_blank" rel="noreferrer">
+                  <Button type="button" variant="outline" className="rounded-none px-8 h-14 border-[3px] border-foreground bg-background hover:bg-foreground hover:text-background text-foreground font-bold tracking-widest uppercase transition-colors group">
+                    SCHEDULE A CALL 
+                    <Calendar className="w-5 h-5 ml-3" />
                   </Button>
-                  <a href="https://cal.com/riray/brief" target="_blank" rel="noreferrer">
-                    <Button type="button" variant="outline" className="rounded-none px-8 h-12 border-primary/20 bg-transparent hover:bg-transparent text-foreground hover:text-accent hover:border-accent transition-colors group">
-                      Schedule a call 
-                      <Calendar className="w-4 h-4 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
-                    </Button>
-                  </a>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+                </a>
+              </div>
+            </form>
+          </div>
           
-          <div className="lg:col-span-2 flex flex-col gap-6">
+          <div className="lg:col-span-2 flex flex-col gap-12 lg:border-l-[3px] lg:border-foreground lg:pl-12">
             {/* Availability & Time Card */}
-            <Card className="bg-surface border-border overflow-hidden rounded-none-[16px] shrink-0">
-              <CardContent className="p-6 flex flex-col gap-5">
-                <div className="flex items-center gap-3">
-                  <div className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-none bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-none h-3 w-3 bg-emerald-500"></span>
-                  </div>
-                  <span className="text-sm font-medium text-foreground">Available for new projects</span>
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-4 pb-6 border-b-[3px] border-foreground">
+                <div className="relative flex h-4 w-4">
+                  <span className="animate-ping absolute inline-flex h-full w-full bg-foreground opacity-30"></span>
+                  <span className="relative inline-flex h-4 w-4 bg-foreground"></span>
                 </div>
-                
-                <div className="flex items-center justify-between border-t border-border/50 pt-4 mt-1">
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm">Local time (WIB)</span>
-                  </div>
-                  <span className="font-mono text-sm font-medium text-foreground">
-                    {time || "Loading..."}
-                  </span>
+                <span className="text-sm font-bold tracking-widest uppercase text-foreground">Available for new projects</span>
+              </div>
+              
+              <div className="flex items-center justify-between pb-6 border-b-[3px] border-foreground">
+                <div className="flex items-center gap-3 text-foreground">
+                  <MapPin className="w-5 h-5" />
+                  <span className="text-sm font-bold tracking-widest uppercase">Local time (WIB)</span>
                 </div>
-              </CardContent>
-            </Card>
+                <span className="font-mono text-sm font-black text-foreground">
+                  {time || "Loading..."}
+                </span>
+              </div>
+            </div>
 
-            <Card className="bg-surface border-border overflow-hidden rounded-none-[16px] flex-1">
-              <CardContent className="p-6 md:p-8 flex flex-col h-full gap-6">
-                <div>
-                  <h4 className="font-semibold text-lg text-foreground mb-2">Connect with me</h4>
-                  <p className="text-sm text-secondary-text leading-relaxed">
-                    I'm active on several platforms. Feel free to reach out or connect with me on your preferred social network.
-                  </p>
-                </div>
-                
-                <div className="flex flex-col gap-3 mt-auto">
-                  {socialsData.map((social: any) => {
-                    let Icon = FaGlobe;
-                    const p = social.platformName?.toLowerCase() || "";
-                    if (p.includes("github")) Icon = FaGithub;
-                    else if (p.includes("linkedin")) Icon = FaLinkedin;
-                    else if (p.includes("twitter") || p.includes("x")) Icon = FaTwitter;
-                    else if (p.includes("instagram")) Icon = FaInstagram;
-                    else if (p.includes("whatsapp") || p.includes("wa")) Icon = FaWhatsapp;
-                    else if (p.includes("email") || p.includes("mail")) Icon = FaEnvelope;
-                    else if (p.includes("phone") || p.includes("call")) Icon = FaPhone;
-                    
-                    return (
-                      <a 
-                        key={social.name}
-                        href={social.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center p-3 rounded-none hover:bg-secondary/10 transition-colors group"
-                      >
-                        <div className="w-8 h-8 rounded-none bg-secondary/10 flex items-center justify-center mr-3 group-hover:bg-secondary/20 transition-colors">
-                          <Icon className="w-4 h-4 text-secondary-text group-hover:text-foreground transition-colors" />
-                        </div>
-                        <span className="font-medium text-sm text-foreground">{social.name}</span>
-                        <ExternalLink className="w-4 h-4 ml-auto text-muted group-hover:text-foreground transition-colors" />
-                      </a>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
+            <div className="flex flex-col gap-2">
+              <h4 className="font-black text-2xl text-foreground uppercase tracking-tight mb-2">Connect with me</h4>
+              
+              <div className="flex flex-col w-full border-t-[3px] border-foreground mt-4">
+                {socialsData.map((social: any) => {
+                  let Icon = FaGlobe;
+                  const p = social.platformName?.toLowerCase() || "";
+                  if (p.includes("github")) Icon = FaGithub;
+                  else if (p.includes("linkedin")) Icon = FaLinkedin;
+                  else if (p.includes("twitter") || p.includes("x")) Icon = FaTwitter;
+                  else if (p.includes("instagram")) Icon = FaInstagram;
+                  else if (p.includes("whatsapp") || p.includes("wa")) Icon = FaWhatsapp;
+                  else if (p.includes("email") || p.includes("mail")) Icon = FaEnvelope;
+                  else if (p.includes("phone") || p.includes("call")) Icon = FaPhone;
+                  
+                  return (
+                    <a 
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center py-4 border-b border-foreground hover:bg-foreground hover:text-background transition-colors group px-2"
+                    >
+                      <Icon className="w-5 h-5 text-foreground group-hover:text-background mr-4 transition-colors" />
+                      <span className="font-bold text-sm uppercase tracking-wider">{social.name}</span>
+                      <ExternalLink className="w-4 h-4 ml-auto text-foreground group-hover:text-background transition-colors" />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
