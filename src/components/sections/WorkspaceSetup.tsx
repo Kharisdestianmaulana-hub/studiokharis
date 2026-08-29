@@ -16,29 +16,29 @@ export function WorkspaceSetup() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-y border-border divide-y md:divide-y-0 md:divide-x divide-border">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-[3px] border-foreground">
         
         {/* Hardware & OS Card */}
-        <div className="group relative p-6 md:p-8 bg-transparent hover:bg-secondary/5 transition-all duration-300 overflow-hidden">
-          <div className="relative z-10 flex flex-col gap-4">
-            <div className="flex items-center gap-3 text-accent mb-2">
-              <Laptop className="w-6 h-6" />
-              <h4 className="font-semibold text-foreground text-lg">Hardware & OS</h4>
+        <div className="group relative p-8 md:p-10 bg-foreground text-background transition-none">
+          <div className="relative z-10 flex flex-col gap-6">
+            <div className="flex items-center gap-4 border-b-[3px] border-background pb-4">
+              <Laptop className="w-8 h-8" />
+              <h4 className="font-black uppercase tracking-widest text-lg">Hardware & OS</h4>
             </div>
             
-            <div className="space-y-4 mt-2">
+            <div className="space-y-6 mt-2">
               <div>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">Laptop</span>
-                <span className="text-sm font-medium text-primary-text">ThinkPad T470s</span>
+                <span className="text-xs opacity-70 uppercase tracking-widest font-bold block mb-1">Laptop</span>
+                <span className="text-sm font-black uppercase">ThinkPad T470s</span>
               </div>
               <div>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">Operating Systems</span>
-                <div className="flex flex-wrap gap-2 mt-1.5">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-secondary/10 text-xs font-medium border border-border">
-                    <FaLinux className="w-3.5 h-3.5" /> Fedora KDE 44
+                <span className="text-xs opacity-70 uppercase tracking-widest font-bold block mb-2">Operating Systems</span>
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 border-[2px] border-current text-xs font-bold uppercase tracking-wider">
+                    <FaLinux className="w-4 h-4" /> Fedora KDE 44
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-secondary/10 text-xs font-medium border border-border">
-                    <FaApple className="w-3.5 h-3.5" /> macOS Monterey
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 border-[2px] border-current text-xs font-bold uppercase tracking-wider">
+                    <FaApple className="w-4 h-4" /> macOS Monterey
                   </span>
                 </div>
               </div>
@@ -47,30 +47,30 @@ export function WorkspaceSetup() {
         </div>
 
         {/* IDE & Tools Card */}
-        <div className="group relative p-6 md:p-8 bg-transparent hover:bg-secondary/5 transition-all duration-300 overflow-hidden">
-          <div className="relative z-10 flex flex-col gap-4">
-            <div className="flex items-center gap-3 text-blue-500 mb-2">
-              <Code2 className="w-6 h-6" />
-              <h4 className="font-semibold text-foreground text-lg">IDE & Editors</h4>
+        <div className="group relative p-8 md:p-10 bg-background text-foreground border-y-[3px] md:border-y-0 lg:border-x-[3px] border-foreground transition-none">
+          <div className="relative z-10 flex flex-col gap-6">
+            <div className="flex items-center gap-4 border-b-[3px] border-foreground pb-4">
+              <Code2 className="w-8 h-8" />
+              <h4 className="font-black uppercase tracking-widest text-lg">IDE & Editors</h4>
             </div>
             
-            <div className="space-y-4 mt-2">
+            <div className="space-y-6 mt-2">
               <div>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">Primary Editors</span>
-                <div className="flex flex-wrap gap-2 mt-1.5">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-blue-500/10 text-blue-500 text-xs font-medium border border-blue-500/20">
-                    <TbBrandVscode className="w-3.5 h-3.5" /> VS Code
+                <span className="text-xs opacity-70 uppercase tracking-widest font-bold block mb-2">Primary Editors</span>
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 border-[2px] border-current text-xs font-bold uppercase tracking-wider">
+                    <TbBrandVscode className="w-4 h-4" /> VS Code
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-zinc-500/10 text-zinc-500 text-xs font-medium border border-zinc-500/20">
-                    <Terminal className="w-3.5 h-3.5" /> Zed
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 border-[2px] border-current text-xs font-bold uppercase tracking-wider">
+                    <Terminal className="w-4 h-4" /> Zed
                   </span>
                 </div>
               </div>
               <div>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">AI Assistant</span>
-                <div className="mt-1.5">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-purple-500/10 text-purple-500 text-xs font-medium border border-purple-500/20">
-                    <Cpu className="w-3.5 h-3.5" /> Antigravity (Gemini)
+                <span className="text-xs opacity-70 uppercase tracking-widest font-bold block mb-2">AI Assistant</span>
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 border-[2px] border-current text-xs font-bold uppercase tracking-wider">
+                    <Cpu className="w-4 h-4" /> Antigravity (Gemini)
                   </span>
                 </div>
               </div>
@@ -79,25 +79,25 @@ export function WorkspaceSetup() {
         </div>
 
         {/* Theme & Aesthetics Card */}
-        <div className="group relative p-6 md:p-8 bg-transparent hover:bg-secondary/5 transition-all duration-300 overflow-hidden">
-          <div className="relative z-10 flex flex-col gap-4">
-            <div className="flex items-center gap-3 text-pink-500 mb-2">
-              <Paintbrush className="w-6 h-6" />
-              <h4 className="font-semibold text-foreground text-lg">Theme & Aesthetics</h4>
+        <div className="group relative p-8 md:p-10 bg-foreground text-background transition-none">
+          <div className="relative z-10 flex flex-col gap-6">
+            <div className="flex items-center gap-4 border-b-[3px] border-background pb-4">
+              <Paintbrush className="w-8 h-8" />
+              <h4 className="font-black uppercase tracking-widest text-lg">Theme & Aesthetics</h4>
             </div>
             
-            <div className="space-y-4 mt-2">
+            <div className="space-y-6 mt-2">
               <div>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">VS Code Theme</span>
-                <span className="text-sm font-medium text-primary-text">Mayukai</span>
+                <span className="text-xs opacity-70 uppercase tracking-widest font-bold block mb-1">VS Code Theme</span>
+                <span className="text-sm font-black uppercase">Mayukai</span>
               </div>
               <div>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">Icon Pack</span>
-                <span className="text-sm font-medium text-primary-text">vscode-icons</span>
+                <span className="text-xs opacity-70 uppercase tracking-widest font-bold block mb-1">Icon Pack</span>
+                <span className="text-sm font-black uppercase">vscode-icons</span>
               </div>
               <div>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">Font</span>
-                <span className="text-sm font-medium font-mono text-primary-text bg-secondary/10 px-1.5 py-0.5 rounded-none border border-border">Fira Code</span>
+                <span className="text-xs opacity-70 uppercase tracking-widest font-bold block mb-2">Font</span>
+                <span className="text-xs font-bold font-mono border-[2px] border-current px-3 py-1.5 uppercase">Fira Code</span>
               </div>
             </div>
           </div>

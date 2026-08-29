@@ -142,9 +142,9 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-12">
-        {/* Left Side: Unified Tech Grid */}
-        <div className="lg:col-span-5 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-12">
+        {/* Left Side: Unified Tech Grid (Periodic Table) */}
+        <div className="lg:col-span-5 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-4 border-[3px] border-foreground bg-foreground gap-[3px]">
           {techStackData.flatMap(c => c.items).map((tech, index) => {
             const { icon: Icon, color } = getTechIcon(tech.name);
             return (
@@ -154,41 +154,41 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="group relative flex items-center justify-center p-4 rounded-none-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all cursor-pointer aspect-square"
+                transition={{ duration: 0.3, delay: index * 0.02 }}
+                className="group relative flex items-center justify-center p-4 bg-background hover:bg-foreground hover:text-background transition-colors cursor-pointer aspect-square"
                 title={`${tech.name} - ${tech.proficiency}%`}
               >
-                <Icon className="w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: color === "#000000" ? "var(--color-primary-text)" : color }} />
+                <Icon className="w-8 h-8 md:w-10 md:h-10 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" style={{ color: color === "#000000" ? "currentColor" : color }} />
               </motion.div>
             );
           })}
         </div>
 
         {/* Right Side: Category Text Columns */}
-        <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {techStackData.map((category, idx) => (
-            <div key={category.category} className="flex flex-col p-8 rounded-none-3xl bg-secondary/5 border border-border/50 hover:bg-secondary/10 transition-colors">
-              <div className="flex justify-between items-start mb-6">
-                <span className="text-4xl md:text-5xl font-light text-foreground">{String(idx + 1).padStart(2, '0')}</span>
-                <h4 className="text-sm md:text-base font-bold tracking-widest uppercase text-right max-w-[120px] leading-tight text-foreground/80">
-                  {category.category}
-                </h4>
+        <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 border-[3px] border-foreground bg-foreground gap-[3px]">
+          {techStackData.map((category, idx) => {
+            const isDark = idx === 1 || idx === 2; // Checkerboard: 0=bg, 1=fg, 2=fg, 3=bg (so it alternates across 2 columns)
+            const bgClass = isDark ? "bg-foreground text-background" : "bg-background text-foreground";
+            
+            return (
+              <div key={category.category} className={`flex flex-col p-8 md:p-10 transition-none ${bgClass}`}>
+                <div className="flex justify-between items-start mb-12">
+                  <span className="text-6xl md:text-7xl font-black tracking-tighter">{String(idx + 1).padStart(2, '0')}</span>
+                  <h4 className="text-sm md:text-base font-black tracking-widest uppercase text-right max-w-[140px] leading-tight">
+                    {category.category}
+                  </h4>
+                </div>
+                
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {category.items.map(tech => (
+                    <span key={tech.name} className="text-xs font-bold uppercase tracking-wider px-3 py-1.5 border-[2px] border-current opacity-90">
+                      {tech.name}
+                    </span>
+                  ))}
+                </div>
               </div>
-              
-              {/* Fake Icon just for the aesthetic matching the design */}
-              <div className="w-12 h-12 bg-surface rounded-none border border-border flex items-center justify-center mb-6">
-                <Code2 className="w-6 h-6 text-foreground" />
-              </div>
-
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {category.items.map(tech => (
-                  <span key={tech.name} className="text-xs md:text-sm font-medium px-3 py-1.5 bg-surface border border-border/50 rounded-none text-muted-foreground">
-                    {tech.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
