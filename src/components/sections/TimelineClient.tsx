@@ -101,11 +101,11 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
 
   if (loading) {
     return (
-      <div className="flex flex-col w-full border border-border">
+      <div className="flex flex-col w-full border border-border mt-4">
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="flex flex-col gap-4 p-6 border-b border-border last:border-b-0 bg-surface">
-            <Skeleton className="h-6 w-1/3 rounded-none-none" />
-            <Skeleton className="h-4 w-2/3 rounded-none-none" />
+          <div key={i} className="flex flex-col gap-4 p-6 border-b border-border last:border-b-0 bg-transparent">
+            <Skeleton className="h-6 w-1/3 rounded-none" />
+            <Skeleton className="h-4 w-2/3 rounded-none" />
           </div>
         ))}
       </div>
@@ -114,7 +114,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
 
   if (error) {
     return (
-      <div className="p-6 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 rounded-none-none">
+      <div className="p-6 mt-4 border border-red-500/20 text-red-600 dark:text-red-400 rounded-none bg-transparent">
         <p className="font-semibold">Error loading GitHub data</p>
         <p className="text-sm mt-1">{error}</p>
       </div>
@@ -123,7 +123,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
 
   if (repos.length === 0) {
     return (
-      <div className="p-6 bg-surface border border-border text-secondary-text rounded-none-none">
+      <div className="p-6 mt-4 border border-border text-secondary-text rounded-none bg-transparent">
         No repositories found.
       </div>
     );
@@ -137,12 +137,12 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
         return (
           <div
             key={repo.id}
-            className="flex flex-col bg-surface border-b border-border transition-all duration-300 animate-in fade-in group"
+            className="flex flex-col bg-transparent border-b border-border transition-all duration-300 animate-in fade-in group"
           >
             {/* Repository Header - Accordion Trigger */}
             <button
               onClick={() => toggleRepo(repo.id)}
-              className="w-full py-8 md:py-10 px-4 md:px-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-secondary/10 transition-colors duration-200 text-left"
+              className="w-full py-8 md:py-10 px-4 md:px-0 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-secondary/5 transition-colors duration-200 text-left"
             >
               <div className="flex-1 flex flex-col gap-3">
                 <div className="flex items-center gap-3 flex-wrap">
@@ -167,7 +167,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
                 </div>
               </div>
 
-              <div className="hidden md:flex items-center justify-center p-4 border border-border rounded-none-none shrink-0 group-hover:bg-foreground group-hover:text-background transition-colors duration-300">
+              <div className="hidden md:flex items-center justify-center p-4 border border-border rounded-none shrink-0 group-hover:bg-foreground group-hover:text-background transition-colors duration-300">
                 <ChevronDown
                   className={cn(
                     "w-5 h-5 transition-transform duration-300",
@@ -179,10 +179,10 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
 
             {/* Commits List - Accordion Content */}
             {isExpanded && (
-              <div className="border-t border-border bg-secondary/5">
+              <div className="border-t border-border bg-transparent">
                 {repo.commits.length > 0 ? (
                   <div className="flex flex-col">
-                    <div className="px-4 md:px-6 py-3 border-b border-border bg-secondary/10">
+                    <div className="px-4 md:px-0 py-3 border-b border-border bg-transparent">
                       <p className="text-xs font-bold text-foreground uppercase tracking-widest">
                         LATEST COMMITS ({repo.commits.length})
                       </p>
@@ -193,7 +193,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
                         <div
                           key={commit.sha}
                           className={cn(
-                            "flex flex-col md:flex-row items-start md:items-center gap-4 p-4 md:p-6 hover:bg-secondary/20 transition-colors duration-200",
+                            "flex flex-col md:flex-row items-start md:items-center gap-4 p-4 md:p-6 hover:bg-secondary/10 transition-colors duration-200 px-4 md:px-0",
                             idx !== repo.commits.length - 1 && "border-b border-border"
                           )}
                         >
@@ -202,7 +202,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
                               <img
                                 src={commit.avatar}
                                 alt={commit.author}
-                                className="w-10 h-10 rounded-none-none border border-border grayscale hover:grayscale-0 transition-all duration-300"
+                                className="w-10 h-10 rounded-none border border-border grayscale hover:grayscale-0 transition-all duration-300"
                               />
                             )}
                             <div className="flex flex-col md:hidden">
@@ -221,9 +221,9 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
                               <span className="text-xs font-mono text-muted-foreground/70">{formatDate(commit.date).toUpperCase()}</span>
                             </div>
                           </div>
-
+                          
                           <div className="shrink-0 w-full md:w-auto flex justify-start md:justify-end">
-                            <code className="text-xs font-mono font-bold text-foreground bg-secondary/30 border border-border px-2 py-1">
+                            <code className="text-xs font-mono font-bold text-foreground bg-secondary/10 border border-border px-2 py-1">
                               {commit.sha.substring(0, 7)}
                             </code>
                           </div>
