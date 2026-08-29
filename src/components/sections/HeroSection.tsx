@@ -1,7 +1,8 @@
 import * as React from "react";
 import { getProfileData } from "@/data/profile";
 import { getSocialLinks } from "@/data/socials";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe, FaWhatsapp, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe, FaWhatsapp, FaEnvelope, FaArrowRight } from "react-icons/fa";
+import { TransitionLink } from "@/components/layout/TransitionLink";
 
 export async function HeroSection({ 
   hideButtons = false, 
@@ -36,8 +37,10 @@ export async function HeroSection({
           className="object-contain h-[90%] md:h-[100%] max-h-[85vh] object-bottom drop-shadow-2xl pointer-events-none"
         />
         
-        {/* Glassmorphism Badge */}
-        <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 bg-white/30 dark:bg-black/30 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-3 md:p-4 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-both w-max min-w-[260px]">
+        {/* Glassmorphism Badge and Floating Button Wrapper */}
+        <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-both w-max min-w-[260px]">
+          
+          <div className="flex flex-col items-center gap-3 bg-white/30 dark:bg-black/30 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-3 md:p-4 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] w-full">
           
           <div className="flex items-center gap-4 w-full">
             {/* Logo on the left */}
@@ -101,6 +104,16 @@ export async function HeroSection({
           </div>
 
         </div>
+        
+        {/* Floating Button */}
+        {!hideButtons && (
+          <TransitionLink href="/projects" className="w-full">
+            <button className="w-full bg-foreground text-background text-sm font-semibold py-2.5 px-6 rounded-full shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] dark:shadow-[0_4px_14px_0_rgb(255,255,255,0.1)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
+              Lihat Project
+              <FaArrowRight className="w-3 h-3" />
+            </button>
+          </TransitionLink>
+        )}
       </div>
     </section>
   );
