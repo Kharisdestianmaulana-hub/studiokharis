@@ -65,7 +65,7 @@ export function ProjectsCoverflow({ projects }: { projects: any[] }) {
                   ease: [0.32, 0.72, 0, 1]
                 }}
                 onClick={() => setActiveIndex(index)}
-                className="w-full h-full rounded-xl shadow-2xl overflow-hidden cursor-pointer bg-surface/50 border border-border/50 relative"
+                className="w-full h-full rounded-none shadow-2xl overflow-hidden cursor-pointer bg-surface/50 border border-border/50 relative"
               >
                 <img 
                   src={project.thumbnail || "/placeholder.svg"} 

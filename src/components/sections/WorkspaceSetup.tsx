@@ -19,7 +19,7 @@ export function WorkspaceSetup() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         
         {/* Hardware & OS Card */}
-        <div className="group relative p-6 rounded-2xl bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+        <div className="group relative p-6 rounded-none-2xl bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="relative z-10 flex flex-col gap-4">
             <div className="flex items-center gap-3 text-accent mb-2">
@@ -35,10 +35,10 @@ export function WorkspaceSetup() {
               <div>
                 <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">Operating Systems</span>
                 <div className="flex flex-wrap gap-2 mt-1.5">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-secondary/10 text-xs font-medium border border-secondary/20">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-secondary/10 text-xs font-medium border border-secondary/20">
                     <FaLinux className="w-3.5 h-3.5" /> Fedora KDE 44
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-secondary/10 text-xs font-medium border border-secondary/20">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-secondary/10 text-xs font-medium border border-secondary/20">
                     <FaApple className="w-3.5 h-3.5" /> macOS Monterey
                   </span>
                 </div>
@@ -48,7 +48,7 @@ export function WorkspaceSetup() {
         </div>
 
         {/* IDE & Tools Card */}
-        <div className="group relative p-6 rounded-2xl bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+        <div className="group relative p-6 rounded-none-2xl bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="relative z-10 flex flex-col gap-4">
             <div className="flex items-center gap-3 text-blue-500 mb-2">
@@ -60,10 +60,10 @@ export function WorkspaceSetup() {
               <div>
                 <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">Primary Editors</span>
                 <div className="flex flex-wrap gap-2 mt-1.5">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-500 text-xs font-medium border border-blue-500/20">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-blue-500/10 text-blue-500 text-xs font-medium border border-blue-500/20">
                     <TbBrandVscode className="w-3.5 h-3.5" /> VS Code
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-500/10 text-zinc-500 text-xs font-medium border border-zinc-500/20">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-zinc-500/10 text-zinc-500 text-xs font-medium border border-zinc-500/20">
                     <Terminal className="w-3.5 h-3.5" /> Zed
                   </span>
                 </div>
@@ -71,7 +71,7 @@ export function WorkspaceSetup() {
               <div>
                 <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">AI Assistant</span>
                 <div className="mt-1.5">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-500 text-xs font-medium border border-purple-500/20">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-purple-500/10 text-purple-500 text-xs font-medium border border-purple-500/20">
                     <Cpu className="w-3.5 h-3.5" /> Antigravity (Gemini)
                   </span>
                 </div>
@@ -81,7 +81,7 @@ export function WorkspaceSetup() {
         </div>
 
         {/* Theme & Aesthetics Card */}
-        <div className="group relative p-6 rounded-2xl bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+        <div className="group relative p-6 rounded-none-2xl bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="relative z-10 flex flex-col gap-4">
             <div className="flex items-center gap-3 text-pink-500 mb-2">
@@ -100,7 +100,7 @@ export function WorkspaceSetup() {
               </div>
               <div>
                 <span className="text-xs text-muted-foreground uppercase tracking-wider font-semibold block mb-1">Font</span>
-                <span className="text-sm font-medium font-mono text-primary-text bg-secondary/10 px-1.5 py-0.5 rounded">Fira Code</span>
+                <span className="text-sm font-medium font-mono text-primary-text bg-secondary/10 px-1.5 py-0.5 rounded-none">Fira Code</span>
               </div>
             </div>
           </div>

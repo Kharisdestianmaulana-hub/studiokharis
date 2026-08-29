@@ -78,7 +78,7 @@ export function GuestbookModal() {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-6 mt-4">
           <div className="flex flex-col items-center gap-4 mb-4">
-            <div className="relative w-20 h-20 rounded-full overflow-hidden bg-muted border-2 border-border">
+            <div className="relative w-20 h-20 rounded-none overflow-hidden bg-muted border-2 border-border">
               <Image 
                 src={avatarUrl} 
                 alt="Avatar Preview" 

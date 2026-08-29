@@ -10,7 +10,7 @@ export function Highlighter({ text, query }: { text: string; query?: string }) {
     <span>
       {parts.map((part, i) => 
         part.toLowerCase() === query.toLowerCase() ? (
-          <mark key={i} className="bg-accent/20 text-accent rounded-sm px-0.5 font-medium">
+          <mark key={i} className="bg-accent/20 text-accent rounded-none px-0.5 font-medium">
             {part}
           </mark>
         ) : (

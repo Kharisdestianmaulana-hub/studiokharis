@@ -87,10 +87,10 @@ export function ImageViewer({ isOpen, onClose, imageSrc, altText = "Image previe
           onWheel={handleWheel}
         >
           {/* Controls */}
-          <div className="absolute top-6 right-6 z-[110] flex items-center gap-4 bg-black/50 p-2 rounded-xl backdrop-blur-md border border-white/10">
+          <div className="absolute top-6 right-6 z-[110] flex items-center gap-4 bg-black/50 p-2 rounded-none backdrop-blur-md border border-white/10">
             <button 
               onClick={handleZoomOut}
-              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-none transition-colors"
               title="Zoom Out"
             >
               <ZoomOut className="w-5 h-5" />
@@ -100,7 +100,7 @@ export function ImageViewer({ isOpen, onClose, imageSrc, altText = "Image previe
             </span>
             <button 
               onClick={handleZoomIn}
-              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-none transition-colors"
               title="Zoom In"
             >
               <ZoomIn className="w-5 h-5" />
@@ -108,7 +108,7 @@ export function ImageViewer({ isOpen, onClose, imageSrc, altText = "Image previe
             <div className="w-px h-6 bg-white/20 mx-1" />
             <button 
               onClick={handleReset}
-              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-none transition-colors"
               title="Reset"
             >
               <RotateCcw className="w-5 h-5" />
@@ -116,7 +116,7 @@ export function ImageViewer({ isOpen, onClose, imageSrc, altText = "Image previe
             <div className="w-px h-6 bg-white/20 mx-1" />
             <button 
               onClick={onClose}
-              className="p-2 text-white/70 hover:text-red-400 hover:bg-red-400/20 rounded-lg transition-colors"
+              className="p-2 text-white/70 hover:text-red-400 hover:bg-red-400/20 rounded-none transition-colors"
               title="Close (Esc)"
             >
               <X className="w-6 h-6" />

@@ -92,7 +92,7 @@ export function SearchBar() {
       <form 
         onSubmit={handleSubmit}
         className={cn(
-          "relative flex items-center w-full h-10 px-3 rounded-[0.5rem] bg-background border transition-colors",
+          "relative flex items-center w-full h-10 px-3 rounded-none-[0.5rem] bg-background border transition-colors",
           isOpen ? "border-accent ring-1 ring-accent/20" : "border-border hover:border-accent/50"
         )}
       >
@@ -110,7 +110,7 @@ export function SearchBar() {
           className="flex-1 h-full px-2 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
         />
         {!query && (
-          <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.4rem] hidden h-6 select-none items-center gap-1 rounded border border-border bg-background px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex text-primary-text">
+          <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.4rem] hidden h-6 select-none items-center gap-1 rounded-none border border-border bg-background px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex text-primary-text">
             <span className="text-xs">Ctrl</span> K
           </kbd>
         )}
@@ -121,7 +121,7 @@ export function SearchBar() {
               setQuery("");
               inputRef.current?.focus();
             }}
-            className="p-1 hover:bg-muted rounded-md text-muted-foreground absolute right-2"
+            className="p-1 hover:bg-muted rounded-none text-muted-foreground absolute right-2"
           >
             <X className="w-3 h-3" />
           </button>
@@ -130,7 +130,7 @@ export function SearchBar() {
 
       {/* Dropdown Suggestions */}
       {isOpen && query.trim() && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-surface border border-border shadow-lg rounded-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-surface border border-border shadow-lg rounded-none overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
           {isLoading ? (
             <div className="p-4 flex items-center justify-center text-sm text-muted-foreground">
               <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -149,7 +149,7 @@ export function SearchBar() {
                       <span className="text-sm text-foreground truncate">{result.title}</span>
                     </div>
                     {result.imageUrl && (
-                      <div className="relative w-8 h-8 rounded shrink-0 overflow-hidden ml-2 bg-muted hidden lg:block">
+                      <div className="relative w-8 h-8 rounded-none shrink-0 overflow-hidden ml-2 bg-muted hidden lg:block">
                         <Image src={result.imageUrl} alt="" fill className="object-cover" />
                       </div>
                     )}
@@ -163,7 +163,7 @@ export function SearchBar() {
                     setTransitionTitle("Search Results");
                     setPendingRoute(`/search?q=${encodeURIComponent(query)}`);
                   }}
-                  className="w-full text-center py-2 text-xs font-medium text-accent hover:bg-accent/10 rounded-md transition-colors"
+                  className="w-full text-center py-2 text-xs font-medium text-accent hover:bg-accent/10 rounded-none transition-colors"
                 >
                   See all results
                 </button>

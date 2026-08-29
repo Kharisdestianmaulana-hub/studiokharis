@@ -38,7 +38,7 @@ export function TopNav({ profileData }: { profileData?: any }) {
         <Button 
           variant="outline" 
           size="sm" 
-          className="hidden md:flex items-center gap-2 rounded-full border-primary/20 text-primary hover:bg-primary/10"
+          className="hidden md:flex items-center gap-2 rounded-none border-primary/20 text-primary hover:bg-primary/10"
           onClick={startTour}
         >
           <PlayCircle className="w-4 h-4" />

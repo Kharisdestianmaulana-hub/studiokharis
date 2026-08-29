@@ -58,7 +58,7 @@ export function MobileDrawer({ profileData }: { profileData?: any }) {
                   key={route.name}
                   href={route.href}
                   className={cn(
-                    "flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-all duration-200",
+                    "flex items-center gap-3 px-3 py-2 rounded-none text-sm transition-all duration-200",
                     isActive
                       ? "bg-secondary/10 text-primary font-medium"
                       : "text-secondary-text hover:bg-secondary/5 hover:text-foreground"
@@ -79,7 +79,7 @@ export function MobileDrawer({ profileData }: { profileData?: any }) {
                 <Link
                   key={route.name}
                   href={route.href}
-                  className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-secondary-text hover:bg-secondary/5 hover:text-foreground transition-all duration-200"
+                  className="flex items-center gap-3 px-3 py-2 rounded-none text-sm text-secondary-text hover:bg-secondary/5 hover:text-foreground transition-all duration-200"
                 >
                   <Icon className="w-4 h-4" />
                   {route.name}

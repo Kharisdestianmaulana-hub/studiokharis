@@ -42,7 +42,7 @@ export function VisitorCounter({ className }: { className?: string }) {
 
   if (count === null) {
     return (
-      <div className={cn("flex items-center gap-1.5 text-xs font-medium text-muted bg-secondary/20 px-2.5 py-1.5 rounded-full animate-pulse border border-border/30", className)}>
+      <div className={cn("flex items-center gap-1.5 text-xs font-medium text-muted bg-secondary/20 px-2.5 py-1.5 rounded-none animate-pulse border border-border/30", className)}>
         <Eye className="w-3.5 h-3.5" />
         <span>...</span>
       </div>
@@ -51,7 +51,7 @@ export function VisitorCounter({ className }: { className?: string }) {
 
   return (
     <div 
-      className={cn("flex items-center gap-1.5 text-xs font-medium text-muted hover:text-accent transition-colors bg-secondary/10 px-2.5 py-1.5 rounded-full border border-border/30 hover:border-accent/30 cursor-default", className)}
+      className={cn("flex items-center gap-1.5 text-xs font-medium text-muted hover:text-accent transition-colors bg-secondary/10 px-2.5 py-1.5 rounded-none border border-border/30 hover:border-accent/30 cursor-default", className)}
       title="Total Website Views"
     >
       <Eye className="w-3.5 h-3.5" />

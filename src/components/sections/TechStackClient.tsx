@@ -80,11 +80,11 @@ const TechNode = ({ tech, index, onClick }: { tech: TechStackItem, index: number
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative flex flex-col items-center gap-4 p-6 rounded-2xl bg-surface border border-border hover:border-accent/50 transition-all duration-300 cursor-pointer"
+      className="group relative flex flex-col items-center gap-4 p-6 rounded-none-2xl bg-surface border border-border hover:border-accent/50 transition-all duration-300 cursor-pointer"
     >
       {/* Glow Effect */}
       <div 
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl"
+        className="absolute inset-0 rounded-none-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl"
         style={{ backgroundColor: color }}
       />
       
@@ -94,7 +94,7 @@ const TechNode = ({ tech, index, onClick }: { tech: TechStackItem, index: number
         
         {/* Central Icon */}
         <div 
-          className="relative z-10 w-12 h-12 flex items-center justify-center rounded-full bg-background border border-border shadow-inner group-hover:scale-110 transition-transform duration-500"
+          className="relative z-10 w-12 h-12 flex items-center justify-center rounded-none bg-background border border-border shadow-inner group-hover:scale-110 transition-transform duration-500"
           style={{ color: color === "#000000" ? "var(--color-primary-text)" : color }} // Adjust black icons for dark mode
         >
           <Icon className="w-6 h-6" />
@@ -105,7 +105,7 @@ const TechNode = ({ tech, index, onClick }: { tech: TechStackItem, index: number
       <div className="text-center z-10">
         <h3 className="font-bold text-foreground mb-1 group-hover:text-accent transition-colors">{tech.name}</h3>
         <div className="text-sm font-mono text-muted-foreground flex items-center justify-center gap-1">
-          <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
+          <span className="inline-block w-2 h-2 rounded-none" style={{ backgroundColor: color }} />
           {tech.proficiency}%
         </div>
       </div>
@@ -155,7 +155,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="group relative flex items-center justify-center p-4 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all cursor-pointer aspect-square"
+                className="group relative flex items-center justify-center p-4 rounded-none-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-border transition-all cursor-pointer aspect-square"
                 title={`${tech.name} - ${tech.proficiency}%`}
               >
                 <Icon className="w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity" style={{ color: color === "#000000" ? "var(--color-primary-text)" : color }} />
@@ -167,7 +167,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
         {/* Right Side: Category Text Columns */}
         <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
           {techStackData.map((category, idx) => (
-            <div key={category.category} className="flex flex-col p-8 rounded-3xl bg-secondary/5 border border-border/50 hover:bg-secondary/10 transition-colors">
+            <div key={category.category} className="flex flex-col p-8 rounded-none-3xl bg-secondary/5 border border-border/50 hover:bg-secondary/10 transition-colors">
               <div className="flex justify-between items-start mb-6">
                 <span className="text-4xl md:text-5xl font-light text-foreground">{String(idx + 1).padStart(2, '0')}</span>
                 <h4 className="text-sm md:text-base font-bold tracking-widest uppercase text-right max-w-[120px] leading-tight text-foreground/80">
@@ -176,13 +176,13 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
               </div>
               
               {/* Fake Icon just for the aesthetic matching the design */}
-              <div className="w-12 h-12 bg-surface rounded-xl border border-border flex items-center justify-center mb-6">
+              <div className="w-12 h-12 bg-surface rounded-none border border-border flex items-center justify-center mb-6">
                 <Code2 className="w-6 h-6 text-foreground" />
               </div>
 
               <div className="flex flex-wrap gap-2 mt-auto">
                 {category.items.map(tech => (
-                  <span key={tech.name} className="text-xs md:text-sm font-medium px-3 py-1.5 bg-surface border border-border/50 rounded-lg text-muted-foreground">
+                  <span key={tech.name} className="text-xs md:text-sm font-medium px-3 py-1.5 bg-surface border border-border/50 rounded-none text-muted-foreground">
                     {tech.name}
                   </span>
                 ))}
@@ -209,11 +209,11 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative w-full max-w-2xl bg-surface border border-border rounded-2xl shadow-2xl overflow-hidden z-10 max-h-[85vh] flex flex-col"
+                className="relative w-full max-w-2xl bg-surface border border-border rounded-none-2xl shadow-2xl overflow-hidden z-10 max-h-[85vh] flex flex-col"
               >
                 <button 
                   onClick={() => setSelectedTech(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-background/50 hover:bg-background border border-border transition-colors text-muted-foreground hover:text-foreground z-20"
+                  className="absolute top-4 right-4 p-2 rounded-none bg-background/50 hover:bg-background border border-border transition-colors text-muted-foreground hover:text-foreground z-20"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -225,7 +225,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
                     style={{ backgroundColor: selectedColor }}
                   />
                   <div 
-                    className="relative z-10 w-20 h-20 mb-4 flex items-center justify-center rounded-2xl bg-background border border-border shadow-sm"
+                    className="relative z-10 w-20 h-20 mb-4 flex items-center justify-center rounded-none-2xl bg-background border border-border shadow-sm"
                     style={{ color: selectedColor === "#000000" ? "var(--color-primary-text)" : selectedColor }}
                   >
                     <SelectedIcon className="w-10 h-10" />
@@ -242,7 +242,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
                         <Link 
                           key={project.id} 
                           href={`/projects/${project.id}`}
-                          className="group flex flex-col overflow-hidden rounded-xl bg-background border border-border hover:border-accent/50 transition-colors"
+                          className="group flex flex-col overflow-hidden rounded-none bg-background border border-border hover:border-accent/50 transition-colors"
                         >
                           <div className="relative aspect-video w-full overflow-hidden bg-muted">
                             {project.thumbnail ? (
@@ -272,7 +272,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
                     </div>
                   ) : (
                     <div className="flex flex-col items-center justify-center py-12 text-center">
-                      <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mb-4 text-muted-foreground">
+                      <div className="w-16 h-16 rounded-none bg-secondary/10 flex items-center justify-center mb-4 text-muted-foreground">
                         <Code2 className="w-8 h-8" />
                       </div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">No projects found</h3>

@@ -46,7 +46,7 @@ export function RoadmapsSection({ roadmaps }: RoadmapsSectionProps) {
                   </div>
                   <div className="flex flex-col items-end">
                     <span className="text-xs font-medium text-muted mb-1">{progress}%</span>
-                    <div className="w-16 h-1.5 bg-secondary rounded-full overflow-hidden">
+                    <div className="w-16 h-1.5 bg-secondary rounded-none overflow-hidden">
                       <div 
                         className="h-full bg-accent transition-all duration-1000 ease-out"
                         style={{ width: `${progress}%` }}

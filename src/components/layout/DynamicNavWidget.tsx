@@ -83,7 +83,7 @@ export function DynamicNavWidget() {
           <MapPin className="w-3.5 h-3.5" />
           <span>Remote (WIB)</span>
         </div>
-        <div className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+        <div className="w-1 h-1 rounded-none bg-muted-foreground/30" />
         <div className="flex items-center gap-1.5 text-foreground">
           <Clock className="w-3.5 h-3.5" />
           <span>{formattedTime}</span>

@@ -24,7 +24,7 @@ export function PhysicsNameTag({ profileData }: { profileData: any }) {
   return (
     <div className="relative w-48 h-[250px] flex flex-col items-center hidden lg:flex mt-4" style={{ perspective: 1200 }}>
       {/* Anchor Pin */}
-      <div className="absolute top-0 w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-600 shadow-inner z-10 border border-zinc-400 dark:border-zinc-500" />
+      <div className="absolute top-0 w-3 h-3 rounded-none bg-zinc-300 dark:bg-zinc-600 shadow-inner z-10 border border-zinc-400 dark:border-zinc-500" />
 
       {/* Dynamic Lanyard String */}
       <svg className="absolute top-1.5 left-1/2 overflow-visible z-0 pointer-events-none">
@@ -53,10 +53,10 @@ export function PhysicsNameTag({ profileData }: { profileData: any }) {
           cursor: "grabbing"
         }}
         style={{ x, y, rotate, rotateX, rotateY }}
-        className="mt-[80px] w-48 bg-white/90 dark:bg-[#18181B]/90 backdrop-blur-md border border-border rounded-xl shadow-2xl p-4 flex flex-col items-center cursor-grab z-20"
+        className="mt-[80px] w-48 bg-white/90 dark:bg-[#18181B]/90 backdrop-blur-md border border-border rounded-none shadow-2xl p-4 flex flex-col items-center cursor-grab z-20"
       >
         {/* Hole for the lanyard */}
-        <div className="w-4 h-1.5 rounded-full bg-zinc-200 dark:bg-zinc-800 shadow-inner mb-4" />
+        <div className="w-4 h-1.5 rounded-none bg-zinc-200 dark:bg-zinc-800 shadow-inner mb-4" />
 
         <Avatar className="w-16 h-16 border-2 border-border mb-3 shadow-sm">
           <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} />

@@ -70,10 +70,10 @@ export default async function SearchPage({
             <Link 
               key={`${result.type}-${result.id}`} 
               href={result.url}
-              className="flex flex-col md:flex-row gap-4 p-5 rounded-2xl bg-surface border border-border hover:border-accent/50 hover:shadow-md transition-all group animate-in fade-in slide-in-from-bottom-4"
+              className="flex flex-col md:flex-row gap-4 p-5 rounded-none-2xl bg-surface border border-border hover:border-accent/50 hover:shadow-md transition-all group animate-in fade-in slide-in-from-bottom-4"
             >
               {result.imageUrl && (
-                <div className="relative w-full md:w-48 h-32 md:h-auto rounded-xl overflow-hidden shrink-0 bg-muted">
+                <div className="relative w-full md:w-48 h-32 md:h-auto rounded-none overflow-hidden shrink-0 bg-muted">
                   <Image src={result.imageUrl} alt={result.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
               )}
@@ -97,7 +97,7 @@ export default async function SearchPage({
           ))
         ) : query ? (
           <div className="flex flex-col items-center justify-center gap-4 py-20 text-center animate-in fade-in zoom-in-95">
-            <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-none bg-accent/10 flex items-center justify-center">
               <SearchX className="w-8 h-8 text-accent" />
             </div>
             <h4 className="text-xl font-bold">No results found</h4>

@@ -20,7 +20,7 @@ export function ProjectCard({ project, isListView = false }: { project: any, isL
     <Tooltip>
       <TooltipTrigger asChild>
         <Card className={cn(
-          "group bg-surface border-border overflow-hidden rounded-[16px] hover:-translate-y-1 hover:shadow-md transition-all duration-300",
+          "group bg-surface border-border overflow-hidden rounded-none-[16px] hover:-translate-y-1 hover:shadow-md transition-all duration-300",
           isListView ? "flex flex-col md:flex-row" : "flex flex-col"
         )}>
           <Link 
@@ -70,7 +70,7 @@ export function ProjectCard({ project, isListView = false }: { project: any, isL
             
             <div className="flex flex-wrap gap-2 mb-6">
               {project.techStack.map((tech: any) => (
-                <Badge key={tech} variant="secondary" className="bg-secondary/10 text-secondary-text hover:bg-secondary/20 rounded-md font-normal text-xs">
+                <Badge key={tech} variant="secondary" className="bg-secondary/10 text-secondary-text hover:bg-secondary/20 rounded-none font-normal text-xs">
                   {tech}
                 </Badge>
               ))}

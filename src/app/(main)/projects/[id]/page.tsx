@@ -90,7 +90,7 @@ export default async function ProjectDetailPage(props: { params: Promise<{ id: s
                 href={project.github} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border text-sm font-medium hover:bg-secondary/10 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-surface border border-border text-sm font-medium hover:bg-secondary/10 transition-colors"
               >
                 <FaGithub className="w-4 h-4" />
                 Source Code
@@ -101,7 +101,7 @@ export default async function ProjectDetailPage(props: { params: Promise<{ id: s
                 href={project.liveDemo} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors"
               >
                 <ExternalLink className="w-4 h-4" />
                 Live Demo
@@ -116,7 +116,7 @@ export default async function ProjectDetailPage(props: { params: Promise<{ id: s
         <ProjectGallery images={project.images} title={project.title} />
       )}
 
-      <div className="prose prose-neutral dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-img:rounded-xl prose-a:text-accent mt-4">
+      <div className="prose prose-neutral dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-img:rounded-none prose-a:text-accent mt-4">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {project.description}
         </ReactMarkdown>

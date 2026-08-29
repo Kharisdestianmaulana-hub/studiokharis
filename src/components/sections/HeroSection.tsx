@@ -40,11 +40,11 @@ export async function HeroSection({
         {/* Glassmorphism Badge and Floating Button Wrapper */}
         <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-both w-max min-w-[260px]">
           
-          <div className="flex flex-col items-center gap-3 bg-white/70 dark:bg-black/70 backdrop-blur-2xl border border-white/40 dark:border-white/20 p-3 md:p-4 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] w-full">
+          <div className="flex flex-col items-center gap-3 bg-white/70 dark:bg-black/70 backdrop-blur-2xl border border-white/40 dark:border-white/20 p-3 md:p-4 rounded-none-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] w-full">
           
           <div className="flex items-center gap-4 w-full">
             {/* Logo on the left */}
-            <div className="w-14 h-14 md:w-16 md:h-16 shrink-0 relative flex items-center justify-center rounded-full overflow-hidden shadow-inner bg-black">
+            <div className="w-14 h-14 md:w-16 md:h-16 shrink-0 relative flex items-center justify-center rounded-none overflow-hidden shadow-inner bg-black">
               {/* Light Mode Logo */}
               <img 
                 src="/logo-light.webp" 
@@ -108,7 +108,7 @@ export async function HeroSection({
         {/* Floating Button */}
         {!hideButtons && (
           <TransitionLink href="/projects" className="w-full">
-            <button className="w-full bg-foreground text-background text-sm font-semibold py-2.5 px-6 rounded-full shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] dark:shadow-[0_4px_14px_0_rgb(255,255,255,0.1)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
+            <button className="w-full bg-foreground text-background text-sm font-semibold py-2.5 px-6 rounded-none shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] dark:shadow-[0_4px_14px_0_rgb(255,255,255,0.1)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
               Lihat Project
               <FaArrowRight className="w-3 h-3" />
             </button>

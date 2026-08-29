@@ -86,7 +86,7 @@ export default async function ArticleDetailPage(props: { params: Promise<{ slug:
       </header>
 
       {article.cover && (
-        <div className="relative aspect-[2/1] w-full rounded-2xl overflow-hidden border border-border shadow-sm">
+        <div className="relative aspect-[2/1] w-full rounded-none-2xl overflow-hidden border border-border shadow-sm">
           <Image 
             src={article.cover} 
             alt={article.title}

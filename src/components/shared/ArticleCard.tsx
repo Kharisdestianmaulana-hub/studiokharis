@@ -9,7 +9,7 @@ export function ArticleCard({ article }: { article: any }) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Card className="group bg-surface border-border overflow-hidden rounded-[16px] hover:-translate-y-1 hover:shadow-md transition-all duration-300 h-full flex flex-col cursor-pointer">
+        <Card className="group bg-surface border-border overflow-hidden rounded-none-[16px] hover:-translate-y-1 hover:shadow-md transition-all duration-300 h-full flex flex-col cursor-pointer">
           {article.cover ? (
             <div className="relative w-full aspect-[16/9] overflow-hidden bg-muted">
               <Image 

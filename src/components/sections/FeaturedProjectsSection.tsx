@@ -25,7 +25,7 @@ export async function FeaturedProjectsSection({ showAll = false }: { showAll?: b
         {!showAll && (
           <Link 
             href="/projects" 
-            className="hidden md:flex items-center gap-1.5 text-sm font-medium text-foreground bg-secondary/20 hover:bg-surface px-6 py-3 rounded-full transition-colors border border-border"
+            className="hidden md:flex items-center gap-1.5 text-sm font-medium text-foreground bg-secondary/20 hover:bg-surface px-6 py-3 rounded-none transition-colors border border-border"
           >
             View More Projects <ArrowRight className="w-4 h-4" />
           </Link>
@@ -46,7 +46,7 @@ export async function FeaturedProjectsSection({ showAll = false }: { showAll?: b
         <div className="mt-6 md:hidden">
           <Link 
             href="/projects" 
-            className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-xl py-3 hover:bg-secondary/10 transition-colors"
+            className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-none py-3 hover:bg-secondary/10 transition-colors"
           >
             View More Projects <ArrowRight className="w-4 h-4" />
           </Link>

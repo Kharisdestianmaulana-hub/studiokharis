@@ -20,7 +20,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
   return (
     <div className="flex flex-col gap-4">
       {/* Main Large Image */}
-      <div className="group relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-border shadow-sm bg-secondary/5 flex items-center justify-center">
+      <div className="group relative aspect-[16/9] w-full rounded-none-2xl overflow-hidden border border-border shadow-sm bg-secondary/5 flex items-center justify-center">
         <Image 
           src={mainImage} 
           alt={`${title} Preview`}
@@ -33,7 +33,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
         {/* Fullscreen Button overlay */}
         <button
           onClick={() => setIsViewerOpen(true)}
-          className="absolute bottom-4 right-4 p-2.5 bg-background/80 hover:bg-background text-foreground backdrop-blur-md rounded-xl border border-border shadow-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+          className="absolute bottom-4 right-4 p-2.5 bg-background/80 hover:bg-background text-foreground backdrop-blur-md rounded-none border border-border shadow-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
           title="View Fullscreen"
         >
           <Maximize2 className="w-5 h-5" />
@@ -48,7 +48,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
               key={idx}
               onClick={() => setMainImage(image)}
               className={cn(
-                "relative aspect-video w-full rounded-lg overflow-hidden border-2 transition-all",
+                "relative aspect-video w-full rounded-none overflow-hidden border-2 transition-all",
                 mainImage === image 
                   ? "border-accent shadow-md opacity-100" 
                   : "border-transparent opacity-60 hover:opacity-100 hover:border-border"

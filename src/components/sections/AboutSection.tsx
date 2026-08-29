@@ -11,7 +11,7 @@ export async function AboutSection() {
   const techStackTotal = techStack.reduce((total, category) => total + category.items.length, 0);
   
   return (
-    <section id="about" className="relative w-full overflow-hidden rounded-[2rem] bg-surface border border-border text-foreground min-h-[80vh] flex flex-col p-8 md:p-12 lg:p-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <section id="about" className="relative w-full overflow-hidden rounded-none-[2rem] bg-surface border border-border text-foreground min-h-[80vh] flex flex-col p-8 md:p-12 lg:p-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
       
       {/* Decorative Wavy Background */}
       <div className="absolute inset-0 opacity-30 dark:opacity-10 pointer-events-none" 
@@ -47,7 +47,7 @@ export async function AboutSection() {
         <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-8 md:gap-12 items-start">
           
           {/* Avatar */}
-          <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-full overflow-hidden border-4 border-background bg-secondary/10 shadow-xl">
+          <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-none overflow-hidden border-4 border-background bg-secondary/10 shadow-xl">
             <img 
               src={profileData.avatarUrl || "/avatar.jpg"} 
               alt={profileData.name}

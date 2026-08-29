@@ -15,7 +15,7 @@ export function DynamicLogo() {
 
   // Prevent hydration mismatch by rendering a placeholder
   if (!mounted) {
-    return <div className="w-8 h-8 rounded-full bg-secondary/20 animate-pulse" />;
+    return <div className="w-8 h-8 rounded-none bg-secondary/20 animate-pulse" />;
   }
 
   const logoSrc = resolvedTheme === "dark" ? "/logo-dark.webp" : "/logo-light.webp";

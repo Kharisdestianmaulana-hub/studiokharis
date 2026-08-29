@@ -93,7 +93,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
                 id={`tour-nav-${route.name.toLowerCase().replace(/\s+/g, '-')}`}
                 href={route.href}
                 className={cn(
-                  "flex items-center rounded-md text-sm transition-all duration-200",
+                  "flex items-center rounded-none text-sm transition-all duration-200",
                   isCollapsed ? "justify-center h-10 w-10 mx-auto" : "gap-3 px-3 py-2",
                   isActive
                     ? "bg-secondary/10 text-primary font-medium"
@@ -129,7 +129,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
                 id={`tour-nav-${route.name.toLowerCase().replace(/\s+/g, '-')}`}
                 href={route.href}
                 className={cn(
-                  "flex items-center rounded-md text-sm text-secondary-text hover:bg-secondary/5 hover:text-foreground transition-all duration-200",
+                  "flex items-center rounded-none text-sm text-secondary-text hover:bg-secondary/5 hover:text-foreground transition-all duration-200",
                   isCollapsed ? "justify-center h-10 w-10 mx-auto" : "gap-3 px-3 py-2"
                 )}
               >

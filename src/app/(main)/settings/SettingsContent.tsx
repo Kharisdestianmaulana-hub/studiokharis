@@ -102,7 +102,7 @@ export function SettingsContent() {
                     onClick={() => setAccentColor(opt.id)}
                     title={opt.label}
                     className={cn(
-                      "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 ring-offset-2 ring-offset-background",
+                      "w-10 h-10 rounded-none flex items-center justify-center transition-all duration-200 ring-offset-2 ring-offset-background",
                       opt.colorClass,
                       accentColor === opt.id ? "ring-2 ring-foreground scale-110" : "hover:scale-105 opacity-80 hover:opacity-100"
                     )}
@@ -119,7 +119,7 @@ export function SettingsContent() {
                   />
                   <div
                     className={cn(
-                      "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 ring-offset-2 ring-offset-background cursor-pointer",
+                      "w-10 h-10 rounded-none flex items-center justify-center transition-all duration-200 ring-offset-2 ring-offset-background cursor-pointer",
                       "bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500",
                       accentColor === 'custom' ? "ring-2 ring-foreground scale-110" : "hover:scale-105 opacity-80 hover:opacity-100"
                     )}

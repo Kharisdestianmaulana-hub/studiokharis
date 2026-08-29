@@ -104,8 +104,8 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
       <div className="flex flex-col w-full border border-border">
         {Array.from({ length: 3 }).map((_, i) => (
           <div key={i} className="flex flex-col gap-4 p-6 border-b border-border last:border-b-0 bg-surface">
-            <Skeleton className="h-6 w-1/3 rounded-none" />
-            <Skeleton className="h-4 w-2/3 rounded-none" />
+            <Skeleton className="h-6 w-1/3 rounded-none-none" />
+            <Skeleton className="h-4 w-2/3 rounded-none-none" />
           </div>
         ))}
       </div>
@@ -114,7 +114,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
 
   if (error) {
     return (
-      <div className="p-6 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 rounded-none">
+      <div className="p-6 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 rounded-none-none">
         <p className="font-semibold">Error loading GitHub data</p>
         <p className="text-sm mt-1">{error}</p>
       </div>
@@ -123,7 +123,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
 
   if (repos.length === 0) {
     return (
-      <div className="p-6 bg-surface border border-border text-secondary-text rounded-none">
+      <div className="p-6 bg-surface border border-border text-secondary-text rounded-none-none">
         No repositories found.
       </div>
     );
@@ -167,7 +167,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
                 </div>
               </div>
 
-              <div className="hidden md:flex items-center justify-center p-4 border border-border rounded-none shrink-0 group-hover:bg-foreground group-hover:text-background transition-colors duration-300">
+              <div className="hidden md:flex items-center justify-center p-4 border border-border rounded-none-none shrink-0 group-hover:bg-foreground group-hover:text-background transition-colors duration-300">
                 <ChevronDown
                   className={cn(
                     "w-5 h-5 transition-transform duration-300",
@@ -202,7 +202,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
                               <img
                                 src={commit.avatar}
                                 alt={commit.author}
-                                className="w-10 h-10 rounded-none border border-border grayscale hover:grayscale-0 transition-all duration-300"
+                                className="w-10 h-10 rounded-none-none border border-border grayscale hover:grayscale-0 transition-all duration-300"
                               />
                             )}
                             <div className="flex flex-col md:hidden">

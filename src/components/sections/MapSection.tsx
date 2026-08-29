@@ -38,13 +38,13 @@ export default function MapSection({ messages }: { messages: any[] }) {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <div className="w-full h-[60vh] flex items-center justify-center border rounded-xl animate-pulse bg-secondary/10 mt-8" />;
+  if (!mounted) return <div className="w-full h-[60vh] flex items-center justify-center border rounded-none animate-pulse bg-secondary/10 mt-8" />;
 
   // Use standard OpenStreetMap tiles
   const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row gap-0 h-[80vh] w-full mt-8 rounded-xl overflow-hidden border border-border shadow-lg">
+    <div className="flex flex-col-reverse lg:flex-row gap-0 h-[80vh] w-full mt-8 rounded-none overflow-hidden border border-border shadow-lg">
       
       {/* Sidebar List */}
       <div className="w-full lg:w-1/3 bg-background flex flex-col h-1/2 lg:h-full border-t lg:border-t-0 lg:border-r border-border overflow-hidden z-10">
@@ -65,7 +65,7 @@ export default function MapSection({ messages }: { messages: any[] }) {
             messages.map((msg) => (
               <div 
                 key={msg.id} 
-                className="bg-background p-4 rounded-xl border border-border cursor-pointer hover:border-primary/50 hover:shadow-md transition-all active:scale-[0.98]"
+                className="bg-background p-4 rounded-none border border-border cursor-pointer hover:border-primary/50 hover:shadow-md transition-all active:scale-[0.98]"
                 onClick={() => setActiveLocation([msg.latitude, msg.longitude])}
               >
                 <div className="flex items-center gap-3 mb-3">
@@ -106,7 +106,7 @@ export default function MapSection({ messages }: { messages: any[] }) {
               <Popup>
                 <div className="flex flex-col gap-2 min-w-[200px] p-1">
                   <div className="flex items-center gap-2 border-b pb-2">
-                    <img src={msg.avatarUrl} alt={msg.name} className="w-6 h-6 rounded-full border" />
+                    <img src={msg.avatarUrl} alt={msg.name} className="w-6 h-6 rounded-none border" />
                     <span className="font-semibold text-sm">{msg.name}</span>
                   </div>
                   <span className="text-sm text-muted-foreground">{msg.message}</span>

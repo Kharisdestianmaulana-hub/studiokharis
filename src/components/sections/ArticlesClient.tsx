@@ -17,7 +17,7 @@ export function ArticlesClient({
 
   if (articlesData.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed rounded-2xl border-border bg-secondary/5 w-full">
+      <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed rounded-none-2xl border-border bg-secondary/5 w-full">
         <BookOpen className="w-12 h-12 text-muted-foreground mb-4 opacity-50" />
         <h3 className="text-lg font-medium">No articles yet</h3>
         <p className="text-muted-foreground mt-1 max-w-sm">
@@ -32,17 +32,17 @@ export function ArticlesClient({
       {/* View Toggle (Only shown on Articles Page where hideViewAll is true) */}
       {hideViewAll && (
         <div className="flex justify-end mb-2 md:-mt-20 relative z-10 w-full">
-          <div className="flex items-center bg-secondary/20 border border-border/50 rounded-full p-1">
+          <div className="flex items-center bg-secondary/20 border border-border/50 rounded-none p-1">
             <button
               onClick={() => setViewMode("list")}
-              className={`p-2 rounded-full transition-all duration-300 ${viewMode === 'list' ? 'bg-surface shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+              className={`p-2 rounded-none transition-all duration-300 ${viewMode === 'list' ? 'bg-surface shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
               title="List View"
             >
               <List className="w-4 h-4" />
             </button>
             <button
               onClick={() => setViewMode("grid")}
-              className={`p-2 rounded-full transition-all duration-300 ${viewMode === 'grid' ? 'bg-surface shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+              className={`p-2 rounded-none transition-all duration-300 ${viewMode === 'grid' ? 'bg-surface shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
               title="Grid View"
             >
               <LayoutGrid className="w-4 h-4" />
@@ -85,7 +85,7 @@ export function ArticlesClient({
                 </Link>
               </div>
               
-              <Link href={`/articles/${article.slug}`} className={`relative aspect-video rounded-2xl overflow-hidden bg-secondary/10 border border-border/50 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}>
+              <Link href={`/articles/${article.slug}`} className={`relative aspect-video rounded-none-2xl overflow-hidden bg-secondary/10 border border-border/50 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}>
                 <img 
                   src={article.cover || '/placeholder.svg'} 
                   alt={article.title} 
@@ -99,7 +99,7 @@ export function ArticlesClient({
             <div className="mt-6 md:hidden">
               <Link 
                 href="/articles" 
-                className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-xl py-3 hover:bg-secondary/10 transition-colors"
+                className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-none py-3 hover:bg-secondary/10 transition-colors"
               >
                 View All Articles <ArrowRight className="w-4 h-4" />
               </Link>
@@ -110,7 +110,7 @@ export function ArticlesClient({
         /* GRID VIEW */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {articlesData.map((article: any) => (
-            <div key={article.id} className="group flex flex-col h-full bg-surface border border-border rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300">
+            <div key={article.id} className="group flex flex-col h-full bg-surface border border-border rounded-none-2xl overflow-hidden hover:shadow-md transition-all duration-300">
               <Link href={`/articles/${article.slug}`} className="relative aspect-video w-full overflow-hidden bg-secondary/10 border-b border-border/50">
                 <img 
                   src={article.cover || '/placeholder.svg'} 

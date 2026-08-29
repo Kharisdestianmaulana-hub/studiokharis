@@ -13,7 +13,7 @@ export function HeroLogo() {
   }, []);
 
   if (!mounted) {
-    return <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-secondary/20 animate-pulse" />;
+    return <div className="w-20 h-20 md:w-28 md:h-28 rounded-none bg-secondary/20 animate-pulse" />;
   }
 
   const logoSrc = resolvedTheme === "dark" ? "/logo-dark.webp" : "/logo-light.webp";

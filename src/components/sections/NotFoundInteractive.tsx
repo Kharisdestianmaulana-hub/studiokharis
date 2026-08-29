@@ -72,7 +72,7 @@ export function NotFoundInteractive() {
           {runCount < MAX_RUNS ? (
             <Button 
               size="lg" 
-              className="rounded-full shadow-lg pointer-events-auto"
+              className="rounded-none shadow-lg pointer-events-auto"
               onMouseEnter={dodgeButton}
               onTouchStart={dodgeButton}
               onClick={(e) => e.preventDefault()} // Prevent click if they somehow catch it before run completes
@@ -82,7 +82,7 @@ export function NotFoundInteractive() {
             </Button>
           ) : (
             <TransitionLink href="/">
-              <Button size="lg" className="rounded-full shadow-lg pointer-events-auto animate-in zoom-in duration-300">
+              <Button size="lg" className="rounded-none shadow-lg pointer-events-auto animate-in zoom-in duration-300">
                 <Home className="w-4 h-4 mr-2" />
                 Go Home
               </Button>

@@ -23,7 +23,7 @@ export async function ArticlesSection({ hideViewAll = false }: { hideViewAll?: b
         {!hideViewAll && (
           <Link 
             href="/articles" 
-            className="hidden md:flex items-center gap-1.5 text-sm font-medium text-foreground bg-secondary/20 hover:bg-surface px-6 py-3 rounded-full transition-colors border border-border mt-4 md:mt-0"
+            className="hidden md:flex items-center gap-1.5 text-sm font-medium text-foreground bg-secondary/20 hover:bg-surface px-6 py-3 rounded-none transition-colors border border-border mt-4 md:mt-0"
           >
             View All Articles <ArrowRight className="w-4 h-4" />
           </Link>

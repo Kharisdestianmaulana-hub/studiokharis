@@ -6,7 +6,7 @@ import { FaGithub } from "react-icons/fa";
 
 export function RepositoryCard({ repo }: { repo: any }) {
   return (
-    <Card className="group bg-surface border-border overflow-hidden rounded-[16px] hover:-translate-y-1 hover:shadow-md transition-all duration-300 h-full flex flex-col">
+    <Card className="group bg-surface border-border overflow-hidden rounded-none-[16px] hover:-translate-y-1 hover:shadow-md transition-all duration-300 h-full flex flex-col">
       <CardContent className="p-6 flex flex-col h-full">
         <div className="flex items-start gap-3 mb-3">
           <FaGithub className="w-5 h-5 text-muted mt-1" />
@@ -24,7 +24,7 @@ export function RepositoryCard({ repo }: { repo: any }) {
         <div className="flex items-center gap-4 text-xs text-muted mt-auto pt-4 border-t border-border/50">
           <div className="flex items-center gap-1.5">
             <span 
-              className="w-2.5 h-2.5 rounded-full" 
+              className="w-2.5 h-2.5 rounded-none" 
               style={{ backgroundColor: repo.languageColor }}
             />
             <span>{repo.language}</span>

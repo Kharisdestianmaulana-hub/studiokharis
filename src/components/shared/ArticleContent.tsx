@@ -105,7 +105,7 @@ export function ArticleContent({ content }: ArticleContentProps) {
       {/* Content */}
       <div 
         ref={contentRef}
-        className="prose prose-neutral dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-headings:scroll-mt-24 prose-img:rounded-xl prose-a:text-accent lg:w-[70%]"
+        className="prose prose-neutral dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-headings:scroll-mt-24 prose-img:rounded-none prose-a:text-accent lg:w-[70%]"
       >
         <ReactMarkdown>{formattedContent}</ReactMarkdown>
       </div>
@@ -113,7 +113,7 @@ export function ArticleContent({ content }: ArticleContentProps) {
       {/* Sidebar TOC */}
       {toc.length > 0 && (
         <aside className="hidden lg:block lg:w-[30%] sticky top-24 shrink-0">
-          <div className="bg-surface border border-border rounded-xl p-5 shadow-sm">
+          <div className="bg-surface border border-border rounded-none p-5 shadow-sm">
             <h4 className="font-semibold text-foreground flex items-center gap-2 mb-4">
               <List className="w-4 h-4" />
               Table of Contents

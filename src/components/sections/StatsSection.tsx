@@ -43,9 +43,9 @@ export async function StatsSection() {
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <Card key={index} className="bg-surface border-border overflow-hidden rounded-[16px] group hover:border-primary/50 transition-colors">
+            <Card key={index} className="bg-surface border-border overflow-hidden rounded-none-[16px] group hover:border-primary/50 transition-colors">
               <CardContent className="p-6 md:p-8 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-none bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <Icon className="w-6 h-6 text-primary" />
                 </div>
                 <div>

@@ -63,7 +63,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 text-muted transition-colors ${link.color}`}
+                className={`flex items-center justify-center w-8 h-8 rounded-none bg-secondary/20 text-muted transition-colors ${link.color}`}
               >
                 {link.icon}
               </a>
@@ -77,7 +77,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
           <TooltipTrigger asChild>
             <button
               onClick={handleCopy}
-              className="flex items-center justify-center w-8 h-8 rounded-full bg-secondary/20 text-muted hover:text-foreground hover:bg-secondary/40 transition-colors ml-1"
+              className="flex items-center justify-center w-8 h-8 rounded-none bg-secondary/20 text-muted hover:text-foreground hover:bg-secondary/40 transition-colors ml-1"
             >
               <FaLink className="w-4 h-4" />
             </button>

@@ -62,14 +62,14 @@ export function MusicPlayer() {
     )}>
       {/* Expanded Controls */}
       <div className={cn(
-        "bg-surface/90 backdrop-blur-xl border border-border rounded-2xl p-4 flex flex-col gap-4 shadow-xl transition-all duration-300 origin-bottom-right",
+        "bg-surface/90 backdrop-blur-xl border border-border rounded-none-2xl p-4 flex flex-col gap-4 shadow-xl transition-all duration-300 origin-bottom-right",
         isExpanded ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none absolute bottom-14 right-0"
       )}>
         <div className="flex items-center gap-4">
-          <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center relative overflow-hidden">
+          <div className="h-10 w-10 bg-primary/10 rounded-none flex items-center justify-center relative overflow-hidden">
             <Music className="w-5 h-5 text-primary relative z-10" />
             {isPlaying && (
-              <div className="absolute inset-0 bg-primary/20 animate-pulse rounded-lg" />
+              <div className="absolute inset-0 bg-primary/20 animate-pulse rounded-none" />
             )}
           </div>
           <div className="flex flex-col">
@@ -104,7 +104,7 @@ export function MusicPlayer() {
             step="1"
             value={isMuted ? 0 : volume[0]}
             onChange={(e) => setVolume([parseInt(e.target.value)])}
-            className="w-[120px] accent-primary h-2 bg-secondary rounded-lg appearance-none cursor-pointer"
+            className="w-[120px] accent-primary h-2 bg-secondary rounded-none appearance-none cursor-pointer"
           />
         </div>
       </div>
@@ -120,7 +120,7 @@ export function MusicPlayer() {
             }}
             size="icon"
             className={cn(
-              "h-12 w-12 rounded-full shadow-lg border relative transition-all duration-500",
+              "h-12 w-12 rounded-none shadow-lg border relative transition-all duration-500",
               isPlaying 
                 ? "bg-primary border-primary hover:bg-primary/90 text-primary-foreground" 
                 : "bg-surface border-border hover:bg-surface-hover text-foreground",
@@ -145,7 +145,7 @@ export function MusicPlayer() {
           variant="ghost" 
           size="sm" 
           onClick={() => setIsExpanded(false)}
-          className="absolute -top-3 -right-3 h-6 w-6 rounded-full bg-surface border border-border p-0 text-muted shadow-sm hover:text-foreground z-10"
+          className="absolute -top-3 -right-3 h-6 w-6 rounded-none bg-surface border border-border p-0 text-muted shadow-sm hover:text-foreground z-10"
         >
           <span className="text-xs">✕</span>
         </Button>

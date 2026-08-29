@@ -20,7 +20,7 @@ interface GuestbookListProps {
 export function GuestbookList({ messages }: GuestbookListProps) {
   if (messages.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed rounded-2xl border-border bg-secondary/5">
+      <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed rounded-none-2xl border-border bg-secondary/5">
         <MessageSquare className="w-12 h-12 text-muted-foreground mb-4 opacity-50" />
         <h3 className="text-lg font-medium">No messages yet</h3>
         <p className="text-muted-foreground mt-1 max-w-sm">
@@ -38,11 +38,11 @@ export function GuestbookList({ messages }: GuestbookListProps) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.5) }}
-          className="p-4 sm:p-6 rounded-2xl border border-border bg-card shadow-sm hover:shadow-md transition-shadow group"
+          className="p-4 sm:p-6 rounded-none-2xl border border-border bg-card shadow-sm hover:shadow-md transition-shadow group"
         >
           <div className="flex gap-4">
             <div className="shrink-0">
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-muted border border-border">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-none overflow-hidden bg-muted border border-border">
                 <Image 
                   src={msg.avatarUrl} 
                   alt={msg.name} 

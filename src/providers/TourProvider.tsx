@@ -29,7 +29,7 @@ const CustomTooltip = ({
   return (
     <div
       {...tooltipProps}
-      className="bg-[#FAFAFA] dark:bg-[#18181B] border border-border p-4 rounded-xl shadow-xl w-80 max-w-[90vw] flex flex-col gap-4 relative"
+      className="bg-[#FAFAFA] dark:bg-[#18181B] border border-border p-4 rounded-none shadow-xl w-80 max-w-[90vw] flex flex-col gap-4 relative"
     >
       <button
         {...closeProps}
@@ -53,7 +53,7 @@ const CustomTooltip = ({
         
         <button
           {...primaryProps}
-          className="bg-[var(--color-accent)] text-white px-4 py-1.5 rounded-md text-sm font-medium hover:opacity-90 transition-opacity"
+          className="bg-[var(--color-accent)] text-white px-4 py-1.5 rounded-none text-sm font-medium hover:opacity-90 transition-opacity"
         >
           {primaryProps.title}
         </button>
@@ -159,7 +159,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       content: (
         <div className="flex flex-col gap-1 text-left">
           <h4 className="font-bold text-foreground">Global Search</h4>
-          <p className="text-sm text-muted">Looking for something specific? Press <kbd className="px-1.5 py-0.5 bg-primary/20 rounded-md mx-1">⌘ K</kbd> to search anywhere!</p>
+          <p className="text-sm text-muted">Looking for something specific? Press <kbd className="px-1.5 py-0.5 bg-primary/20 rounded-none mx-1">⌘ K</kbd> to search anywhere!</p>
         </div>
       ),
       placement: "bottom",

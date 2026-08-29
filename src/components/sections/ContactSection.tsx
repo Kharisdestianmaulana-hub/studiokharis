@@ -98,7 +98,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          <Card className="lg:col-span-3 bg-surface border-border overflow-hidden rounded-[16px]">
+          <Card className="lg:col-span-3 bg-surface border-border overflow-hidden rounded-none-[16px]">
             <CardContent className="p-6 md:p-8 flex flex-col justify-between h-full">
               <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col h-full gap-8">
                 
@@ -121,7 +121,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                   . I'd love to work with you on
                   <span className="inline-block mx-1 align-middle">
                     <Select onValueChange={(v) => form.setValue("service", v)} defaultValue={form.getValues("service")}>
-                      <SelectTrigger className={`h-8 border-b-2 border-t-0 border-l-0 border-r-0 border-dashed border-foreground/30 bg-transparent rounded-none focus:ring-0 focus:border-primary w-[260px] text-lg text-foreground px-2 py-0 ${form.formState.errors.service ? errorClass : ''}`}>
+                      <SelectTrigger className={`h-8 border-b-2 border-t-0 border-l-0 border-r-0 border-dashed border-foreground/30 bg-transparent rounded-none-none focus:ring-0 focus:border-primary w-[260px] text-lg text-foreground px-2 py-0 ${form.formState.errors.service ? errorClass : ''}`}>
                         <SelectValue placeholder="select a service" />
                       </SelectTrigger>
                       <SelectContent>
@@ -153,7 +153,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                   <Button 
                     type="submit" 
                     disabled={!isValid || isSubmitting} 
-                    className="rounded-xl px-8 h-12"
+                    className="rounded-none px-8 h-12"
                   >
                     {isSubmitting ? (
                       "Sending..."
@@ -165,7 +165,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                     )}
                   </Button>
                   <a href="https://cal.com/riray/brief" target="_blank" rel="noreferrer">
-                    <Button type="button" variant="outline" className="rounded-xl px-8 h-12 border-primary/20 bg-transparent hover:bg-transparent text-foreground hover:text-accent hover:border-accent transition-colors group">
+                    <Button type="button" variant="outline" className="rounded-none px-8 h-12 border-primary/20 bg-transparent hover:bg-transparent text-foreground hover:text-accent hover:border-accent transition-colors group">
                       Schedule a call 
                       <Calendar className="w-4 h-4 ml-2 opacity-70 group-hover:opacity-100 transition-opacity" />
                     </Button>
@@ -177,12 +177,12 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
           
           <div className="lg:col-span-2 flex flex-col gap-6">
             {/* Availability & Time Card */}
-            <Card className="bg-surface border-border overflow-hidden rounded-[16px] shrink-0">
+            <Card className="bg-surface border-border overflow-hidden rounded-none-[16px] shrink-0">
               <CardContent className="p-6 flex flex-col gap-5">
                 <div className="flex items-center gap-3">
                   <div className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-none bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-none h-3 w-3 bg-emerald-500"></span>
                   </div>
                   <span className="text-sm font-medium text-foreground">Available for new projects</span>
                 </div>
@@ -199,7 +199,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
               </CardContent>
             </Card>
 
-            <Card className="bg-surface border-border overflow-hidden rounded-[16px] flex-1">
+            <Card className="bg-surface border-border overflow-hidden rounded-none-[16px] flex-1">
               <CardContent className="p-6 md:p-8 flex flex-col h-full gap-6">
                 <div>
                   <h4 className="font-semibold text-lg text-foreground mb-2">Connect with me</h4>
@@ -226,9 +226,9 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                         href={social.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors group"
+                        className="flex items-center p-3 rounded-none hover:bg-secondary/10 transition-colors group"
                       >
-                        <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center mr-3 group-hover:bg-secondary/20 transition-colors">
+                        <div className="w-8 h-8 rounded-none bg-secondary/10 flex items-center justify-center mr-3 group-hover:bg-secondary/20 transition-colors">
                           <Icon className="w-4 h-4 text-secondary-text group-hover:text-foreground transition-colors" />
                         </div>
                         <span className="font-medium text-sm text-foreground">{social.name}</span>

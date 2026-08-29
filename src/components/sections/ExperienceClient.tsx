@@ -52,7 +52,7 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
           <div 
             key={exp.id} 
             className={cn(
-              "group relative flex flex-col md:flex-row gap-4 md:gap-8 py-8 md:py-10 border-b border-border/50 hover:bg-secondary/10 transition-colors duration-300 px-4 -mx-4 rounded-xl md:rounded-none md:hover:bg-transparent md:px-0 md:mx-0",
+              "group relative flex flex-col md:flex-row gap-4 md:gap-8 py-8 md:py-10 border-b border-border/50 hover:bg-secondary/10 transition-colors duration-300 px-4 -mx-4 rounded-none md:rounded-none-none md:hover:bg-transparent md:px-0 md:mx-0",
               index === 0 && "border-t"
             )}
           >
@@ -90,7 +90,7 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
               {exp.technologies && exp.technologies.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-4 md:group-hover:translate-x-2 transition-transform duration-300 delay-150">
                   {exp.technologies.map((tech: any) => (
-                    <span key={tech} className="text-xs font-mono border border-border/50 px-2 py-1 rounded-sm text-muted-foreground uppercase">
+                    <span key={tech} className="text-xs font-mono border border-border/50 px-2 py-1 rounded-none text-muted-foreground uppercase">
                       {tech}
                     </span>
                   ))}

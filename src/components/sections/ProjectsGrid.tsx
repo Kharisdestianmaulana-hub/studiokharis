@@ -52,7 +52,7 @@ export function ProjectsGrid({ projects, showFilters = false }: { projects: any[
   return (
     <div className="flex flex-col gap-6">
       {showFilters && (
-        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-card p-4 rounded-2xl border border-border">
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-card p-4 rounded-none-2xl border border-border">
           <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 scrollbar-hide">
             <Filter className="w-4 h-4 text-muted-foreground mr-1 shrink-0" />
             {allTechStacks.map(tech => (
@@ -60,7 +60,7 @@ export function ProjectsGrid({ projects, showFilters = false }: { projects: any[
                 key={tech}
                 variant={selectedTech === tech ? "default" : "secondary"}
                 size="sm"
-                className="rounded-full shrink-0"
+                className="rounded-none shrink-0"
                 onClick={() => setSelectedTech(tech)}
               >
                 {tech}
@@ -105,7 +105,7 @@ export function ProjectsGrid({ projects, showFilters = false }: { projects: any[
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
-              className="col-span-full py-12 text-center text-muted-foreground bg-secondary/5 border border-dashed border-border rounded-2xl"
+              className="col-span-full py-12 text-center text-muted-foreground bg-secondary/5 border border-dashed border-border rounded-none-2xl"
             >
               No projects found for the selected filter.
             </motion.div>

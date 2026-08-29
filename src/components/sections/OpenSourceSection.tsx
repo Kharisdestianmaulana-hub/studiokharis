@@ -35,7 +35,7 @@ export async function OpenSourceSection() {
         <Link 
           href="https://github.com/amelie" 
           target="_blank"
-          className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-xl py-3 hover:bg-secondary/10 transition-colors"
+          className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-none py-3 hover:bg-secondary/10 transition-colors"
         >
           <FaGithub className="w-4 h-4" /> View GitHub Profile
         </Link>
