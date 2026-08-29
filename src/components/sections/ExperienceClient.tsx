@@ -2,48 +2,71 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { ArrowUp, ArrowDown } from "lucide-react";
 
 const CATEGORIES = ["ALL", "WORK", "EDUCATION", "CERTIFICATION", "INTERNSHIP", "VOLUNTEER"];
 
 export function ExperienceClient({ experienceData }: { experienceData: any[] }) {
   const [activeCategory, setActiveCategory] = React.useState("ALL");
+  const [sortOrder, setSortOrder] = React.useState<"newest" | "oldest">("newest");
 
   const filteredData = React.useMemo(() => {
-    if (activeCategory === "ALL") return experienceData;
-    return experienceData.filter((exp) => exp.type.toUpperCase() === activeCategory);
-  }, [experienceData, activeCategory]);
+    let result = experienceData;
+    if (activeCategory !== "ALL") {
+      result = result.filter((exp) => exp.type.toUpperCase() === activeCategory);
+    }
+    
+    if (sortOrder === "oldest") {
+      return [...result].reverse();
+    }
+    return result;
+  }, [experienceData, activeCategory, sortOrder]);
 
   return (
     <div className="flex flex-col gap-12 w-full mt-4">
-      {/* Category Tabs - Typography Driven */}
-      <div className="flex flex-wrap items-center gap-6 border-b border-border/50 pb-2">
-        {CATEGORIES.map((category) => {
-          const count = category === "ALL" 
-            ? experienceData.length 
-            : experienceData.filter((exp) => exp.type.toUpperCase() === category).length;
-          
-          if (count === 0 && category !== "ALL") return null;
+      {/* Category Tabs & Sort Button - Typography Driven */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/50 pb-2">
+        <div className="flex flex-wrap items-center gap-6">
+          {CATEGORIES.map((category) => {
+            const count = category === "ALL" 
+              ? experienceData.length 
+              : experienceData.filter((exp) => exp.type.toUpperCase() === category).length;
+            
+            if (count === 0 && category !== "ALL") return null;
 
-          const isActive = activeCategory === category;
-          
-          return (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={cn(
-                "group flex items-center gap-1.5 pb-2 -mb-[9px] text-sm md:text-base font-bold uppercase tracking-widest transition-all duration-300",
-                isActive 
-                  ? "text-foreground border-b-2 border-foreground" 
-                  : "text-muted-foreground border-b-2 border-transparent hover:text-foreground"
-              )}
-            >
-              {category}
-              <span className="font-mono text-xs opacity-70 font-normal">
-                ({count})
-              </span>
-            </button>
-          );
-        })}
+            const isActive = activeCategory === category;
+            
+            return (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={cn(
+                  "group flex items-center gap-1.5 pb-2 -mb-[9px] text-sm md:text-base font-bold uppercase tracking-widest transition-all duration-300",
+                  isActive 
+                    ? "text-foreground border-b-2 border-foreground" 
+                    : "text-muted-foreground border-b-2 border-transparent hover:text-foreground"
+                )}
+              >
+                {category}
+                <span className="font-mono text-xs opacity-70 font-normal">
+                  ({count})
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Sort Toggle */}
+        <button
+          onClick={() => setSortOrder(prev => prev === "newest" ? "oldest" : "newest")}
+          className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors pb-2 md:pb-0"
+        >
+          {sortOrder === "newest" ? (
+            <>Newest First <ArrowDown className="w-4 h-4" /></>
+          ) : (
+            <>Oldest First <ArrowUp className="w-4 h-4" /></>
+          )}
+        </button>
       </div>
 
       {/* Experience List - Typography & Hover Driven */}
