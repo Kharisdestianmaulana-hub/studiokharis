@@ -1,4 +1,11 @@
-import { fetchFromHub } from "@/lib/appwrite";
+import { getProjects } from '@/data/projects';
+import { getArticles } from '@/data/articles';
+import { getExperiences } from '@/data/experience';
+import { getTechStack } from '@/data/tech-stack';
+import { getChangelogs } from '@/data/timeline';
+import { getOpenSource } from '@/data/oss';
+import { getProfileData } from '@/data/profile';
+import { getSocialLinks } from '@/data/socials';
 import { Highlighter } from "@/components/ui/Highlighter";
 import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import Image from "next/image";
@@ -8,42 +15,107 @@ import { ArrowRight, SearchX } from "lucide-react";
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  const query = typeof searchParams.q === 'string' ? searchParams.q : '';
+  const params = await searchParams;
+  const query = typeof params.q === 'string' ? params.q : '';
 
   let results: any[] = [];
 
   if (query) {
     const q = query.toLowerCase();
     
-    // In a real robust implementation, we would use Appwrite's Query.search() 
-    // but fetching and filtering locally works perfectly for small-mid portfolios
-    const [projects, articles] = await Promise.all([
-      fetchFromHub('public_projects', []),
-      fetchFromHub('public_articles', [])
+    const [
+      projects, 
+      articles, 
+      experiences, 
+      techStackCategories, 
+      changelogs, 
+      oss, 
+      profile, 
+      socials
+    ] = await Promise.all([
+      getProjects(),
+      getArticles(),
+      getExperiences(),
+      getTechStack(),
+      getChangelogs(),
+      getOpenSource(),
+      getProfileData(),
+      getSocialLinks()
     ]);
+
+    const allTechStacks = techStackCategories.flatMap((cat: any) => 
+      cat.items.map((item: any) => ({
+        ...item,
+        categoryName: cat.category
+      }))
+    );
 
     results = [
       ...projects.map((p: any) => ({
-        id: p.$id,
+        id: p.id,
         title: p.title,
         description: p.description,
         type: 'Project',
-        url: `/projects/${p.$id}`,
-        imageUrl: p.thumbnail_url || p.image_url,
+        url: `/projects/${p.id}`,
+        imageUrl: p.thumbnail,
       })),
       ...articles.map((a: any) => ({
-        id: a.$id,
+        id: a.id,
         title: a.title,
-        description: a.excerpt || a.content?.substring(0, 150) + "...",
+        description: a.excerpt,
         type: 'Article',
         url: `/articles/${a.slug}`,
-        imageUrl: a.thumbnail_url,
+        imageUrl: a.cover,
       })),
+      ...experiences.map((e: any) => ({
+        id: e.id,
+        title: `${e.role} at ${e.company}`,
+        description: e.description || e.duration,
+        type: 'Experience',
+        url: `/experience`,
+      })),
+      ...allTechStacks.map((t: any, index: number) => ({
+        id: `tech-${index}`,
+        title: t.name,
+        description: `Tech Stack • ${t.categoryName}`,
+        type: 'Tech Stack',
+        url: `/tech-stack`,
+      })),
+      ...changelogs.map((c: any) => ({
+        id: c.id,
+        title: `${c.project_name} - ${c.version}`,
+        description: c.description || c.type,
+        type: 'Changelog',
+        url: `/timeline`,
+      })),
+      ...oss.map((o: any) => ({
+        id: o.id,
+        title: o.name,
+        description: o.description,
+        type: 'Open Source',
+        url: o.url,
+      })),
+      ...(profile ? [{
+        id: 'profile-info',
+        title: profile.name,
+        description: profile.about ? profile.about.substring(0, 100) + '...' : profile.tagline,
+        type: 'Profile',
+        url: `/about`,
+        imageUrl: profile.avatarUrl,
+      }] : []),
+      ...socials.map((s: any) => ({
+        id: s.name,
+        title: s.name,
+        description: 'Social Media Profile',
+        type: 'Social',
+        url: s.url,
+      }))
     ].filter(item => 
       item.title?.toLowerCase().includes(q) || 
-      item.description?.toLowerCase().includes(q)
+      item.description?.toLowerCase().includes(q) ||
+      item.type?.toLowerCase().includes(q)
     );
   }
 
