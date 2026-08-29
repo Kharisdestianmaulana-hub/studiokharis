@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Badge } from "@/components/ui/badge";
-import { GitCommit, ChevronDown, Star, Code } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -102,16 +101,11 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
 
   if (loading) {
     return (
-      <div className="flex flex-col space-y-6 w-full">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="flex flex-col gap-4 p-6 rounded-2xl bg-surface border border-border">
-            <Skeleton className="h-6 w-1/3" />
-            <Skeleton className="h-4 w-2/3" />
-            <div className="flex gap-2">
-              <Skeleton className="h-6 w-16" />
-              <Skeleton className="h-6 w-16" />
-              <Skeleton className="h-6 w-20" />
-            </div>
+      <div className="flex flex-col w-full border border-border">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div key={i} className="flex flex-col gap-4 p-6 border-b border-border last:border-b-0 bg-surface">
+            <Skeleton className="h-6 w-1/3 rounded-none" />
+            <Skeleton className="h-4 w-2/3 rounded-none" />
           </div>
         ))}
       </div>
@@ -120,7 +114,7 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
 
   if (error) {
     return (
-      <div className="p-6 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400">
+      <div className="p-6 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 rounded-none">
         <p className="font-semibold">Error loading GitHub data</p>
         <p className="text-sm mt-1">{error}</p>
       </div>
@@ -129,112 +123,118 @@ export function TimelineClient({ limit, repoNames }: TimelineClientProps) {
 
   if (repos.length === 0) {
     return (
-      <div className="p-6 rounded-2xl bg-surface border border-border text-secondary-text">
+      <div className="p-6 bg-surface border border-border text-secondary-text rounded-none">
         No repositories found.
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col space-y-4 w-full">
+    <div className="flex flex-col w-full border-t border-border mt-4">
       {repos.map((repo) => {
         const isExpanded = expandedRepos.has(repo.id);
         
         return (
           <div
             key={repo.id}
-            className="flex flex-col rounded-2xl bg-surface border border-border overflow-hidden hover:border-accent/50 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4"
+            className="flex flex-col bg-surface border-b border-border transition-all duration-300 animate-in fade-in group"
           >
             {/* Repository Header - Accordion Trigger */}
             <button
               onClick={() => toggleRepo(repo.id)}
-              className="w-full p-6 flex items-start justify-between gap-4 hover:bg-secondary/30 transition-colors duration-200 text-left"
+              className="w-full py-8 md:py-10 px-4 md:px-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-secondary/10 transition-colors duration-200 text-left"
             >
               <div className="flex-1 flex flex-col gap-3">
                 <div className="flex items-center gap-3 flex-wrap">
-                  <h4 className="text-lg font-bold text-foreground hover:text-accent transition-colors">
+                  <h4 className="text-xl md:text-2xl font-black uppercase tracking-tight text-foreground group-hover:translate-x-2 transition-transform duration-300">
                     {repo.name}
                   </h4>
-                  {repo.stargazers_count > 0 && (
-                    <Badge variant="outline" className="flex items-center gap-1 px-2 py-1">
-                      <Star className="w-3 h-3" />
-                      {repo.stargazers_count}
-                    </Badge>
-                  )}
                   {repo.language && (
-                    <Badge variant="outline" className="flex items-center gap-1 px-2 py-1">
-                      <Code className="w-3 h-3" />
+                    <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground border border-border px-2 py-1">
                       {repo.language}
-                    </Badge>
+                    </span>
                   )}
                 </div>
                 
                 {repo.description && (
-                  <p className="text-sm text-secondary-text line-clamp-2">
+                  <p className="text-sm md:text-base text-muted-foreground max-w-2xl group-hover:translate-x-2 transition-transform duration-300 delay-50">
                     {repo.description}
                   </p>
                 )}
                 
-                <div className="text-xs text-muted-foreground">
-                  Last updated: {formatDate(repo.pushed_at)}
+                <div className="text-xs font-mono text-muted-foreground/60 group-hover:translate-x-2 transition-transform duration-300 delay-75">
+                  UPDATED: {formatDate(repo.pushed_at).toUpperCase()}
                 </div>
               </div>
 
-              <ChevronDown
-                className={cn(
-                  "w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform duration-300 mt-1",
-                  isExpanded && "rotate-180"
-                )}
-              />
+              <div className="hidden md:flex items-center justify-center p-4 border border-border rounded-none shrink-0 group-hover:bg-foreground group-hover:text-background transition-colors duration-300">
+                <ChevronDown
+                  className={cn(
+                    "w-5 h-5 transition-transform duration-300",
+                    isExpanded && "rotate-180"
+                  )}
+                />
+              </div>
             </button>
 
             {/* Commits List - Accordion Content */}
             {isExpanded && (
-              <div className="border-t border-border bg-secondary/20 px-6 py-4">
+              <div className="border-t border-border bg-secondary/5">
                 {repo.commits.length > 0 ? (
-                  <div className="flex flex-col space-y-3">
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                      {repo.commits.length} Commits
-                    </p>
+                  <div className="flex flex-col">
+                    <div className="px-4 md:px-6 py-3 border-b border-border bg-secondary/10">
+                      <p className="text-xs font-bold text-foreground uppercase tracking-widest">
+                        LATEST COMMITS ({repo.commits.length})
+                      </p>
+                    </div>
                     
-                    <div className="flex flex-col space-y-2 max-h-96 overflow-y-auto">
-                      {repo.commits.map((commit) => (
+                    <div className="flex flex-col max-h-[500px] overflow-y-auto">
+                      {repo.commits.map((commit, idx) => (
                         <div
                           key={commit.sha}
-                          className="flex items-start gap-3 p-3 rounded-lg bg-background/50 hover:bg-background transition-colors duration-200 border border-border/50"
-                        >
-                          {commit.avatar && (
-                            <img
-                              src={commit.avatar}
-                              alt={commit.author}
-                              className="w-8 h-8 rounded-full flex-shrink-0"
-                            />
+                          className={cn(
+                            "flex flex-col md:flex-row items-start md:items-center gap-4 p-4 md:p-6 hover:bg-secondary/20 transition-colors duration-200",
+                            idx !== repo.commits.length - 1 && "border-b border-border"
                           )}
-                          
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <code className="text-xs font-mono bg-secondary/50 px-2 py-1 rounded text-accent">
-                                {commit.sha}
-                              </code>
-                              <span className="text-xs text-muted-foreground">
-                                {formatDate(commit.date)}
-                              </span>
+                        >
+                          <div className="flex items-center gap-4 w-full md:w-auto shrink-0">
+                            {commit.avatar && (
+                              <img
+                                src={commit.avatar}
+                                alt={commit.author}
+                                className="w-10 h-10 rounded-none border border-border grayscale hover:grayscale-0 transition-all duration-300"
+                              />
+                            )}
+                            <div className="flex flex-col md:hidden">
+                              <span className="text-sm font-bold text-foreground">{commit.author}</span>
+                              <span className="text-xs font-mono text-muted-foreground">{formatDate(commit.date).toUpperCase()}</span>
                             </div>
-                            
-                            <p className="text-sm text-foreground mt-1 break-words">
+                          </div>
+                          
+                          <div className="flex-1 min-w-0 flex flex-col gap-1 w-full">
+                            <p className="text-sm md:text-base font-medium text-foreground break-words leading-snug">
                               {formatCommitMessage(commit.message)}
                             </p>
-                            
-                            <p className="text-xs text-secondary-text mt-1">
-                              by {commit.author}
-                            </p>
+                            <div className="hidden md:flex items-center gap-2">
+                              <span className="text-xs font-bold text-muted-foreground uppercase">{commit.author}</span>
+                              <span className="text-muted-foreground/30">•</span>
+                              <span className="text-xs font-mono text-muted-foreground/70">{formatDate(commit.date).toUpperCase()}</span>
+                            </div>
+                          </div>
+
+                          <div className="shrink-0 w-full md:w-auto flex justify-start md:justify-end">
+                            <code className="text-xs font-mono font-bold text-foreground bg-secondary/30 border border-border px-2 py-1">
+                              {commit.sha.substring(0, 7)}
+                            </code>
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
                 ) : (
-                  <p className="text-sm text-secondary-text italic">No commits found.</p>
+                  <div className="p-6 text-sm font-mono text-muted-foreground italic border-b border-border">
+                    NO COMMITS FOUND.
+                  </div>
                 )}
               </div>
             )}
