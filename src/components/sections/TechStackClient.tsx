@@ -209,75 +209,76 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative w-full max-w-2xl bg-surface border border-border rounded-none-2xl shadow-2xl overflow-hidden z-10 max-h-[85vh] flex flex-col"
+                className="relative w-full max-w-3xl bg-background border-[3px] border-foreground shadow-[12px_12px_0_0_var(--foreground)] overflow-hidden z-10 max-h-[85vh] flex flex-col"
               >
                 <button 
                   onClick={() => setSelectedTech(null)}
-                  className="absolute top-4 right-4 p-2 rounded-none bg-background/50 hover:bg-background border border-border transition-colors text-muted-foreground hover:text-foreground z-20"
+                  className="absolute top-4 right-4 md:top-6 md:right-6 px-4 py-2 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:bg-background hover:text-foreground transition-colors z-20 flex items-center gap-2"
                 >
-                  <X className="w-5 h-5" />
+                  CLOSE <X className="w-5 h-5 stroke-[3]" />
                 </button>
 
                 {/* Modal Header */}
-                <div className="flex flex-col items-center justify-center p-8 bg-background/50 border-b border-border relative overflow-hidden">
+                <div className="flex flex-col items-center justify-center p-12 bg-background border-b-[3px] border-foreground relative overflow-hidden">
                   <div 
-                    className="absolute inset-0 opacity-10 blur-3xl"
+                    className="absolute inset-0 opacity-20"
                     style={{ backgroundColor: selectedColor }}
                   />
                   <div 
-                    className="relative z-10 w-20 h-20 mb-4 flex items-center justify-center rounded-none-2xl bg-background border border-border shadow-sm"
-                    style={{ color: selectedColor === "#000000" ? "var(--color-primary-text)" : selectedColor }}
+                    className="relative z-10 w-24 h-24 mb-6 flex items-center justify-center bg-background border-[3px] border-foreground grayscale"
                   >
-                    <SelectedIcon className="w-10 h-10" />
+                    <SelectedIcon className="w-12 h-12 text-foreground" />
                   </div>
-                  <h2 className="text-2xl font-bold text-foreground relative z-10">{selectedTech.name}</h2>
-                  <p className="text-muted-foreground mt-1 relative z-10">Projects built using this technology</p>
+                  <h2 className="text-4xl md:text-5xl font-black text-foreground uppercase tracking-tighter relative z-10">{selectedTech.name}</h2>
+                  <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm mt-3 relative z-10">PROJECTS BUILT USING THIS TECHNOLOGY</p>
                 </div>
 
                 {/* Modal Body / Projects List */}
-                <div className="p-6 overflow-y-auto flex-1 custom-scrollbar">
+                <div className="p-6 md:p-10 overflow-y-auto flex-1 custom-scrollbar bg-background">
                   {filteredProjects.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                       {filteredProjects.map((project) => (
                         <Link 
                           key={project.id} 
                           href={`/projects/${project.id}`}
-                          className="group flex flex-col overflow-hidden rounded-none bg-background border border-border hover:border-accent/50 transition-colors"
+                          className="group flex flex-col overflow-hidden bg-background border-[3px] border-foreground hover:-translate-y-1 transition-transform duration-300"
                         >
-                          <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                          <div className="relative aspect-[4/3] w-full overflow-hidden bg-foreground border-b-[3px] border-foreground">
                             {project.thumbnail ? (
                               <Image 
                                 src={project.thumbnail} 
                                 alt={project.title} 
                                 fill 
-                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                className="object-cover transition-all duration-500 grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal transform group-hover:scale-105"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center bg-secondary/10">
-                                <Code2 className="w-8 h-8 text-muted-foreground" />
+                              <div className="w-full h-full flex items-center justify-center bg-background">
+                                <Code2 className="w-10 h-10 text-foreground" />
                               </div>
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                           </div>
-                          <div className="p-4 flex flex-col flex-1 justify-between gap-3">
-                            <h4 className="font-semibold text-foreground line-clamp-2 group-hover:text-accent transition-colors">
+                          <div className="p-6 flex flex-col flex-1 justify-between gap-6">
+                            <h4 className="font-black text-lg md:text-xl text-foreground uppercase tracking-tight line-clamp-2 leading-tight">
                               {project.title}
                             </h4>
-                            <div className="flex items-center text-xs text-accent font-medium gap-1">
-                              View Project <ExternalLink className="w-3 h-3" />
+                            <div className="flex items-center justify-between w-full">
+                              <span className="text-xs font-black uppercase tracking-widest border-[2px] border-foreground px-2 py-1">
+                                VIEW PROJECT
+                              </span>
+                              <ExternalLink className="w-5 h-5 text-foreground group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" strokeWidth={3} />
                             </div>
                           </div>
                         </Link>
                       ))}
                     </div>
                   ) : (
-                    <div className="flex flex-col items-center justify-center py-12 text-center">
-                      <div className="w-16 h-16 rounded-none bg-secondary/10 flex items-center justify-center mb-4 text-muted-foreground">
-                        <Code2 className="w-8 h-8" />
+                    <div className="flex flex-col items-center justify-center py-16 text-center border-[3px] border-dashed border-foreground/30">
+                      <div className="w-20 h-20 bg-foreground text-background flex items-center justify-center mb-6">
+                        <Code2 className="w-10 h-10" />
                       </div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2">No projects found</h3>
-                      <p className="text-muted-foreground max-w-sm">
-                        There are currently no public projects listed that use {selectedTech.name}.
+                      <h3 className="text-2xl font-black uppercase tracking-tighter text-foreground mb-2">NO PROJECTS FOUND</h3>
+                      <p className="text-foreground font-bold uppercase tracking-widest text-xs opacity-70 max-w-sm">
+                        THERE ARE CURRENTLY NO PUBLIC PROJECTS LISTED THAT USE {selectedTech.name}.
                       </p>
                     </div>
                   )}
