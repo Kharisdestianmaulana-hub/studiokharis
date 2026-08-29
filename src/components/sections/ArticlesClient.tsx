@@ -52,9 +52,9 @@ export function ArticlesClient({
       )}
 
       {viewMode === "list" ? (
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col border-y border-border divide-y divide-border">
           {articlesData.map((article: any, index: number) => (
-            <div key={article.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center group">
+            <div key={article.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center group py-12">
               <div className={`flex flex-col ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}>
                 <div className="flex justify-between items-start mb-2">
                   <Link href={`/articles/${article.slug}`}>

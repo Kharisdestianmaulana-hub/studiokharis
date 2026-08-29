@@ -24,10 +24,10 @@ export async function TechMarqueeSection() {
           </p>
         </div>
         
-        <div className="relative w-full overflow-hidden flex items-center bg-surface border-y border-border py-8">
+        <div className="relative w-full overflow-hidden flex items-center bg-transparent border-y border-border py-8">
           {/* Fading edges for smooth transition */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-surface to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-surface to-transparent z-10"></div>
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-background to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-background to-transparent z-10"></div>
           
           {/* Marquee track */}
           <div className="flex w-max animate-marquee hover-pause">

@@ -2,7 +2,7 @@ import * as React from "react";
 import { getProjects } from "@/data/projects";
 import { getTechStack } from "@/data/tech-stack";
 import { getArticles } from "@/data/articles";
-import { Card, CardContent } from "@/components/ui/card";
+
 import { Layers, Code2, BookOpen } from "lucide-react";
 
 export async function StatsSection() {
@@ -39,24 +39,22 @@ export async function StatsSection() {
 
   return (
     <section className="py-2">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 border-y border-border divide-y md:divide-y-0 md:divide-x divide-border">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <Card key={index} className="bg-surface border-border overflow-hidden rounded-none-[16px] group hover:border-primary/50 transition-colors">
-              <CardContent className="p-6 md:p-8 flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-none bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-4xl font-bold tracking-tight text-foreground mb-1">
-                    {stat.value}
-                  </h3>
-                  <p className="font-medium text-foreground mb-1">{stat.label}</p>
-                  <p className="text-sm text-secondary-text">{stat.description}</p>
-                </div>
-              </CardContent>
-            </Card>
+            <div key={index} className="flex flex-col gap-4 p-8 md:p-10 group bg-transparent hover:bg-secondary/5 transition-colors">
+              <div className="w-12 h-12 flex items-center group-hover:scale-110 transition-transform duration-300">
+                <Icon className="w-8 h-8 text-foreground" />
+              </div>
+              <div className="mt-4">
+                <h3 className="text-4xl md:text-5xl font-black tracking-tight text-foreground mb-2">
+                  {stat.value}
+                </h3>
+                <p className="font-bold text-foreground mb-1 uppercase tracking-wider text-sm">{stat.label}</p>
+                <p className="text-sm text-muted-foreground">{stat.description}</p>
+              </div>
+            </div>
           );
         })}
       </div>
