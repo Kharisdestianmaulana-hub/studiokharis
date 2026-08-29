@@ -28,7 +28,7 @@ export function MobileDrawer({ profileData }: { profileData?: any }) {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[280px] p-0 flex flex-col border-r border-border bg-background">
+      <SheetContent side="left" className="w-[280px] p-0 flex flex-col border-r border-border bg-[#FAFAFA]/90 dark:bg-[#09090B]/90 backdrop-blur-md">
         <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
         <div className="p-6 pb-2">
           <Link href="/about" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
