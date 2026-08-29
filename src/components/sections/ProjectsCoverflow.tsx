@@ -56,7 +56,7 @@ export function ProjectsCoverflow({ projects }: { projects: any[] }) {
                   opacity,
                 }}
                 transition={{
-                  duration: 0.5,
+                  duration: 0.2,
                   ease: [0.19, 1, 0.22, 1] // brutalist snap curve
                 }}
                 onClick={() => setActiveIndex(index)}
@@ -79,13 +79,13 @@ export function ProjectsCoverflow({ projects }: { projects: any[] }) {
       </div>
 
       {/* Active Project Details */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         <motion.div
           key={activeProject.originalId}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.2 }}
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 10, position: 'absolute' }}
+          transition={{ duration: 0.15 }}
           className="flex flex-col items-start text-left w-full max-w-[500px] mt-8 px-4"
         >
           <div className="bg-foreground text-background px-3 py-1 mb-4 w-fit">
