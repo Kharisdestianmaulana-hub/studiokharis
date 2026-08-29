@@ -4,16 +4,9 @@ import { useEffect, useState } from "react";
 import { useSettingsStore } from "@/store/settingsStore";
 import { useTheme } from "next-themes";
 
-const accentColors = {
-  blue: { light: "#2563EB", dark: "#3B82F6" },
-  green: { light: "#16A34A", dark: "#22C55E" },
-  purple: { light: "#9333EA", dark: "#A855F7" },
-  orange: { light: "#EA580C", dark: "#F97316" },
-};
-
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
-  const { accentColor, customColor, reducedMotion, textSize } = useSettingsStore();
+  const { reducedMotion, textSize } = useSettingsStore();
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
@@ -23,15 +16,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!mounted) return;
     
-    // Apply accent color
-    const isDark = resolvedTheme === "dark";
-    
-    if (accentColor === 'custom') {
-      document.documentElement.style.setProperty("--color-accent", customColor);
-    } else {
-      const colors = accentColors[accentColor as keyof typeof accentColors] || accentColors.blue;
-      document.documentElement.style.setProperty("--color-accent", isDark ? colors.dark : colors.light);
-    }
+    // Accent color is now purely CSS-driven via globals.css
 
     // Apply reduced motion
     if (reducedMotion) {
@@ -47,7 +32,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
       document.documentElement.classList.remove("text-large");
     }
     
-  }, [mounted, accentColor, customColor, reducedMotion, textSize, resolvedTheme]);
+  }, [mounted, reducedMotion, textSize, resolvedTheme]);
 
   // To prevent hydration errors, we can still render children but we must be careful with what relies on the store directly in the UI.
   return <>{children}</>;

@@ -1,10 +1,10 @@
 "use client";
 
-import { useSettingsStore, AccentColor } from "@/store/settingsStore";
+import { useSettingsStore } from "@/store/settingsStore";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Moon, Sun, Monitor, Type, EyeOff, LayoutGrid, List, RefreshCw, Pipette } from "lucide-react";
+import { Moon, Sun, Monitor, Type, EyeOff, LayoutGrid, List, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -13,13 +13,9 @@ export function SettingsContent() {
   const { theme, setTheme } = useTheme();
   
   const { 
-    accentColor, 
-    customColor,
     reducedMotion, 
     textSize, 
     projectsView, 
-    setAccentColor, 
-    setCustomColor,
     setReducedMotion, 
     setTextSize, 
     setProjectsView, 
@@ -41,12 +37,6 @@ export function SettingsContent() {
       </div>
     );
   }
-
-  const accentOptions: { id: AccentColor; label: string; colorClass: string }[] = [
-    { id: "blue", label: "Blue", colorClass: "bg-blue-500" },
-    { id: "green", label: "Green", colorClass: "bg-green-500" },
-    { id: "purple", label: "Purple", colorClass: "bg-purple-500" },
-  ];
 
   return (
     <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
@@ -92,43 +82,7 @@ export function SettingsContent() {
               </div>
             </div>
 
-            {/* Accent Color */}
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium text-foreground">Accent Color</span>
-              <div className="flex flex-wrap gap-3">
-                {accentOptions.map((opt) => (
-                  <button
-                    key={opt.id}
-                    onClick={() => setAccentColor(opt.id)}
-                    title={opt.label}
-                    className={cn(
-                      "w-10 h-10 rounded-none flex items-center justify-center transition-all duration-200 ring-offset-2 ring-offset-background",
-                      opt.colorClass,
-                      accentColor === opt.id ? "ring-2 ring-foreground scale-110" : "hover:scale-105 opacity-80 hover:opacity-100"
-                    )}
-                  />
-                ))}
-                
-                <div className="relative">
-                  <input
-                    type="color"
-                    value={customColor}
-                    onChange={(e) => setCustomColor(e.target.value)}
-                    className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"
-                    title="Custom Color"
-                  />
-                  <div
-                    className={cn(
-                      "w-10 h-10 rounded-none flex items-center justify-center transition-all duration-200 ring-offset-2 ring-offset-background cursor-pointer",
-                      "bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500",
-                      accentColor === 'custom' ? "ring-2 ring-foreground scale-110" : "hover:scale-105 opacity-80 hover:opacity-100"
-                    )}
-                  >
-                    <Pipette className="w-4 h-4 text-white drop-shadow-md" />
-                  </div>
-                </div>
-              </div>
-            </div>
+
             
           </CardContent>
         </Card>

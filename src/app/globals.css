@@ -6,7 +6,7 @@
   :root {
     --color-primary: #111827;
     --color-secondary: #374151;
-    --color-accent: #2563EB;
+    --color-accent: #000000;
     --color-background: #FAFAFA;
     --color-surface: #FFFFFF;
     --color-border: #E5E7EB;
@@ -26,7 +26,7 @@
     --color-primary-text: #FAFAFA;
     --color-secondary-text: #D4D4D8;
     --color-muted: #A1A1AA;
-    --color-accent: #3B82F6;
+    --color-accent: #FFFFFF;
     --color-primary: #FAFAFA;
     --color-secondary: #D4D4D8;
   }
