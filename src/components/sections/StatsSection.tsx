@@ -39,20 +39,26 @@ export async function StatsSection() {
 
   return (
     <section className="py-2">
-      <div className="grid grid-cols-1 md:grid-cols-3 border-y border-border divide-y md:divide-y-0 md:divide-x divide-border">
+      <div className="grid grid-cols-1 md:grid-cols-3 border-[3px] border-foreground">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
+          const isMiddle = index === 1;
+          
+          // Alternating checkerboard style
+          const bgClass = isMiddle ? "bg-background text-foreground" : "bg-foreground text-background";
+          const borderClass = isMiddle ? "border-y-[3px] md:border-y-0 md:border-x-[3px] border-foreground" : "";
+          
           return (
-            <div key={index} className="flex flex-col gap-4 p-8 md:p-10 group bg-transparent hover:bg-secondary/5 transition-colors">
-              <div className="w-12 h-12 flex items-center group-hover:scale-110 transition-transform duration-300">
-                <Icon className="w-8 h-8 text-foreground" />
+            <div key={index} className={`flex flex-col gap-4 p-8 md:p-12 transition-none ${bgClass} ${borderClass}`}>
+              <div className="w-12 h-12 flex items-center">
+                <Icon className="w-8 h-8 opacity-90" />
               </div>
               <div className="mt-4">
-                <h3 className="text-4xl md:text-5xl font-black tracking-tight text-foreground mb-2">
+                <h3 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-2">
                   {stat.value}
                 </h3>
-                <p className="font-bold text-foreground mb-1 uppercase tracking-wider text-sm">{stat.label}</p>
-                <p className="text-sm text-muted-foreground">{stat.description}</p>
+                <p className="font-bold mb-1 uppercase tracking-widest text-xs md:text-sm">{stat.label}</p>
+                <p className="text-xs font-mono opacity-70 uppercase">{stat.description}</p>
               </div>
             </div>
           );
