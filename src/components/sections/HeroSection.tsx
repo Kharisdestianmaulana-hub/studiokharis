@@ -40,7 +40,7 @@ export async function HeroSection({
         {/* Glassmorphism Badge and Floating Button Wrapper */}
         <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-both w-max min-w-[260px]">
           
-          <div className="flex flex-col items-center gap-3 bg-white/30 dark:bg-black/30 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-3 md:p-4 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] w-full">
+          <div className="flex flex-col items-center gap-3 bg-white/70 dark:bg-black/70 backdrop-blur-2xl border border-white/40 dark:border-white/20 p-3 md:p-4 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] w-full">
           
           <div className="flex items-center gap-4 w-full">
             {/* Logo on the left */}
