@@ -1,8 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Briefcase, GraduationCap, Award, Users, Heart, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const CATEGORIES = ["ALL", "WORK", "EDUCATION", "CERTIFICATION", "INTERNSHIP", "VOLUNTEER"];
@@ -15,26 +13,17 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
     return experienceData.filter((exp) => exp.type.toUpperCase() === activeCategory);
   }, [experienceData, activeCategory]);
 
-  const getIcon = (type: string) => {
-    switch (type.toUpperCase()) {
-      case "WORK": return <Briefcase className="w-5 h-5 text-accent" />;
-      case "EDUCATION": return <GraduationCap className="w-5 h-5 text-accent" />;
-      case "CERTIFICATION": return <Award className="w-5 h-5 text-accent" />;
-      case "INTERNSHIP": return <Users className="w-5 h-5 text-accent" />;
-      case "VOLUNTEER": return <Heart className="w-5 h-5 text-accent" />;
-      default: return <Briefcase className="w-5 h-5 text-accent" />;
-    }
-  };
-
   return (
-    <div className="flex flex-col gap-8 w-full">
-      {/* Category Tabs */}
-      <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-col gap-12 w-full mt-4">
+      {/* Category Tabs - Typography Driven */}
+      <div className="flex flex-wrap items-center gap-6 border-b border-border/50 pb-2">
         {CATEGORIES.map((category) => {
           const count = category === "ALL" 
             ? experienceData.length 
             : experienceData.filter((exp) => exp.type.toUpperCase() === category).length;
           
+          if (count === 0 && category !== "ALL") return null;
+
           const isActive = activeCategory === category;
           
           return (
@@ -42,76 +31,78 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
               key={category}
               onClick={() => setActiveCategory(category)}
               className={cn(
-                "flex items-center gap-2 px-4 py-2 text-sm font-semibold border-2 transition-all duration-200 uppercase tracking-wider rounded-xl",
+                "group flex items-center gap-1.5 pb-2 -mb-[9px] text-sm md:text-base font-bold uppercase tracking-widest transition-all duration-300",
                 isActive 
-                  ? "bg-accent border-accent text-white" 
-                  : "bg-surface border-border text-secondary-text hover:border-accent/50 hover:text-foreground"
+                  ? "text-foreground border-b-2 border-foreground" 
+                  : "text-muted-foreground border-b-2 border-transparent hover:text-foreground"
               )}
             >
               {category}
-              <span className={cn(
-                "px-2 py-0.5 rounded text-xs",
-                isActive ? "bg-white/20 text-white" : "bg-secondary/10 text-secondary-text"
-              )}>
-                {count}
+              <span className="font-mono text-xs opacity-70 font-normal">
+                ({count})
               </span>
             </button>
           );
         })}
       </div>
 
-      {/* Timeline List */}
-      <div className="flex flex-col space-y-12 border-l-2 border-border/60 pl-8 ml-3 md:ml-4 mt-6">
-        {filteredData.map((exp: any) => (
-          <div key={exp.id} className="relative group animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {/* Timeline Icon */}
-            <div className="absolute -left-[49px] md:-left-[57px] w-12 h-12 rounded-full bg-surface border-2 border-accent flex items-center justify-center ring-4 ring-background group-hover:scale-110 transition-transform duration-300">
-              {getIcon(exp.type)}
+      {/* Experience List - Typography & Hover Driven */}
+      <div className="flex flex-col">
+        {filteredData.map((exp: any, index: number) => (
+          <div 
+            key={exp.id} 
+            className={cn(
+              "group relative flex flex-col md:flex-row gap-4 md:gap-8 py-8 md:py-10 border-b border-border/50 hover:bg-secondary/10 transition-colors duration-300 px-4 -mx-4 rounded-xl md:rounded-none md:hover:bg-transparent md:px-0 md:mx-0",
+              index === 0 && "border-t"
+            )}
+          >
+            {/* Left Column: Date & Type */}
+            <div className="md:w-1/4 shrink-0 flex flex-col gap-1 md:pt-1">
+              <span className="font-mono text-sm font-medium text-foreground/80">{exp.duration}</span>
+              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">{exp.type}</span>
             </div>
             
-            {/* Content Card */}
-            <div className="flex flex-col gap-3 p-6 rounded-2xl bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 -mt-2">
-              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-xl md:text-2xl font-bold text-foreground uppercase tracking-wider">{exp.role}</h3>
-                  <div className="text-secondary-text font-medium text-base">{exp.company}</div>
-                </div>
-                
-                <Badge variant="secondary" className="w-fit bg-accent/10 text-accent border border-accent/20">
-                  {exp.type}
-                </Badge>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 text-sm font-medium mt-1">
-                <div className="bg-secondary/5 text-foreground px-3 py-1.5 border border-border rounded-md">
-                  {exp.duration}
-                </div>
+            {/* Right Column: Content */}
+            <div className="flex-1 flex flex-col gap-2 relative">
+              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-foreground md:group-hover:translate-x-2 transition-transform duration-300">
+                {exp.role}
+              </h3>
+              
+              <div className="flex items-center gap-2 text-foreground/90 font-medium md:text-lg md:group-hover:translate-x-2 transition-transform duration-300 delay-75">
+                <span>{exp.company}</span>
                 {exp.address && (
-                  <div className="flex items-center gap-1.5 bg-accent/5 text-accent px-3 py-1.5 border border-accent/20 rounded-md">
-                    <MapPin className="w-4 h-4" />
-                    <span>{exp.address}</span>
-                  </div>
+                  <>
+                    <span className="text-border/80 hidden md:inline">•</span>
+                    <span className="text-sm text-muted-foreground hidden md:inline">{exp.address}</span>
+                  </>
                 )}
               </div>
+              
+              {exp.address && (
+                 <span className="text-sm text-muted-foreground md:hidden">{exp.address}</span>
+              )}
 
-              <p className="text-secondary-text mt-3 text-sm md:text-base leading-relaxed">
+              <p className="text-muted-foreground mt-3 text-sm md:text-base leading-relaxed md:group-hover:translate-x-2 transition-transform duration-300 delay-100">
                 {exp.description}
               </p>
               
+              {/* Tech Stack */}
               {exp.technologies && exp.technologies.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-2">
+                <div className="flex flex-wrap gap-2 mt-4 md:group-hover:translate-x-2 transition-transform duration-300 delay-150">
                   {exp.technologies.map((tech: any) => (
-                    <Badge key={tech} variant="outline" className="text-xs bg-background/50 border-border/50">
+                    <span key={tech} className="text-xs font-mono border border-border/50 px-2 py-1 rounded-sm text-muted-foreground uppercase">
                       {tech}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
               )}
+
             </div>
           </div>
         ))}
+
         {filteredData.length === 0 && (
-          <div className="text-secondary-text italic p-4">
+          <div className="text-muted-foreground italic py-8">
             No experiences found for this category.
           </div>
         )}
