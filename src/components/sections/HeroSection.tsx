@@ -37,14 +37,14 @@ export async function HeroSection({
           className="object-contain h-[90%] md:h-[100%] max-h-[85vh] object-bottom drop-shadow-2xl pointer-events-none"
         />
         
-        {/* Glassmorphism Badge and Floating Button Wrapper */}
+        {/* Text Highlight Badge and Floating Button Wrapper */}
         <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-both w-max min-w-[260px]">
           
-          <div className="flex flex-col items-center gap-3 bg-white/70 dark:bg-black/70 backdrop-blur-2xl border border-white/40 dark:border-white/20 p-3 md:p-4 rounded-none-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] w-full">
+          <div className="flex flex-col items-center gap-2 w-full">
           
-          <div className="flex items-center gap-4 w-full">
+          <div className="flex items-center justify-center gap-3 w-full">
             {/* Logo on the left */}
-            <div className="w-14 h-14 md:w-16 md:h-16 shrink-0 relative flex items-center justify-center rounded-none overflow-hidden shadow-inner bg-black">
+            <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 relative flex items-center justify-center rounded-none overflow-hidden shadow-none bg-background border border-border">
               {/* Light Mode Logo */}
               <img 
                 src="/logo-light.webp" 
@@ -60,16 +60,18 @@ export async function HeroSection({
             </div>
             
             {/* Text in the middle */}
-            <div className="flex flex-col justify-center text-left pt-1 pr-4">
-              <h3 className="text-lg md:text-xl font-black tracking-tight leading-none text-foreground mb-1">Studio Kharis</h3>
-              <p className="text-[11px] md:text-xs font-medium text-muted-foreground whitespace-nowrap">Small Studio. Big Ideas.</p>
+            <div className="flex flex-col justify-center text-left gap-1">
+              <div className="bg-foreground text-background px-2 py-1">
+                <h3 className="text-base md:text-lg font-black tracking-widest uppercase leading-none">Studio Kharis</h3>
+              </div>
+              <div className="bg-background text-foreground px-2 py-0.5 border border-border w-fit">
+                <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest whitespace-nowrap">Small Studio. Big Ideas.</p>
+              </div>
             </div>
           </div>
 
-          <div className="w-full h-px bg-foreground/10 dark:bg-white/10 my-1" />
-
           {/* Social Icons row */}
-          <div className="flex items-center justify-center gap-4 w-full py-1">
+          <div className="flex items-center justify-center gap-2 w-full mt-1">
             {socialsData.slice(0, 4).map((social, idx) => {
               let Icon = FaGlobe;
               const platform = social.platformName || social.name.toLowerCase();
@@ -85,10 +87,10 @@ export async function HeroSection({
                   href={social.url} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="text-foreground/70 hover:text-foreground transition-all hover:scale-110"
+                  className="bg-background border border-border text-foreground p-2 hover:bg-foreground hover:text-background transition-colors"
                   aria-label={social.name}
                 >
-                  <Icon className="w-4 h-4 md:w-5 md:h-5" />
+                  <Icon className="w-4 h-4" />
                 </a>
               );
             })}
@@ -96,14 +98,14 @@ export async function HeroSection({
             {/* Email icon */}
             <a 
               href={`mailto:${profileData.email}`} 
-              className="text-foreground/70 hover:text-foreground transition-all hover:scale-110"
+              className="bg-background border border-border text-foreground p-2 hover:bg-foreground hover:text-background transition-colors"
               aria-label="Email"
             >
-              <FaEnvelope className="w-4 h-4 md:w-5 md:h-5" />
+              <FaEnvelope className="w-4 h-4" />
             </a>
           </div>
-
-        </div>
+          
+          </div>
         
         {/* Floating Button */}
         {!hideButtons && (
