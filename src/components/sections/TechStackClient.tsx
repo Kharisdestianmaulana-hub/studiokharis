@@ -144,7 +144,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
     <>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-12">
         {/* Left Side: Unified Tech Grid (Periodic Table) */}
-        <div className="lg:col-span-5 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-4 border-[3px] border-foreground bg-foreground gap-[3px]">
+        <div className="lg:col-span-5 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-4 border-[3px] border-foreground bg-foreground gap-[3px] self-start">
           {techStackData.flatMap(c => c.items).map((tech, index) => {
             const { icon: Icon, color } = getTechIcon(tech.name);
             return (
