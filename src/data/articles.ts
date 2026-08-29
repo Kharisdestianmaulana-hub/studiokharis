@@ -1,4 +1,4 @@
-import { fetchFromHub, getAppwriteImageUrl } from "@/lib/appwrite";
+import { fetchFromHub, getAppwriteImageUrl, getAppwriteOgImageUrl } from "@/lib/appwrite";
 
 export interface Article {
   $id: string;
@@ -29,5 +29,6 @@ export async function getArticles() {
     readingTime: "5 min read", // derived or mapped if possible
     slug: doc.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
     cover: getAppwriteImageUrl(doc.cover_image),
+    ogImage: getAppwriteOgImageUrl(doc.cover_image),
   }));
 }

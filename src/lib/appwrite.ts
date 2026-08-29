@@ -56,8 +56,13 @@ export async function fetchFromHub(collectionId: string, queries: any[] = []) {
 export function getAppwriteImageUrl(fileId: string): string {
   if (!fileId) return "";
   if (fileId.startsWith("http")) return fileId;
-  // Use /preview instead of /view, and force output=jpg for WhatsApp/OpenGraph compatibility
-  return `${APPWRITE_ENDPOINT}/storage/buckets/${APPWRITE_IMAGES_BUCKET_ID}/files/${fileId}/preview?project=${APPWRITE_PROJECT_ID}&output=jpg&width=1200&height=630&quality=80&ext=.jpg`;
+  return `${APPWRITE_ENDPOINT}/storage/buckets/${APPWRITE_IMAGES_BUCKET_ID}/files/${fileId}/view?project=${APPWRITE_PROJECT_ID}`;
+}
+
+export function getAppwriteOgImageUrl(fileId: string): string {
+  if (!fileId) return "";
+  if (fileId.startsWith("http")) return fileId;
+  return `${APPWRITE_ENDPOINT}/storage/buckets/${APPWRITE_IMAGES_BUCKET_ID}/files/${fileId}/preview?project=${APPWRITE_PROJECT_ID}&output=jpg&width=1200&height=630&quality=80`;
 }
 
 export function getAppwriteDownloadUrl(fileId: string): string {

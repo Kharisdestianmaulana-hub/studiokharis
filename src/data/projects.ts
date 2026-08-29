@@ -1,4 +1,4 @@
-import { fetchFromHub, getAppwriteImageUrl, APPWRITE_PROJECTS_COLLECTION_ID } from "@/lib/appwrite";
+import { fetchFromHub, getAppwriteImageUrl, getAppwriteOgImageUrl, APPWRITE_PROJECTS_COLLECTION_ID } from "@/lib/appwrite";
 
 export interface Project {
   $id: string;
@@ -25,6 +25,7 @@ export async function getProjects() {
     title: doc.title,
     description: doc.content_body,
     thumbnail: getAppwriteImageUrl(doc.cover_image_id),
+    ogImage: getAppwriteOgImageUrl(doc.cover_image_id),
     images: Array.isArray(doc.image_ids) ? doc.image_ids.map(getAppwriteImageUrl) : (doc.cover_image_id ? [getAppwriteImageUrl(doc.cover_image_id)] : []),
     techStack: Array.isArray(doc.tech_stack) ? doc.tech_stack : (typeof doc.tech_stack === "string" ? doc.tech_stack.split(",").map(t => t.trim()) : []),
     status: doc.status,
