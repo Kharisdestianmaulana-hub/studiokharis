@@ -25,8 +25,8 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
   return (
     <div className="flex flex-col gap-12 w-full mt-4">
       {/* Category Tabs & Sort Button - Typography Driven */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border/50 pb-2">
-        <div className="flex flex-wrap items-center gap-6">
+      <div className="flex items-center justify-between border-b border-border/50">
+        <div className="flex items-center gap-6 overflow-x-auto whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pr-4">
           {CATEGORIES.map((category) => {
             const count = category === "ALL" 
               ? experienceData.length 
@@ -41,7 +41,7 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
                 key={category}
                 onClick={() => setActiveCategory(category)}
                 className={cn(
-                  "group flex items-center gap-1.5 pb-2 -mb-[9px] text-sm md:text-base font-bold uppercase tracking-widest transition-all duration-300",
+                  "group flex items-center gap-1.5 pb-3 -mb-[2px] text-sm md:text-base font-bold uppercase tracking-widest transition-all duration-300",
                   isActive 
                     ? "text-foreground border-b-2 border-foreground" 
                     : "text-muted-foreground border-b-2 border-transparent hover:text-foreground"
@@ -57,16 +57,19 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
         </div>
 
         {/* Sort Toggle */}
-        <button
-          onClick={() => setSortOrder(prev => prev === "newest" ? "oldest" : "newest")}
-          className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors pb-2 md:pb-0"
-        >
-          {sortOrder === "newest" ? (
-            <>Newest First <ArrowDown className="w-4 h-4" /></>
-          ) : (
-            <>Oldest First <ArrowUp className="w-4 h-4" /></>
-          )}
-        </button>
+        <div className="shrink-0 pl-4 border-l border-border/50 py-2 pb-3 flex items-center ml-auto">
+          <button
+            onClick={() => setSortOrder(prev => prev === "newest" ? "oldest" : "newest")}
+            className="flex items-center gap-1.5 text-xs sm:text-sm font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <span>{sortOrder === "newest" ? "Newest" : "Oldest"}</span>
+            {sortOrder === "newest" ? (
+              <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            ) : (
+              <ArrowUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Experience List - Typography & Hover Driven */}
