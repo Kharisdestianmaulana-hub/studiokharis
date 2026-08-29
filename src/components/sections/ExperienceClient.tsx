@@ -24,9 +24,9 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
 
   return (
     <div className="flex flex-col gap-12 w-full mt-4">
-      {/* Category Tabs & Sort Button - Typography Driven */}
-      <div className="flex items-center justify-between border-b border-border/50">
-        <div className="flex items-center gap-6 overflow-x-auto whitespace-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pr-4">
+      {/* Category Tabs & Sort */}
+      <div className="flex items-center border-b-[3px] border-foreground relative overflow-x-auto [&::-webkit-scrollbar]:hidden w-full mb-4">
+        <div className="flex items-center gap-2 md:gap-4 min-w-max">
           {CATEGORIES.map((category) => {
             const count = category === "ALL" 
               ? experienceData.length 
@@ -41,10 +41,10 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
                 key={category}
                 onClick={() => setActiveCategory(category)}
                 className={cn(
-                  "group flex items-center gap-1.5 pb-3 -mb-[2px] text-sm md:text-base font-bold uppercase tracking-widest transition-all duration-300",
+                  "group flex items-center gap-1.5 px-4 py-3 -mb-[3px] text-sm md:text-base font-black uppercase tracking-widest transition-none border-[3px]",
                   isActive 
-                    ? "text-foreground border-b-2 border-foreground" 
-                    : "text-muted-foreground border-b-2 border-transparent hover:text-foreground"
+                    ? "text-background bg-foreground border-foreground" 
+                    : "text-foreground bg-background border-transparent hover:border-foreground"
                 )}
               >
                 {category}
@@ -72,60 +72,63 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
         </div>
       </div>
 
-      {/* Experience List - Typography & Hover Driven */}
-      <div className="flex flex-col">
-        {filteredData.map((exp: any, index: number) => (
-          <div 
-            key={exp.id} 
-            className={cn(
-              "group relative flex flex-col md:flex-row gap-4 md:gap-8 py-8 md:py-10 border-b border-border/50 hover:bg-secondary/10 transition-colors duration-300 px-4 -mx-4 rounded-none md:rounded-none-none md:hover:bg-transparent md:px-0 md:mx-0",
-              index === 0 && "border-t"
-            )}
-          >
-            {/* Left Column: Date & Type */}
-            <div className="md:w-1/4 shrink-0 flex flex-col gap-1 md:pt-1">
-              <span className="font-mono text-sm font-medium text-foreground/80">{exp.duration}</span>
-              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">{exp.type}</span>
-            </div>
-            
-            {/* Right Column: Content */}
-            <div className="flex-1 flex flex-col gap-2 relative">
-              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-foreground md:group-hover:translate-x-2 transition-transform duration-300">
-                {exp.role}
-              </h3>
-              
-              <div className="flex items-center gap-2 text-foreground/90 font-medium md:text-lg md:group-hover:translate-x-2 transition-transform duration-300 delay-75">
-                <span>{exp.company}</span>
-                {exp.address && (
-                  <>
-                    <span className="text-border/80 hidden md:inline">•</span>
-                    <span className="text-sm text-muted-foreground hidden md:inline">{exp.address}</span>
-                  </>
-                )}
+      {/* Experience List - Brutalist Ledger Driven */}
+      <div className="flex flex-col border-[3px] border-foreground mt-4">
+        {filteredData.map((exp: any, index: number) => {
+          const isEven = index % 2 === 0;
+          const bgClass = isEven ? "bg-foreground text-background" : "bg-background text-foreground";
+          const borderClass = index !== 0 ? "border-t-[3px] border-foreground" : "";
+          
+          return (
+            <div 
+              key={exp.id} 
+              className={cn(
+                "group relative flex flex-col md:flex-row gap-4 md:gap-8 py-8 md:py-10 px-6 transition-none",
+                bgClass,
+                borderClass
+              )}
+            >
+              {/* Left Column: Date & Type */}
+              <div className="md:w-1/4 shrink-0 flex flex-col gap-1 md:pt-1">
+                <span className="font-mono text-sm font-black opacity-90">{exp.duration}</span>
+                <span className="text-xs font-bold opacity-70 uppercase tracking-widest">{exp.type}</span>
               </div>
               
-              {exp.address && (
-                 <span className="text-sm text-muted-foreground md:hidden">{exp.address}</span>
-              )}
-
-              <p className="text-muted-foreground mt-3 text-sm md:text-base leading-relaxed md:group-hover:translate-x-2 transition-transform duration-300 delay-100">
-                {exp.description}
-              </p>
-              
-              {/* Tech Stack */}
-              {exp.technologies && exp.technologies.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-4 md:group-hover:translate-x-2 transition-transform duration-300 delay-150">
-                  {exp.technologies.map((tech: any) => (
-                    <span key={tech} className="text-xs font-mono border border-border/50 px-2 py-1 rounded-none text-muted-foreground uppercase">
-                      {tech}
-                    </span>
-                  ))}
+              {/* Right Column: Content */}
+              <div className="flex-1 flex flex-col gap-2 relative">
+                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight md:group-hover:translate-x-2 transition-transform duration-300">
+                  {exp.role}
+                </h3>
+                
+                <div className="flex items-center gap-2 font-bold md:text-lg opacity-90 md:group-hover:translate-x-2 transition-transform duration-300 delay-75">
+                  <span>{exp.company}</span>
+                  {exp.address && (
+                    <>
+                      <span className="opacity-50 text-sm">•</span>
+                      <span className="text-sm opacity-80">{exp.address}</span>
+                    </>
+                  )}
                 </div>
-              )}
-
+                {exp.description && (
+                  <p className="mt-2 text-sm md:text-base font-mono leading-relaxed opacity-80 max-w-3xl md:group-hover:translate-x-2 transition-transform duration-300 delay-100">
+                    {exp.description}
+                  </p>
+                )}
+                
+                {/* Tech Stack */}
+                {exp.technologies && exp.technologies.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-4 md:group-hover:translate-x-2 transition-transform duration-300 delay-150">
+                    {exp.technologies.map((tech: any) => (
+                      <span key={tech} className="text-xs font-mono border-[2px] border-current px-2 py-1 uppercase font-bold opacity-80">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
 
         {filteredData.length === 0 && (
           <div className="text-muted-foreground italic py-8">
