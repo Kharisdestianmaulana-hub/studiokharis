@@ -27,7 +27,7 @@ export async function StatsSection() {
       label: "Technologies Mastered",
       value: `${techStackCount}+`,
       icon: Layers,
-      description: "Tools in our arsenal",
+      description: "Tools in my arsenal",
     },
     {
       label: "Published Articles",

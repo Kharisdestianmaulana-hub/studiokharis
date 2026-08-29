@@ -102,7 +102,7 @@ export default async function SearchPage({
             </div>
             <h4 className="text-xl font-bold">No results found</h4>
             <p className="text-secondary-text max-w-sm">
-              We couldn't find anything matching "{query}". Try adjusting your search terms or checking for typos.
+              I couldn't find anything matching "{query}". Try adjusting your search terms or checking for typos.
             </p>
           </div>
         ) : null}

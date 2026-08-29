@@ -55,7 +55,7 @@ export function NotFoundInteractive() {
           Are you lost?
         </h2>
         <p className="text-muted-foreground max-w-md">
-          Looks like this page doesn't exist in our directory. Find the button to return to base.
+          Looks like this page doesn't exist in my directory. Find the button to return to base.
         </p>
       </div>
 

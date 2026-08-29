@@ -18,7 +18,7 @@ export async function TechMarqueeSection() {
     <section className="py-2 overflow-hidden">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <h3 className="text-2xl font-bold tracking-tight text-foreground">Technologies We Use</h3>
+          <h3 className="text-2xl font-bold tracking-tight text-foreground">Technologies I Use</h3>
           <p className="text-muted text-sm md:text-base">
             Modern tools for modern problems.
           </p>
