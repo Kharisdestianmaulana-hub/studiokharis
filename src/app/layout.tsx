@@ -17,15 +17,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://studiokharis.works"),
   title: {
     default: "Kharis - Full Stack Developer",
     template: "%s | Kharis"
   },
   description: "Portfolio of Kharis, a passionate Full Stack Developer specializing in React, Next.js, and modern web technologies.",
   icons: {
-    // We provide a fallback, but DynamicFavicon will handle theme switching on the client
     icon: "/logo-light.webp" 
-  }
+  },
+  openGraph: {
+    title: "Kharis - Full Stack Developer",
+    description: "Portfolio of Kharis, a passionate Full Stack Developer.",
+    url: "https://studiokharis.works",
+    siteName: "Kharis",
+    images: [
+      {
+        url: "/logo-light.webp",
+        width: 800,
+        height: 800,
+      }
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 import { PageTransition } from "@/components/layout/PageTransition";

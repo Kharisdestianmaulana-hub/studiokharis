@@ -56,7 +56,7 @@ export async function fetchFromHub(collectionId: string, queries: any[] = []) {
 export function getAppwriteImageUrl(fileId: string): string {
   if (!fileId) return "";
   if (fileId.startsWith("http")) return fileId;
-  return `${APPWRITE_ENDPOINT}/storage/buckets/${APPWRITE_IMAGES_BUCKET_ID}/files/${fileId}/view?project=${APPWRITE_PROJECT_ID}`;
+  return `${APPWRITE_ENDPOINT}/storage/buckets/${APPWRITE_IMAGES_BUCKET_ID}/files/${fileId}/view?project=${APPWRITE_PROJECT_ID}&mode=admin&ext=.jpg`;
 }
 
 export function getAppwriteDownloadUrl(fileId: string): string {
