@@ -45,7 +45,7 @@ export function ProjectsCoverflow({ projects }: { projects: any[] }) {
     <div className="flex flex-col items-center w-full">
       {/* Coverflow Carousel */}
       <div 
-        className="relative w-full h-[300px] md:h-[450px] flex items-center justify-center overflow-hidden border-y border-border bg-accent/5 dark:bg-accent/10" 
+        className="relative w-full h-[300px] md:h-[450px] flex items-center justify-center overflow-hidden border-y-[3px] border-foreground bg-surface/50" 
         style={{ perspective: 1200 }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -53,19 +53,19 @@ export function ProjectsCoverflow({ projects }: { projects: any[] }) {
         {/* Next/Prev Buttons (Desktop only) */}
         <button
           onClick={() => setActiveIndex(Math.max(0, activeIndex - 1))}
-          className="hidden md:flex absolute left-4 lg:left-12 z-30 w-12 h-12 bg-background border-2 border-foreground items-center justify-center hover:bg-foreground hover:text-background transition-colors disabled:opacity-30 disabled:hover:bg-background disabled:hover:text-foreground disabled:cursor-not-allowed"
+          className="hidden md:flex absolute left-4 lg:left-12 z-30 w-12 h-12 bg-surface border-[3px] border-foreground items-center justify-center hover:bg-foreground hover:text-background transition-colors disabled:opacity-30 disabled:hover:bg-surface disabled:hover:text-foreground disabled:cursor-not-allowed shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
           disabled={activeIndex === 0}
           aria-label="Previous Project"
         >
-          <ArrowLeft className="w-6 h-6" />
+          <ArrowLeft className="w-6 h-6 stroke-[3]" />
         </button>
         <button
           onClick={() => setActiveIndex(Math.min(projects.length - 1, activeIndex + 1))}
-          className="hidden md:flex absolute right-4 lg:right-12 z-30 w-12 h-12 bg-background border-2 border-foreground items-center justify-center hover:bg-foreground hover:text-background transition-colors disabled:opacity-30 disabled:hover:bg-background disabled:hover:text-foreground disabled:cursor-not-allowed"
+          className="hidden md:flex absolute right-4 lg:right-12 z-30 w-12 h-12 bg-surface border-[3px] border-foreground items-center justify-center hover:bg-foreground hover:text-background transition-colors disabled:opacity-30 disabled:hover:bg-surface disabled:hover:text-foreground disabled:cursor-not-allowed shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
           disabled={activeIndex === projects.length - 1}
           aria-label="Next Project"
         >
-          <ArrowRight className="w-6 h-6" />
+          <ArrowRight className="w-6 h-6 stroke-[3]" />
         </button>
         {projects.map((project, index) => {
           const diff = index - activeIndex;
@@ -100,9 +100,9 @@ export function ProjectsCoverflow({ projects }: { projects: any[] }) {
                   ease: [0.19, 1, 0.22, 1] // brutalist snap curve
                 }}
                 onClick={() => setActiveIndex(index)}
-                className={`w-full h-full p-2 md:p-3 bg-background border-2 border-foreground shadow-none cursor-pointer overflow-hidden transition-all duration-300 ${isCenter ? '' : 'grayscale contrast-125 hover:grayscale-0'}`}
+                className={`w-full h-full p-2 md:p-3 bg-background border-[3px] border-foreground shadow-[8px_8px_0_0_var(--foreground)] cursor-pointer overflow-hidden transition-all duration-300 ${isCenter ? '' : 'grayscale contrast-125 hover:grayscale-0'}`}
               >
-                <div className="w-full h-full border border-border bg-muted relative overflow-hidden">
+                <div className="w-full h-full border-[3px] border-foreground bg-surface relative overflow-hidden">
                   <img 
                     src={project.thumbnail || "/placeholder.svg"} 
                     alt={project.title}
@@ -119,7 +119,7 @@ export function ProjectsCoverflow({ projects }: { projects: any[] }) {
       </div>
 
       {/* Active Project Details */}
-      <div className="min-h-[240px] w-full flex justify-center">
+      <div className="min-h-[240px] w-full flex justify-center pb-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeProject.originalId}
@@ -129,25 +129,25 @@ export function ProjectsCoverflow({ projects }: { projects: any[] }) {
             transition={{ duration: 0.15 }}
             className="flex flex-col items-start text-left w-full max-w-[500px] mt-8 px-4"
           >
-            <div className="bg-foreground text-background px-3 py-1 mb-4 w-fit">
-            <h3 className="text-xl md:text-3xl font-black tracking-tight uppercase">
-              {activeProject.title}
-            </h3>
-          </div>
-          
-          <div className="border border-border p-3 md:p-4 bg-background w-full mb-6">
-            <p className="text-xs md:text-sm text-foreground/80 font-mono leading-relaxed">
-              {shortDescription}
-            </p>
-          </div>
-          
-          <Link 
-            href={`/projects/${activeProject.id}`}
-            className="flex items-center gap-2 px-4 py-2 border-2 border-foreground bg-background text-foreground hover:bg-foreground hover:text-background transition-colors font-bold uppercase text-xs tracking-widest"
-          >
-            View Project <ArrowRight className="w-4 h-4" />
-          </Link>
-        </motion.div>
+            <div className="border-[3px] border-foreground bg-accent text-accent-foreground px-4 py-2 mb-4 w-fit shadow-[4px_4px_0_0_var(--foreground)]">
+              <h3 className="text-xl md:text-3xl font-black tracking-tighter uppercase">
+                {activeProject.title}
+              </h3>
+            </div>
+            
+            <div className="border-[3px] border-foreground p-4 md:p-6 bg-surface shadow-[4px_4px_0_0_var(--foreground)] w-full mb-8">
+              <p className="text-xs md:text-sm text-foreground font-bold leading-relaxed">
+                {shortDescription}
+              </p>
+            </div>
+            
+            <Link 
+              href={`/projects/${activeProject.id}`}
+              className="flex items-center gap-2 px-6 py-3 border-[3px] border-foreground bg-foreground text-background hover:bg-accent hover:text-accent-foreground transition-all shadow-[6px_6px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none font-black uppercase text-xs tracking-widest"
+            >
+              View Project <ArrowRight className="w-4 h-4 stroke-[3]" />
+            </Link>
+          </motion.div>
         </AnimatePresence>
       </div>
     </div>
