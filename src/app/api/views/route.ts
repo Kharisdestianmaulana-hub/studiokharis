@@ -8,8 +8,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const action = searchParams.get("action") === "up" ? "/up" : "";
     
-    // Proxy request to the global counter API v2
-    const res = await fetch(`https://api.counterapi.dev/v2/kharis-destian-maulanas-team-5266/visitor-counter-kharis${action}`, {
+    // Proxy request to the global counter API v2 with cache buster
+    const res = await fetch(`https://api.counterapi.dev/v2/kharis-destian-maulanas-team-5266/visitor-counter-kharis${action}?t=${Date.now()}`, {
       cache: "no-store",
     });
     
