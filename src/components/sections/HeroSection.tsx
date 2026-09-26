@@ -1,7 +1,7 @@
 import * as React from "react";
 import { getProfileData } from "@/data/profile";
 import { getSocialLinks } from "@/data/socials";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe, FaWhatsapp, FaEnvelope, FaArrowRight } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe, FaWhatsapp, FaEnvelope, FaArrowRight, FaDownload } from "react-icons/fa";
 import { TransitionLink } from "@/components/layout/TransitionLink";
 
 export async function HeroSection({ 
@@ -109,12 +109,20 @@ export async function HeroSection({
         
         {/* Floating Button */}
         {!hideButtons && (
-          <TransitionLink href="/projects" className="w-full">
-            <button className="w-full bg-foreground text-background text-sm font-semibold py-2.5 px-6 rounded-none shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] dark:shadow-[0_4px_14px_0_rgb(255,255,255,0.1)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
-              Lihat Project
-              <FaArrowRight className="w-3 h-3" />
-            </button>
-          </TransitionLink>
+          <div className="flex w-full gap-2 mt-2">
+            <TransitionLink href="/projects" className="flex-1">
+              <button className="w-full bg-foreground text-background border-[3px] border-foreground text-xs md:text-sm font-black py-2.5 px-2 rounded-none hover:bg-background hover:text-foreground transition-colors flex items-center justify-center gap-2 uppercase tracking-widest">
+                Project
+                <FaArrowRight className="w-3 h-3" />
+              </button>
+            </TransitionLink>
+            <a href={profileData.resumeUrl} target="_blank" rel="noreferrer" className="flex-1">
+              <button className="w-full bg-background text-foreground border-[3px] border-foreground text-xs md:text-sm font-black py-2.5 px-2 rounded-none hover:bg-foreground hover:text-background transition-colors flex items-center justify-center gap-2 uppercase tracking-widest">
+                Unduh CV
+                <FaDownload className="w-3 h-3" />
+              </button>
+            </a>
+          </div>
         )}
       </div>
       </div>
