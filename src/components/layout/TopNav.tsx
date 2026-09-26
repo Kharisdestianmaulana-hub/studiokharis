@@ -15,7 +15,7 @@ export function TopNav({ profileData }: { profileData?: any }) {
   const { startTour } = useTour();
 
   return (
-    <header className="sticky top-0 z-20 w-full h-[72px] border-b border-border bg-[#FAFAFA]/80 dark:bg-[#09090B]/80 backdrop-blur-md flex items-center justify-between px-4 lg:px-8">
+    <header className="sticky top-0 z-20 w-full h-[72px] border-b-[3px] border-foreground bg-background flex items-center justify-between px-4 lg:px-8">
       {/* Left Section */}
       <div className="flex items-center gap-2 flex-1 md:flex-none md:w-auto md:min-w-[250px] mr-2 md:mr-0">
         <MobileDrawer profileData={profileData} />
@@ -34,16 +34,14 @@ export function TopNav({ profileData }: { profileData?: any }) {
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center gap-2 md:min-w-[200px] justify-end">
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="hidden md:flex items-center gap-2 rounded-none border-primary/20 text-primary hover:bg-primary/10"
+      <div className="flex items-center gap-4 md:min-w-[200px] justify-end">
+        <button 
+          className="hidden md:flex items-center gap-2 px-4 py-2 bg-surface text-foreground font-black uppercase tracking-widest text-xs border-[3px] border-foreground hover:bg-foreground hover:text-background transition-all shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
           onClick={startTour}
         >
-          <PlayCircle className="w-4 h-4" />
-          <span className="text-xs font-medium">Tour</span>
-        </Button>
+          <PlayCircle className="w-4 h-4 stroke-[3]" />
+          <span>Tour</span>
+        </button>
         <div id="tour-visitor">
           <VisitorCounter />
         </div>
