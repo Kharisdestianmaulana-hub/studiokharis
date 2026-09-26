@@ -39,10 +39,10 @@ export function Sidebar({ profileData }: { profileData?: any }) {
       <div className={cn("p-6 flex border-b-[3px] border-foreground", isCollapsed ? "flex-col items-center gap-4" : "items-center justify-between")}>
         {!isCollapsed && (
           <Link href="/about" id="tour-profile" className="flex items-center gap-4 overflow-hidden px-1 hover:-translate-y-1 transition-transform cursor-pointer group">
-            <div className="h-12 w-12 border-[3px] border-foreground shrink-0 shadow-[4px_4px_0_0_var(--foreground)] group-hover:shadow-[2px_2px_0_0_var(--foreground)] bg-accent overflow-hidden">
+            <Avatar className="h-12 w-12 border-[3px] border-foreground rounded-none shrink-0 shadow-[4px_4px_0_0_var(--foreground)] group-hover:shadow-[2px_2px_0_0_var(--foreground)] bg-accent overflow-hidden">
               <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} className="object-cover w-full h-full grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
-              <AvatarFallback className="font-black text-background bg-foreground">{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
-            </div>
+              <AvatarFallback className="font-black text-background bg-foreground rounded-none">{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
+            </Avatar>
             <div className="flex flex-col overflow-hidden w-full">
               <span className="font-black text-sm uppercase tracking-widest text-foreground line-clamp-1">{profileData?.name || "User"}</span>
               <div className="overflow-hidden relative w-full mask-edges">
@@ -75,10 +75,10 @@ export function Sidebar({ profileData }: { profileData?: any }) {
 
         {isCollapsed && (
           <Link href="/about" id="tour-profile" className="mx-auto hover:-translate-y-1 transition-transform cursor-pointer group mt-4">
-            <div className="h-12 w-12 border-[3px] border-foreground shrink-0 shadow-[4px_4px_0_0_var(--foreground)] group-hover:shadow-[2px_2px_0_0_var(--foreground)] bg-accent overflow-hidden">
+            <Avatar className="h-12 w-12 border-[3px] border-foreground rounded-none shrink-0 shadow-[4px_4px_0_0_var(--foreground)] group-hover:shadow-[2px_2px_0_0_var(--foreground)] bg-accent overflow-hidden">
               <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} className="object-cover w-full h-full grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
-              <AvatarFallback className="font-black text-background bg-foreground">{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
-            </div>
+              <AvatarFallback className="font-black text-background bg-foreground rounded-none">{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
+            </Avatar>
           </Link>
         )}
       </div>
