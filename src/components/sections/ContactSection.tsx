@@ -62,14 +62,20 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
   });
 
   const { isValid, isSubmitting } = form.formState;
+  const watchService = form.watch("service");
+  const [customService, setCustomService] = React.useState("");
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const finalService = values.service === "something else" && customService.trim() !== "" 
+      ? customService.trim() 
+      : values.service;
+      
     const subject = encodeURIComponent(`New Project Inquiry from ${values.name}`);
     let bodyText = `Hi Kharis,\n\nMy name is ${values.name}`;
     if (values.company) {
       bodyText += ` and I work at ${values.company}`;
     }
-    bodyText += `. I'd love to work with you on ${values.service}.\n\nYou can reach me at ${values.email}.\n\nHere are some more details about the project:\n${values.message}`;
+    bodyText += `. I'd love to work with you on ${finalService}.\n\nYou can reach me at ${values.email}.\n\nHere are some more details about the project:\n${values.message}`;
     
     const body = encodeURIComponent(bodyText);
     
@@ -130,6 +136,16 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                     </SelectContent>
                   </Select>
                 </span>
+                {watchService === "something else" && (
+                  <span className="inline-block mx-1 align-middle">
+                    <input
+                      value={customService}
+                      onChange={(e) => setCustomService(e.target.value)}
+                      placeholder="SPECIFY SERVICE"
+                      className={`${blankInputClass} w-[200px] md:w-[280px] animate-in fade-in zoom-in-95 duration-200`}
+                    />
+                  </span>
+                )}
                 . You can reach me at
                 <input
                   {...form.register("email")}
