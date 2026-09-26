@@ -273,7 +273,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       ),
       placement: "top-end",
     },
-  ];
+  ].map(step => ({ ...step, isFixed: true }));
 
   const handleJoyrideCallback = (data: any) => {
     const { status } = data;
