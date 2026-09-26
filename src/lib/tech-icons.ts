@@ -52,6 +52,6 @@ export const getTechIcon = (name: string) => {
     case normalized.includes("appwrite"): return { icon: SiAppwrite, color: "#FD366E" };
     case normalized.includes("illustrator"): return { icon: TbBrandAdobeIllustrator, color: "#FF9A00" };
     case normalized.includes("photoshop"): return { icon: TbBrandAdobePhotoshop, color: "#31A8FF" };
-    default: return { icon: Code2, color: "var(--color-accent)" };
+    default: return { icon: Code2, color: "var(--color-accent)", isDefault: true };
   }
 };

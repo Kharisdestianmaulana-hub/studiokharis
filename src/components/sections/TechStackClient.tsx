@@ -28,90 +28,7 @@ type ProjectMin = {
 };
 
 import { getTechIcon } from "@/lib/tech-icons";
-
-const CircularProgress = ({ proficiency, color }: { proficiency: number, color: string }) => {
-  const radius = 38;
-  const circumference = 2 * Math.PI * radius;
-  // Convert proficiency to stroke-dashoffset (100% = 0, 0% = circumference)
-  const strokeDashoffset = circumference - (proficiency / 100) * circumference;
-
-  return (
-    <div className="absolute inset-0 flex items-center justify-center -rotate-90">
-      <svg className="w-full h-full" viewBox="0 0 100 100">
-        {/* Background track */}
-        <circle
-          className="text-border/40"
-          strokeWidth="6"
-          stroke="currentColor"
-          fill="transparent"
-          r={radius}
-          cx="50"
-          cy="50"
-        />
-        {/* Animated Progress Ring */}
-        <motion.circle
-          stroke={color}
-          strokeWidth="6"
-          strokeLinecap="round"
-          fill="transparent"
-          r={radius}
-          cx="50"
-          cy="50"
-          initial={{ strokeDashoffset: circumference }}
-          whileInView={{ strokeDashoffset }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          style={{
-            strokeDasharray: circumference,
-          }}
-        />
-      </svg>
-    </div>
-  );
-};
-
-const TechNode = ({ tech, index, onClick }: { tech: TechStackItem, index: number, onClick: () => void }) => {
-  const { icon: Icon, color } = getTechIcon(tech.name);
-
-  return (
-    <motion.div
-      onClick={onClick}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative flex flex-col items-center gap-4 p-6 rounded-none-2xl bg-surface border border-border hover:border-accent/50 transition-all duration-300 cursor-pointer"
-    >
-      {/* Glow Effect */}
-      <div 
-        className="absolute inset-0 rounded-none-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl"
-        style={{ backgroundColor: color }}
-      />
-      
-      {/* Icon & Ring Container */}
-      <div className="relative w-24 h-24 flex items-center justify-center">
-        <CircularProgress proficiency={tech.proficiency} color={color} />
-        
-        {/* Central Icon */}
-        <div 
-          className="relative z-10 w-12 h-12 flex items-center justify-center rounded-none bg-background border border-border shadow-inner group-hover:scale-110 transition-transform duration-500"
-          style={{ color: color === "#000000" ? "var(--color-primary-text)" : color }} // Adjust black icons for dark mode
-        >
-          <Icon className="w-6 h-6" />
-        </div>
-      </div>
-
-      {/* Tech Info */}
-      <div className="text-center z-10">
-        <h3 className="font-bold text-foreground mb-1 group-hover:text-accent transition-colors">{tech.name}</h3>
-        <div className="text-sm font-mono text-muted-foreground flex items-center justify-center gap-1">
-          <span className="inline-block w-2 h-2 rounded-none" style={{ backgroundColor: color }} />
-          {tech.proficiency}%
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+import { HybridIcon } from "@/components/shared/HybridIcon";
 
 export function TechStackClient({ techStackData, projects = [] }: { techStackData: TechStackCategory[], projects?: ProjectMin[] }) {
   const [selectedTech, setSelectedTech] = React.useState<TechStackItem | null>(null);
@@ -137,7 +54,6 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
     return projects.filter(p => p.techStack?.some(t => t.toLowerCase() === techName));
   }, [selectedTech, projects]);
 
-  const SelectedIcon = selectedTech ? getTechIcon(selectedTech.name).icon : null;
   const selectedColor = selectedTech ? getTechIcon(selectedTech.name).color : "#000";
 
   return (
@@ -146,7 +62,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
         {/* Left Side: Unified Tech Grid (Periodic Table) */}
         <div className="lg:col-span-5 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-4 border-[3px] border-foreground bg-foreground gap-[3px] self-start">
           {techStackData.flatMap(c => c.items).map((tech, index) => {
-            const { icon: Icon, color } = getTechIcon(tech.name);
+            const { color } = getTechIcon(tech.name);
             return (
               <motion.div
                 key={tech.name}
@@ -158,7 +74,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
                 className="group relative flex items-center justify-center p-4 bg-background hover:bg-foreground hover:text-background transition-colors cursor-pointer aspect-square"
                 title={`${tech.name} - ${tech.proficiency}%`}
               >
-                <Icon className="w-8 h-8 md:w-10 md:h-10 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" style={{ color: color === "#000000" ? "currentColor" : color }} />
+                <HybridIcon name={tech.name} className="w-8 h-8 md:w-10 md:h-10 grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" style={{ color: color === "#000000" ? "currentColor" : color }} />
               </motion.div>
             );
           })}
@@ -195,7 +111,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
       {/* Tech Projects Modal */}
       {mounted && createPortal(
         <AnimatePresence>
-          {selectedTech && SelectedIcon && (
+          {selectedTech && (
             <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
               <motion.div 
                 initial={{ opacity: 0 }}
@@ -227,7 +143,7 @@ export function TechStackClient({ techStackData, projects = [] }: { techStackDat
                   <div 
                     className="relative z-10 w-24 h-24 mb-6 flex items-center justify-center bg-background border-[3px] border-foreground grayscale"
                   >
-                    <SelectedIcon className="w-12 h-12 text-foreground" />
+                    <HybridIcon name={selectedTech.name} className="w-12 h-12 text-foreground" />
                   </div>
                   <h2 className="text-4xl md:text-5xl font-black text-foreground uppercase tracking-tighter relative z-10">{selectedTech.name}</h2>
                   <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm mt-3 relative z-10">PROJECTS BUILT USING THIS TECHNOLOGY</p>

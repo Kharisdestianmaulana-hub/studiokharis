@@ -1,6 +1,6 @@
 import * as React from "react";
 import { getTechStack } from "@/data/tech-stack";
-import { getTechIcon } from "@/lib/tech-icons";
+import { HybridIcon } from "@/components/shared/HybridIcon";
 
 export async function TechMarqueeSection() {
   const techStackData = await getTechStack();
@@ -30,13 +30,12 @@ export async function TechMarqueeSection() {
           <div className="flex w-max animate-marquee hover-pause" style={{ animationDuration: '40s' }}>
             <div className="flex gap-8 md:gap-16 items-center whitespace-nowrap px-6 md:px-12">
               {marqueeItems.map((tech, index) => {
-                const { icon: Icon } = getTechIcon(tech.name);
                 return (
                   <div 
                     key={`${tech.name}-${index}`} 
                     className="flex items-center gap-4 md:gap-6 group cursor-default"
                   >
-                    <Icon className="w-10 h-10 md:w-12 md:h-12" />
+                    <HybridIcon name={tech.name} className="w-10 h-10 md:w-12 md:h-12" />
                     <span className="font-black text-2xl md:text-4xl uppercase tracking-widest">
                       {tech.name}
                     </span>
