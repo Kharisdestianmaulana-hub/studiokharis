@@ -69,19 +69,37 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setIsMounted(true);
+    
+    // Check if the user is on mobile (Tailwind md breakpoint is 768px)
+    const isMobile = window.innerWidth < 768;
+    
     // Check if the user has seen the tour before
     const hasSeenTour = localStorage.getItem("has_seen_tour_v2");
     
-    // Auto-start for new visitors after a short delay
-    if (!hasSeenTour) {
+    // Auto-start for new visitors after a short delay (only on desktop)
+    if (!hasSeenTour && !isMobile) {
       const timer = setTimeout(() => {
         setRunTour(true);
         // Mark as seen immediately so it doesn't auto-run again if they just refresh
         localStorage.setItem("has_seen_tour_v2", "true");
       }, 1500);
       return () => clearTimeout(timer);
+    } else if (!hasSeenTour && isMobile) {
+      // If they are on mobile, just mark it as seen silently so it doesn't bother them
+      localStorage.setItem("has_seen_tour_v2", "true");
     }
   }, []);
+
+  const startTour = () => {
+    // Optional: prevent manual start on mobile too, or let them do it if they want
+    // But since the targets are hidden, manual start will also break.
+    if (window.innerWidth < 768) {
+      alert("Tutorial is only available on desktop screens.");
+      return;
+    }
+    setTourKey(prev => prev + 1);
+    setRunTour(true);
+  };
 
   const steps: Step[] = [
     {
@@ -196,10 +214,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const startTour = () => {
-    setTourKey(prev => prev + 1);
-    setRunTour(true);
-  };
+
 
   const stopTour = () => {
     setRunTour(false);
