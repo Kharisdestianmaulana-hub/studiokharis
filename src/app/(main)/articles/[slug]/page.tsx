@@ -53,53 +53,58 @@ export default async function ArticleDetailPage(props: { params: Promise<{ slug:
   return (
     <>
       <ReadingProgress />
-      <article className="flex flex-col gap-8 pb-16 pt-8 animate-in fade-in duration-700">
+      <article className="flex flex-col gap-10 pb-16 pt-8 animate-in fade-in duration-700">
+        
+        {/* Brutalist Back Button */}
         <Link 
           href="/articles" 
-        className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors w-fit"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back to articles
-      </Link>
+          className="inline-flex items-center gap-2 font-black uppercase tracking-widest text-sm border-[3px] border-foreground px-4 py-2 bg-surface hover:bg-foreground hover:text-background transition-colors w-fit shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
+        >
+          <ArrowLeft className="w-5 h-5 stroke-[3]" />
+          Back to articles
+        </Link>
 
-      <header className="flex flex-col gap-6">
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-wrap gap-2">
-            {article.tags && article.tags.map((tag: string, index: number) => (
-              <Badge key={index} variant="secondary" className="w-fit bg-secondary/10 text-secondary-text border-transparent">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground leading-tight">
-            {article.title}
-          </h1>
-          <div className="flex flex-wrap items-center justify-between gap-4 w-full">
-            <div className="flex flex-wrap items-center gap-4 text-sm text-muted">
-              <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {new Date(article.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
-              <span>•</span>
-              <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {article.readingTime}</span>
+        <header className="flex flex-col gap-8 border-[3px] border-foreground bg-background p-6 md:p-10 shadow-[8px_8px_0_0_var(--foreground)]">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap gap-2">
+              {article.tags && article.tags.map((tag: string, index: number) => (
+                <span key={index} className="px-3 py-1.5 border-[3px] border-foreground bg-accent text-accent-foreground font-black uppercase tracking-widest text-xs shadow-[2px_2px_0_0_var(--foreground)]">
+                  {tag}
+                </span>
+              ))}
             </div>
-            <ShareButtons url={`/articles/${article.slug}`} title={article.title} />
+            
+            <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase leading-none mt-2">
+              {article.title}
+            </h1>
+            
+            <div className="flex flex-wrap items-center justify-between gap-4 w-full mt-4 pt-6 border-t-[3px] border-foreground border-dashed">
+              <div className="flex flex-wrap items-center gap-4 text-sm font-bold uppercase tracking-widest text-foreground">
+                <span className="flex items-center gap-2 border-[2px] border-foreground px-3 py-1 bg-surface"><Calendar className="w-4 h-4 stroke-[3]" /> {new Date(article.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+                <span className="flex items-center gap-2 border-[2px] border-foreground px-3 py-1 bg-surface"><Clock className="w-4 h-4 stroke-[3]" /> {article.readingTime}</span>
+              </div>
+              <ShareButtons url={`/articles/${article.slug}`} title={article.title} />
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {article.cover && (
-        <div className="relative aspect-[2/1] w-full rounded-none-2xl overflow-hidden border border-border shadow-sm">
-          <Image 
-            src={article.cover} 
-            alt={article.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 1200px) 100vw, 1200px"
-            priority
-          />
-        </div>
-      )}
+        {article.cover && (
+          <div className="relative aspect-[2/1] w-full bg-background border-[3px] border-foreground shadow-[8px_8px_0_0_var(--foreground)] p-2">
+            <div className="relative w-full h-full border-[3px] border-foreground overflow-hidden">
+              <Image 
+                src={article.cover} 
+                alt={article.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                priority
+              />
+            </div>
+          </div>
+        )}
 
-      <ArticleContent content={article.content || article.excerpt || "Article content goes here..."} />
-    </article>
+        <ArticleContent content={article.content || article.excerpt || "Article content goes here..."} />
+      </article>
     </>
   );
 }

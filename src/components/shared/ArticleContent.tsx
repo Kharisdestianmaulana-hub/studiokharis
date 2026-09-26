@@ -105,7 +105,7 @@ export function ArticleContent({ content }: ArticleContentProps) {
       {/* Content */}
       <div 
         ref={contentRef}
-        className="prose prose-neutral dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-headings:scroll-mt-24 prose-img:rounded-none prose-a:text-accent lg:w-[70%]"
+        className="prose prose-neutral dark:prose-invert max-w-none lg:w-[70%] p-6 md:p-10 border-[3px] border-foreground bg-background shadow-[8px_8px_0_0_var(--foreground)] prose-p:font-medium prose-p:leading-relaxed prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-headings:scroll-mt-24 prose-img:border-[3px] prose-img:border-foreground prose-img:shadow-[6px_6px_0_0_var(--foreground)] prose-a:text-accent prose-a:font-bold prose-a:decoration-[3px] prose-a:underline-offset-4 prose-blockquote:border-l-[6px] prose-blockquote:border-foreground prose-blockquote:bg-surface prose-blockquote:p-4 prose-blockquote:font-bold prose-blockquote:not-italic prose-strong:font-black"
       >
         <ReactMarkdown>{formattedContent}</ReactMarkdown>
       </div>
@@ -113,23 +113,23 @@ export function ArticleContent({ content }: ArticleContentProps) {
       {/* Sidebar TOC */}
       {toc.length > 0 && (
         <aside className="hidden lg:block lg:w-[30%] sticky top-24 shrink-0">
-          <div className="bg-surface border border-border rounded-none p-5 shadow-sm">
-            <h4 className="font-semibold text-foreground flex items-center gap-2 mb-4">
-              <List className="w-4 h-4" />
+          <div className="bg-background border-[3px] border-foreground p-6 shadow-[8px_8px_0_0_var(--foreground)]">
+            <h4 className="font-black uppercase tracking-widest text-foreground flex items-center gap-2 mb-6 border-b-[3px] border-foreground pb-4">
+              <List className="w-5 h-5 stroke-[3]" />
               Table of Contents
             </h4>
-            <nav className="flex flex-col gap-2.5 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
+            <nav className="flex flex-col gap-3 max-h-[65vh] overflow-y-auto pr-2 custom-scrollbar">
               {toc.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
                   className={cn(
-                    "text-sm transition-colors hover:text-accent line-clamp-2",
-                    item.level === 3 && "pl-4",
-                    item.level === 4 && "pl-8",
+                    "text-sm uppercase font-bold tracking-wider transition-all px-2 py-1.5 border-[2px] border-transparent",
+                    item.level === 3 && "pl-6",
+                    item.level === 4 && "pl-10",
                     activeId === item.id 
-                      ? "text-accent font-medium" 
-                      : "text-muted"
+                      ? "text-background bg-foreground border-foreground shadow-[2px_2px_0_0_var(--color-accent)] translate-x-1" 
+                      : "text-foreground hover:bg-accent hover:text-accent-foreground hover:border-foreground hover:translate-x-1 hover:shadow-[2px_2px_0_0_var(--foreground)]"
                   )}
                   onClick={(e) => {
                     e.preventDefault();
