@@ -82,7 +82,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
   }
 
   // Helper for input classes to look like a legal contract blank
-  const blankInputClass = "inline-flex h-auto py-1 min-w-[150px] max-w-full border-b-[4px] border-solid border-foreground bg-transparent px-2 text-center font-black text-foreground placeholder:font-black placeholder:opacity-30 focus-visible:outline-none focus-visible:border-foreground/50 transition-colors mx-1 my-2 md:my-0";
+  const blankInputClass = "inline-flex h-auto py-1 min-w-[150px] max-w-full border-b-[4px] border-solid border-foreground bg-transparent px-2 text-center font-black text-foreground placeholder:font-black placeholder:opacity-30 focus-visible:outline-none focus-visible:border-foreground/50 transition-colors mx-1";
   
   // Custom error class
   const errorClass = "border-danger text-danger placeholder:text-danger/50";
@@ -102,7 +102,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col h-full gap-12">
               
               {/* Mad Libs Form */}
-              <div className="text-3xl md:text-5xl lg:text-[2.75rem] xl:text-6xl font-black tracking-tight leading-[1.6] md:leading-[1.8] text-foreground">
+              <div className="text-3xl md:text-5xl lg:text-[2.75rem] xl:text-6xl font-black tracking-tight leading-[2.2] md:leading-[2] text-foreground">
                 Hi Kharis! My name is
                 <input
                   {...form.register("name")}
@@ -116,7 +116,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                   className={`${blankInputClass} w-[220px] md:w-[320px]`}
                 />
                 . I'd love to work with you on
-                <span className="inline-block mx-1 align-middle my-2 md:my-0">
+                <span className="inline-block mx-1 align-middle">
                   <Select onValueChange={(v) => form.setValue("service", v)} defaultValue={form.getValues("service")}>
                     <SelectTrigger className={`h-auto py-1 border-b-[4px] border-t-0 border-l-0 border-r-0 border-solid border-foreground bg-transparent rounded-none focus:ring-0 focus:border-foreground/50 w-auto min-w-[240px] md:min-w-[320px] text-3xl md:text-5xl lg:text-[2.75rem] xl:text-6xl font-black text-foreground px-2 ${form.formState.errors.service ? errorClass : ''}`}>
                       <SelectValue placeholder="SERVICE" />
@@ -134,14 +134,21 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                 <input
                   {...form.register("email")}
                   placeholder="EMAIL"
-                  className={`${blankInputClass} w-[full] md:w-[400px] ${form.formState.errors.email ? errorClass : ''}`}
+                  className={`${blankInputClass} w-full md:w-[400px] ${form.formState.errors.email ? errorClass : ''}`}
                 />
                 . Here are some more details about the project:
-                <input
-                  {...form.register("message")}
-                  placeholder="BRIEF PROJECT DETAILS..."
-                  className={`${blankInputClass} w-full mt-4 ${form.formState.errors.message ? errorClass : ''}`}
-                />
+                <div className="relative w-full mt-6 block">
+                  <textarea
+                    {...form.register("message")}
+                    placeholder="BRIEF PROJECT DETAILS..."
+                    maxLength={500}
+                    rows={4}
+                    className="w-full h-auto min-h-[160px] p-6 bg-transparent border-[4px] border-foreground text-2xl md:text-3xl font-black text-foreground placeholder:opacity-30 focus-visible:outline-none focus-visible:shadow-[8px_8px_0_0_var(--foreground)] transition-shadow resize-none rounded-none"
+                  />
+                  <div className="absolute bottom-4 right-4 text-sm font-black opacity-40">
+                    {form.watch("message")?.length || 0}/500
+                  </div>
+                </div>
               </div>
               
               <div className="flex flex-wrap items-center gap-4 mt-auto">
