@@ -2,7 +2,7 @@ import * as React from "react";
 import { getProfileData } from "@/data/profile";
 import { getProjects } from "@/data/projects";
 import { getTechStack } from "@/data/tech-stack";
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, Download } from "lucide-react";
 
 export async function AboutSection() {
   const profileData = await getProfileData();
@@ -11,32 +11,32 @@ export async function AboutSection() {
   const techStackTotal = techStack.reduce((total, category) => total + category.items.length, 0);
   
   return (
-    <section id="about" className="relative w-full overflow-hidden rounded-none-[2rem] bg-surface border border-border text-foreground min-h-[80vh] flex flex-col p-8 md:p-12 lg:p-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <section id="about" className="relative w-full overflow-hidden bg-background border-[3px] border-foreground shadow-[8px_8px_0_0_var(--foreground)] text-foreground min-h-[80vh] flex flex-col p-8 md:p-12 lg:p-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
       
-      {/* Decorative Wavy Background */}
-      <div className="absolute inset-0 opacity-30 dark:opacity-10 pointer-events-none" 
+      {/* Decorative Grid Background */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05]" 
            style={{
-             backgroundImage: `url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M-100,50 Q200,10 500,50 T1100,50' fill='none' stroke='%23374151' stroke-width='1.5' stroke-dasharray='10, 10'/%3E%3Cpath d='M-100,150 Q200,110 500,150 T1100,150' fill='none' stroke='%23374151' stroke-width='1' stroke-opacity='0.5'/%3E%3Cpath d='M-100,250 Q200,210 500,250 T1100,250' fill='none' stroke='%23374151' stroke-width='0.5' stroke-opacity='0.3'/%3E%3C/svg%3E")`,
-             backgroundSize: 'cover',
-             backgroundPosition: 'center',
-             backgroundRepeat: 'no-repeat'
+             backgroundImage: `linear-gradient(var(--foreground) 2px, transparent 2px), linear-gradient(90deg, var(--foreground) 2px, transparent 2px)`,
+             backgroundSize: '3rem 3rem'
            }}
       />
 
       <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col h-full justify-center">
         
         {/* Top small text */}
-        <div className="w-full max-w-5xl mx-auto px-0">
-          <p className="text-xs font-bold tracking-[0.3em] text-muted uppercase mb-6">
-            ABOUT ME
-          </p>
+        <div className="w-full max-w-5xl mx-auto px-0 mb-8">
+          <div className="inline-block border-[3px] border-foreground bg-accent text-accent-foreground px-4 py-2 shadow-[4px_4px_0_0_var(--foreground)]">
+            <p className="text-xs font-black tracking-widest uppercase">
+              ABOUT ME
+            </p>
+          </div>
         </div>
 
         {/* Big Title Marquee */}
-        <div className="w-[calc(100%+4rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+10rem)] -ml-8 md:-ml-12 lg:-ml-20 overflow-hidden mb-16 relative">
+        <div className="w-[calc(100%+4rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+10rem)] -ml-8 md:-ml-12 lg:-ml-20 overflow-hidden mb-16 relative border-y-[3px] border-foreground border-dashed py-4 bg-surface/50">
           <div className="flex flex-nowrap whitespace-nowrap animate-marquee w-max" style={{ animationDuration: '35s' }}>
             {Array(6).fill(profileData.tagline || "Problem Solver. Digital Generalist.").map((text, i) => (
-              <h1 key={i} className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tight mx-4 md:mx-8 leading-[1.1]">
+              <h1 key={i} className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tighter uppercase mx-4 md:mx-8 leading-none">
                 {text}
               </h1>
             ))}
@@ -44,63 +44,64 @@ export async function AboutSection() {
         </div>
 
         {/* Profile Info Row */}
-        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-8 md:gap-12 items-start">
+        <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-8 md:gap-16 items-start">
           
           {/* Avatar */}
-          <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-none overflow-hidden border-4 border-background bg-secondary/10 shadow-xl">
+          <div className="w-40 h-40 md:w-48 md:h-48 shrink-0 overflow-hidden border-[3px] border-foreground bg-surface shadow-[6px_6px_0_0_var(--foreground)]">
             <img 
               src={profileData.avatarUrl || "/avatar.jpg"} 
               alt={profileData.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover grayscale contrast-125"
             />
           </div>
 
           {/* Details */}
-          <div className="flex flex-col flex-1 pt-2 w-full">
+          <div className="flex flex-col flex-1 w-full">
             
             {/* Name */}
-            <div className="flex items-center gap-2 mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-wide">
+            <div className="flex items-center gap-4 mb-8">
+              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none">
                 {profileData.name}
               </h2>
-              <BadgeCheck className="w-6 h-6 text-accent fill-accent/20" />
+              <BadgeCheck className="w-8 h-8 md:w-10 md:h-10 text-accent stroke-[3]" />
             </div>
 
             {/* Stats Row */}
-            <div className="flex flex-wrap gap-x-12 md:gap-x-16 gap-y-6 mb-8 border-b border-border pb-8">
-              <div className="flex flex-col gap-1.5">
-                <span className="text-[10px] md:text-xs font-bold tracking-widest text-muted uppercase">Location</span>
-                <span className="text-sm md:text-base font-bold">Kabupaten Cirebon</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 pb-10 border-b-[3px] border-foreground border-dashed">
+              <div className="flex flex-col gap-2 p-3 border-[3px] border-foreground bg-surface shadow-[4px_4px_0_0_var(--foreground)]">
+                <span className="text-[10px] md:text-xs font-black tracking-widest text-foreground uppercase opacity-70">Location</span>
+                <span className="text-sm md:text-base font-bold uppercase tracking-wide">Kabupaten Cirebon</span>
               </div>
-              <div className="flex flex-col gap-1.5">
-                <span className="text-[10px] md:text-xs font-bold tracking-widest text-muted uppercase">Projects</span>
-                <span className="text-sm md:text-base font-bold">{projects.length}+ Completed</span>
+              <div className="flex flex-col gap-2 p-3 border-[3px] border-foreground bg-surface shadow-[4px_4px_0_0_var(--foreground)]">
+                <span className="text-[10px] md:text-xs font-black tracking-widest text-foreground uppercase opacity-70">Projects</span>
+                <span className="text-sm md:text-base font-bold uppercase tracking-wide">{projects.length}+ Completed</span>
               </div>
-              <div className="flex flex-col gap-1.5">
-                <span className="text-[10px] md:text-xs font-bold tracking-widest text-muted uppercase">Tech Stack</span>
-                <span className="text-sm md:text-base font-bold">{techStackTotal} Technologies</span>
+              <div className="flex flex-col gap-2 p-3 border-[3px] border-foreground bg-surface shadow-[4px_4px_0_0_var(--foreground)]">
+                <span className="text-[10px] md:text-xs font-black tracking-widest text-foreground uppercase opacity-70">Tech Stack</span>
+                <span className="text-sm md:text-base font-bold uppercase tracking-wide">{techStackTotal} Techs</span>
               </div>
-              <div className="flex flex-col gap-1.5">
-                <span className="text-[10px] md:text-xs font-bold tracking-widest text-muted uppercase">Email</span>
-                <span className="text-sm md:text-base font-bold">{profileData.email}</span>
+              <div className="flex flex-col gap-2 p-3 border-[3px] border-foreground bg-surface shadow-[4px_4px_0_0_var(--foreground)]">
+                <span className="text-[10px] md:text-xs font-black tracking-widest text-foreground uppercase opacity-70">Email</span>
+                <span className="text-sm md:text-base font-bold uppercase tracking-wide break-all">{profileData.email}</span>
               </div>
             </div>
 
             {/* Bio Paragraph */}
-            <div className="text-secondary-text text-sm md:text-base leading-relaxed space-y-4 max-w-3xl font-medium mb-8 whitespace-pre-wrap">
+            <div className="prose prose-neutral dark:prose-invert text-foreground text-sm md:text-base leading-relaxed space-y-4 max-w-3xl font-bold mb-10 whitespace-pre-wrap prose-strong:font-black prose-strong:uppercase">
               <div dangerouslySetInnerHTML={{ __html: profileData.about }} />
             </div>
 
             {/* Resume Link */}
-            <div className="flex items-center gap-2 text-foreground text-sm md:text-base font-medium flex-wrap">
-              <span>Want to know more about my experience?</span>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-auto">
+              <span className="font-black uppercase tracking-widest text-sm">Want to know more about my experience?</span>
               <a 
                 href={profileData.resumeUrl} 
                 target="_blank" 
                 rel="noreferrer"
-                className="underline underline-offset-4 decoration-2 decoration-accent hover:text-accent transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 border-[3px] border-foreground bg-foreground text-background hover:bg-accent hover:text-accent-foreground font-black uppercase tracking-widest text-xs transition-all shadow-[6px_6px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
               >
-                Download my resume.
+                <Download className="w-4 h-4 stroke-[3]" />
+                Download Resume
               </a>
             </div>
 
