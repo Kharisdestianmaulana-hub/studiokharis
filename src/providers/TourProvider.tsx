@@ -112,7 +112,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "center",
-      disableScrolling: true,
     },
     {
       target: "#tour-collapse",
@@ -123,7 +122,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-profile",
@@ -134,7 +132,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-home",
@@ -145,7 +142,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-projects",
@@ -156,7 +152,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-experience",
@@ -167,7 +162,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-tech-stack",
@@ -178,7 +172,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-articles",
@@ -189,7 +182,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-visitor-map",
@@ -200,7 +192,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-guestbook",
@@ -211,7 +202,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-timeline",
@@ -222,7 +212,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-contact",
@@ -233,7 +222,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-nav-settings",
@@ -244,7 +232,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-theme",
@@ -255,7 +242,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
-      disableScrolling: true,
     },
     {
       target: "#tour-search",
@@ -266,7 +252,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "bottom",
-      disableScrolling: true,
     },
     {
       target: "#tour-visitor",
@@ -277,7 +262,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "left",
-      disableScrolling: true,
     },
     {
       target: "#tour-music",
@@ -288,7 +272,6 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "top-end",
-      disableScrolling: true,
     },
   ];
 
@@ -316,6 +299,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
           steps={steps}
           run={runTour}
           continuous
+          disableScrolling={true}
+          disableScrollParentFix={true}
           {...({ showProgress: true, showSkipButton: true } as any)}
           callback={handleJoyrideCallback}
           tooltipComponent={CustomTooltip}
