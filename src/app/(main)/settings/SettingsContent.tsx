@@ -2,8 +2,6 @@
 
 import { useSettingsStore } from "@/store/settingsStore";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Moon, Sun, Monitor, Type, EyeOff, LayoutGrid, List, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -29,174 +27,176 @@ export function SettingsContent() {
 
   if (!mounted) {
     return (
-      <div className="flex flex-col gap-8 animate-in fade-in duration-500">
+      <div className="flex flex-col gap-10 animate-in fade-in duration-500">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold text-foreground">Settings</h1>
-          <p className="text-secondary-text">Loading preferences...</p>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground uppercase">Settings</h1>
+          <p className="font-bold tracking-widest text-xs uppercase text-foreground">Loading preferences...</p>
         </div>
       </div>
     );
   }
 
+  const brutalistCard = "flex flex-col border-[3px] border-foreground bg-background shadow-[8px_8px_0_0_var(--foreground)]";
+  const brutalistCardHeader = "p-6 md:p-8 border-b-[3px] border-foreground bg-surface";
+  const brutalistCardTitle = "text-3xl font-black uppercase tracking-tighter text-foreground";
+  const brutalistCardDesc = "font-bold tracking-widest text-xs uppercase text-foreground opacity-80 mt-2";
+  const brutalistCardContent = "p-6 md:p-8 flex flex-col gap-8";
+  const brutalistLabel = "text-sm font-black uppercase tracking-widest text-foreground";
+  
+  const getBrutalistBtnClass = (isActive: boolean) => cn(
+    "flex items-center gap-2 px-5 py-3 border-[3px] border-foreground font-black uppercase tracking-widest text-xs transition-all",
+    isActive 
+      ? "bg-foreground text-background translate-x-[4px] translate-y-[4px] shadow-none" 
+      : "bg-surface text-foreground hover:bg-accent hover:text-accent-foreground hover:-translate-y-1 shadow-[4px_4px_0_0_var(--foreground)] hover:shadow-[6px_6px_0_0_var(--foreground)]"
+  );
+
   return (
-    <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
+    <div className="flex flex-col gap-12 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-5xl">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold text-foreground">Settings</h1>
-        <p className="text-secondary-text">Customize your experience on this portfolio.</p>
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground uppercase">Settings</h1>
+        <p className="font-bold tracking-widest text-xs uppercase text-foreground border-[3px] border-foreground bg-accent text-accent-foreground px-4 py-2 w-fit shadow-[4px_4px_0_0_var(--foreground)]">Customize your experience on this portfolio.</p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2">
         {/* Appearance Settings */}
-        <Card className="bg-surface border-border">
-          <CardHeader>
-            <CardTitle className="text-xl">Appearance</CardTitle>
-            <CardDescription>Adjust the visual theme and colors.</CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-6">
+        <div className={brutalistCard}>
+          <div className={brutalistCardHeader}>
+            <h2 className={brutalistCardTitle}>Appearance</h2>
+            <p className={brutalistCardDesc}>Adjust the visual theme and colors.</p>
+          </div>
+          <div className={brutalistCardContent}>
             
             {/* Theme Toggle */}
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium text-foreground">Theme</span>
-              <div className="flex flex-wrap gap-2">
-                <Button 
-                  variant={theme === "light" ? "default" : "outline"}
+            <div className="flex flex-col gap-4">
+              <span className={brutalistLabel}>Theme</span>
+              <div className="flex flex-wrap gap-4">
+                <button 
                   onClick={() => setTheme("light")}
-                  className={cn("gap-2", theme === "light" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
+                  className={getBrutalistBtnClass(theme === "light")}
                 >
-                  <Sun className="w-4 h-4" /> Light
-                </Button>
-                <Button 
-                  variant={theme === "dark" ? "default" : "outline"}
+                  <Sun className="w-5 h-5 stroke-[3]" /> Light
+                </button>
+                <button 
                   onClick={() => setTheme("dark")}
-                  className={cn("gap-2", theme === "dark" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
+                  className={getBrutalistBtnClass(theme === "dark")}
                 >
-                  <Moon className="w-4 h-4" /> Dark
-                </Button>
-                <Button 
-                  variant={theme === "system" ? "default" : "outline"}
+                  <Moon className="w-5 h-5 stroke-[3]" /> Dark
+                </button>
+                <button 
                   onClick={() => setTheme("system")}
-                  className={cn("gap-2", theme === "system" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
+                  className={getBrutalistBtnClass(theme === "system")}
                 >
-                  <Monitor className="w-4 h-4" /> System
-                </Button>
+                  <Monitor className="w-5 h-5 stroke-[3]" /> System
+                </button>
               </div>
             </div>
 
-
-            
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Accessibility Settings */}
-        <Card className="bg-surface border-border">
-          <CardHeader>
-            <CardTitle className="text-xl">Accessibility</CardTitle>
-            <CardDescription>Make the site easier to use.</CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-6">
+        <div className={brutalistCard}>
+          <div className={brutalistCardHeader}>
+            <h2 className={brutalistCardTitle}>Accessibility</h2>
+            <p className={brutalistCardDesc}>Make the site easier to use.</p>
+          </div>
+          <div className={brutalistCardContent}>
             
             {/* Text Size */}
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium text-foreground">Text Size</span>
-              <div className="flex flex-wrap gap-2">
-                <Button 
-                  variant={textSize === "normal" ? "default" : "outline"}
+            <div className="flex flex-col gap-4">
+              <span className={brutalistLabel}>Text Size</span>
+              <div className="flex flex-wrap gap-4">
+                <button 
                   onClick={() => setTextSize("normal")}
-                  className={cn("gap-2", textSize === "normal" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
+                  className={getBrutalistBtnClass(textSize === "normal")}
                 >
-                  <Type className="w-4 h-4" /> Normal
-                </Button>
-                <Button 
-                  variant={textSize === "large" ? "default" : "outline"}
+                  <Type className="w-5 h-5 stroke-[3]" /> Normal
+                </button>
+                <button 
                   onClick={() => setTextSize("large")}
-                  className={cn("gap-2", textSize === "large" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
+                  className={getBrutalistBtnClass(textSize === "large")}
                 >
-                  <Type className="w-5 h-5" /> Large
-                </Button>
+                  <Type className="w-6 h-6 stroke-[3]" /> Large
+                </button>
               </div>
             </div>
 
             {/* Reduced Motion */}
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium text-foreground">Reduced Motion</span>
-              <div className="flex flex-wrap gap-2">
-                <Button 
-                  variant={!reducedMotion ? "default" : "outline"}
+            <div className="flex flex-col gap-4">
+              <span className={brutalistLabel}>Reduced Motion</span>
+              <div className="flex flex-wrap gap-4">
+                <button 
                   onClick={() => setReducedMotion(false)}
-                  className={cn("gap-2", !reducedMotion && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
+                  className={getBrutalistBtnClass(!reducedMotion)}
                 >
-                  Default (Animated)
-                </Button>
-                <Button 
-                  variant={reducedMotion ? "default" : "outline"}
+                  Animated
+                </button>
+                <button 
                   onClick={() => setReducedMotion(true)}
-                  className={cn("gap-2", reducedMotion && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
+                  className={getBrutalistBtnClass(reducedMotion)}
                 >
-                  <EyeOff className="w-4 h-4" /> Reduce Motion
-                </Button>
+                  <EyeOff className="w-5 h-5 stroke-[3]" /> Reduced
+                </button>
               </div>
             </div>
             
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Display Preferences */}
-        <Card className="bg-surface border-border">
-          <CardHeader>
-            <CardTitle className="text-xl">Display Preferences</CardTitle>
-            <CardDescription>Customize how content is presented.</CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-6">
+        <div className={brutalistCard}>
+          <div className={brutalistCardHeader}>
+            <h2 className={brutalistCardTitle}>Layout</h2>
+            <p className={brutalistCardDesc}>Customize how content is presented.</p>
+          </div>
+          <div className={brutalistCardContent}>
             
             {/* Projects View */}
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium text-foreground">Projects View Default</span>
-              <div className="flex flex-wrap gap-2">
-                <Button 
-                  variant={projectsView === "grid" ? "default" : "outline"}
+            <div className="flex flex-col gap-4">
+              <span className={brutalistLabel}>Projects View Default</span>
+              <div className="flex flex-wrap gap-4">
+                <button 
                   onClick={() => setProjectsView("grid")}
-                  className={cn("gap-2", projectsView === "grid" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
+                  className={getBrutalistBtnClass(projectsView === "grid")}
                 >
-                  <LayoutGrid className="w-4 h-4" /> Grid
-                </Button>
-                <Button 
-                  variant={projectsView === "list" ? "default" : "outline"}
+                  <LayoutGrid className="w-5 h-5 stroke-[3]" /> Grid
+                </button>
+                <button 
                   onClick={() => setProjectsView("list")}
-                  className={cn("gap-2", projectsView === "list" && "bg-accent text-accent-foreground hover:bg-accent/90 border-transparent")}
+                  className={getBrutalistBtnClass(projectsView === "list")}
                 >
-                  <List className="w-4 h-4" /> List
-                </Button>
+                  <List className="w-5 h-5 stroke-[3]" /> List
+                </button>
               </div>
             </div>
             
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Data & Privacy */}
-        <Card className="bg-surface border-border border-destructive/20">
-          <CardHeader>
-            <CardTitle className="text-xl text-destructive">Data & Privacy</CardTitle>
-            <CardDescription>Manage your stored preferences.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col gap-3 items-start">
-              <p className="text-sm text-secondary-text">
+        <div className={cn(brutalistCard, "border-destructive")}>
+          <div className={cn(brutalistCardHeader, "bg-destructive text-destructive-foreground border-destructive")}>
+            <h2 className={cn(brutalistCardTitle, "text-destructive-foreground")}>Danger Zone</h2>
+            <p className={cn(brutalistCardDesc, "text-destructive-foreground opacity-90")}>Manage your stored preferences.</p>
+          </div>
+          <div className={brutalistCardContent}>
+            <div className="flex flex-col gap-4 items-start">
+              <p className="text-sm font-bold uppercase tracking-widest text-foreground leading-relaxed">
                 Atur ulang semua preferensi dan pengaturan Anda ke bawaan pabrik. Tindakan ini akan menghapus semua konfigurasi personalisasi yang telah Anda buat.
               </p>
               
-              <div className="flex flex-wrap gap-3 mt-2">
-                <Button 
-                  variant="destructive" 
+              <div className="flex flex-wrap gap-4 mt-4 w-full">
+                <button 
                   onClick={resetSettings}
-                  className="gap-2"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-destructive text-destructive-foreground font-black uppercase tracking-widest border-[3px] border-foreground hover:bg-foreground hover:text-background transition-all shadow-[6px_6px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
                 >
-                  <RefreshCw className="w-4 h-4" />
+                  <RefreshCw className="w-5 h-5 stroke-[3]" />
                   Reset All Settings
-                </Button>
+                </button>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
