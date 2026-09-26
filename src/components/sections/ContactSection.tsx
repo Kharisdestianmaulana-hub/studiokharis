@@ -82,7 +82,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
   }
 
   // Helper for input classes to look like a legal contract blank
-  const blankInputClass = "inline-flex h-10 w-[200px] border-b-[3px] border-solid border-foreground bg-transparent px-2 py-1 text-center font-bold text-foreground placeholder:font-normal placeholder:text-muted focus-visible:outline-none focus-visible:border-accent disabled:cursor-not-allowed disabled:opacity-50 transition-colors mx-1";
+  const blankInputClass = "inline-flex h-auto py-1 min-w-[150px] max-w-full border-b-[4px] border-solid border-foreground bg-transparent px-2 text-center font-black text-foreground placeholder:font-black placeholder:opacity-30 focus-visible:outline-none focus-visible:border-foreground/50 transition-colors mx-1 my-2 md:my-0";
   
   // Custom error class
   const errorClass = "border-danger text-danger placeholder:text-danger/50";
@@ -97,31 +97,29 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 pt-8 border-t-[3px] border-foreground">
-          <div className="lg:col-span-3 flex flex-col justify-between h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 pt-8 border-t-[3px] border-foreground">
+          <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-between h-full">
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col h-full gap-12">
               
               {/* Mad Libs Form */}
-              <div className="text-3xl md:text-5xl font-black tracking-tight leading-[1.8] md:leading-[2] text-foreground">
+              <div className="text-3xl md:text-5xl lg:text-[2.75rem] xl:text-6xl font-black tracking-tight leading-[1.6] md:leading-[1.8] text-foreground">
                 Hi Kharis! My name is
                 <input
                   {...form.register("name")}
-                  placeholder="YOUR NAME"
-                  className={`${blankInputClass} ${form.formState.errors.name ? errorClass : ''}`}
-                  style={{ width: "240px" }}
+                  placeholder="NAME"
+                  className={`${blankInputClass} w-[180px] md:w-[280px] ${form.formState.errors.name ? errorClass : ''}`}
                 />
                 and I work at
                 <input
                   {...form.register("company")}
-                  placeholder="COMPANY (OPTIONAL)"
-                  className={blankInputClass}
-                  style={{ width: "340px" }}
+                  placeholder="COMPANY"
+                  className={`${blankInputClass} w-[220px] md:w-[320px]`}
                 />
                 . I'd love to work with you on
-                <span className="inline-block mx-1 align-middle">
+                <span className="inline-block mx-1 align-middle my-2 md:my-0">
                   <Select onValueChange={(v) => form.setValue("service", v)} defaultValue={form.getValues("service")}>
-                    <SelectTrigger className={`h-10 border-b-[3px] border-t-0 border-l-0 border-r-0 border-solid border-foreground bg-transparent rounded-none focus:ring-0 focus:border-accent w-[300px] text-2xl md:text-3xl font-bold text-foreground px-2 py-0 ${form.formState.errors.service ? errorClass : ''}`}>
-                      <SelectValue placeholder="SELECT A SERVICE" />
+                    <SelectTrigger className={`h-auto py-1 border-b-[4px] border-t-0 border-l-0 border-r-0 border-solid border-foreground bg-transparent rounded-none focus:ring-0 focus:border-foreground/50 w-auto min-w-[240px] md:min-w-[320px] text-3xl md:text-5xl lg:text-[2.75rem] xl:text-6xl font-black text-foreground px-2 ${form.formState.errors.service ? errorClass : ''}`}>
+                      <SelectValue placeholder="SERVICE" />
                     </SelectTrigger>
                     <SelectContent className="rounded-none border-[3px] border-foreground font-bold">
                       <SelectItem value="a new website">A NEW WEBSITE</SelectItem>
@@ -135,16 +133,14 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                 . You can reach me at
                 <input
                   {...form.register("email")}
-                  placeholder="YOUR EMAIL"
-                  className={`${blankInputClass} ${form.formState.errors.email ? errorClass : ''}`}
-                  style={{ width: "360px" }}
+                  placeholder="EMAIL"
+                  className={`${blankInputClass} w-[full] md:w-[400px] ${form.formState.errors.email ? errorClass : ''}`}
                 />
                 . Here are some more details about the project:
                 <input
                   {...form.register("message")}
                   placeholder="BRIEF PROJECT DETAILS..."
-                  className={`${blankInputClass} ${form.formState.errors.message ? errorClass : ''}`}
-                  style={{ width: "100%", maxWidth: "100%", marginTop: "16px" }}
+                  className={`${blankInputClass} w-full mt-4 ${form.formState.errors.message ? errorClass : ''}`}
                 />
               </div>
               
@@ -173,7 +169,7 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
             </form>
           </div>
           
-          <div className="lg:col-span-2 flex flex-col gap-12 lg:border-l-[3px] lg:border-foreground lg:pl-12">
+          <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-12 lg:border-l-[3px] lg:border-foreground lg:pl-12">
             {/* Availability & Time Card */}
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-4 pb-6 border-b-[3px] border-foreground">
