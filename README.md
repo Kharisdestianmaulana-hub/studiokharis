@@ -2,100 +2,58 @@
 
 ## Bahasa Indonesia
 
-**StudioKharis** adalah sebuah portofolio pengembang yang estetis, dinamis, dan interaktif, dibangun oleh [Kharis Destian Maulana](https://github.com/Kharisdestianmaulana-hub). Portofolio ini dirancang tidak hanya untuk memamerkan proyek, tetapi juga sebagai bukti keahlian rekayasa antarmuka (front-end engineering), manajemen status, dan prinsip UI/UX modern dengan gaya desain Neo-Brutalism.
+Halo! Selamat datang di repositori kode untuk portofolio pribadi saya, **StudioKharis**. Saya merancang situs web ini tidak hanya untuk memamerkan proyek-proyek saya, tetapi juga sebagai tempat bermain untuk bereksperimen dengan rekayasa antarmuka (front-end engineering), manajemen status, dan prinsip UI/UX modern.
 
-### Fitur Utama
+### Mengapa Neo-Brutalism?
+Saya memilih gaya desain Neo-Brutalism (dan Swiss Design) karena karakternya yang berani. Anda akan melihat banyak garis batas tebal, sudut tajam, dan bayangan solid di seluruh antarmuka ini. Tujuannya adalah membuat struktur yang kaku, kuat, namun tetap bersih dan sangat rapi.
 
-- **Desain Neo-Brutalism & Swiss Design**: Antarmuka yang berani dengan garis batas tebal, sudut tajam, dan bayangan solid yang memberikan kesan kaku namun sangat rapi.
-- **Tur Interaktif**: Sistem panduan otomatis bagi pengunjung baru untuk mengenali fitur-fitur yang ada di dalam situs web.
-- **Pencarian Global (Command Palette)**: Antarmuka pencarian terpusat (dapat diakses via `Ctrl+K` atau `Cmd+K`) untuk mencari proyek, artikel, dan halaman lainnya secara instan.
-- **Peta Pengunjung & Buku Tamu**: Menampilkan asal pengunjung secara langsung pada peta dunia interaktif, dilengkapi dengan sistem buku tamu bergaya papan catur (checkerboard).
-- **Pemutar Musik Lo-Fi**: Pemutar musik terintegrasi untuk menemani pengunjung saat menelusuri portofolio.
-- **Integrasi Headless CMS**: Semua konten (proyek, pengalaman, artikel) dikelola dan disajikan melalui API Appwrite, memungkinkan pembaruan konten secara instan tanpa perlu peluncuran (deploy) ulang.
-- **Tema Dinamis & Favicon**: Dukungan mode gelap (dark mode) dan terang (light mode) di mana seluruh antarmuka dan ikon tab peramban (favicon) berubah menyesuaikan tema yang dipilih secara otomatis.
-- **Animasi Mikro**: Transisi halus dan animasi mikro interaktif yang ditenagai oleh Framer Motion.
+### Fitur Utama di Dalamnya
+- **Tur Interaktif**: Saat Anda pertama kali berkunjung, akan ada sistem panduan otomatis untuk mengenali tata letak fitur-fitur di website.
+- **Pencarian Global (Command Palette)**: Tekan `Ctrl+K` atau `Cmd+K` di mana saja, dan Anda bisa mencari seluruh proyek, artikel, atau halaman secara instan.
+- **Peta Pengunjung & Buku Tamu**: Anda bisa melihat asal pengunjung website ini di atas peta dunia 3D interaktif. Jangan lupa tinggalkan pesan di buku tamu bergaya papan catur (checkerboard) saya!
+- **Pemutar Musik Lo-Fi**: Saya menambahkan pemutar musik terintegrasi agar Anda bisa bersantai saat menelusuri portofolio saya.
+- **Integrasi Headless CMS**: Semua proyek dan artikel saya tarik langsung melalui API Appwrite. Ini memungkinkan saya memperbarui portofolio kapan saja tanpa harus melakukan peluncuran (deploy) ulang kode.
+- **Tema Dinamis & Favicon**: Mendukung mode gelap (dark mode) dan terang (light mode). Coba ubah temanya, dan lihat bagaimana ikon tab peramban (favicon) juga ikut berubah!
+- **Animasi Mikro**: Saya memastikan setiap transisi dan interaksi terasa sangat mulus dengan bantuan Framer Motion.
 
-### Teknologi yang Digunakan
+### Teknologi yang Saya Gunakan
+Di balik layar, saya membangun ini dengan:
+- **Framework**: Next.js 15 (App Router)
+- **Bahasa**: TypeScript
+- **Penataan Gaya**: Tailwind CSS
+- **Komponen UI**: shadcn/ui & Radix UI
+- **Animasi**: Framer Motion
+- **Database / CMS**: Appwrite
+- **Ikon**: Lucide React & React Icons
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
-- **Bahasa**: [TypeScript](https://www.typescriptlang.org/)
-- **Penataan Gaya**: [Tailwind CSS](https://tailwindcss.com/)
-- **Komponen UI**: [shadcn/ui](https://ui.shadcn.com/) & Radix UI
-- **Animasi**: [Framer Motion](https://www.framer.com/motion/)
-- **Database / CMS**: [Appwrite](https://appwrite.io/)
-- **Ikon**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
-
-### Cara Instalasi
-
-1. Klon repositori ini:
-   ```bash
-   git clone https://github.com/Kharisdestianmaulana-hub/studiokharis.git
-   ```
-2. Masuk ke dalam direktori proyek:
-   ```bash
-   cd studiokharis
-   ```
-3. Instal dependensi:
-   ```bash
-   npm install
-   ```
-4. Buat berkas `.env` berdasarkan variabel lingkungan yang dibutuhkan dan isi dengan kredensial Appwrite Anda.
-5. Jalankan server pengembangan lokal:
-   ```bash
-   npm run dev
-   ```
-6. Buka `http://localhost:3000` di peramban Anda.
+*(Catatan: Repositori ini hanya untuk keperluan etalase kode dan portofolio. Repositori ini tidak ditujukan untuk dikloning atau dijalankan secara publik karena terhubung langsung dengan kredensial database pribadi saya).*
 
 ---
 
 ## English
 
-**StudioKharis** is a highly aesthetic, dynamic, and interactive developer portfolio built by [Kharis Destian Maulana](https://github.com/Kharisdestianmaulana-hub). This portfolio is designed not just to showcase projects, but to serve as a testament to advanced front-end engineering, state management, and modern UI/UX principles wrapped in a Neo-Brutalist design language.
+Hello! Welcome to the source code repository of my personal portfolio, **StudioKharis**. I designed this space not just to showcase my projects, but as a playground to experiment with advanced front-end engineering, state management, and modern UI/UX principles.
 
-### Key Features
+### Why Neo-Brutalism?
+I chose the Neo-Brutalist (and Swiss Design) approach for its bold character. You'll notice thick borders, sharp corners, and solid hard shadows throughout the site. The goal is to provide an interface that feels rigid and structured, yet remains extremely clean and organized.
 
-- **Neo-Brutalism & Swiss Design**: A bold interface featuring thick borders, sharp corners, and solid hard shadows that provide a rigid yet extremely organized layout.
-- **Interactive Tour**: An automated onboarding guide for new visitors to explore the website's functionalities.
-- **Global Search (Command Palette)**: A powerful, unified search interface (accessible via `Ctrl+K` or `Cmd+K`) that instantly queries all database items, including projects and articles.
-- **Live Visitor Map & Guestbook**: Displays real-time visitor locations on a 3D interactive globe, complete with a checkerboard-styled guestbook system.
-- **Lo-Fi Music Player**: An integrated background music player to keep visitors engaged while browsing.
-- **Headless CMS Integration**: All content (projects, experiences, articles) is decoupled and served securely via Appwrite API, allowing for instant, zero-redeploy content updates.
-- **Dynamic Theme & Favicon**: Deep dark/light mode integration where not only the UI theme swaps seamlessly, but the browser tab's favicon dynamically matches the chosen theme in real-time.
-- **Micro-Animations**: Smooth, 60fps transitions and interactive micro-animations powered by Framer Motion.
+### What's Inside
+- **Interactive Tour**: An automated onboarding guide pops up for new visitors to explore the website's functionalities.
+- **Global Search (Command Palette)**: Hit `Ctrl+K` or `Cmd+K` anywhere, and you can instantly query all my projects, articles, and pages.
+- **Live Visitor Map & Guestbook**: See real-time visitor locations on a 3D interactive globe. Don't forget to leave a message on my checkerboard-styled guestbook!
+- **Lo-Fi Music Player**: I integrated a background music player so you can vibe while exploring my work.
+- **Headless CMS Integration**: All my content is decoupled and served securely via the Appwrite API. This lets me push content updates instantly without redeploying the code.
+- **Dynamic Theme & Favicon**: Deep dark/light mode integration. Toggle the theme and watch how even the browser tab's favicon dynamically matches your choice!
+- **Micro-Animations**: I made sure every transition feels smooth and responsive using Framer Motion.
 
 ### Tech Stack
+Under the hood, I built this using:
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui & Radix UI
+- **Animations**: Framer Motion
+- **Database / CMS**: Appwrite
+- **Icons**: Lucide React & React Icons
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) & Radix UI
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Database / CMS**: [Appwrite](https://appwrite.io/)
-- **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
-
-### Getting Started
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Kharisdestianmaulana-hub/studiokharis.git
-   ```
-2. Navigate into the project directory:
-   ```bash
-   cd studiokharis
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Create an `.env` file based on the required environment variables and populate it with your Appwrite credentials.
-5. Run the development server:
-   ```bash
-   npm run dev
-   ```
-6. Open `http://localhost:3000` in your browser.
-
----
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+*(Note: This repository serves strictly as a code showcase. It is not intended to be cloned or run publicly as it is tightly coupled with my private database credentials).*
