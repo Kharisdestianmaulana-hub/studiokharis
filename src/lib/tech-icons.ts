@@ -5,7 +5,8 @@ import {
 import { 
   SiFlutter, SiTypescript, SiExpress, SiMongodb, SiPostgresql, 
   SiMysql, SiFirebase, SiTailwindcss, SiNextdotjs, SiGodotengine,
-  SiDjango, SiFastapi, SiGraphql, SiRedis, SiFigma, SiUnity, SiAppwrite
+  SiDjango, SiFastapi, SiGraphql, SiRedis, SiFigma, SiUnity, SiAppwrite,
+  SiSwift, SiKotlin, SiRust, SiGo
 } from "react-icons/si";
 import { TbBrandCSharp, TbBrandAdobeIllustrator, TbBrandAdobePhotoshop } from "react-icons/tb";
 import { Code2 } from "lucide-react";
@@ -24,6 +25,10 @@ export const getTechIcon = (name: string) => {
     case normalized.includes("angular"): return { icon: FaAngular, color: "#DD0031" };
     case normalized.includes("tailwind"): return { icon: SiTailwindcss, color: "#06B6D4" };
     case normalized.includes("flutter"): return { icon: SiFlutter, color: "#02569B" };
+    case normalized.includes("swift"): return { icon: SiSwift, color: "#F05138" };
+    case normalized.includes("kotlin"): return { icon: SiKotlin, color: "#7F52FF" };
+    case normalized.includes("rust"): return { icon: SiRust, color: "#000000" };
+    case normalized === "go" || normalized.includes("golang"): return { icon: SiGo, color: "#00ADD8" };
     case normalized.includes("node"): return { icon: FaNodeJs, color: "#339933" };
     case normalized.includes("express"): return { icon: SiExpress, color: "#000000" };
     case normalized.includes("python"): return { icon: FaPython, color: "#3776AB" };
