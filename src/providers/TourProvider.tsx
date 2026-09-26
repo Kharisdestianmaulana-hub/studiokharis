@@ -112,6 +112,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "center",
+      disableScrolling: true,
     },
     {
       target: "#tour-collapse",
@@ -122,6 +123,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
+      disableScrolling: true,
     },
     {
       target: "#tour-profile",
@@ -132,6 +134,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
+      disableScrolling: true,
     },
     {
       target: "#tour-nav-home",
@@ -142,6 +145,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
+      disableScrolling: true,
     },
     {
       target: "#tour-nav-projects",
@@ -152,6 +156,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
+      disableScrolling: true,
     },
     {
       target: "#tour-nav-experience",
@@ -162,6 +167,18 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
+      disableScrolling: true,
+    },
+    {
+      target: "#tour-nav-tech-stack",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">TECH STACK</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">The tools, languages, and frameworks I use.</p>
+        </div>
+      ),
+      placement: "right",
+      disableScrolling: true,
     },
     {
       target: "#tour-nav-articles",
@@ -172,6 +189,40 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
+      disableScrolling: true,
+    },
+    {
+      target: "#tour-nav-visitor-map",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">VISITOR MAP</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">See live visitor locations across the globe.</p>
+        </div>
+      ),
+      placement: "right",
+      disableScrolling: true,
+    },
+    {
+      target: "#tour-nav-guestbook",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">GUESTBOOK</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Leave a message for me and other visitors.</p>
+        </div>
+      ),
+      placement: "right",
+      disableScrolling: true,
+    },
+    {
+      target: "#tour-nav-timeline",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">TIMELINE</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">A chronological view of my milestones.</p>
+        </div>
+      ),
+      placement: "right",
+      disableScrolling: true,
     },
     {
       target: "#tour-nav-contact",
@@ -182,16 +233,18 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
+      disableScrolling: true,
     },
     {
-      target: "#tour-nav-globe",
+      target: "#tour-nav-settings",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">VISITOR MAP</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">See live visitor locations across the globe.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">SETTINGS</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Customize your experience on this site.</p>
         </div>
       ),
       placement: "right",
+      disableScrolling: true,
     },
     {
       target: "#tour-theme",
@@ -202,6 +255,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "right",
+      disableScrolling: true,
     },
     {
       target: "#tour-search",
@@ -212,6 +266,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "bottom",
+      disableScrolling: true,
     },
     {
       target: "#tour-visitor",
@@ -222,6 +277,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "left",
+      disableScrolling: true,
     },
     {
       target: "#tour-music",
@@ -232,6 +288,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
         </div>
       ),
       placement: "top-end",
+      disableScrolling: true,
     },
   ];
 
