@@ -25,25 +25,26 @@ const CustomTooltip = ({
   closeProps,
   primaryProps,
   tooltipProps,
+  isLastStep,
 }: TooltipRenderProps) => {
   return (
     <div
       {...tooltipProps}
-      className="bg-[#FAFAFA] dark:bg-[#18181B] border border-border p-4 rounded-none shadow-xl w-80 max-w-[90vw] flex flex-col gap-4 relative"
+      className="bg-background border-[4px] border-foreground p-6 rounded-none shadow-[12px_12px_0_0_var(--foreground)] w-[360px] max-w-[90vw] flex flex-col gap-4 relative"
     >
       <button
         {...closeProps}
-        className="absolute top-2 right-2 p-1 text-muted hover:text-foreground transition-colors"
+        className="absolute top-2 right-2 p-1 text-foreground hover:bg-foreground hover:text-background transition-colors border-2 border-transparent hover:border-foreground"
       >
-        <X className="w-4 h-4" />
+        <X className="w-5 h-5" />
       </button>
 
-      <div className="mt-2">{step.content}</div>
-      <div className="flex items-center justify-between mt-2">
+      <div className="mt-2 text-foreground">{step.content}</div>
+      <div className="flex items-center justify-between mt-4 border-t-[3px] border-foreground pt-4">
         {index > 0 ? (
           <button
             {...backProps}
-            className="text-sm font-medium text-muted hover:text-foreground transition-colors px-3 py-1.5"
+            className="text-sm font-black uppercase tracking-widest text-foreground hover:bg-foreground hover:text-background border-[3px] border-transparent hover:border-foreground transition-colors px-4 py-2"
           >
             {backProps.title}
           </button>
@@ -53,7 +54,7 @@ const CustomTooltip = ({
         
         <button
           {...primaryProps}
-          className="bg-[var(--color-accent)] text-accent-foreground px-4 py-1.5 rounded-none text-sm font-medium hover:opacity-90 transition-opacity"
+          className="bg-foreground text-background border-[3px] border-foreground px-6 py-2 rounded-none text-sm font-black uppercase tracking-widest hover:bg-background hover:text-foreground transition-all shadow-[4px_4px_0_0_var(--foreground)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1"
         >
           {primaryProps.title}
         </button>
@@ -106,18 +107,28 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "body",
       content: (
         <div className="flex flex-col gap-2 p-2">
-          <h3 className="text-xl font-bold text-foreground">Welcome to StudioKharis! 👋</h3>
-          <p className="text-sm text-muted">Let me give you a quick tour of the features on this website. It will only take a moment!</p>
+          <h3 className="text-2xl font-black uppercase tracking-widest text-foreground">WELCOME TO STUDIOKHARIS!</h3>
+          <p className="text-sm font-bold opacity-80 uppercase tracking-widest">Let's take a quick tour of this brutalist interface.</p>
         </div>
       ),
       placement: "center",
     },
     {
+      target: "#tour-collapse",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">TOGGLE SIDEBAR</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Expand or collapse the sidebar for more screen real estate.</p>
+        </div>
+      ),
+      placement: "right",
+    },
+    {
       target: "#tour-profile",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">About Me</h4>
-          <p className="text-sm text-muted">Get to know more about who I am and my background.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">ABOUT ME</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Get to know more about who I am and my background.</p>
         </div>
       ),
       placement: "right",
@@ -126,8 +137,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-home",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">Home</h4>
-          <p className="text-sm text-muted">Return to the main dashboard anytime.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">HOME</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Return to the main dashboard anytime.</p>
         </div>
       ),
       placement: "right",
@@ -136,8 +147,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-projects",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">Projects</h4>
-          <p className="text-sm text-muted">Explore the portfolio of work I've built.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">PROJECTS</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Explore the portfolio of work I've built.</p>
         </div>
       ),
       placement: "right",
@@ -146,8 +157,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-experience",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">Experience</h4>
-          <p className="text-sm text-muted">My professional journey and career history.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">EXPERIENCE</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">My professional journey and career history.</p>
         </div>
       ),
       placement: "right",
@@ -156,8 +167,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-articles",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">Articles</h4>
-          <p className="text-sm text-muted">Read my thoughts and tutorials on software development.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">ARTICLES</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Read my thoughts and tutorials on software development.</p>
         </div>
       ),
       placement: "right",
@@ -166,8 +177,28 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-contact",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">Contact</h4>
-          <p className="text-sm text-muted">Let's connect! Reach out to me here.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">CONTACT</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Let's connect! Reach out to me here.</p>
+        </div>
+      ),
+      placement: "right",
+    },
+    {
+      target: "#tour-nav-globe",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">VISITOR MAP</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">See live visitor locations across the globe.</p>
+        </div>
+      ),
+      placement: "right",
+    },
+    {
+      target: "#tour-theme",
+      content: (
+        <div className="flex flex-col gap-1 text-left">
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">THEME SWITCH</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Toggle between light and dark brutalism.</p>
         </div>
       ),
       placement: "right",
@@ -176,8 +207,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-search",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">Global Search</h4>
-          <p className="text-sm text-muted">Looking for something specific? Press <kbd className="px-1.5 py-0.5 bg-primary/20 rounded-none mx-1">⌘ K</kbd> to search anywhere!</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">GLOBAL SEARCH</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Looking for something? Press <kbd className="px-2 py-0.5 border-[2px] border-foreground bg-foreground text-background font-black mx-1">⌘ K</kbd> anywhere!</p>
         </div>
       ),
       placement: "bottom",
@@ -186,8 +217,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-visitor",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">Live Visitor Counter</h4>
-          <p className="text-sm text-muted">See how many awesome people like you have visited this page.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">VISITOR COUNTER</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Live statistics of people who visited this page.</p>
         </div>
       ),
       placement: "left",
@@ -196,8 +227,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-music",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-bold text-foreground">Lo-Fi Music Player</h4>
-          <p className="text-sm text-muted">Need focus? Click here to play some chill Lo-Fi beats while browsing.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">LO-FI PLAYER</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Need focus? Play some chill beats while browsing.</p>
         </div>
       ),
       placement: "top-end",

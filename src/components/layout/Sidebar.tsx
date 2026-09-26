@@ -58,6 +58,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
+              id="tour-collapse"
               variant="ghost"
               size="icon"
               className={cn("h-8 w-8 shrink-0 text-muted hover:text-white", !isCollapsed && "ml-2")}
@@ -155,7 +156,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
           {!isCollapsed && <span className="text-xs text-muted">Theme</span>}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div>
+              <div id="tour-theme">
                 <ThemeToggle />
               </div>
             </TooltipTrigger>
