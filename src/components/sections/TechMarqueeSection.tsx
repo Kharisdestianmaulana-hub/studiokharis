@@ -35,7 +35,12 @@ export async function TechMarqueeSection() {
                     key={`${tech.name}-${index}`} 
                     className="flex items-center gap-4 md:gap-6 group cursor-default"
                   >
-                    <HybridIcon name={tech.name} className="w-10 h-10 md:w-12 md:h-12" />
+                    <HybridIcon 
+                      name={tech.name} 
+                      className="w-10 h-10 md:w-12 md:h-12" 
+                      useBrandColor={false} 
+                      fallbackFilterClass="brightness-0 invert dark:invert-0"
+                    />
                     <span className="font-black text-2xl md:text-4xl uppercase tracking-widest">
                       {tech.name}
                     </span>
