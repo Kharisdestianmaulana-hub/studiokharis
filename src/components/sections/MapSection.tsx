@@ -44,43 +44,41 @@ export default function MapSection({ messages }: { messages: any[] }) {
   const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row gap-0 h-[80vh] w-full mt-8 rounded-none overflow-hidden border border-border shadow-lg">
+    <div className="flex flex-col-reverse lg:flex-row gap-0 h-[80vh] w-full mt-4 rounded-none overflow-hidden border-[3px] border-foreground shadow-[8px_8px_0_0_var(--foreground)] md:shadow-[12px_12px_0_0_var(--foreground)]">
       
       {/* Sidebar List */}
-      <div className="w-full lg:w-1/3 bg-background flex flex-col h-1/2 lg:h-full border-t lg:border-t-0 lg:border-r border-border overflow-hidden z-10">
-        <div className="p-4 bg-secondary/20 border-b border-border shadow-sm">
-          <h3 className="font-semibold text-lg flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-primary" /> Visitor Locations
+      <div className="w-full lg:w-1/3 bg-background flex flex-col h-1/2 lg:h-full border-t-[3px] lg:border-t-0 lg:border-r-[3px] border-foreground overflow-hidden z-10">
+        <div className="p-4 bg-foreground text-background border-b-[3px] border-foreground">
+          <h3 className="font-black text-xl flex items-center gap-2 uppercase tracking-widest">
+            <MapPin className="w-6 h-6" /> Visitors
           </h3>
-          <p className="text-xs text-muted-foreground mt-1">Click a message to fly to their location</p>
+          <p className="text-xs font-bold mt-1 opacity-80 uppercase tracking-widest">Click to trace location</p>
         </div>
         
-        <div className="overflow-y-auto flex-1 p-4 space-y-4 bg-secondary/5">
+        <div className="overflow-y-auto flex-1 bg-background flex flex-col">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center p-4">
-              <Globe2 className="w-12 h-12 mb-3 text-muted-foreground/50" />
-              <p className="text-sm text-muted-foreground">No visitor locations recorded yet. Be the first to sign the guestbook!</p>
+              <Globe2 className="w-12 h-12 mb-3 opacity-50" />
+              <p className="text-sm font-bold uppercase">No visitors yet</p>
             </div>
           ) : (
-            messages.map((msg) => (
+            messages.map((msg, idx) => (
               <div 
-                key={msg.id} 
-                className="bg-background p-4 rounded-none border border-border cursor-pointer hover:border-primary/50 hover:shadow-md transition-all active:scale-[0.98]"
+                key={msg.id || idx} 
+                className={`p-4 border-b-[3px] border-foreground cursor-pointer transition-none ${activeLocation?.[0] === msg.latitude && activeLocation?.[1] === msg.longitude ? 'bg-foreground text-background' : 'hover:bg-foreground hover:text-background bg-background text-foreground'}`}
                 onClick={() => setActiveLocation([msg.latitude, msg.longitude])}
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <Avatar className="h-10 w-10 border shadow-sm">
-                    <AvatarImage src={msg.avatarUrl} />
-                    <AvatarFallback>{msg.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-semibold">{msg.name}</span>
-                    <span className="text-[10px] text-muted-foreground">
-                      {new Date(msg.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+                <div className="flex items-center gap-3">
+                  <div className="relative w-12 h-12 border-[3px] border-current bg-background shrink-0 p-0.5">
+                    <img src={msg.avatarUrl} alt={msg.name} className="w-full h-full object-cover grayscale" />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-sm font-black uppercase truncate">{msg.name}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider opacity-80">
+                      {msg.city || "Unknown City"}, {msg.country || "Earth"}
                     </span>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">{msg.message}</p>
               </div>
             ))
           )}

@@ -16,11 +16,12 @@ export default async function GlobePage() {
 
   return (
     <div className="flex flex-col gap-8 pb-16 pt-8 animate-in fade-in slide-in-from-bottom-8 duration-700 h-full">
-      <div className="flex flex-col items-center text-center gap-4 max-w-2xl mx-auto px-4">
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tight">Global Reach</h1>
-        <p className="text-muted-foreground text-sm md:text-base">
-          Explore this interactive map that highlights the real-time geographic locations of people who sign the Guestbook. 
-          It demonstrates the use of Vercel Edge Headers for IP geolocation mapped using Leaflet.
+      <div className="flex flex-col text-left gap-4 w-full px-4 border-b-[3px] border-foreground pb-6">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase leading-none">
+          Global <br className="md:hidden" /> Reach
+        </h1>
+        <p className="text-sm md:text-base font-bold uppercase tracking-widest max-w-2xl bg-foreground text-background px-3 py-1.5 w-fit">
+          Real-time visitor map & guestbook
         </p>
       </div>
 

@@ -64,70 +64,70 @@ export function GuestbookModal() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="gap-2">
-          <MessageSquarePlus className="w-4 h-4" />
+        <Button className="gap-2 rounded-none border-[3px] border-foreground bg-background text-foreground hover:bg-foreground hover:text-background font-black uppercase tracking-widest transition-colors shadow-[4px_4px_0_0_var(--foreground)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1 py-6 px-6">
+          <MessageSquarePlus className="w-5 h-5" />
           Sign Guestbook
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Sign the Guestbook</DialogTitle>
-          <DialogDescription>
-            Leave a message for me and other visitors. Your avatar will be generated based on your name!
+      <DialogContent className="sm:max-w-[425px] border-[3px] border-foreground rounded-none shadow-[8px_8px_0_0_var(--foreground)] p-0 overflow-hidden bg-background">
+        <DialogHeader className="bg-foreground text-background p-6">
+          <DialogTitle className="text-2xl font-black uppercase tracking-widest text-background">Sign Guestbook</DialogTitle>
+          <DialogDescription className="text-background/80 font-bold uppercase text-xs tracking-wider">
+            Leave your mark on the server log
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6 mt-4">
-          <div className="flex flex-col items-center gap-4 mb-4">
-            <div className="relative w-20 h-20 rounded-none overflow-hidden bg-muted border-2 border-border">
+        <form onSubmit={handleSubmit} className="space-y-6 p-6">
+          <div className="flex flex-col items-center gap-2 mb-4">
+            <div className="relative w-20 h-20 rounded-none overflow-hidden bg-background border-[3px] border-foreground shadow-[4px_4px_0_0_var(--foreground)]">
               <Image 
                 src={avatarUrl} 
                 alt="Avatar Preview" 
                 fill 
-                className="object-cover"
+                className="object-cover grayscale"
                 unoptimized
               />
             </div>
-            <p className="text-xs text-muted-foreground">Avatar Preview</p>
           </div>
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-medium">Your Name</label>
+              <label htmlFor="name" className="text-sm font-black uppercase tracking-wider">Name</label>
               <Input 
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. John Doe"
+                placeholder="JOHN DOE"
                 maxLength={64}
                 required
+                className="rounded-none border-[3px] border-foreground shadow-[4px_4px_0_0_var(--foreground)] focus-visible:ring-0 focus-visible:shadow-none focus-visible:translate-x-1 focus-visible:translate-y-1 transition-all bg-background text-foreground font-black uppercase"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="message" className="text-sm font-medium">Message</label>
+              <label htmlFor="message" className="text-sm font-black uppercase tracking-wider">Message</label>
               <Textarea 
                 id="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Leave a nice message..."
+                placeholder="YOUR MESSAGE..."
                 maxLength={500}
                 required
-                className="resize-none"
+                className="resize-none rounded-none border-[3px] border-foreground shadow-[4px_4px_0_0_var(--foreground)] focus-visible:ring-0 focus-visible:shadow-none focus-visible:translate-x-1 focus-visible:translate-y-1 transition-all bg-background text-foreground font-medium"
                 rows={4}
               />
-              <p className="text-xs text-right text-muted-foreground">
+              <p className="text-xs text-right font-black opacity-50">
                 {message.length}/500
               </p>
             </div>
           </div>
           
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          <Button type="submit" className="w-full rounded-none border-[3px] border-foreground bg-foreground text-background hover:bg-background hover:text-foreground font-black uppercase tracking-widest text-lg py-6 transition-colors shadow-[4px_4px_0_0_var(--foreground)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Posting...
+                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                POSTING...
               </>
             ) : (
-              "Post Message"
+              "POST MESSAGE"
             )}
           </Button>
         </form>
