@@ -102,7 +102,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
     setRunTour(true);
   };
 
-  const steps: Step[] = [
+  const initialSteps: Step[] = [
     {
       target: "body",
       content: (
@@ -273,7 +273,9 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       ),
       placement: "top-end",
     },
-  ].map(step => ({ ...step, isFixed: true }));
+  ];
+  
+  const steps: Step[] = initialSteps.map(step => ({ ...step, isFixed: true }));
 
   const handleJoyrideCallback = (data: any) => {
     const { status } = data;
