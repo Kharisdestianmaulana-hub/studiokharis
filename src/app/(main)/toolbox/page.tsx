@@ -28,7 +28,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.qr.title,
       desc: dict.toolbox.tools.qr.desc,
       href: "/toolbox/qr-generator",
-      color: "bg-[#DFFF00]"
+      color: "bg-foreground text-background"
     },
     {
       id: 'image-compressor',
@@ -36,7 +36,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.compressor.title,
       desc: dict.toolbox.tools.compressor.desc,
       href: "/toolbox/image-compressor",
-      color: "bg-emerald-400"
+      color: "bg-foreground text-background"
     },
     {
       id: 'image-resizer',
@@ -44,7 +44,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.resizer.title,
       desc: dict.toolbox.tools.resizer.desc,
       href: "/toolbox/image-resizer",
-      color: "bg-blue-400"
+      color: "bg-foreground text-background"
     },
     {
       id: 'image-converter',
@@ -52,7 +52,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.converter.title,
       desc: dict.toolbox.tools.converter.desc,
       href: "/toolbox/image-converter",
-      color: "bg-teal-400"
+      color: "bg-foreground text-background"
     },
     {
       id: 'json-formatter',
@@ -60,7 +60,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.json.title,
       desc: dict.toolbox.tools.json.desc,
       href: "/toolbox/json-formatter",
-      color: "bg-yellow-400"
+      color: "bg-foreground text-background"
     },
     {
       id: 'password-generator',
@@ -68,7 +68,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.password.title,
       desc: dict.toolbox.tools.password.desc,
       href: "/toolbox/password-generator",
-      color: "bg-red-400"
+      color: "bg-foreground text-background"
     },
     {
       id: 'color-converter',
@@ -76,7 +76,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.color.title,
       desc: dict.toolbox.tools.color.desc,
       href: "/toolbox/color-converter",
-      color: "bg-purple-400"
+      color: "bg-foreground text-background"
     },
     {
       id: 'contrast-checker',
@@ -84,7 +84,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.contrast.title,
       desc: dict.toolbox.tools.contrast.desc,
       href: "/toolbox/contrast-checker",
-      color: "bg-indigo-400"
+      color: "bg-foreground text-background"
     },
     {
       id: 'percentage-calculator',
@@ -92,7 +92,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.percentage.title,
       desc: dict.toolbox.tools.percentage.desc,
       href: "/toolbox/percentage-calculator",
-      color: "bg-pink-400"
+      color: "bg-foreground text-background"
     },
     {
       id: 'word-counter',
@@ -100,7 +100,7 @@ export default async function ToolboxPage() {
       title: dict.toolbox.tools.wordCount.title,
       desc: dict.toolbox.tools.wordCount.desc,
       href: "/toolbox/word-counter",
-      color: "bg-orange-400"
+      color: "bg-foreground text-background"
     }
   ];
 
@@ -123,7 +123,7 @@ export default async function ToolboxPage() {
             className="flex flex-col gap-4 p-6 bg-surface border-[3px] border-foreground shadow-[6px_6px_0_0_var(--foreground)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all group animate-in fade-in slide-in-from-bottom-4"
           >
             <div className={`w-14 h-14 border-[3px] border-foreground flex items-center justify-center shrink-0 ${tool.color}`}>
-              <tool.icon className="w-7 h-7 text-black stroke-[2.5]" />
+              <tool.icon className="w-7 h-7 text-background stroke-[2.5]" />
             </div>
             <div className="flex flex-col gap-2 mt-2">
               <h3 className="text-xl font-black uppercase tracking-widest text-foreground group-hover:bg-foreground group-hover:text-background w-fit transition-colors">
