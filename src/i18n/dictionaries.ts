@@ -258,6 +258,8 @@ export const dictionaries = {
         pomodoro: { title: "Pomodoro Timer", desc: "Stay focused with Brutalist time management." },
         markdown: { title: "Markdown Preview", desc: "Write and preview Markdown in real-time." },
         picker: { title: "Color Picker", desc: "Extract precise colors from any uploaded image." },
+        decision: { title: "Decision Maker", desc: "Randomly pick an option from your list. Brutal style." },
+        watermark: { title: "Watermark Creator", desc: "Stamp images with your text securely in the browser." },
       }
     }
   },
@@ -520,6 +522,8 @@ export const dictionaries = {
         pomodoro: { title: "Timer Pomodoro", desc: "Tetap fokus dengan manajemen waktu Brutalis." },
         markdown: { title: "Pratinjau Markdown", desc: "Tulis dan pratinjau Markdown secara instan." },
         picker: { title: "Pemetik Warna", desc: "Ekstrak warna presisi dari gambar yang diunggah." },
+        decision: { title: "Penentu Nasib", desc: "Pilih satu opsi secara acak dari daftar Anda. Gaya brutal." },
+        watermark: { title: "Pembuat Watermark", desc: "Beri cap teks pada gambar dengan aman di peramban." },
       }
     }
   }

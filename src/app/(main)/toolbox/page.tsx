@@ -125,6 +125,22 @@ export default async function ToolboxPage() {
       desc: dict.toolbox.tools.picker.desc,
       href: "/toolbox/color-picker",
       color: "bg-foreground text-background"
+    },
+    {
+      id: 'decision-maker',
+      icon: require('lucide-react').Dices,
+      title: dict.toolbox.tools.decision.title,
+      desc: dict.toolbox.tools.decision.desc,
+      href: "/toolbox/decision-maker",
+      color: "bg-foreground text-background"
+    },
+    {
+      id: 'watermark',
+      icon: require('lucide-react').Stamp,
+      title: dict.toolbox.tools.watermark.title,
+      desc: dict.toolbox.tools.watermark.desc,
+      href: "/toolbox/watermark",
+      color: "bg-foreground text-background"
     }
   ];
 
