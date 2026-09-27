@@ -19,7 +19,7 @@ export function TopNav({ profileData }: { profileData?: any }) {
   return (
     <header className="sticky top-0 z-20 w-full h-[72px] border-b-[3px] border-foreground bg-background flex items-center justify-between px-4 lg:px-8">
       {/* Left Section */}
-      <div className="flex items-center gap-2 flex-1 min-w-0 md:flex-none md:w-auto md:min-w-[250px] mr-2 md:mr-0">
+      <div className="flex items-center gap-2 flex-1 min-w-0 md:flex-none md:w-auto md:min-w-[250px] mr-4 md:mr-0 pr-2 md:pr-0">
         <MobileDrawer profileData={profileData} />
         <div className="shrink-0">
           <DynamicLogo />

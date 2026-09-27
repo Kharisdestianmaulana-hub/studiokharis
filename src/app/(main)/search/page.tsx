@@ -121,17 +121,17 @@ export default async function SearchPage({
 
   return (
     <div className="flex flex-col gap-8 w-full max-w-4xl mx-auto min-h-[50vh]">
-      <div className="flex flex-col gap-2">
-        <h3 className="text-2xl font-bold tracking-tight text-foreground">
+      <div className="flex flex-col gap-2 mb-8 border-b-[3px] border-foreground pb-6">
+        <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase">
           Search Results
         </h3>
         {query ? (
-          <p className="text-muted text-sm md:text-base">
-            Found <span className="font-bold text-accent">{results.length}</span> results for "<span className="italic">{query}</span>"
+          <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm mt-2">
+            Found <span className="font-black bg-foreground text-background px-2 mx-1 py-0.5">{results.length}</span> results for "<span className="italic">{query}</span>"
           </p>
         ) : (
-          <p className="text-muted text-sm md:text-base">
-            Enter a search term in the navigation bar to begin.
+          <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm mt-2">
+            ENTER A SEARCH TERM IN THE NAVIGATION BAR TO BEGIN.
           </p>
         )}
       </div>
@@ -142,39 +142,39 @@ export default async function SearchPage({
             <Link 
               key={`${result.type}-${result.id}`} 
               href={result.url}
-              className="flex flex-col md:flex-row gap-4 p-5 rounded-none-2xl bg-surface border border-border hover:border-accent/50 hover:shadow-md transition-all group animate-in fade-in slide-in-from-bottom-4"
+              className="flex flex-col md:flex-row gap-4 p-5 rounded-none bg-surface border-[3px] border-foreground shadow-[6px_6px_0_0_var(--foreground)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all group animate-in fade-in slide-in-from-bottom-4"
             >
               {result.imageUrl && (
-                <div className="relative w-full md:w-48 h-32 md:h-auto rounded-none overflow-hidden shrink-0 bg-muted">
+                <div className="relative w-full md:w-48 h-32 md:h-auto rounded-none overflow-hidden shrink-0 border-[3px] border-foreground bg-muted">
                   <Image src={result.imageUrl} alt={result.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
               )}
               <div className="flex flex-col gap-2 flex-1 justify-center">
                 <div className="flex items-center gap-2">
-                  <Badge variant="outline" className="font-mono text-xs">
+                  <span className="bg-foreground text-background font-black uppercase tracking-widest text-[10px] px-2 py-1">
                     {result.type}
-                  </Badge>
+                  </span>
                 </div>
-                <h4 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors">
+                <h4 className="text-lg font-black text-foreground uppercase tracking-wider mt-1 w-fit">
                   <Highlighter text={result.title} query={query} />
                 </h4>
-                <p className="text-sm text-secondary-text line-clamp-2">
+                <p className="text-sm font-bold text-foreground leading-snug line-clamp-2">
                   <Highlighter text={result.description || ""} query={query} />
                 </p>
-                <div className="flex items-center gap-1 text-xs font-bold text-accent mt-2 opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0 duration-300">
-                  Read more <ArrowRight className="w-3 h-3" />
+                <div className="flex items-center gap-1 text-xs font-black uppercase tracking-widest text-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0 duration-300">
+                  READ MORE <ArrowRight className="w-4 h-4 stroke-[3]" />
                 </div>
               </div>
             </Link>
           ))
         ) : query ? (
-          <div className="flex flex-col items-center justify-center gap-4 py-20 text-center animate-in fade-in zoom-in-95">
-            <div className="w-16 h-16 rounded-none bg-accent/10 flex items-center justify-center">
-              <SearchX className="w-8 h-8 text-accent" />
+          <div className="flex flex-col items-center justify-center gap-4 py-20 text-center animate-in fade-in zoom-in-95 border-[3px] border-foreground shadow-[8px_8px_0_0_var(--foreground)] bg-surface p-8">
+            <div className="w-16 h-16 rounded-none border-[3px] border-foreground flex items-center justify-center bg-foreground text-background">
+              <SearchX className="w-8 h-8" />
             </div>
-            <h4 className="text-xl font-bold">No results found</h4>
-            <p className="text-secondary-text max-w-sm">
-              I couldn't find anything matching "{query}". Try adjusting your search terms or checking for typos.
+            <h4 className="text-2xl md:text-4xl font-black uppercase tracking-widest text-foreground">NO RESULTS FOUND</h4>
+            <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm max-w-sm">
+              I COULDN'T FIND ANYTHING MATCHING "<span className="bg-[#DFFF00] text-black px-1 mx-1 border-[2px] border-black inline-block">{query}</span>". TRY ADJUSTING YOUR SEARCH TERMS.
             </p>
           </div>
         ) : null}
