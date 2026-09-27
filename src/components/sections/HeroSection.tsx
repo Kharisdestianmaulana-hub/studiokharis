@@ -3,6 +3,7 @@ import { getProfileData } from "@/data/profile";
 import { getSocialLinks } from "@/data/socials";
 import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaGlobe, FaWhatsapp, FaEnvelope, FaArrowRight, FaDownload } from "react-icons/fa";
 import { TransitionLink } from "@/components/layout/TransitionLink";
+import { getDictionary } from "@/lib/i18n";
 
 export async function HeroSection({ 
   hideButtons = false, 
@@ -13,6 +14,7 @@ export async function HeroSection({
 } = {}) {
   const profileData = await getProfileData();
   const socialsData = await getSocialLinks();
+  const dict = getDictionary();
   
   return (
     <section className="relative w-full h-[80vh] min-h-[600px] flex items-end justify-center pb-24 md:pb-0 animate-in fade-in slide-in-from-bottom-8 duration-700">
@@ -62,10 +64,10 @@ export async function HeroSection({
             {/* Text in the middle */}
             <div className="flex flex-col justify-center text-left gap-1">
               <div className="bg-foreground text-background px-2 py-1">
-                <h3 className="text-base md:text-lg font-black tracking-widest uppercase leading-none">Studio Kharis</h3>
+                <h3 className="text-base md:text-lg font-black tracking-widest uppercase leading-none">{dict.hero.title}</h3>
               </div>
               <div className="bg-background text-foreground px-2 py-0.5 border border-border w-fit">
-                <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest whitespace-nowrap">Small Studio. Big Ideas.</p>
+                <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest whitespace-nowrap">{dict.hero.subtitle}</p>
               </div>
             </div>
           </div>
@@ -112,13 +114,13 @@ export async function HeroSection({
           <div className="flex w-full gap-2 mt-2">
             <TransitionLink href="/projects" className="flex-[3]">
               <button className="w-full bg-foreground text-background border-[3px] border-foreground text-[10px] md:text-xs font-black py-2 px-3 rounded-none hover:bg-background hover:text-foreground transition-colors flex items-center justify-center gap-1.5 uppercase tracking-widest whitespace-nowrap">
-                Projects
+                {dict.hero.projectsBtn}
                 <FaArrowRight className="w-3 h-3" />
               </button>
             </TransitionLink>
             <TransitionLink href="/cv" className="flex-[2]">
               <button className="w-full bg-background text-foreground border-[3px] border-foreground text-[10px] md:text-xs font-black py-2 px-3 rounded-none hover:bg-foreground hover:text-background transition-colors flex items-center justify-center gap-1.5 uppercase tracking-widest whitespace-nowrap">
-                CV
+                {dict.hero.cvBtn}
                 <FaDownload className="w-3 h-3" />
               </button>
             </TransitionLink>

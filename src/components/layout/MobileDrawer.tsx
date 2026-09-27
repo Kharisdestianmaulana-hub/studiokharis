@@ -10,10 +10,12 @@ import { NAVIGATION_ROUTES, BOTTOM_ROUTES } from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function MobileDrawer({ profileData }: { profileData?: any }) {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
+  const { dict } = useLanguage();
 
   // Close drawer on route change
   React.useEffect(() => {
@@ -65,7 +67,7 @@ export function MobileDrawer({ profileData }: { profileData?: any }) {
                   )}
                 >
                   <Icon className="w-4 h-4" />
-                  {route.name}
+                  {dict.nav[route.dictKey]}
                 </Link>
               );
             })}
@@ -82,13 +84,13 @@ export function MobileDrawer({ profileData }: { profileData?: any }) {
                   className="flex items-center gap-3 px-3 py-2 rounded-none text-sm text-secondary-text hover:bg-secondary/5 hover:text-foreground transition-all duration-200"
                 >
                   <Icon className="w-4 h-4" />
-                  {route.name}
+                  {dict.nav[route.dictKey]}
                 </Link>
               );
             })}
           </nav>
           <div className="flex items-center justify-between px-3">
-            <span className="text-xs text-muted">Theme</span>
+            <span className="text-xs text-muted">{dict.nav.theme}</span>
             <ThemeToggle />
           </div>
         </div>

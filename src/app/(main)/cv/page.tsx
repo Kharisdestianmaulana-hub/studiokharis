@@ -1,6 +1,7 @@
 import * as React from "react";
 import { getProfileData } from "@/data/profile";
 import { CvClient } from "./CvClient";
+import { getDictionary } from "@/lib/i18n";
 
 export const metadata = {
   title: "Curriculum Vitae - Kharis",
@@ -9,6 +10,7 @@ export const metadata = {
 
 export default async function CvPage() {
   const profileData = await getProfileData();
+  const dict = getDictionary();
 
   return (
     <div className="w-full min-h-screen py-12 md:py-24 px-4 sm:px-8">
@@ -26,7 +28,7 @@ export default async function CvPage() {
           
           <div className="mt-8 md:mt-0">
             <div className="bg-foreground text-background font-mono text-xs font-bold px-4 py-2 uppercase tracking-widest inline-block border-[3px] border-foreground">
-              STATUS: {profileData.availability.toUpperCase()}
+              {dict.cv.status.split(":")[0].toUpperCase()}: {profileData.availability.toUpperCase()}
             </div>
           </div>
         </div>

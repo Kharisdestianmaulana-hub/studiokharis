@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import Image from "next/image";
@@ -6,9 +8,11 @@ import { FaGithub } from "react-icons/fa";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { useTransitionStore } from "@/store/useTransitionStore";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function ProjectCard({ project, isListView = false }: { project: any, isListView?: boolean }) {
   const setTransitionTitle = useTransitionStore(state => state.setTransitionTitle);
+  const { dict } = useLanguage();
 
   const handleClick = () => {
     setTransitionTitle(project.title);
@@ -82,7 +86,7 @@ export function ProjectCard({ project, isListView = false }: { project: any, isL
                   className="inline-flex items-center gap-2 px-4 py-2 border-[2px] border-foreground bg-foreground text-background hover:bg-accent hover:text-accent-foreground font-black uppercase tracking-widest text-xs transition-all shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
                 >
                   <ExternalLink className="w-4 h-4 stroke-[3]" />
-                  <span>Live Demo</span>
+                  <span>{dict.projects.liveDemo}</span>
                 </Link>
               )}
               {project.github && (
@@ -92,7 +96,7 @@ export function ProjectCard({ project, isListView = false }: { project: any, isL
                   className="inline-flex items-center gap-2 px-4 py-2 border-[2px] border-foreground bg-surface text-foreground hover:bg-foreground hover:text-background font-black uppercase tracking-widest text-xs transition-all shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
                 >
                   <FaGithub className="w-4 h-4" />
-                  <span>Source</span>
+                  <span>{dict.projects.source}</span>
                 </Link>
               )}
             </div>

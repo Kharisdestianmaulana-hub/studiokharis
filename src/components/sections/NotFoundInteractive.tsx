@@ -4,12 +4,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
 import { TransitionLink } from "@/components/layout/TransitionLink";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function NotFoundInteractive() {
   const [pos, setPos] = useState({ x: -1000, y: -1000 });
   const [buttonPos, setButtonPos] = useState<{ left: string; top: string } | null>(null);
   const [runCount, setRunCount] = useState(0);
   const [isClient, setIsClient] = useState(false);
+  const { dict } = useLanguage();
   
   const MAX_RUNS = 3;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,13 +51,13 @@ export function NotFoundInteractive() {
       {/* The actual content (hidden by default unless spotlight shines on it) */}
       <div className="z-0 flex flex-col items-center justify-center text-center p-4">
         <h1 className="text-[8rem] md:text-[15rem] font-black leading-none tracking-tighter text-background [-webkit-text-stroke:2px_#000] dark:[-webkit-text-stroke:2px_#fff]">
-          404
+          {dict.notFound.title}
         </h1>
         <h2 className="text-2xl md:text-4xl font-bold mt-4 mb-2">
-          Are you lost?
+          {dict.notFound.areYouLost}
         </h2>
         <p className="text-muted-foreground max-w-md">
-          Looks like this page doesn't exist in my directory. Find the button to return to base.
+          {dict.notFound.desc}
         </p>
       </div>
 
@@ -78,13 +80,13 @@ export function NotFoundInteractive() {
               onClick={(e) => e.preventDefault()} // Prevent click if they somehow catch it before run completes
             >
               <Home className="w-4 h-4 mr-2" />
-              Go Home
+              {dict.notFound.goHome}
             </Button>
           ) : (
             <TransitionLink href="/">
               <Button size="lg" className="rounded-none shadow-lg pointer-events-auto animate-in zoom-in duration-300">
                 <Home className="w-4 h-4 mr-2" />
-                Go Home
+                {dict.notFound.goHome}
               </Button>
             </TransitionLink>
           )}
@@ -102,7 +104,7 @@ export function NotFoundInteractive() {
       
       {/* Subtle hint text that is visible on top of the black overlay */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none opacity-30 text-xs md:text-sm text-white/50 animate-pulse whitespace-nowrap">
-        Move your cursor or swipe to find the way out
+        {dict.notFound.hint}
       </div>
     </div>
   );

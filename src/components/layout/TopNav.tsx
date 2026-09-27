@@ -10,9 +10,11 @@ import { Button } from "@/components/ui/button";
 import { SearchBar } from "@/components/ui/SearchBar";
 import { VisitorCounter } from "@/components/shared/VisitorCounter";
 import { useTour } from "@/providers/TourProvider";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function TopNav({ profileData }: { profileData?: any }) {
   const { startTour } = useTour();
+  const { locale, setLocale } = useLanguage();
 
   return (
     <header className="sticky top-0 z-20 w-full h-[72px] border-b-[3px] border-foreground bg-background flex items-center justify-between px-4 lg:px-8">
@@ -35,6 +37,13 @@ export function TopNav({ profileData }: { profileData?: any }) {
 
       {/* Right Section */}
       <div className="flex items-center gap-4 md:min-w-[200px] justify-end">
+        <button 
+          className="hidden md:flex items-center justify-center gap-1 px-3 py-2 bg-surface text-foreground font-black uppercase tracking-widest text-xs border-[3px] border-foreground hover:bg-foreground hover:text-background transition-all shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
+          onClick={() => setLocale(locale === 'en' ? 'id' : 'en')}
+          title="Toggle Language"
+        >
+          {locale === 'en' ? 'EN' : 'ID'}
+        </button>
         <button 
           className="hidden md:flex items-center gap-2 px-4 py-2 bg-surface text-foreground font-black uppercase tracking-widest text-xs border-[3px] border-foreground hover:bg-foreground hover:text-background transition-all shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
           onClick={startTour}

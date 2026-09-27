@@ -1,9 +1,11 @@
 import * as React from "react";
 import { getTechStack } from "@/data/tech-stack";
 import { HybridIcon } from "@/components/shared/HybridIcon";
+import { getDictionary } from "@/lib/i18n";
 
 export async function TechMarqueeSection() {
   const techStackData = await getTechStack();
+  const dict = getDictionary();
   
   // Flatten all tech items from categories
   const allTechs = techStackData.flatMap((cat: any) => cat.items);
@@ -18,9 +20,9 @@ export async function TechMarqueeSection() {
     <section className="py-12">
       <div className="flex flex-col gap-8 md:gap-16">
         <div className="flex flex-col gap-2">
-          <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-foreground uppercase">Technologies I Use</h3>
+          <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-foreground uppercase">{dict.techMarquee.title}</h3>
           <p className="text-muted-foreground font-bold tracking-widest uppercase text-xs md:text-sm">
-            MODERN TOOLS FOR MODERN PROBLEMS.
+            {dict.techMarquee.subtitle}
           </p>
         </div>
         

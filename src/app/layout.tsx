@@ -44,27 +44,33 @@ export const metadata: Metadata = {
 };
 
 import { PageTransition } from "@/components/layout/PageTransition";
+import { LanguageProvider } from "@/components/providers/LanguageProvider";
+import { getLocale } from "@/lib/i18n";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const initialLocale = getLocale();
+
   return (
-    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang={initialLocale} suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="font-sans antialiased min-h-screen bg-background text-foreground">
         <RouteTracker />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <DynamicFavicon />
-          <PageTransition />
-          {children}
-          <Toaster position="bottom-right" />
-        </ThemeProvider>
+        <LanguageProvider initialLocale={initialLocale}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <DynamicFavicon />
+            <PageTransition />
+            {children}
+            <Toaster position="bottom-right" />
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

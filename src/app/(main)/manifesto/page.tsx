@@ -1,46 +1,48 @@
 import * as React from "react";
 import { getProfileData } from "@/data/profile";
+import { getDictionary } from "@/lib/i18n";
 
 export const metadata = {
   title: "Manifesto - Kharis",
   description: "The Studio Kharis Manifesto. Core principles and philosophy.",
 };
 
-const MANIFESTO_RULES = [
-  {
-    num: "01",
-    title: "Function Over Flash",
-    desc: "A beautiful website is useless if it's slow. Performance is a feature, not an afterthought. Build things that actually work, then make them look good.",
-    theme: "light", // bg-background text-foreground
-  },
-  {
-    num: "02",
-    title: "Design With Attitude",
-    desc: "Stop making boring, rounded, glassmorphism websites. The web should have character. Stand out, be bold, and leave a permanent mark on the visitor's memory.",
-    theme: "dark", // bg-foreground text-background
-  },
-  {
-    num: "03",
-    title: "Clear > Clever",
-    desc: "Good code isn't the most complex code; it's the most readable code. Don't hide behind abstractions. Write code your future self will understand.",
-    theme: "accent", // bg-accent text-foreground
-  },
-  {
-    num: "04",
-    title: "Ship Fast, Iterate Faster",
-    desc: "Perfection is an illusion. Build the MVP, throw it into the real world, gather feedback, and ruthlessly improve. Execution beats theory.",
-    theme: "light",
-  },
-  {
-    num: "05",
-    title: "Small Studio, Big Ideas",
-    desc: "You don't need a massive team to build world-class products. Sharp execution is more lethal than headcount. Own your stack and take responsibility.",
-    theme: "dark",
-  },
-];
-
 export default async function ManifestoPage() {
   const profileData = await getProfileData();
+  const dict = getDictionary();
+
+  const MANIFESTO_RULES = [
+    {
+      num: "01",
+      title: dict.manifesto.rules[0].title,
+      desc: dict.manifesto.rules[0].desc,
+      theme: "light", // bg-background text-foreground
+    },
+    {
+      num: "02",
+      title: dict.manifesto.rules[1].title,
+      desc: dict.manifesto.rules[1].desc,
+      theme: "dark", // bg-foreground text-background
+    },
+    {
+      num: "03",
+      title: dict.manifesto.rules[2].title,
+      desc: dict.manifesto.rules[2].desc,
+      theme: "accent", // bg-accent text-foreground
+    },
+    {
+      num: "04",
+      title: dict.manifesto.rules[3].title,
+      desc: dict.manifesto.rules[3].desc,
+      theme: "light",
+    },
+    {
+      num: "05",
+      title: dict.manifesto.rules[4].title,
+      desc: dict.manifesto.rules[4].desc,
+      theme: "dark",
+    },
+  ];
 
   return (
     <div className="w-full min-h-screen">
@@ -56,11 +58,10 @@ export default async function ManifestoPage() {
           <p className="text-sm font-black tracking-widest text-foreground uppercase border-[3px] border-foreground px-4 py-2 bg-surface">
             {profileData.name.toUpperCase()} / {new Date().getFullYear()}
           </p>
-          <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-black tracking-tighter text-foreground uppercase leading-[0.85]">
-            The<br/>Manifesto
+          <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-black tracking-tighter text-foreground uppercase leading-[0.85]" dangerouslySetInnerHTML={{ __html: dict.manifesto.title.replace(' ', '<br/>') }}>
           </h1>
           <p className="text-xl md:text-2xl font-bold tracking-widest uppercase mt-4 opacity-80">
-            RULES OF ENGAGEMENT FOR MODERN ENGINEERING & DESIGN.
+            {dict.manifesto.subtitle}
           </p>
         </div>
       </div>
@@ -103,10 +104,10 @@ export default async function ManifestoPage() {
       {/* Footer Closing */}
       <div className="w-full p-16 md:p-32 flex flex-col items-center justify-center text-center bg-background">
         <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-foreground">
-          END OF TRANSMISSION
+          {dict.manifesto.endOfTransmission}
         </h2>
         <p className="mt-4 text-sm font-black tracking-widest uppercase opacity-50">
-          STUDIO KHARIS // 2024
+          STUDIO KHARIS // {new Date().getFullYear()}
         </p>
       </div>
     </div>

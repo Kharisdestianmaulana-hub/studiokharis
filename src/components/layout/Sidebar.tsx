@@ -10,11 +10,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { PanelLeftClose, PanelLeft } from "lucide-react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function Sidebar({ profileData }: { profileData?: any }) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const { dict } = useLanguage();
 
   useEffect(() => {
     setIsMounted(true);
@@ -69,7 +71,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
             </button>
           </TooltipTrigger>
           <TooltipContent side="right" className="font-black uppercase tracking-widest border-[3px] border-foreground">
-            {isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+            {isCollapsed ? dict.nav.expandSidebar : dict.nav.collapseSidebar}
           </TooltipContent>
         </Tooltip>
 
@@ -103,7 +105,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
                 )}
               >
                 <Icon className={cn("shrink-0 stroke-[3]", isCollapsed ? "w-4 h-4" : "w-4 h-4")} />
-                {!isCollapsed && <span className="truncate">{route.name}</span>}
+                {!isCollapsed && <span className="truncate">{dict.nav[route.dictKey]}</span>}
               </Link>
             );
 
@@ -112,7 +114,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
                 <TooltipTrigger asChild>
                   {LinkContent}
                 </TooltipTrigger>
-                <TooltipContent side="right" className="font-black uppercase tracking-widest border-[3px] border-foreground">{route.name}</TooltipContent>
+                <TooltipContent side="right" className="font-black uppercase tracking-widest border-[3px] border-foreground">{dict.nav[route.dictKey]}</TooltipContent>
               </Tooltip>
             ) : (
               <div key={route.name}>{LinkContent}</div>
@@ -136,7 +138,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
                 )}
               >
                 <Icon className={cn("shrink-0 stroke-[3]", isCollapsed ? "w-4 h-4" : "w-4 h-4")} />
-                {!isCollapsed && <span className="truncate">{route.name}</span>}
+                {!isCollapsed && <span className="truncate">{dict.nav[route.dictKey]}</span>}
               </Link>
             );
 
@@ -145,7 +147,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
                 <TooltipTrigger asChild>
                   {LinkContent}
                 </TooltipTrigger>
-                <TooltipContent side="right" className="font-black uppercase tracking-widest border-[3px] border-foreground">{route.name}</TooltipContent>
+                <TooltipContent side="right" className="font-black uppercase tracking-widest border-[3px] border-foreground">{dict.nav[route.dictKey]}</TooltipContent>
               </Tooltip>
             ) : (
               <div key={route.name}>{LinkContent}</div>
@@ -154,14 +156,14 @@ export function Sidebar({ profileData }: { profileData?: any }) {
         </nav>
         
         <div className={cn("flex items-center border-[3px] border-foreground bg-surface p-1.5 shadow-[4px_4px_0_0_var(--foreground)]", isCollapsed ? "justify-center flex-col gap-2" : "justify-between px-3 py-2")}>
-          {!isCollapsed && <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Theme</span>}
+          {!isCollapsed && <span className="text-[10px] font-black uppercase tracking-widest text-foreground">{dict.nav.theme}</span>}
           <Tooltip>
             <TooltipTrigger asChild>
               <div id="tour-theme">
                 <ThemeToggle />
               </div>
             </TooltipTrigger>
-            {isCollapsed && <TooltipContent side="right" className="font-black uppercase tracking-widest border-[3px] border-foreground">Toggle Theme</TooltipContent>}
+            {isCollapsed && <TooltipContent side="right" className="font-black uppercase tracking-widest border-[3px] border-foreground">{dict.nav.toggleTheme}</TooltipContent>}
           </Tooltip>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 import {
   Select,
   SelectContent,
@@ -28,6 +29,7 @@ const formSchema = z.object({
 
 export function ContactSection({ socialsData }: { socialsData: any[] }) {
   const [time, setTime] = React.useState<string>("");
+  const { dict } = useLanguage();
 
   React.useEffect(() => {
     // Update time every second
@@ -97,9 +99,9 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
     <section id="contact" className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-700 fill-mode-both mt-16">
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2 border-b-[3px] border-foreground pb-4">
-          <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase">Get in Touch</h3>
+          <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase">{dict.contact.title}</h3>
           <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm">
-            LET'S BUILD SOMETHING AMAZING TOGETHER. FILL IN THE BLANKS OR BOOK A CALL DIRECTLY.
+            {dict.contact.subtitle}
           </p>
         </div>
 
@@ -109,30 +111,30 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
               
               {/* Mad Libs Form */}
               <div className="text-3xl md:text-5xl lg:text-[2.75rem] xl:text-6xl font-black tracking-tight leading-[2.2] md:leading-[2] text-foreground">
-                Hi Kharis! My name is
+                {dict.contact.madLibs.hi}
                 <input
                   {...form.register("name")}
-                  placeholder="NAME"
+                  placeholder={dict.contact.madLibs.namePlaceholder}
                   className={`${blankInputClass} w-[180px] md:w-[280px] ${form.formState.errors.name ? errorClass : ''}`}
                 />
-                and I work at
+                {dict.contact.madLibs.andWorkAt}
                 <input
                   {...form.register("company")}
-                  placeholder="COMPANY"
+                  placeholder={dict.contact.madLibs.companyPlaceholder}
                   className={`${blankInputClass} w-[220px] md:w-[320px]`}
                 />
-                . I'd love to work with you on
+                {dict.contact.madLibs.loveToWork}
                 <span className="inline-block mx-1 align-middle">
                   <Select onValueChange={(v) => form.setValue("service", v)} defaultValue={form.getValues("service")}>
                     <SelectTrigger className={`h-auto py-1 border-b-[4px] border-t-0 border-l-0 border-r-0 border-solid border-foreground bg-transparent rounded-none focus:ring-0 focus:border-foreground/50 w-auto min-w-[240px] md:min-w-[320px] text-3xl md:text-5xl lg:text-[2.75rem] xl:text-6xl font-black text-foreground px-2 ${form.formState.errors.service ? errorClass : ''}`}>
-                      <SelectValue placeholder="SERVICE" />
+                      <SelectValue placeholder={dict.contact.madLibs.servicePlaceholder} />
                     </SelectTrigger>
                     <SelectContent className="rounded-none border-[3px] border-foreground font-bold">
-                      <SelectItem value="a new website">A NEW WEBSITE</SelectItem>
-                      <SelectItem value="a mobile app">A MOBILE APP</SelectItem>
-                      <SelectItem value="ui/ux design">UI/UX DESIGN</SelectItem>
-                      <SelectItem value="consulting">CONSULTING</SelectItem>
-                      <SelectItem value="something else">SOMETHING ELSE</SelectItem>
+                      <SelectItem value="a new website">{dict.contact.madLibs.services.website.toUpperCase()}</SelectItem>
+                      <SelectItem value="a mobile app">{dict.contact.madLibs.services.app.toUpperCase()}</SelectItem>
+                      <SelectItem value="ui/ux design">{dict.contact.madLibs.services.uiux.toUpperCase()}</SelectItem>
+                      <SelectItem value="consulting">{dict.contact.madLibs.services.consulting.toUpperCase()}</SelectItem>
+                      <SelectItem value="something else">{dict.contact.madLibs.services.other.toUpperCase()}</SelectItem>
                     </SelectContent>
                   </Select>
                 </span>
@@ -141,22 +143,22 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                     <input
                       value={customService}
                       onChange={(e) => setCustomService(e.target.value)}
-                      placeholder="SPECIFY SERVICE"
+                      placeholder={dict.contact.madLibs.specifyService}
                       className={`${blankInputClass} w-[200px] md:w-[280px] animate-in fade-in zoom-in-95 duration-200`}
                     />
                   </span>
                 )}
-                . You can reach me at
+                {dict.contact.madLibs.reachMe}
                 <input
                   {...form.register("email")}
-                  placeholder="EMAIL"
+                  placeholder={dict.contact.madLibs.emailPlaceholder}
                   className={`${blankInputClass} w-full md:w-[400px] ${form.formState.errors.email ? errorClass : ''}`}
                 />
-                . Here are some more details about the project:
+                {dict.contact.madLibs.moreDetails}
                 <div className="relative w-full mt-6 block">
                   <textarea
                     {...form.register("message")}
-                    placeholder="BRIEF PROJECT DETAILS..."
+                    placeholder={dict.contact.madLibs.messagePlaceholder}
                     maxLength={500}
                     rows={4}
                     className="w-full h-auto min-h-[160px] p-6 bg-transparent border-[4px] border-foreground text-2xl md:text-3xl font-black text-foreground placeholder:opacity-30 focus-visible:outline-none focus-visible:shadow-[8px_8px_0_0_var(--foreground)] transition-shadow resize-none rounded-none"
@@ -174,17 +176,17 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                   className="rounded-none px-8 h-14 bg-foreground text-background font-bold tracking-widest uppercase hover:bg-foreground/90 transition-none"
                 >
                   {isSubmitting ? (
-                    "SENDING..."
+                    dict.contact.buttons.sending
                   ) : (
                     <>
-                      SEND MESSAGE
+                      {dict.contact.buttons.send}
                       <Send className="w-5 h-5 ml-3" />
                     </>
                   )}
                 </Button>
                 <a href="https://cal.com/riray/brief" target="_blank" rel="noreferrer">
                   <Button type="button" variant="outline" className="rounded-none px-8 h-14 border-[3px] border-foreground bg-background hover:bg-foreground hover:text-background text-foreground font-bold tracking-widest uppercase transition-colors group">
-                    SCHEDULE A CALL 
+                    {dict.contact.buttons.schedule} 
                     <Calendar className="w-5 h-5 ml-3" />
                   </Button>
                 </a>
@@ -200,22 +202,22 @@ export function ContactSection({ socialsData }: { socialsData: any[] }) {
                   <span className="animate-ping absolute inline-flex h-full w-full bg-foreground opacity-30"></span>
                   <span className="relative inline-flex h-4 w-4 bg-foreground"></span>
                 </div>
-                <span className="text-sm font-bold tracking-widest uppercase text-foreground">Available for new projects</span>
+                <span className="text-sm font-bold tracking-widest uppercase text-foreground">{dict.contact.info.available}</span>
               </div>
               
               <div className="flex items-center justify-between pb-6 border-b-[3px] border-foreground">
                 <div className="flex items-center gap-3 text-foreground">
                   <MapPin className="w-5 h-5" />
-                  <span className="text-sm font-bold tracking-widest uppercase">Local time (WIB)</span>
+                  <span className="text-sm font-bold tracking-widest uppercase">{dict.contact.info.localTime}</span>
                 </div>
                 <span className="font-mono text-sm font-black text-foreground">
-                  {time || "Loading..."}
+                  {time || dict.contact.info.loadingTime}
                 </span>
               </div>
             </div>
 
             <div className="flex flex-col gap-2">
-              <h4 className="font-black text-2xl text-foreground uppercase tracking-tight mb-2">Connect with me</h4>
+              <h4 className="font-black text-2xl text-foreground uppercase tracking-tight mb-2">{dict.contact.info.connect}</h4>
               
               <div className="flex flex-col w-full border-t-[3px] border-foreground mt-4">
                 {socialsData.map((social: any) => {

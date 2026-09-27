@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Download, Printer } from "lucide-react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function CvClient({ 
   resumeUrl, 
@@ -10,6 +11,7 @@ export function CvClient({
   resumeUrl: string;
   resumeViewUrl?: string; 
 }) {
+  const { dict } = useLanguage();
   const handlePrint = () => {
     window.print();
   };
@@ -28,7 +30,7 @@ export function CvClient({
         >
           <button className="w-full bg-foreground text-background border-[3px] border-foreground text-sm font-black py-4 px-6 rounded-none hover:bg-background hover:text-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all flex items-center justify-center gap-2 uppercase tracking-widest">
             <Download className="w-5 h-5" />
-            Download PDF
+            {dict.cv.downloadPdf}
           </button>
         </a>
         <button 
@@ -36,7 +38,7 @@ export function CvClient({
           className="flex-1 bg-surface text-foreground border-[3px] border-foreground text-sm font-black py-4 px-6 rounded-none hover:bg-foreground hover:text-background hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all flex items-center justify-center gap-2 uppercase tracking-widest"
         >
           <Printer className="w-5 h-5" />
-          Print Page
+          {dict.cv.printPage}
         </button>
       </div>
 
@@ -48,7 +50,7 @@ export function CvClient({
         
         {/* Warning if PDF doesn't load */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 -z-10 pointer-events-none">
-          <p className="font-black text-2xl uppercase tracking-widest opacity-20">Loading Document...</p>
+          <p className="font-black text-2xl uppercase tracking-widest opacity-20">{dict.cv.loading}</p>
         </div>
 
         <iframe 

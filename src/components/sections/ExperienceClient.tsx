@@ -3,12 +3,21 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { ArrowUp, ArrowDown } from "lucide-react";
-
-const CATEGORIES = ["ALL", "WORK", "EDUCATION", "CERTIFICATION", "INTERNSHIP", "VOLUNTEER"];
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function ExperienceClient({ experienceData }: { experienceData: any[] }) {
   const [activeCategory, setActiveCategory] = React.useState("ALL");
   const [sortOrder, setSortOrder] = React.useState<"newest" | "oldest">("newest");
+  const { dict } = useLanguage();
+
+  const CATEGORIES = [
+    { key: "ALL", label: dict.experience.filterAll },
+    { key: "WORK", label: dict.experience.filterWork },
+    { key: "EDUCATION", label: dict.experience.filterEducation },
+    { key: "CERTIFICATION", label: dict.experience.filterCertification },
+    { key: "INTERNSHIP", label: dict.experience.filterInternship },
+    { key: "VOLUNTEER", label: dict.experience.filterVolunteer }
+  ];
 
   const filteredData = React.useMemo(() => {
     let result = experienceData;
@@ -27,19 +36,19 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
       {/* Category Tabs & Sort */}
       <div className="flex items-center border-b-[3px] border-foreground relative overflow-x-auto [&::-webkit-scrollbar]:hidden w-full mb-4">
         <div className="flex items-center gap-2 md:gap-4 min-w-max">
-          {CATEGORIES.map((category) => {
-            const count = category === "ALL" 
+          {CATEGORIES.map(({ key, label }) => {
+            const count = key === "ALL" 
               ? experienceData.length 
-              : experienceData.filter((exp) => exp.type.toUpperCase() === category).length;
+              : experienceData.filter((exp) => exp.type.toUpperCase() === key).length;
             
-            if (count === 0 && category !== "ALL") return null;
+            if (count === 0 && key !== "ALL") return null;
 
-            const isActive = activeCategory === category;
+            const isActive = activeCategory === key;
             
             return (
               <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
+                key={key}
+                onClick={() => setActiveCategory(key)}
                 className={cn(
                   "group flex items-center gap-1.5 px-4 py-3 -mb-[3px] text-sm md:text-base font-black uppercase tracking-widest transition-none border-[3px]",
                   isActive 
@@ -47,7 +56,7 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
                     : "text-foreground bg-background border-transparent hover:border-foreground"
                 )}
               >
-                {category}
+                {label}
                 <span className="font-mono text-xs opacity-70 font-normal">
                   ({count})
                 </span>
@@ -62,7 +71,7 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
             onClick={() => setSortOrder(prev => prev === "newest" ? "oldest" : "newest")}
             className="flex items-center gap-1.5 text-xs sm:text-sm font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
           >
-            <span>{sortOrder === "newest" ? "Newest" : "Oldest"}</span>
+            <span>{sortOrder === "newest" ? dict.projects.newest : dict.projects.oldest}</span>
             {sortOrder === "newest" ? (
               <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             ) : (
@@ -90,8 +99,8 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
             >
               {/* Left Column: Date & Type */}
               <div className="md:w-1/4 shrink-0 flex flex-col gap-1 md:pt-1">
-                <span className="font-mono text-sm font-black opacity-90">{exp.duration}</span>
-                <span className="text-xs font-bold opacity-70 uppercase tracking-widest">{exp.type}</span>
+                <span className="font-mono text-sm font-black opacity-90">{exp.duration.replace("Present", dict.experience.present)}</span>
+                <span className="text-xs font-bold opacity-70 uppercase tracking-widest">{CATEGORIES.find(c => c.key === exp.type.toUpperCase())?.label || exp.type}</span>
               </div>
               
               {/* Right Column: Content */}
@@ -131,8 +140,8 @@ export function ExperienceClient({ experienceData }: { experienceData: any[] }) 
         })}
 
         {filteredData.length === 0 && (
-          <div className="text-muted-foreground italic py-8">
-            No experiences found for this category.
+          <div className="text-muted-foreground italic py-8 px-6 font-mono border-t-[3px] border-foreground">
+            {dict.experience.noExperience}
           </div>
         )}
       </div>

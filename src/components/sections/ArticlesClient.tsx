@@ -3,6 +3,7 @@
 import * as React from "react";
 import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { ArrowRight, BookOpen, LayoutGrid, List } from "lucide-react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function ArticlesClient({ 
   articlesData, 
@@ -12,6 +13,7 @@ export function ArticlesClient({
   hideViewAll: boolean 
 }) {
   const [viewMode, setViewMode] = React.useState<"list" | "grid">("list");
+  const { dict } = useLanguage();
   
   const stripHtml = (html: string) => html.replace(/<[^>]*>?/gm, '');
 
@@ -19,9 +21,9 @@ export function ArticlesClient({
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed rounded-none-2xl border-border bg-secondary/5 w-full">
         <BookOpen className="w-12 h-12 text-muted-foreground mb-4 opacity-50" />
-        <h3 className="text-lg font-medium">No articles yet</h3>
+        <h3 className="text-lg font-medium">{dict.articles.noArticles}</h3>
         <p className="text-muted-foreground mt-1 max-w-sm">
-          I'm currently working on some exciting content. Check back soon for new articles!
+          {dict.articles.checkBackSoon}
         </p>
       </div>
     );
@@ -83,7 +85,7 @@ export function ArticlesClient({
                   href={`/articles/${article.slug}`} 
                   className="w-full text-center text-sm font-black uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 py-4 transition-none flex items-center justify-center gap-2"
                 >
-                  READ ARTICLE <ArrowRight className="w-5 h-5" />
+                  {dict.articles.readArticle} <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
               
@@ -103,7 +105,7 @@ export function ArticlesClient({
                 href="/articles" 
                 className="w-full text-center text-sm font-black uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 py-4 transition-none flex items-center justify-center gap-2"
               >
-                VIEW ALL ARTICLES <ArrowRight className="w-5 h-5" />
+                {dict.articles.viewAll} <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
           )}
@@ -148,7 +150,7 @@ export function ArticlesClient({
                   href={`/articles/${article.slug}`} 
                   className="mt-auto w-full text-center text-sm font-black uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 py-4 transition-none flex items-center justify-center gap-2"
                 >
-                  READ ARTICLE <ArrowRight className="w-5 h-5" />
+                  {dict.articles.readArticle} <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
             </div>

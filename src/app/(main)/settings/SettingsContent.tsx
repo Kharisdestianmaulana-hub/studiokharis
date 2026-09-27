@@ -5,10 +5,12 @@ import { useTheme } from "next-themes";
 import { Moon, Sun, Monitor, Type, EyeOff, LayoutGrid, List, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function SettingsContent() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { dict } = useLanguage();
   
   const { 
     reducedMotion, 
@@ -29,8 +31,8 @@ export function SettingsContent() {
     return (
       <div className="flex flex-col gap-10 animate-in fade-in duration-500">
         <div className="flex flex-col gap-2">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground uppercase">Settings</h1>
-          <p className="font-bold tracking-widest text-xs uppercase text-foreground">Loading preferences...</p>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground uppercase">{dict.settings.title}</h1>
+          <p className="font-bold tracking-widest text-xs uppercase text-foreground">{dict.settings.loading}</p>
         </div>
       </div>
     );
@@ -53,40 +55,40 @@ export function SettingsContent() {
   return (
     <div className="flex flex-col gap-12 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-5xl">
       <div className="flex flex-col gap-2">
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground uppercase">Settings</h1>
-        <p className="font-bold tracking-widest text-xs uppercase text-foreground border-[3px] border-foreground bg-accent text-accent-foreground px-4 py-2 w-fit shadow-[4px_4px_0_0_var(--foreground)]">Customize your experience on this portfolio.</p>
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground uppercase">{dict.settings.title}</h1>
+        <p className="font-bold tracking-widest text-xs uppercase text-foreground border-[3px] border-foreground bg-accent text-accent-foreground px-4 py-2 w-fit shadow-[4px_4px_0_0_var(--foreground)]">{dict.settings.subtitle}</p>
       </div>
 
       <div className="grid gap-8 md:grid-cols-2">
         {/* Appearance Settings */}
         <div className={brutalistCard}>
           <div className={brutalistCardHeader}>
-            <h2 className={brutalistCardTitle}>Appearance</h2>
-            <p className={brutalistCardDesc}>Adjust the visual theme and colors.</p>
+            <h2 className={brutalistCardTitle}>{dict.settings.appearance}</h2>
+            <p className={brutalistCardDesc}>{dict.settings.appearanceDesc}</p>
           </div>
           <div className={brutalistCardContent}>
             
             {/* Theme Toggle */}
             <div className="flex flex-col gap-4">
-              <span className={brutalistLabel}>Theme</span>
+              <span className={brutalistLabel}>{dict.settings.theme}</span>
               <div className="flex flex-wrap gap-4">
                 <button 
                   onClick={() => setTheme("light")}
                   className={getBrutalistBtnClass(theme === "light")}
                 >
-                  <Sun className="w-5 h-5 stroke-[3]" /> Light
+                  <Sun className="w-5 h-5 stroke-[3]" /> {dict.settings.lightMode}
                 </button>
                 <button 
                   onClick={() => setTheme("dark")}
                   className={getBrutalistBtnClass(theme === "dark")}
                 >
-                  <Moon className="w-5 h-5 stroke-[3]" /> Dark
+                  <Moon className="w-5 h-5 stroke-[3]" /> {dict.settings.darkMode}
                 </button>
                 <button 
                   onClick={() => setTheme("system")}
                   className={getBrutalistBtnClass(theme === "system")}
                 >
-                  <Monitor className="w-5 h-5 stroke-[3]" /> System
+                  <Monitor className="w-5 h-5 stroke-[3]" /> {dict.settings.system}
                 </button>
               </div>
             </div>
@@ -97,45 +99,45 @@ export function SettingsContent() {
         {/* Accessibility Settings */}
         <div className={brutalistCard}>
           <div className={brutalistCardHeader}>
-            <h2 className={brutalistCardTitle}>Accessibility</h2>
-            <p className={brutalistCardDesc}>Make the site easier to use.</p>
+            <h2 className={brutalistCardTitle}>{dict.settings.accessibility}</h2>
+            <p className={brutalistCardDesc}>{dict.settings.accessibilityDesc}</p>
           </div>
           <div className={brutalistCardContent}>
             
             {/* Text Size */}
             <div className="flex flex-col gap-4">
-              <span className={brutalistLabel}>Text Size</span>
+              <span className={brutalistLabel}>{dict.settings.textSize}</span>
               <div className="flex flex-wrap gap-4">
                 <button 
                   onClick={() => setTextSize("normal")}
                   className={getBrutalistBtnClass(textSize === "normal")}
                 >
-                  <Type className="w-5 h-5 stroke-[3]" /> Normal
+                  <Type className="w-5 h-5 stroke-[3]" /> {dict.settings.textNormal}
                 </button>
                 <button 
                   onClick={() => setTextSize("large")}
                   className={getBrutalistBtnClass(textSize === "large")}
                 >
-                  <Type className="w-6 h-6 stroke-[3]" /> Large
+                  <Type className="w-6 h-6 stroke-[3]" /> {dict.settings.textLarge}
                 </button>
               </div>
             </div>
 
             {/* Reduced Motion */}
             <div className="flex flex-col gap-4">
-              <span className={brutalistLabel}>Reduced Motion</span>
+              <span className={brutalistLabel}>{dict.settings.reduceMotion}</span>
               <div className="flex flex-wrap gap-4">
                 <button 
                   onClick={() => setReducedMotion(false)}
                   className={getBrutalistBtnClass(!reducedMotion)}
                 >
-                  Animated
+                  {dict.settings.motionAnimated}
                 </button>
                 <button 
                   onClick={() => setReducedMotion(true)}
                   className={getBrutalistBtnClass(reducedMotion)}
                 >
-                  <EyeOff className="w-5 h-5 stroke-[3]" /> Reduced
+                  <EyeOff className="w-5 h-5 stroke-[3]" /> {dict.settings.motionReduced}
                 </button>
               </div>
             </div>
@@ -146,26 +148,26 @@ export function SettingsContent() {
         {/* Display Preferences */}
         <div className={brutalistCard}>
           <div className={brutalistCardHeader}>
-            <h2 className={brutalistCardTitle}>Layout</h2>
-            <p className={brutalistCardDesc}>Customize how content is presented.</p>
+            <h2 className={brutalistCardTitle}>{dict.settings.layout}</h2>
+            <p className={brutalistCardDesc}>{dict.settings.layoutDesc}</p>
           </div>
           <div className={brutalistCardContent}>
             
             {/* Projects View */}
             <div className="flex flex-col gap-4">
-              <span className={brutalistLabel}>Projects View Default</span>
+              <span className={brutalistLabel}>{dict.settings.projectsView}</span>
               <div className="flex flex-wrap gap-4">
                 <button 
                   onClick={() => setProjectsView("grid")}
                   className={getBrutalistBtnClass(projectsView === "grid")}
                 >
-                  <LayoutGrid className="w-5 h-5 stroke-[3]" /> Grid
+                  <LayoutGrid className="w-5 h-5 stroke-[3]" /> {dict.settings.viewGrid}
                 </button>
                 <button 
                   onClick={() => setProjectsView("list")}
                   className={getBrutalistBtnClass(projectsView === "list")}
                 >
-                  <List className="w-5 h-5 stroke-[3]" /> List
+                  <List className="w-5 h-5 stroke-[3]" /> {dict.settings.viewList}
                 </button>
               </div>
             </div>
@@ -176,13 +178,13 @@ export function SettingsContent() {
         {/* Data & Privacy */}
         <div className={cn(brutalistCard, "border-destructive")}>
           <div className={cn(brutalistCardHeader, "bg-destructive text-destructive-foreground border-destructive")}>
-            <h2 className={cn(brutalistCardTitle, "text-destructive-foreground")}>Danger Zone</h2>
-            <p className={cn(brutalistCardDesc, "text-destructive-foreground opacity-90")}>Manage your stored preferences.</p>
+            <h2 className={cn(brutalistCardTitle, "text-destructive-foreground")}>{dict.settings.dangerZone}</h2>
+            <p className={cn(brutalistCardDesc, "text-destructive-foreground opacity-90")}>{dict.settings.dangerDesc}</p>
           </div>
           <div className={brutalistCardContent}>
             <div className="flex flex-col gap-4 items-start">
               <p className="text-sm font-bold uppercase tracking-widest text-foreground leading-relaxed">
-                Atur ulang semua preferensi dan pengaturan Anda ke bawaan pabrik. Tindakan ini akan menghapus semua konfigurasi personalisasi yang telah Anda buat.
+                {dict.settings.resetWarning}
               </p>
               
               <div className="flex flex-wrap gap-4 mt-4 w-full">
@@ -191,7 +193,7 @@ export function SettingsContent() {
                   className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-destructive text-destructive-foreground font-black uppercase tracking-widest border-[3px] border-foreground hover:bg-foreground hover:text-background transition-all shadow-[6px_6px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
                 >
                   <RefreshCw className="w-5 h-5 stroke-[3]" />
-                  Reset All Settings
+                  {dict.settings.resetSettings}
                 </button>
               </div>
             </div>

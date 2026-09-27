@@ -5,10 +5,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function ProjectsCoverflow({ projects }: { projects: any[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  const { dict } = useLanguage();
 
   if (!projects || projects.length === 0) return null;
 
@@ -145,7 +147,7 @@ export function ProjectsCoverflow({ projects }: { projects: any[] }) {
               href={`/projects/${activeProject.id}`}
               className="flex items-center gap-2 px-6 py-3 border-[3px] border-foreground bg-foreground text-background hover:bg-accent hover:text-accent-foreground transition-all shadow-[6px_6px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none font-black uppercase text-xs tracking-widest"
             >
-              View Project <ArrowRight className="w-4 h-4 stroke-[3]" />
+              {dict.projects.viewProject} <ArrowRight className="w-4 h-4 stroke-[3]" />
             </Link>
           </motion.div>
         </AnimatePresence>

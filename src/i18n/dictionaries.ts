@@ -1,0 +1,393 @@
+export const dictionaries = {
+  en: {
+    nav: {
+      home: "Home",
+      projects: "Projects",
+      experience: "Experience",
+      techStack: "Tech Stack",
+      articles: "Articles",
+      visitorMap: "Visitor Map",
+      guestbook: "Guestbook",
+      manifesto: "Manifesto",
+      timeline: "Timeline",
+      contact: "Contact",
+      settings: "Settings",
+      collapseSidebar: "Collapse Sidebar",
+      expandSidebar: "Expand Sidebar",
+      toggleTheme: "Toggle Theme",
+      theme: "Theme"
+    },
+    hero: {
+      title: "Studio Kharis",
+      subtitle: "Small Studio. Big Ideas.",
+      projectsBtn: "Projects",
+      cvBtn: "CV"
+    },
+    about: {
+      title: "About Me",
+      subtitle: "KNOW MORE ABOUT ME",
+      yearsExp: "Years of Experience",
+      projectsCompleted: "Projects Completed",
+      articlesPublished: "Articles Published",
+      viewResume: "View Full Resume",
+      location: "Location",
+      projects: "Projects",
+      techStack: "Tech Stack",
+      email: "Email",
+      wantToKnow: "Want to know more about my experience?",
+      downloadResume: "Download Resume",
+      completed: "Completed",
+      techs: "Techs"
+    },
+    techMarquee: {
+      title: "Technologies I Use",
+      subtitle: "MODERN TOOLS FOR MODERN PROBLEMS."
+    },
+    projects: {
+      title: "Projects",
+      subtitle: "WHAT I'VE BEEN WORKING ON",
+      filterAll: "ALL",
+      sortBy: "Sort By",
+      newest: "Newest",
+      oldest: "Oldest",
+      readArticle: "Read Article",
+      source: "Source",
+      liveDemo: "Live Demo",
+      selectedWork: "SELECTED WORK",
+      allProjects: "All Projects",
+      workGallery: "Work Gallery",
+      allDesc: "A COMPREHENSIVE LIST OF MY WORK, EXPERIMENTS, AND OPEN SOURCE CONTRIBUTIONS.",
+      featuredDesc: "A COLLECTION OF SYSTEMS, DIGITAL PROJECTS, AND TECHNICAL WORK I'VE BUILT.",
+      viewMore: "VIEW MORE PROJECTS",
+      viewProject: "View Project",
+      noProjects: "No projects found for the selected filter. Try another tech."
+    },
+    articles: {
+      latestUpdates: "Latest Updates",
+      title: "Articles & Updates",
+      subtitle: "MY THOUGHTS ON SOFTWARE ENGINEERING, DESIGN, AND TECHNICAL EXPERIMENTS.",
+      readArticle: "Read Article",
+      viewAll: "View All Articles",
+      noArticles: "No articles yet",
+      checkBackSoon: "I'm currently working on some exciting content. Check back soon for new articles!"
+    },
+    cv: {
+      title: "Curriculum Vitae",
+      status: "Status: Available",
+      downloadPdf: "Download PDF",
+      printPage: "Print Page",
+      loading: "Loading Document..."
+    },
+    experience: {
+      title: "Experience",
+      subtitle: "MY PROFESSIONAL JOURNEY, EDUCATION, AND VOLUNTEER WORK.",
+      filterWork: "Work",
+      filterEducation: "Education",
+      filterVolunteer: "Volunteer",
+      filterAll: "All",
+      filterCertification: "Certification",
+      filterInternship: "Internship",
+      present: "Present",
+      techStack: "Tech Stack:",
+      noExperience: "No experiences found for this category."
+    },
+    contact: {
+      title: "Get in Touch",
+      subtitle: "LET'S BUILD SOMETHING AMAZING TOGETHER. FILL IN THE BLANKS OR BOOK A CALL DIRECTLY.",
+      madLibs: {
+        hi: "Hi Kharis! My name is",
+        namePlaceholder: "NAME",
+        andWorkAt: "and I work at",
+        companyPlaceholder: "COMPANY",
+        loveToWork: ". I'd love to work with you on",
+        servicePlaceholder: "SERVICE",
+        services: {
+          website: "a new website",
+          app: "a mobile app",
+          uiux: "ui/ux design",
+          consulting: "consulting",
+          other: "something else"
+        },
+        specifyService: "SPECIFY SERVICE",
+        reachMe: ". You can reach me at",
+        emailPlaceholder: "EMAIL",
+        moreDetails: ". Here are some more details about the project:",
+        messagePlaceholder: "BRIEF PROJECT DETAILS..."
+      },
+      buttons: {
+        sending: "Sending...",
+        send: "Send Message",
+        schedule: "Schedule a Call"
+      },
+      info: {
+        available: "Available for new projects",
+        localTime: "Local time (WIB)",
+        connect: "Connect with me",
+        loadingTime: "Loading..."
+      }
+    },
+    settings: {
+      title: "Settings",
+      subtitle: "CUSTOMIZE YOUR EXPERIENCE ON THIS PORTFOLIO.",
+      loading: "Loading preferences...",
+      desc: "Configure your workspace",
+      appearance: "Appearance",
+      appearanceDesc: "Adjust the visual theme and colors.",
+      theme: "Theme",
+      darkMode: "Dark",
+      lightMode: "Light",
+      system: "System",
+      accessibility: "Accessibility",
+      accessibilityDesc: "Make the site easier to use.",
+      textSize: "Text Size",
+      textNormal: "Normal",
+      textLarge: "Large",
+      animations: "Animations",
+      reduceMotion: "Reduced Motion",
+      motionAnimated: "Animated",
+      motionReduced: "Reduced",
+      layout: "Layout",
+      layoutDesc: "Customize how content is presented.",
+      projectsView: "Projects View Default",
+      viewGrid: "Grid",
+      viewList: "List",
+      dangerZone: "Danger Zone",
+      dangerDesc: "Manage your stored preferences.",
+      resetWarning: "Reset all your preferences and settings to factory defaults. This will wipe all personalization configurations you have made.",
+      resetSettings: "Reset All Settings"
+    },
+    manifesto: {
+      title: "The Manifesto",
+      subtitle: "RULES OF ENGAGEMENT FOR MODERN ENGINEERING & DESIGN.",
+      endOfTransmission: "End of Transmission",
+      rules: [
+        {
+          title: "Function Over Flash",
+          desc: "A beautiful website is useless if it's slow. Performance is a feature, not an afterthought. Build things that actually work, then make them look good."
+        },
+        {
+          title: "Design With Attitude",
+          desc: "Stop making boring, rounded, glassmorphism websites. The web should have character. Stand out, be bold, and leave a permanent mark on the visitor's memory."
+        },
+        {
+          title: "Clear > Clever",
+          desc: "Good code isn't the most complex code; it's the most readable code. Don't hide behind abstractions. Write code your future self will understand."
+        },
+        {
+          title: "Ship Fast, Iterate Faster",
+          desc: "Perfection is an illusion. Build the MVP, throw it into the real world, gather feedback, and ruthlessly improve. Execution beats theory."
+        },
+        {
+          title: "Small Studio, Big Ideas",
+          desc: "You don't need a massive team to build world-class products. Sharp execution is more lethal than headcount. Own your stack and take responsibility."
+        }
+      ]
+    },
+    notFound: {
+      title: "404",
+      subtitle: "Page Not Found",
+      areYouLost: "Are you lost?",
+      desc: "Looks like this page doesn't exist in my directory. Find the button to return to base.",
+      goHome: "Go Home",
+      hint: "Move your cursor or swipe to find the way out",
+      backToHome: "Back to Home"
+    }
+  },
+  id: {
+    nav: {
+      home: "Beranda",
+      projects: "Proyek",
+      experience: "Pengalaman",
+      techStack: "Teknologi",
+      articles: "Artikel",
+      visitorMap: "Peta Pengunjung",
+      guestbook: "Buku Tamu",
+      manifesto: "Manifesto",
+      timeline: "Linimasa",
+      contact: "Kontak",
+      settings: "Pengaturan",
+      collapseSidebar: "Tutup Sidebar",
+      expandSidebar: "Buka Sidebar",
+      toggleTheme: "Ubah Tema",
+      theme: "Tema"
+    },
+    hero: {
+      title: "Studio Kharis",
+      subtitle: "Studio Kecil. Ide Besar.",
+      projectsBtn: "Proyek",
+      cvBtn: "CV"
+    },
+    about: {
+      title: "Tentang Saya",
+      subtitle: "KENALI SAYA LEBIH JAUH",
+      yearsExp: "Tahun Pengalaman",
+      projectsCompleted: "Proyek Selesai",
+      articlesPublished: "Artikel Terbit",
+      viewResume: "Lihat Resume Lengkap",
+      location: "Lokasi",
+      projects: "Proyek",
+      techStack: "Teknologi",
+      email: "Email",
+      wantToKnow: "Ingin tahu lebih banyak tentang pengalaman saya?",
+      downloadResume: "Unduh Resume",
+      completed: "Selesai",
+      techs: "Teknologi"
+    },
+    techMarquee: {
+      title: "Teknologi yang Saya Gunakan",
+      subtitle: "ALAT MODERN UNTUK MASALAH MODERN."
+    },
+    projects: {
+      title: "Proyek",
+      subtitle: "KARYA YANG SEDANG SAYA KERJAKAN",
+      filterAll: "SEMUA",
+      sortBy: "Urutkan",
+      newest: "Terbaru",
+      oldest: "Terlama",
+      readArticle: "Baca Artikel",
+      source: "Kode Sumber",
+      liveDemo: "Demo Langsung",
+      selectedWork: "KARYA PILIHAN",
+      allProjects: "Semua Proyek",
+      workGallery: "Galeri Karya",
+      allDesc: "DAFTAR LENGKAP KARYA, EKSPERIMEN, DAN KONTRIBUSI OPEN SOURCE SAYA.",
+      featuredDesc: "KOLEKSI SISTEM, PROYEK DIGITAL, DAN KARYA TEKNIS YANG SAYA BANGUN.",
+      viewMore: "LIHAT LEBIH BANYAK PROYEK",
+      viewProject: "Lihat Proyek",
+      noProjects: "Tidak ada proyek yang ditemukan untuk filter yang dipilih. Coba teknologi lain."
+    },
+    articles: {
+      latestUpdates: "Pembaruan Terkini",
+      title: "Artikel & Update",
+      subtitle: "PEMIKIRAN SAYA TENTANG REKAYASA PERANGKAT LUNAK, DESAIN, DAN EKSPERIMEN TEKNIS.",
+      readArticle: "Baca Artikel",
+      viewAll: "Lihat Semua Artikel",
+      noArticles: "Belum ada artikel",
+      checkBackSoon: "Saya sedang menyiapkan konten menarik. Cek lagi nanti untuk artikel baru!"
+    },
+    cv: {
+      title: "Curriculum Vitae",
+      status: "Status: Tersedia",
+      downloadPdf: "Unduh PDF",
+      printPage: "Cetak Halaman",
+      loading: "Memuat Dokumen..."
+    },
+    experience: {
+      title: "Pengalaman",
+      subtitle: "PERJALANAN PROFESIONAL, PENDIDIKAN, DAN KERJA SUKARELA SAYA.",
+      filterWork: "Pekerjaan",
+      filterEducation: "Pendidikan",
+      filterVolunteer: "Sukarelawan",
+      filterAll: "Semua",
+      filterCertification: "Sertifikasi",
+      filterInternship: "Magang",
+      present: "Sekarang",
+      techStack: "Teknologi:",
+      noExperience: "Tidak ada pengalaman yang ditemukan untuk kategori ini."
+    },
+    contact: {
+      title: "Hubungi Saya",
+      subtitle: "MARI BANGUN SESUATU YANG LUAR BIASA BERSAMA. ISI FORMULIR ATAU JADWALKAN PANGGILAN LANGSUNG.",
+      madLibs: {
+        hi: "Halo Kharis! Nama saya",
+        namePlaceholder: "NAMA",
+        andWorkAt: "dan saya bekerja di",
+        companyPlaceholder: "PERUSAHAAN",
+        loveToWork: ". Saya ingin bekerja sama denganmu untuk membuat",
+        servicePlaceholder: "LAYANAN",
+        services: {
+          website: "website baru",
+          app: "aplikasi mobile",
+          uiux: "desain ui/ux",
+          consulting: "konsultasi",
+          other: "hal lainnya"
+        },
+        specifyService: "SEBUTKAN LAYANAN",
+        reachMe: ". Kamu bisa menghubungi saya di",
+        emailPlaceholder: "EMAIL",
+        moreDetails: ". Berikut beberapa detail tambahan tentang proyeknya:",
+        messagePlaceholder: "DETAIL SINGKAT PROYEK..."
+      },
+      buttons: {
+        sending: "Mengirim...",
+        send: "Kirim Pesan",
+        schedule: "Jadwalkan Panggilan"
+      },
+      info: {
+        available: "Tersedia untuk proyek baru",
+        localTime: "Waktu lokal (WIB)",
+        connect: "Terhubung dengan saya",
+        loadingTime: "Memuat..."
+      }
+    },
+    settings: {
+      title: "Pengaturan",
+      subtitle: "SESUAIKAN PENGALAMAN ANDA DI PORTFOLIO INI.",
+      loading: "Memuat preferensi...",
+      desc: "Konfigurasi ruang kerja Anda",
+      appearance: "Tampilan",
+      appearanceDesc: "Sesuaikan tema visual dan warna.",
+      theme: "Tema",
+      darkMode: "Gelap",
+      lightMode: "Terang",
+      system: "Sistem",
+      accessibility: "Aksesibilitas",
+      accessibilityDesc: "Buat situs lebih mudah digunakan.",
+      textSize: "Ukuran Teks",
+      textNormal: "Normal",
+      textLarge: "Besar",
+      animations: "Animasi",
+      reduceMotion: "Kurangi Gerakan",
+      motionAnimated: "Animasi Penuh",
+      motionReduced: "Dikurangi",
+      layout: "Tata Letak",
+      layoutDesc: "Sesuaikan cara konten disajikan.",
+      projectsView: "Tampilan Proyek Default",
+      viewGrid: "Grid",
+      viewList: "Daftar",
+      dangerZone: "Zona Bahaya",
+      dangerDesc: "Kelola preferensi Anda yang tersimpan.",
+      resetWarning: "Atur ulang semua preferensi dan pengaturan Anda ke bawaan pabrik. Tindakan ini akan menghapus semua konfigurasi personalisasi yang telah Anda buat.",
+      resetSettings: "Atur Ulang Pengaturan"
+    },
+    manifesto: {
+      title: "Manifesto",
+      subtitle: "ATURAN MAIN UNTUK REKAYASA & DESAIN MODERN.",
+      endOfTransmission: "Akhir dari Transmisi",
+      rules: [
+        {
+          title: "Fungsi Diatas Gaya",
+          desc: "Sebuah situs web yang indah tidak ada gunanya jika lambat. Kinerja adalah fitur, bukan renungan. Bangun hal-hal yang benar-benar berfungsi, lalu buat agar terlihat bagus."
+        },
+        {
+          title: "Desain Dengan Sikap",
+          desc: "Berhentilah membuat situs web glassmorphism yang membosankan dan membulat. Web harus memiliki karakter. Menonjol, jadilah berani, dan tinggalkan jejak permanen dalam ingatan pengunjung."
+        },
+        {
+          title: "Jelas > Pintar",
+          desc: "Kode yang bagus bukanlah kode yang paling kompleks; itu adalah kode yang paling mudah dibaca. Jangan bersembunyi di balik abstraksi. Tulis kode yang akan dipahami oleh diri Anda di masa depan."
+        },
+        {
+          title: "Kirim Cepat, Iterasi Lebih Cepat",
+          desc: "Keserempurnaan adalah ilusi. Bangun MVP, lempar ke dunia nyata, kumpulkan umpan balik, dan tingkatkan dengan kejam. Eksekusi mengalahkan teori."
+        },
+        {
+          title: "Studio Kecil, Ide Besar",
+          desc: "Anda tidak membutuhkan tim besar untuk membangun produk kelas dunia. Eksekusi yang tajam lebih mematikan daripada jumlah karyawan. Miliki tumpukan Anda dan bertanggung jawab."
+        }
+      ]
+    },
+    notFound: {
+      title: "404",
+      subtitle: "Halaman Tidak Ditemukan",
+      areYouLost: "Tersesat?",
+      desc: "Sepertinya halaman ini tidak ada dalam direktori saya. Temukan tombol untuk kembali.",
+      goHome: "Kembali",
+      hint: "Gerakkan kursor atau usap layar untuk menemukan jalan keluar",
+      backToHome: "Kembali ke Beranda"
+    }
+  }
+} as const;
+
+export type Locale = keyof typeof dictionaries;
+export type Dictionary = typeof dictionaries.en;

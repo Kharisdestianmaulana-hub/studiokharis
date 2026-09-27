@@ -6,12 +6,14 @@ import { useSettingsStore } from "@/store/settingsStore";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { Filter } from "lucide-react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function ProjectsGrid({ projects, showFilters = false }: { projects: any[], showFilters?: boolean }) {
   const [mounted, setMounted] = useState(false);
   const { projectsView } = useSettingsStore();
   const [selectedTech, setSelectedTech] = useState<string>("All");
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+  const { dict } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
@@ -67,21 +69,21 @@ export function ProjectsGrid({ projects, showFilters = false }: { projects: any[
                     : "bg-background text-foreground hover:bg-accent hover:text-accent-foreground hover:-translate-y-1 shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
                 )}
               >
-                {tech}
+                {tech === "All" ? dict.projects.filterAll : tech}
               </button>
             ))}
           </div>
           
           <div className="shrink-0 w-full lg:w-auto flex items-center gap-4">
-            <span className="font-black uppercase tracking-widest text-xs text-foreground hidden sm:block">Sort:</span>
+            <span className="font-black uppercase tracking-widest text-xs text-foreground hidden sm:block">{dict.projects.sortBy}:</span>
             <div className="relative w-full sm:w-auto">
               <select 
                 value={sortOrder} 
                 onChange={(e: any) => setSortOrder(e.target.value)}
                 className="w-full sm:w-[180px] appearance-none px-4 py-3 bg-background border-[3px] border-foreground font-black uppercase tracking-widest text-xs shadow-[4px_4px_0_0_var(--foreground)] focus:outline-none cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors"
               >
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
+                <option value="newest">{dict.projects.newest}</option>
+                <option value="oldest">{dict.projects.oldest}</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-foreground">
                 <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -117,7 +119,7 @@ export function ProjectsGrid({ projects, showFilters = false }: { projects: any[
               animate={{ opacity: 1 }} 
               className="col-span-full py-16 text-center font-black uppercase tracking-widest text-foreground bg-surface border-[3px] border-dashed border-foreground shadow-[8px_8px_0_0_var(--foreground)]"
             >
-              No projects found for the selected filter. Try another tech.
+              {dict.projects.noProjects}
             </motion.div>
           )}
         </AnimatePresence>
