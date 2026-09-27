@@ -257,6 +257,7 @@ export const dictionaries = {
         wordCount: { title: "Word & Character Counter", desc: "Count words, characters, and estimate reading time." },
         pomodoro: { title: "Pomodoro Timer", desc: "Stay focused with Brutalist time management." },
         markdown: { title: "Markdown Preview", desc: "Write and preview Markdown in real-time." },
+        picker: { title: "Color Picker", desc: "Extract precise colors from any uploaded image." },
       }
     }
   },
@@ -518,6 +519,7 @@ export const dictionaries = {
         wordCount: { title: "Penghitung Kata & Karakter", desc: "Hitung kata, karakter, dan estimasi waktu membaca." },
         pomodoro: { title: "Timer Pomodoro", desc: "Tetap fokus dengan manajemen waktu Brutalis." },
         markdown: { title: "Pratinjau Markdown", desc: "Tulis dan pratinjau Markdown secara instan." },
+        picker: { title: "Pemetik Warna", desc: "Ekstrak warna presisi dari gambar yang diunggah." },
       }
     }
   }

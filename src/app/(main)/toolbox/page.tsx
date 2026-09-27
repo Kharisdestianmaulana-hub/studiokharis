@@ -117,6 +117,14 @@ export default async function ToolboxPage() {
       desc: dict.toolbox.tools.markdown.desc,
       href: "/toolbox/markdown-preview",
       color: "bg-foreground text-background"
+    },
+    {
+      id: 'color-picker',
+      icon: require('lucide-react').Pipette,
+      title: dict.toolbox.tools.picker.title,
+      desc: dict.toolbox.tools.picker.desc,
+      href: "/toolbox/color-picker",
+      color: "bg-foreground text-background"
     }
   ];
 
