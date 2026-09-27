@@ -33,11 +33,11 @@ export async function OpenSourceSection() {
       
       <div className="mt-6 md:hidden">
         <Link 
-          href="https://github.com/amelie" 
+          href="https://github.com/Kharisdestianmaulana-hub" 
           target="_blank"
-          className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-none py-3 hover:bg-secondary/10 transition-colors"
+          className="flex items-center justify-center gap-2 text-sm font-black uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 px-8 py-4 transition-none"
         >
-          <FaGithub className="w-4 h-4" /> View GitHub Profile
+          <FaGithub className="w-5 h-5" /> VIEW GITHUB PROFILE
         </Link>
       </div>
     </section>

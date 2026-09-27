@@ -48,9 +48,9 @@ export async function FeaturedProjectsSection({ showAll = false }: { showAll?: b
         <div className="mt-6 md:hidden">
           <Link 
             href="/projects" 
-            className="flex items-center justify-center gap-1.5 text-sm font-medium text-foreground bg-secondary/5 border border-border rounded-none py-3 hover:bg-secondary/10 transition-colors"
+            className="flex items-center justify-center gap-2 text-sm font-black uppercase tracking-widest text-background bg-foreground hover:bg-foreground/90 px-8 py-4 transition-none"
           >
-            {dict.projects.viewMore} <ArrowRight className="w-4 h-4" />
+            {dict.projects.viewMore} <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       )}

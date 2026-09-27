@@ -36,9 +36,9 @@ export function TopNav({ profileData }: { profileData?: any }) {
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center gap-4 md:min-w-[200px] justify-end">
+      <div className="flex items-center gap-2 md:gap-4 md:min-w-[200px] justify-end">
         <button 
-          className="hidden md:flex items-center justify-center gap-1 px-3 py-2 bg-surface text-foreground font-black uppercase tracking-widest text-xs border-[3px] border-foreground hover:bg-foreground hover:text-background transition-all shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
+          className="flex items-center justify-center gap-1 px-2 py-1 md:px-3 md:py-2 bg-surface text-foreground font-black uppercase tracking-widest text-xs border-[3px] border-foreground hover:bg-foreground hover:text-background transition-all shadow-[2px_2px_0_0_var(--foreground)] md:shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
           onClick={() => setLocale(locale === 'en' ? 'id' : 'en')}
           title="Toggle Language"
         >
