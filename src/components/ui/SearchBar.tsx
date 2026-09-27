@@ -92,8 +92,8 @@ export function SearchBar() {
       <form 
         onSubmit={handleSubmit}
         className={cn(
-          "relative flex items-center w-full h-10 px-3 rounded-none-[0.5rem] bg-background border transition-colors",
-          isOpen ? "border-accent ring-1 ring-accent/20" : "border-border hover:border-accent/50"
+          "relative flex items-center w-full h-10 px-3 rounded-none bg-background border-[3px] transition-all",
+          isOpen ? "border-foreground shadow-[2px_2px_0_0_var(--foreground)]" : "border-foreground shadow-[4px_4px_0_0_var(--foreground)]"
         )}
       >
         <Search className="w-4 h-4 text-muted-foreground shrink-0" />
@@ -130,7 +130,7 @@ export function SearchBar() {
 
       {/* Dropdown Suggestions */}
       {isOpen && query.trim() && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-surface border border-border shadow-lg rounded-none overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
+        <div className="absolute top-full left-0 right-0 mt-3 bg-background border-[3px] border-foreground shadow-[4px_4px_0_0_var(--foreground)] rounded-none overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
           {isLoading ? (
             <div className="p-4 flex items-center justify-center text-sm text-muted-foreground">
               <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -142,11 +142,11 @@ export function SearchBar() {
                 <li key={`${result.type}-${result.id}`}>
                   <button
                     onClick={() => handleSelect(result.url, result.title)}
-                    className="w-full text-left px-4 py-2 hover:bg-accent/10 flex items-center justify-between group transition-colors"
+                    className="w-full text-left px-4 py-2 hover:bg-foreground hover:text-background flex items-center justify-between group transition-none border-b-[3px] border-transparent hover:border-foreground"
                   >
                     <div className="flex items-center gap-3 overflow-hidden">
-                      <Search className="w-4 h-4 text-muted-foreground group-hover:text-accent shrink-0" />
-                      <span className="text-sm text-foreground truncate">{result.title}</span>
+                      <Search className="w-4 h-4 text-muted-foreground group-hover:text-background shrink-0" />
+                      <span className="text-sm font-bold uppercase tracking-widest text-foreground group-hover:text-background truncate">{result.title}</span>
                     </div>
                     {result.imageUrl && (
                       <div className="relative w-8 h-8 rounded-none shrink-0 overflow-hidden ml-2 bg-muted hidden lg:block">
@@ -163,7 +163,7 @@ export function SearchBar() {
                     setTransitionTitle("Search Results");
                     setPendingRoute(`/search?q=${encodeURIComponent(query)}`);
                   }}
-                  className="w-full text-center py-2 text-xs font-medium text-accent hover:bg-accent/10 rounded-none transition-colors"
+                  className="w-full text-center py-3 text-xs font-black uppercase tracking-widest text-foreground hover:bg-foreground hover:text-background rounded-none transition-none"
                 >
                   See all results
                 </button>

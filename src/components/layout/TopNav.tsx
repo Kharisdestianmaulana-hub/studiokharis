@@ -25,7 +25,7 @@ export function TopNav({ profileData }: { profileData?: any }) {
           <DynamicLogo />
         </div>
         <DynamicNavWidget />
-        <div className="md:hidden flex-1 min-w-0 max-w-[130px]">
+        <div className="md:hidden flex-1 min-w-0 w-full">
           <SearchBar />
         </div>
       </div>
