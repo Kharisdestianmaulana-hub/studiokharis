@@ -15,7 +15,7 @@ export default function MarkdownPreview() {
   }, [markdown]);
 
   return (
-    <ToolLayout title="Markdown Preview" desc="WRITE AND PREVIEW MARKDOWN IN REAL-TIME." maxWidth="max-w-7xl">
+    <ToolLayout title="Markdown Preview" desc="WRITE AND PREVIEW MARKDOWN IN REAL-TIME." maxWidth="max-w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[500px]">
         <div className="flex flex-col gap-2 h-full min-h-[500px]">
           <label className="font-black uppercase tracking-widest text-sm shrink-0">Markdown Input</label>

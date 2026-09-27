@@ -95,7 +95,7 @@ export default function ColorPicker() {
   };
 
   return (
-    <ToolLayout title={dict.toolbox.tools.picker.title} desc={dict.toolbox.tools.picker.desc} maxWidth="max-w-6xl">
+    <ToolLayout title={dict.toolbox.tools.picker.title} desc={dict.toolbox.tools.picker.desc} maxWidth="max-w-7xl">
       <div className="flex flex-col md:flex-row gap-8">
         
         {/* Kontrol Kiri */}
