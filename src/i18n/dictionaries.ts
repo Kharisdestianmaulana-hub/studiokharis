@@ -11,6 +11,7 @@ export const dictionaries = {
       manifesto: "Manifesto",
       timeline: "Timeline",
       contact: "Contact",
+      toolbox: "Toolbox",
       settings: "Settings",
       collapseSidebar: "Collapse Sidebar",
       expandSidebar: "Expand Sidebar",
@@ -238,6 +239,22 @@ export const dictionaries = {
       welcome: "WELCOME",
       welcomeBack: "WELCOME BACK",
       to: "TO"
+    },
+    toolbox: {
+      title: "Toolbox",
+      subtitle: "A COLLECTION OF HANDY MINI-TOOLS.",
+      tools: {
+        qr: { title: "QR Code Generator", desc: "Create QR codes from any text or URL instantly." },
+        compressor: { title: "Image Compressor", desc: "Compress images directly in your browser without losing quality." },
+        resizer: { title: "Image Resizer", desc: "Resize images to exact dimensions in seconds." },
+        converter: { title: "Image Converter", desc: "Convert images between JPG, PNG, and WEBP formats." },
+        json: { title: "JSON Formatter", desc: "Format, validate, and beautify your JSON data." },
+        password: { title: "Password Generator", desc: "Generate strong, secure, and random passwords." },
+        color: { title: "Color Converter", desc: "Convert colors between HEX, RGB, HSL, and more." },
+        contrast: { title: "Contrast Checker", desc: "Check if your colors meet WCAG accessibility standards." },
+        percentage: { title: "Percentage Calculator", desc: "Calculate percentages and discounts easily." },
+        wordCount: { title: "Word & Character Counter", desc: "Count words, characters, and estimate reading time." },
+      }
     }
   },
   id: {
@@ -252,6 +269,7 @@ export const dictionaries = {
       manifesto: "Manifesto",
       timeline: "Linimasa",
       contact: "Kontak",
+      toolbox: "Kotak Perkakas",
       settings: "Pengaturan",
       collapseSidebar: "Tutup Sidebar",
       expandSidebar: "Buka Sidebar",
@@ -479,6 +497,22 @@ export const dictionaries = {
       welcome: "SELAMAT DATANG",
       welcomeBack: "SELAMAT DATANG KEMBALI",
       to: "KE"
+    },
+    toolbox: {
+      title: "Kotak Perkakas",
+      subtitle: "KOLEKSI ALAT-ALAT MINI YANG SANGAT BERGUNA.",
+      tools: {
+        qr: { title: "Pembuat QR Code", desc: "Buat kode QR dari teks atau tautan apa pun secara instan." },
+        compressor: { title: "Kompresor Gambar", desc: "Kompres gambar langsung di peramban tanpa mengurangi kualitas." },
+        resizer: { title: "Pengubah Ukuran Gambar", desc: "Ubah ukuran gambar ke dimensi persis dalam hitungan detik." },
+        converter: { title: "Konverter Gambar", desc: "Ubah format gambar antara JPG, PNG, dan WEBP." },
+        json: { title: "Pemformat JSON", desc: "Format, validasi, dan rapikan data JSON Anda." },
+        password: { title: "Pembuat Kata Sandi", desc: "Buat kata sandi yang kuat, aman, dan acak." },
+        color: { title: "Konverter Warna", desc: "Ubah format warna antara HEX, RGB, HSL, dan lainnya." },
+        contrast: { title: "Pemeriksa Kontras", desc: "Periksa apakah warna Anda memenuhi standar aksesibilitas WCAG." },
+        percentage: { title: "Kalkulator Persentase", desc: "Hitung persentase dan diskon dengan mudah." },
+        wordCount: { title: "Penghitung Kata & Karakter", desc: "Hitung kata, karakter, dan estimasi waktu membaca." },
+      }
     }
   }
 };

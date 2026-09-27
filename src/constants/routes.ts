@@ -11,7 +11,8 @@ import {
   Settings,
   MessageSquare,
   Map,
-  Flag
+  Flag,
+  Wrench
 } from "lucide-react";
 
 export const NAVIGATION_ROUTES = [
@@ -74,6 +75,12 @@ export const NAVIGATION_ROUTES = [
     dictKey: "contact" as const,
     href: "/contact",
     icon: Mail,
+  },
+  {
+    name: "Toolbox",
+    dictKey: "toolbox" as const,
+    href: "/toolbox",
+    icon: Wrench,
   },
 ];
 
