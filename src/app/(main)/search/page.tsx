@@ -10,7 +10,7 @@ import { Highlighter } from "@/components/ui/Highlighter";
 import { TransitionLink as Link } from "@/components/layout/TransitionLink";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, SearchX } from "lucide-react";
+import { ArrowRight, SearchX, Grid, List } from "lucide-react";
 
 export default async function SearchPage({
   searchParams,
@@ -19,6 +19,7 @@ export default async function SearchPage({
 }) {
   const params = await searchParams;
   const query = typeof params.q === 'string' ? params.q : '';
+  const view = typeof params.view === 'string' ? params.view : 'list';
 
   let results: any[] = [];
 
@@ -121,31 +122,51 @@ export default async function SearchPage({
 
   return (
     <div className="flex flex-col gap-8 w-full max-w-4xl mx-auto min-h-[50vh]">
-      <div className="flex flex-col gap-2 mb-8 border-b-[3px] border-foreground pb-6">
-        <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase">
-          Search Results
-        </h3>
-        {query ? (
-          <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm mt-2">
-            Found <span className="font-black bg-foreground text-background px-2 mx-1 py-0.5">{results.length}</span> results for "<span className="italic">{query}</span>"
-          </p>
-        ) : (
-          <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm mt-2">
-            ENTER A SEARCH TERM IN THE NAVIGATION BAR TO BEGIN.
-          </p>
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b-[3px] border-foreground pb-6">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase">
+            Search Results
+          </h3>
+          {query ? (
+            <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm mt-2">
+              Found <span className="font-black bg-foreground text-background px-2 mx-1 py-0.5">{results.length}</span> results for "<span className="italic">{query}</span>"
+            </p>
+          ) : (
+            <p className="text-foreground font-bold tracking-widest uppercase text-xs md:text-sm mt-2">
+              ENTER A SEARCH TERM IN THE NAVIGATION BAR TO BEGIN.
+            </p>
+          )}
+        </div>
+        
+        {results.length > 0 && (
+          <div className="flex items-center border-[3px] border-foreground self-start md:self-auto shadow-[4px_4px_0_0_var(--foreground)]">
+            <Link 
+              href={`/search?q=${query}&view=list`} 
+              className={`px-3 py-2 transition-none ${view === 'list' ? 'bg-foreground text-background' : 'bg-surface text-foreground hover:bg-secondary/10'}`}
+            >
+              <List className="w-5 h-5" />
+            </Link>
+            <div className="w-[3px] bg-foreground self-stretch" />
+            <Link 
+              href={`/search?q=${query}&view=grid`} 
+              className={`px-3 py-2 transition-none ${view === 'grid' ? 'bg-foreground text-background' : 'bg-surface text-foreground hover:bg-secondary/10'}`}
+            >
+              <Grid className="w-5 h-5" />
+            </Link>
+          </div>
         )}
       </div>
 
-      <div className="flex flex-col gap-6">
+      <div className={view === 'grid' ? "grid grid-cols-1 md:grid-cols-2 gap-6" : "flex flex-col gap-6"}>
         {results.length > 0 ? (
           results.map((result) => (
             <Link 
               key={`${result.type}-${result.id}`} 
               href={result.url}
-              className="flex flex-col md:flex-row gap-4 p-5 rounded-none bg-surface border-[3px] border-foreground shadow-[6px_6px_0_0_var(--foreground)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all group animate-in fade-in slide-in-from-bottom-4"
+              className={`flex ${view === 'grid' ? 'flex-col' : 'flex-col md:flex-row'} gap-4 p-5 rounded-none bg-surface border-[3px] border-foreground shadow-[6px_6px_0_0_var(--foreground)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all group animate-in fade-in slide-in-from-bottom-4`}
             >
               {result.imageUrl && (
-                <div className="relative w-full md:w-48 h-32 md:h-auto rounded-none overflow-hidden shrink-0 border-[3px] border-foreground bg-muted">
+                <div className={`relative w-full ${view === 'grid' ? 'h-48' : 'md:w-48 h-32 md:h-auto'} rounded-none overflow-hidden shrink-0 border-[3px] border-foreground bg-muted`}>
                   <Image src={result.imageUrl} alt={result.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
               )}
