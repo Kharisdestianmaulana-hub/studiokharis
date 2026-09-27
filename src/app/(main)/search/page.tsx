@@ -140,7 +140,7 @@ export default async function SearchPage({
         </div>
         
         {results.length > 0 && (
-          <div className="flex items-center border-[3px] border-foreground self-start md:self-auto shadow-[4px_4px_0_0_var(--foreground)]">
+          <div className="hidden md:flex items-center border-[3px] border-foreground self-start md:self-auto shadow-[4px_4px_0_0_var(--foreground)]">
             <NextLink 
               href={`/search?q=${query}&view=list`} 
               className={`px-3 py-2 transition-none ${view === 'list' ? 'bg-foreground text-background' : 'bg-surface text-foreground hover:bg-secondary/10'}`}
@@ -160,7 +160,7 @@ export default async function SearchPage({
         )}
       </div>
 
-      <div className={view === 'grid' ? "grid grid-cols-1 md:grid-cols-2 gap-6" : "flex flex-col gap-6"}>
+      <div key={view} className={`animate-in fade-in duration-500 ${view === 'grid' ? "grid grid-cols-1 md:grid-cols-2 gap-6" : "flex flex-col gap-6"}`}>
         {results.length > 0 ? (
           results.map((result) => (
             <Link 
