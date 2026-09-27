@@ -47,6 +47,9 @@ const getPageName = (path: string, customTitle: string, dict: any) => {
     "/about": dict.tour.aboutTitle,
     "/timeline": dict.nav.timeline,
     "/settings": dict.nav.settings,
+    "/toolbox": dict.nav.toolbox || "Toolbox",
+    "/manifesto": dict.nav.manifesto || "Manifesto",
+    "/search": dict.search?.title || "Search",
   };
   if (exactSections[path]) return exactSections[path];
 
