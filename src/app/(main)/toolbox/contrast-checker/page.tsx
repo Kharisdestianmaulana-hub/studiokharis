@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ToolLayout } from "@/components/toolbox/ToolLayout";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 function getLuminance(r: number, g: number, b: number) {
     var a = [r, g, b].map(function (v) {
@@ -20,6 +21,7 @@ function hexToRgbArr(hex: string) {
 }
 
 export default function ContrastChecker() {
+  const { dict } = useLanguage();
   const [fg, setFg] = useState("#FFFFFF");
   const [bg, setBg] = useState("#000000");
   const [ratio, setRatio] = useState(0);
@@ -36,7 +38,7 @@ export default function ContrastChecker() {
   }, [fg, bg]);
 
   return (
-    <ToolLayout title="Contrast Checker" desc="CHECK IF YOUR COLORS MEET WCAG STANDARDS.">
+    <ToolLayout title={dict.toolbox.tools.contrast.title} desc={dict.toolbox.tools.contrast.desc}>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-1 flex flex-col gap-6 p-6 border-[3px] border-foreground bg-surface shadow-[6px_6px_0_0_var(--foreground)]">
           <label className="font-black uppercase tracking-widest text-sm">Foreground (Text) HEX</label>

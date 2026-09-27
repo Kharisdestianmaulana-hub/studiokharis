@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import { ToolLayout } from "@/components/toolbox/ToolLayout";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function JsonFormatter() {
+  const { dict } = useLanguage();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
@@ -20,7 +22,7 @@ export default function JsonFormatter() {
   };
 
   return (
-    <ToolLayout title="JSON Formatter" desc="FORMAT, VALIDATE, AND BEAUTIFY YOUR JSON DATA.">
+    <ToolLayout title={dict.toolbox.tools.json.title} desc={dict.toolbox.tools.json.desc}>
       <div className="flex flex-col gap-4">
         <button onClick={formatJSON} className="self-start px-6 py-3 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all">Format JSON</button>
         {error && <div className="p-4 bg-background text-foreground border-[3px] border-dashed border-foreground font-bold">{error}</div>}

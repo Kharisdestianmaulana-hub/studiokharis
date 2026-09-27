@@ -1,12 +1,23 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToolLayout } from "@/components/toolbox/ToolLayout";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ImageResizer() {
+  const { dict } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(800);
   const [resizedUrl, setResizedUrl] = useState("");
+  const [previewUrl, setPreviewUrl] = useState<string>("");
+
+  useEffect(() => {
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+      return () => URL.revokeObjectURL(url);
+    }
+  }, [file]);
 
   const handleResize = () => {
     if(!file) return;
@@ -25,39 +36,64 @@ export default function ImageResizer() {
   };
 
   return (
-    <ToolLayout title="Image Resizer" desc="RESIZE IMAGES TO EXACT DIMENSIONS.">
-      <div className="flex flex-col gap-6 p-6 border-[3px] border-foreground bg-surface shadow-[8px_8px_0_0_var(--foreground)]">
-        <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="border-[3px] border-foreground p-2 text-foreground" />
-        
-        {file && (
-          <div className="flex flex-col gap-4 text-foreground">
-            <div className="flex gap-4">
-              <div className="flex flex-col gap-2">
-                <label className="font-black uppercase text-sm">Width (px)</label>
-                <input type="number" value={width} onChange={e => setWidth(Number(e.target.value))} className="p-2 border-[3px] border-foreground max-w-[150px] bg-background" />
+    <ToolLayout title={dict.toolbox.tools.resizer.title} desc={dict.toolbox.tools.resizer.desc}>
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex-1 flex flex-col gap-6 p-6 border-[3px] border-foreground bg-surface shadow-[8px_8px_0_0_var(--foreground)]">
+          <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="border-[3px] border-foreground p-2 text-foreground" />
+          
+          {file && (
+            <div className="flex flex-col gap-4 text-foreground">
+              <div className="flex gap-4">
+                <div className="flex flex-col gap-2">
+                  <label className="font-black uppercase text-sm">Width (px)</label>
+                  <input type="number" value={width} onChange={e => setWidth(Number(e.target.value))} className="p-2 border-[3px] border-foreground max-w-[150px] bg-background" />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="font-black uppercase text-sm">Height (px)</label>
+                  <input type="number" value={height} onChange={e => setHeight(Number(e.target.value))} className="p-2 border-[3px] border-foreground max-w-[150px] bg-background" />
+                </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="font-black uppercase text-sm">Height (px)</label>
-                <input type="number" value={height} onChange={e => setHeight(Number(e.target.value))} className="p-2 border-[3px] border-foreground max-w-[150px] bg-background" />
+
+              <button onClick={handleResize} className="py-4 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all">
+                RESIZE IMAGE
+              </button>
+            </div>
+          )}
+
+          {resizedUrl && (
+            <div className="mt-4 flex flex-col gap-4">
+              <a href={resizedUrl} download={`resized_${file?.name}`} className="text-center py-3 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all">
+                DOWNLOAD
+              </a>
+            </div>
+          )}
+        </div>
+
+        <div className="w-full md:w-[400px] flex flex-col gap-6">
+          {previewUrl && !resizedUrl && (
+            <div className="flex flex-col gap-2">
+              <p className="font-black uppercase tracking-widest text-sm">Original Preview</p>
+              <div className="border-[3px] border-foreground overflow-hidden max-h-[400px] flex items-center justify-center bg-muted shadow-[6px_6px_0_0_var(--foreground)]">
+                <img src={previewUrl} alt="Original Preview" className="max-w-full max-h-[400px] object-contain" />
               </div>
             </div>
+          )}
 
-            <button onClick={handleResize} className="py-4 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all">
-              RESIZE IMAGE
-            </button>
-          </div>
-        )}
-
-        {resizedUrl && (
-          <div className="mt-4 flex flex-col gap-4">
-            <div className="border-[3px] border-foreground overflow-hidden max-h-[400px] flex items-center justify-center bg-muted">
-              <img src={resizedUrl} alt="Resized" className="max-w-full max-h-[400px] object-contain" />
+          {resizedUrl && (
+             <div className="flex flex-col gap-2">
+              <p className="font-black uppercase tracking-widest text-sm text-foreground">Resized Preview ({width}x{height})</p>
+              <div className="border-[3px] border-foreground overflow-hidden max-h-[400px] flex items-center justify-center bg-muted shadow-[6px_6px_0_0_var(--foreground)]">
+                <img src={resizedUrl} alt="Resized" className="max-w-full max-h-[400px] object-contain" />
+              </div>
             </div>
-            <a href={resizedUrl} download={`resized_${file?.name}`} className="text-center py-3 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all">
-              DOWNLOAD
-            </a>
-          </div>
-        )}
+          )}
+          
+          {!previewUrl && !resizedUrl && (
+            <div className="w-full h-64 border-[3px] border-dashed border-foreground flex items-center justify-center text-foreground font-bold uppercase tracking-widest bg-surface">
+              NO IMAGE SELECTED
+            </div>
+          )}
+        </div>
       </div>
     </ToolLayout>
   );

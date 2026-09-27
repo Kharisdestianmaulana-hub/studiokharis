@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import { ToolLayout } from "@/components/toolbox/ToolLayout";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function PasswordGenerator() {
+  const { dict } = useLanguage();
   const [password, setPassword] = useState("");
   const [length, setLength] = useState(16);
   const [useUpper, setUseUpper] = useState(true);
@@ -28,7 +30,7 @@ export default function PasswordGenerator() {
   };
 
   return (
-    <ToolLayout title="Password Generator" desc="GENERATE STRONG, SECURE, AND RANDOM PASSWORDS.">
+    <ToolLayout title={dict.toolbox.tools.password.title} desc={dict.toolbox.tools.password.desc}>
       <div className="flex flex-col max-w-xl gap-6 border-[3px] border-foreground bg-surface p-6 shadow-[8px_8px_0_0_var(--foreground)]">
         <div className="flex items-center justify-between gap-4">
           <input type="text" readOnly value={password} className="w-full p-4 border-[3px] border-foreground font-mono text-lg font-black bg-foreground text-background" placeholder="Click generate..." />

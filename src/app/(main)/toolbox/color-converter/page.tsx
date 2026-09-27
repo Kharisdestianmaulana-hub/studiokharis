@@ -1,8 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ToolLayout } from "@/components/toolbox/ToolLayout";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ColorConverter() {
+  const { dict } = useLanguage();
   const [hex, setHex] = useState("#000000");
   const [rgb, setRgb] = useState("");
   
@@ -29,7 +31,7 @@ export default function ColorConverter() {
   }, [hex]);
 
   return (
-    <ToolLayout title="Color Converter" desc="CONVERT HEX TO RGB EASILY.">
+    <ToolLayout title={dict.toolbox.tools.color.title} desc={dict.toolbox.tools.color.desc}>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-1 flex flex-col gap-6 p-6 border-[3px] border-foreground bg-surface shadow-[6px_6px_0_0_var(--foreground)]">
           <label className="font-black uppercase tracking-widest text-sm">HEX Color</label>

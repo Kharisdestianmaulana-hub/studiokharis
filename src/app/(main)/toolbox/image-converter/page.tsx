@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import { ToolLayout } from "@/components/toolbox/ToolLayout";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ImageConverter() {
+  const { dict } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [format, setFormat] = useState("image/png");
   const [convertedUrl, setConvertedUrl] = useState("");
@@ -30,7 +32,7 @@ export default function ImageConverter() {
   };
 
   return (
-    <ToolLayout title="Image Converter" desc="CONVERT IMAGES BETWEEN FORMATS.">
+    <ToolLayout title={dict.toolbox.tools.converter.title} desc={dict.toolbox.tools.converter.desc}>
       <div className="flex flex-col gap-6 p-6 border-[3px] border-foreground bg-surface shadow-[8px_8px_0_0_var(--foreground)]">
         <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="border-[3px] border-foreground p-2 text-foreground" />
         

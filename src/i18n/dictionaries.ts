@@ -243,6 +243,7 @@ export const dictionaries = {
     toolbox: {
       title: "Toolbox",
       subtitle: "A COLLECTION OF HANDY MINI-TOOLS.",
+      back: "BACK TO TOOLBOX",
       tools: {
         qr: { title: "QR Code Generator", desc: "Create QR codes from any text or URL instantly." },
         compressor: { title: "Image Compressor", desc: "Compress images directly in your browser without losing quality." },
@@ -501,6 +502,7 @@ export const dictionaries = {
     toolbox: {
       title: "Kotak Perkakas",
       subtitle: "KOLEKSI ALAT-ALAT MINI YANG SANGAT BERGUNA.",
+      back: "KEMBALI KE TOOLBOX",
       tools: {
         qr: { title: "Pembuat QR Code", desc: "Buat kode QR dari teks atau tautan apa pun secara instan." },
         compressor: { title: "Kompresor Gambar", desc: "Kompres gambar langsung di peramban tanpa mengurangi kualitas." },

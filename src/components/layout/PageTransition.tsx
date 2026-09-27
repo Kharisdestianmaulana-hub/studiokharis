@@ -72,6 +72,22 @@ const getPageName = (path: string, customTitle: string, dict: any) => {
 
   // Fallback to segment 1 if no custom title
   if (segments[1]) {
+    if (segments[0] === 'toolbox' && dict?.toolbox?.tools) {
+      const map: Record<string, string> = {
+        'qr-generator': dict.toolbox.tools.qr.title,
+        'image-compressor': dict.toolbox.tools.compressor.title,
+        'image-resizer': dict.toolbox.tools.resizer.title,
+        'image-converter': dict.toolbox.tools.converter.title,
+        'json-formatter': dict.toolbox.tools.json.title,
+        'password-generator': dict.toolbox.tools.password.title,
+        'color-converter': dict.toolbox.tools.color.title,
+        'contrast-checker': dict.toolbox.tools.contrast.title,
+        'percentage-calculator': dict.toolbox.tools.percentage.title,
+        'word-counter': dict.toolbox.tools.wordCount.title,
+      };
+      if (map[segments[1]]) return `${dict.nav.toolbox || "Toolbox"} / ${map[segments[1]]}`;
+    }
+
     const formattedSlug = segments[1].replace(/-/g, ' ');
     // uppercase first letters
     const titleCase = formattedSlug.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');

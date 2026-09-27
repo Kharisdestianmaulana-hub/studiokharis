@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import { ToolLayout } from "@/components/toolbox/ToolLayout";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function WordCounter() {
+  const { dict } = useLanguage();
   const [text, setText] = useState("");
   
   const words = text.trim() ? text.trim().split(/\s+/).length : 0;
@@ -11,7 +13,7 @@ export default function WordCounter() {
   const readingTime = Math.ceil(words / 200);
   
   return (
-    <ToolLayout title="Word Counter" desc="COUNT WORDS, CHARACTERS, AND ESTIMATE READING TIME.">
+    <ToolLayout title={dict.toolbox.tools.wordCount.title} desc={dict.toolbox.tools.wordCount.desc}>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
         {[
           { label: "Words", val: words },

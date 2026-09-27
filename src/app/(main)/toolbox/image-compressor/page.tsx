@@ -1,13 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToolLayout } from "@/components/toolbox/ToolLayout";
 import imageCompression from "browser-image-compression";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ImageCompressor() {
+  const { dict } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [compressedFile, setCompressedFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState({ maxSizeMB: 1, maxWidthOrHeight: 1920 });
+  const [previewUrl, setPreviewUrl] = useState<string>("");
+
+  useEffect(() => {
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+      return () => URL.revokeObjectURL(url);
+    }
+  }, [file]);
 
   const handleCompress = async () => {
     if(!file) return;
@@ -32,33 +43,47 @@ export default function ImageCompressor() {
   };
 
   return (
-    <ToolLayout title="Image Compressor" desc="COMPRESS IMAGES DIRECTLY IN BROWSER.">
-      <div className="flex flex-col gap-6 p-6 border-[3px] border-foreground bg-surface shadow-[8px_8px_0_0_var(--foreground)]">
-        <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="border-[3px] border-foreground p-2 text-foreground" />
-        
-        {file && (
-          <div className="flex flex-col gap-4 text-foreground">
-            <p className="font-bold">Original Size: {(file.size / 1024 / 1024).toFixed(2)} MB</p>
-            
-            <div className="flex flex-col gap-2">
-              <label className="font-black uppercase text-sm">Max Size (MB)</label>
-              <input type="number" value={options.maxSizeMB} onChange={e => setOptions({...options, maxSizeMB: Number(e.target.value)})} className="p-2 border-[3px] border-foreground max-w-[150px] bg-background" />
+    <ToolLayout title={dict.toolbox.tools.compressor.title} desc={dict.toolbox.tools.compressor.desc}>
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex-1 flex flex-col gap-6 p-6 border-[3px] border-foreground bg-surface shadow-[8px_8px_0_0_var(--foreground)]">
+          <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} className="border-[3px] border-foreground p-2 text-foreground" />
+          
+          {file && (
+            <div className="flex flex-col gap-4 text-foreground">
+              <p className="font-bold">Original Size: {(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              
+              <div className="flex flex-col gap-2">
+                <label className="font-black uppercase text-sm">Max Size (MB)</label>
+                <input type="number" value={options.maxSizeMB} onChange={e => setOptions({...options, maxSizeMB: Number(e.target.value)})} className="p-2 border-[3px] border-foreground max-w-[150px] bg-background" />
+              </div>
+
+              <button onClick={handleCompress} disabled={loading} className="py-4 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all disabled:opacity-50">
+                {loading ? "COMPRESSING..." : "COMPRESS IMAGE"}
+              </button>
             </div>
+          )}
 
-            <button onClick={handleCompress} disabled={loading} className="py-4 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all disabled:opacity-50">
-              {loading ? "COMPRESSING..." : "COMPRESS IMAGE"}
-            </button>
-          </div>
-        )}
-
-        {compressedFile && (
-          <div className="mt-4 p-4 border-[3px] border-foreground bg-foreground text-background flex flex-col gap-4">
-            <p className="font-bold">Compressed Size: {(compressedFile.size / 1024 / 1024).toFixed(2)} MB</p>
-            <button onClick={handleDownload} className="py-3 bg-background text-foreground font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--background)] transition-all">
-              DOWNLOAD
-            </button>
-          </div>
-        )}
+          {compressedFile && (
+            <div className="mt-4 p-4 border-[3px] border-foreground bg-foreground text-background flex flex-col gap-4">
+              <p className="font-bold">Compressed Size: {(compressedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+              <button onClick={handleDownload} className="py-3 bg-background text-foreground font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--background)] transition-all">
+                DOWNLOAD
+              </button>
+            </div>
+          )}
+        </div>
+        
+        <div className="w-full md:w-[400px] flex flex-col gap-2">
+          {previewUrl ? (
+            <div className="border-[3px] border-foreground overflow-hidden max-h-[500px] flex items-center justify-center bg-muted shadow-[6px_6px_0_0_var(--foreground)]">
+              <img src={previewUrl} alt="Preview" className="max-w-full max-h-[500px] object-contain" />
+            </div>
+          ) : (
+            <div className="w-full h-64 border-[3px] border-dashed border-foreground flex items-center justify-center text-foreground font-bold uppercase tracking-widest bg-surface">
+              NO IMAGE SELECTED
+            </div>
+          )}
+        </div>
       </div>
     </ToolLayout>
   );
