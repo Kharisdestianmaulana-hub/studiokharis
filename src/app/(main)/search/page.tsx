@@ -8,6 +8,7 @@ import { getProfileData } from '@/data/profile';
 import { getSocialLinks } from '@/data/socials';
 import { Highlighter } from "@/components/ui/Highlighter";
 import { TransitionLink as Link } from "@/components/layout/TransitionLink";
+import NextLink from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, SearchX, Grid, List } from "lucide-react";
@@ -140,19 +141,21 @@ export default async function SearchPage({
         
         {results.length > 0 && (
           <div className="flex items-center border-[3px] border-foreground self-start md:self-auto shadow-[4px_4px_0_0_var(--foreground)]">
-            <Link 
+            <NextLink 
               href={`/search?q=${query}&view=list`} 
               className={`px-3 py-2 transition-none ${view === 'list' ? 'bg-foreground text-background' : 'bg-surface text-foreground hover:bg-secondary/10'}`}
+              scroll={false}
             >
               <List className="w-5 h-5" />
-            </Link>
+            </NextLink>
             <div className="w-[3px] bg-foreground self-stretch" />
-            <Link 
+            <NextLink 
               href={`/search?q=${query}&view=grid`} 
               className={`px-3 py-2 transition-none ${view === 'grid' ? 'bg-foreground text-background' : 'bg-surface text-foreground hover:bg-secondary/10'}`}
+              scroll={false}
             >
               <Grid className="w-5 h-5" />
-            </Link>
+            </NextLink>
           </div>
         )}
       </div>
