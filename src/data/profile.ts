@@ -22,6 +22,7 @@ export async function getProfileData() {
                            .sort((a: any, b: any) => new Date(b.$createdAt).getTime() - new Date(a.$createdAt).getTime());
   
   const resumeUrl = resumeFiles.length > 0 ? getAppwriteDownloadUrl(resumeFiles[0].$id) : "/resume.pdf";
+  const resumeViewUrl = resumeFiles.length > 0 ? getAppwriteImageUrl(resumeFiles[0].$id) : "/resume.pdf";
   
   if (!bio) {
     return {
@@ -38,6 +39,7 @@ export async function getProfileData() {
       github_url: "",
       linkedin_url: "",
       resumeUrl,
+      resumeViewUrl,
     };
   }
 
@@ -57,5 +59,6 @@ export async function getProfileData() {
     github_url: bio.github_url,
     linkedin_url: bio.linkedin_url,
     resumeUrl,
+    resumeViewUrl,
   };
 }

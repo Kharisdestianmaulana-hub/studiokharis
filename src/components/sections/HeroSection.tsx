@@ -116,12 +116,12 @@ export async function HeroSection({
                 <FaArrowRight className="w-3 h-3" />
               </button>
             </TransitionLink>
-            <a href={profileData.resumeUrl} target="_blank" rel="noreferrer" className="flex-[2]">
+            <TransitionLink href="/cv" className="flex-[2]">
               <button className="w-full bg-background text-foreground border-[3px] border-foreground text-[10px] md:text-xs font-black py-2 px-3 rounded-none hover:bg-foreground hover:text-background transition-colors flex items-center justify-center gap-1.5 uppercase tracking-widest whitespace-nowrap">
                 CV
                 <FaDownload className="w-3 h-3" />
               </button>
-            </a>
+            </TransitionLink>
           </div>
         )}
       </div>
