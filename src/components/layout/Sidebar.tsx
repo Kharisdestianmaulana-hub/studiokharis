@@ -32,11 +32,11 @@ export function Sidebar({ profileData }: { profileData?: any }) {
 
   return (
     <aside className={cn(
-      "hidden lg:flex flex-col shrink-0 h-screen sticky top-0 border-r-[3px] border-foreground bg-background z-30 transition-all duration-300",
+      "hidden lg:flex flex-col shrink-0 h-screen sticky top-0 border-r-[3px] border-foreground bg-background z-30 transition-all duration-300 overflow-y-auto scrollbar-none",
       isCollapsed ? "w-[90px]" : "w-[280px]"
     )}>
       {/* Top Profile / Header & Toggle */}
-      <div className={cn("p-6 flex border-b-[3px] border-foreground", isCollapsed ? "flex-col items-center gap-4" : "items-center justify-between")}>
+      <div className={cn("p-6 flex shrink-0 border-b-[3px] border-foreground", isCollapsed ? "flex-col items-center gap-4" : "items-center justify-between")}>
         {!isCollapsed && (
           <Link href="/about" id="tour-profile" className="flex items-center gap-4 overflow-hidden px-1 hover:-translate-y-1 transition-transform cursor-pointer group">
             <Avatar className="h-12 w-12 border-[3px] border-foreground rounded-none shrink-0 shadow-[4px_4px_0_0_var(--foreground)] group-hover:shadow-[2px_2px_0_0_var(--foreground)] bg-accent overflow-hidden">
@@ -84,7 +84,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
       </div>
 
       {/* Main Navigation */}
-      <div className="flex-1 overflow-y-auto p-4 scrollbar-none">
+      <div className="flex-1 py-8 px-4 flex flex-col justify-center">
         <nav className="flex flex-col gap-3">
           {NAVIGATION_ROUTES.map((route) => {
             const Icon = route.icon;
@@ -122,7 +122,7 @@ export function Sidebar({ profileData }: { profileData?: any }) {
       </div>
 
       {/* Bottom Navigation & Utilities */}
-      <div className="p-4 border-t-[3px] border-foreground">
+      <div className="p-4 border-t-[3px] border-foreground shrink-0 mt-auto">
         <nav className="flex flex-col gap-3 mb-6">
           {BOTTOM_ROUTES.map((route) => {
             const Icon = route.icon;
