@@ -32,14 +32,14 @@ export function Sidebar({ profileData }: { profileData?: any }) {
 
   return (
     <aside className={cn(
-      "hidden lg:flex flex-col shrink-0 h-screen sticky top-0 border-r-[3px] border-foreground bg-background z-30 transition-all duration-300 overflow-y-auto scrollbar-none",
-      isCollapsed ? "w-[90px]" : "w-[280px]"
+      "hidden lg:flex flex-col shrink-0 h-screen sticky top-0 border-r-[3px] border-foreground bg-background z-30 transition-all duration-300 overflow-hidden",
+      isCollapsed ? "w-[80px] xl:w-[90px]" : "w-[280px]"
     )}>
       {/* Top Profile / Header & Toggle */}
-      <div className={cn("p-6 flex shrink-0 border-b-[3px] border-foreground", isCollapsed ? "flex-col items-center gap-4" : "items-center justify-between")}>
+      <div className={cn("p-4 lg:p-5 flex shrink-0 border-b-[3px] border-foreground", isCollapsed ? "flex-col items-center justify-center gap-3" : "items-center justify-between")}>
         {!isCollapsed && (
           <Link href="/about" id="tour-profile" className="flex items-center gap-4 overflow-hidden px-1 hover:-translate-y-1 transition-transform cursor-pointer group">
-            <Avatar className="h-12 w-12 border-[3px] border-foreground rounded-none shrink-0 shadow-[4px_4px_0_0_var(--foreground)] group-hover:shadow-[2px_2px_0_0_var(--foreground)] bg-accent overflow-hidden">
+            <Avatar className="h-10 w-10 border-[3px] border-foreground rounded-none shrink-0 shadow-[4px_4px_0_0_var(--foreground)] group-hover:shadow-[2px_2px_0_0_var(--foreground)] bg-accent overflow-hidden">
               <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} className="object-cover w-full h-full grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
               <AvatarFallback className="font-black text-background bg-foreground rounded-none">{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
             </Avatar>
@@ -61,11 +61,11 @@ export function Sidebar({ profileData }: { profileData?: any }) {
               id="tour-collapse"
               className={cn(
                 "flex items-center justify-center shrink-0 border-[3px] border-foreground bg-surface text-foreground hover:bg-foreground hover:text-background transition-all active:translate-y-1 active:shadow-none shadow-[2px_2px_0_0_var(--foreground)]",
-                isCollapsed ? "w-12 h-12" : "w-10 h-10 ml-2"
+                isCollapsed ? "w-10 h-10" : "w-8 h-8 ml-2"
               )}
               onClick={toggleSidebar}
             >
-              {isCollapsed ? <PanelLeft className="h-5 w-5 stroke-[3]" /> : <PanelLeftClose className="h-5 w-5 stroke-[3]" />}
+              {isCollapsed ? <PanelLeft className="h-4 w-4 stroke-[3]" /> : <PanelLeftClose className="h-4 w-4 stroke-[3]" />}
             </button>
           </TooltipTrigger>
           <TooltipContent side="right" className="font-black uppercase tracking-widest border-[3px] border-foreground">
@@ -74,8 +74,8 @@ export function Sidebar({ profileData }: { profileData?: any }) {
         </Tooltip>
 
         {isCollapsed && (
-          <Link href="/about" id="tour-profile" className="mx-auto hover:-translate-y-1 transition-transform cursor-pointer group mt-4">
-            <Avatar className="h-12 w-12 border-[3px] border-foreground rounded-none shrink-0 shadow-[4px_4px_0_0_var(--foreground)] group-hover:shadow-[2px_2px_0_0_var(--foreground)] bg-accent overflow-hidden">
+          <Link href="/about" id="tour-profile" className="mx-auto hover:-translate-y-1 transition-transform cursor-pointer group mt-1">
+            <Avatar className="h-10 w-10 border-[3px] border-foreground rounded-none shrink-0 shadow-[4px_4px_0_0_var(--foreground)] group-hover:shadow-[2px_2px_0_0_var(--foreground)] bg-accent overflow-hidden">
               <AvatarImage src={profileData?.avatarUrl || "/avatar.jpg"} alt={profileData?.name || "User"} className="object-cover w-full h-full grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
               <AvatarFallback className="font-black text-background bg-foreground rounded-none">{profileData?.name?.substring(0, 2).toUpperCase() || "US"}</AvatarFallback>
             </Avatar>
@@ -84,8 +84,8 @@ export function Sidebar({ profileData }: { profileData?: any }) {
       </div>
 
       {/* Main Navigation */}
-      <div className="flex-1 py-8 px-4 flex flex-col justify-center">
-        <nav className="flex flex-col gap-3">
+      <div className="flex-1 py-4 px-2 md:px-4 flex flex-col justify-center min-h-0">
+        <nav className="flex flex-col gap-2 xl:gap-3">
           {NAVIGATION_ROUTES.map((route) => {
             const Icon = route.icon;
             const isActive = pathname === route.href || (route.href !== "/" && pathname.startsWith(route.href));
@@ -96,13 +96,13 @@ export function Sidebar({ profileData }: { profileData?: any }) {
                 href={route.href}
                 className={cn(
                   "flex items-center text-sm font-black uppercase tracking-widest transition-all duration-200 border-[3px]",
-                  isCollapsed ? "justify-center h-12 w-12 mx-auto" : "gap-4 px-4 py-3",
+                  isCollapsed ? "justify-center h-10 w-10 mx-auto" : "gap-4 px-4 py-2.5",
                   isActive
                     ? "bg-accent text-accent-foreground border-foreground shadow-[4px_4px_0_0_var(--foreground)] translate-x-1"
                     : "border-transparent text-foreground hover:border-foreground hover:bg-surface hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)]"
                 )}
               >
-                <Icon className={cn("shrink-0 stroke-[3]", isCollapsed ? "w-5 h-5" : "w-5 h-5")} />
+                <Icon className={cn("shrink-0 stroke-[3]", isCollapsed ? "w-4 h-4" : "w-4 h-4")} />
                 {!isCollapsed && <span className="truncate">{route.name}</span>}
               </Link>
             );
@@ -122,8 +122,8 @@ export function Sidebar({ profileData }: { profileData?: any }) {
       </div>
 
       {/* Bottom Navigation & Utilities */}
-      <div className="p-4 border-t-[3px] border-foreground shrink-0 mt-auto">
-        <nav className="flex flex-col gap-3 mb-6">
+      <div className="p-3 md:p-4 border-t-[3px] border-foreground shrink-0 mt-auto">
+        <nav className="flex flex-col gap-2 xl:gap-3 mb-3 md:mb-4">
           {BOTTOM_ROUTES.map((route) => {
             const Icon = route.icon;
             const LinkContent = (
@@ -132,10 +132,10 @@ export function Sidebar({ profileData }: { profileData?: any }) {
                 href={route.href}
                 className={cn(
                   "flex items-center text-sm font-black uppercase tracking-widest transition-all duration-200 border-[3px]",
-                  isCollapsed ? "justify-center h-12 w-12 mx-auto border-transparent hover:border-foreground hover:bg-surface hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)]" : "gap-4 px-4 py-3 border-transparent hover:border-foreground hover:bg-surface hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] text-foreground"
+                  isCollapsed ? "justify-center h-10 w-10 mx-auto border-transparent hover:border-foreground hover:bg-surface hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)]" : "gap-4 px-4 py-2.5 border-transparent hover:border-foreground hover:bg-surface hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] text-foreground"
                 )}
               >
-                <Icon className={cn("shrink-0 stroke-[3]", isCollapsed ? "w-5 h-5" : "w-5 h-5")} />
+                <Icon className={cn("shrink-0 stroke-[3]", isCollapsed ? "w-4 h-4" : "w-4 h-4")} />
                 {!isCollapsed && <span className="truncate">{route.name}</span>}
               </Link>
             );
@@ -153,8 +153,8 @@ export function Sidebar({ profileData }: { profileData?: any }) {
           })}
         </nav>
         
-        <div className={cn("flex items-center border-[3px] border-foreground bg-surface p-2 shadow-[4px_4px_0_0_var(--foreground)]", isCollapsed ? "justify-center flex-col gap-3" : "justify-between px-4 py-3")}>
-          {!isCollapsed && <span className="text-xs font-black uppercase tracking-widest text-foreground">Theme</span>}
+        <div className={cn("flex items-center border-[3px] border-foreground bg-surface p-1.5 shadow-[4px_4px_0_0_var(--foreground)]", isCollapsed ? "justify-center flex-col gap-2" : "justify-between px-3 py-2")}>
+          {!isCollapsed && <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Theme</span>}
           <Tooltip>
             <TooltipTrigger asChild>
               <div id="tour-theme">
