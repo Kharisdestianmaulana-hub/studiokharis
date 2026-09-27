@@ -9,7 +9,7 @@ export const metadata = {
 
 export default async function ManifestoPage() {
   const profileData = await getProfileData();
-  const dict = getDictionary();
+  const dict = await getDictionary();
 
   const MANIFESTO_RULES = [
     {

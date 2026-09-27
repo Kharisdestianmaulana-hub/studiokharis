@@ -14,7 +14,7 @@ export async function HeroSection({
 } = {}) {
   const profileData = await getProfileData();
   const socialsData = await getSocialLinks();
-  const dict = getDictionary();
+  const dict = await getDictionary();
   
   return (
     <section className="relative w-full h-[80vh] min-h-[600px] flex items-end justify-center pb-24 md:pb-0 animate-in fade-in slide-in-from-bottom-8 duration-700">

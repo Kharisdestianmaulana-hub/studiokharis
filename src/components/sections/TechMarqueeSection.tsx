@@ -5,7 +5,7 @@ import { getDictionary } from "@/lib/i18n";
 
 export async function TechMarqueeSection() {
   const techStackData = await getTechStack();
-  const dict = getDictionary();
+  const dict = await getDictionary();
   
   // Flatten all tech items from categories
   const allTechs = techStackData.flatMap((cat: any) => cat.items);

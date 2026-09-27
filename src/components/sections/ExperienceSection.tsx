@@ -5,7 +5,7 @@ import { getDictionary } from "@/lib/i18n";
 
 export async function ExperienceSection() {
   const experienceData = await getExperiences();
-  const dict = getDictionary();
+  const dict = await getDictionary();
   return (
     <section id="experience" className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">
       <div className="flex flex-col gap-4">

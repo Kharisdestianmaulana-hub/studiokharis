@@ -8,7 +8,7 @@ import { ArticlesClient } from "./ArticlesClient";
 
 export async function ArticlesSection({ hideViewAll = false }: { hideViewAll?: boolean }) {
   const articlesData = await getArticles();
-  const dict = getDictionary();
+  const dict = await getDictionary();
 
   return (
     <section id="articles" className="animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">

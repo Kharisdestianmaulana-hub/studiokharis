@@ -8,7 +8,7 @@ import { getDictionary } from "@/lib/i18n";
 
 export async function FeaturedProjectsSection({ showAll = false }: { showAll?: boolean }) {
   const projectsData = await getProjects();
-  const dict = getDictionary();
+  const dict = await getDictionary();
   // Fetch a bit more for the coverflow if not showAll
   const featuredProjects = showAll ? projectsData : projectsData.filter((p: any) => p.featured).slice(0, 5);
 

@@ -10,7 +10,7 @@ export async function AboutSection() {
   const projects = await getProjects();
   const techStack = await getTechStack();
   const techStackTotal = techStack.reduce((total, category) => total + category.items.length, 0);
-  const dict = getDictionary();
+  const dict = await getDictionary();
   
   return (
     <section id="about" className="relative w-full overflow-hidden bg-background border-[3px] border-foreground shadow-[8px_8px_0_0_var(--foreground)] text-foreground min-h-[80vh] flex flex-col p-8 md:p-12 lg:p-20 animate-in fade-in slide-in-from-bottom-8 duration-700">

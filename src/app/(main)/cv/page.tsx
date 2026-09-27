@@ -10,7 +10,7 @@ export const metadata = {
 
 export default async function CvPage() {
   const profileData = await getProfileData();
-  const dict = getDictionary();
+  const dict = await getDictionary();
 
   return (
     <div className="w-full min-h-screen py-12 md:py-24 px-4 sm:px-8">

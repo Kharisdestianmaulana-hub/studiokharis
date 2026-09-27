@@ -47,12 +47,12 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { getLocale } from "@/lib/i18n";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const initialLocale = getLocale();
+  const initialLocale = await getLocale();
 
   return (
     <html lang={initialLocale} suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
