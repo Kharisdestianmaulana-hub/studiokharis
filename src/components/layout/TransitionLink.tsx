@@ -12,7 +12,11 @@ interface TransitionLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchor
   href: string;
 }
 
-export function TransitionLink({ children, href, onClick, ...props }: TransitionLinkProps) {
+export function TransitionLink({ 
+  children, href, onClick, 
+  prefetch, replace, scroll, shallow, passHref, legacyBehavior, locale,
+  ...props 
+}: TransitionLinkProps) {
   const setPendingRoute = useTransitionStore((state) => state.setPendingRoute);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -44,8 +48,8 @@ export function TransitionLink({ children, href, onClick, ...props }: Transition
   };
 
   return (
-    <Link href={href} onClick={handleClick} {...props}>
+    <a href={href} onClick={handleClick} {...props}>
       {children}
-    </Link>
+    </a>
   );
 }
