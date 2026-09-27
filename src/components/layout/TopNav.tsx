@@ -19,11 +19,13 @@ export function TopNav({ profileData }: { profileData?: any }) {
   return (
     <header className="sticky top-0 z-20 w-full h-[72px] border-b-[3px] border-foreground bg-background flex items-center justify-between px-4 lg:px-8">
       {/* Left Section */}
-      <div className="flex items-center gap-2 flex-1 md:flex-none md:w-auto md:min-w-[250px] mr-2 md:mr-0">
+      <div className="flex items-center gap-2 flex-1 min-w-0 md:flex-none md:w-auto md:min-w-[250px] mr-2 md:mr-0">
         <MobileDrawer profileData={profileData} />
-        <DynamicLogo />
+        <div className="shrink-0">
+          <DynamicLogo />
+        </div>
         <DynamicNavWidget />
-        <div className="md:hidden flex-1 max-w-[200px]">
+        <div className="md:hidden flex-1 min-w-0 max-w-[130px]">
           <SearchBar />
         </div>
       </div>
@@ -36,7 +38,7 @@ export function TopNav({ profileData }: { profileData?: any }) {
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center gap-2 md:gap-4 md:min-w-[200px] justify-end">
+      <div className="flex items-center shrink-0 gap-2 md:gap-4 md:min-w-[200px] justify-end relative z-10">
         <button 
           className="flex items-center justify-center gap-1 px-2 py-1 md:px-3 md:py-2 bg-surface text-foreground font-black uppercase tracking-widest text-xs border-[3px] border-foreground hover:bg-foreground hover:text-background transition-all shadow-[2px_2px_0_0_var(--foreground)] md:shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-1 active:shadow-none"
           onClick={() => setLocale(locale === 'en' ? 'id' : 'en')}
