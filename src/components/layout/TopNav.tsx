@@ -23,9 +23,6 @@ export function TopNav({ profileData }: { profileData?: any }) {
         <MobileDrawer profileData={profileData} />
         <div className="shrink-0 flex items-center gap-3">
           <DynamicLogo />
-          <Link href="/" className="hidden md:block font-black uppercase tracking-[0.2em] text-lg hover:-translate-y-0.5 transition-transform">
-            Studio Kharis
-          </Link>
         </div>
         <DynamicNavWidget />
         <div className="md:hidden flex-1 min-w-0 w-full">
