@@ -53,13 +53,13 @@ export default function DecisionMaker() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[400px]">
         {/* Kontrol Kiri */}
         <div className="flex flex-col gap-4">
-          <label className="font-black uppercase tracking-widest text-sm">Enter Options (One per line)</label>
+          <label className="font-black uppercase tracking-widest text-sm">{dict.toolbox.details.decision.enterOptions}</label>
           <textarea
             value={optionsText}
             onChange={(e) => setOptionsText(e.target.value)}
             disabled={spinning}
             className="flex-1 w-full min-h-[300px] p-4 border-[3px] border-foreground bg-surface text-foreground font-mono resize-none focus:outline-none focus:shadow-[8px_8px_0_0_var(--foreground)] transition-all disabled:opacity-50"
-            placeholder="Option 1\nOption 2\nOption 3"
+            placeholder={dict.toolbox.details.decision.placeholder}
           />
           <button
             onClick={handleSpin}
@@ -67,18 +67,18 @@ export default function DecisionMaker() {
             className="py-4 font-black uppercase tracking-widest text-xl border-[3px] border-foreground flex items-center justify-center gap-2 bg-foreground text-background hover:-translate-y-1 hover:shadow-[6px_6px_0_0_var(--foreground)] transition-all active:translate-y-0 active:shadow-none disabled:opacity-50 disabled:pointer-events-none"
           >
             <Dices className="w-6 h-6" />
-            {spinning ? "DECIDING..." : "RANDOMIZE"}
+            {spinning ? dict.toolbox.details.decision.deciding : dict.toolbox.details.decision.randomize}
           </button>
         </div>
         
         {/* Hasil Kanan */}
         <div className="flex flex-col gap-2 relative h-full min-h-[300px]">
-          <label className="font-black uppercase tracking-widest text-sm text-center lg:text-left">Result</label>
+          <label className="font-black uppercase tracking-widest text-sm text-center lg:text-left">{dict.toolbox.details.decision.result}</label>
           <div className="flex-1 w-full border-[3px] border-foreground flex items-center justify-center bg-background shadow-[8px_8px_0_0_var(--foreground)] overflow-hidden relative p-8">
             
             {!spinning && !winner && (
               <div className="text-muted-foreground font-black uppercase tracking-widest text-center opacity-50">
-                WAITING FOR INPUT...
+                {dict.toolbox.details.decision.waiting}
               </div>
             )}
             
@@ -91,7 +91,7 @@ export default function DecisionMaker() {
             {winner && (
               <div className="flex flex-col items-center justify-center gap-6 animate-in zoom-in-50 duration-300 w-full">
                 <div className="text-sm font-black uppercase tracking-widest px-4 py-1 border-[2px] border-foreground bg-surface">
-                  THE WINNER IS
+                  {dict.toolbox.details.decision.winnerIs}
                 </div>
                 <div className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-center break-words w-full bg-foreground text-background p-4 shadow-[8px_8px_0_0_var(--foreground)] -rotate-2">
                   {winner}

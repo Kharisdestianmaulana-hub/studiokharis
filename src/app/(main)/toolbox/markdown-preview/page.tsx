@@ -15,7 +15,7 @@ export default function MarkdownPreview() {
   }, [markdown]);
 
   return (
-    <ToolLayout title="Markdown Preview" desc="WRITE AND PREVIEW MARKDOWN IN REAL-TIME." maxWidth="max-w-full">
+    <ToolLayout title={dict.toolbox.tools.markdown.title} desc={dict.toolbox.tools.markdown.desc} maxWidth="max-w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[500px]">
         <div className="flex flex-col gap-2 h-full min-h-[500px]">
           <label className="font-black uppercase tracking-widest text-sm shrink-0">Markdown Input</label>
@@ -23,12 +23,12 @@ export default function MarkdownPreview() {
             value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
             className="w-full h-full p-4 border-[3px] border-foreground bg-surface text-foreground font-mono resize-none focus:outline-none focus:shadow-[8px_8px_0_0_var(--foreground)] transition-shadow"
-            placeholder="Type your markdown here..."
+            placeholder={dict.toolbox.details.markdown.writeHere}
           />
         </div>
         
         <div className="flex flex-col gap-2 h-full min-h-[500px]">
-          <label className="font-black uppercase tracking-widest text-sm shrink-0">Live Preview</label>
+          <label className="font-black uppercase tracking-widest text-sm shrink-0">{dict.toolbox.details.markdown.preview}</label>
           <div 
             className="w-full h-full p-6 border-[3px] border-foreground bg-background text-foreground markdown-body overflow-y-auto break-words"
             dangerouslySetInnerHTML={{ __html: html }}

@@ -132,7 +132,7 @@ export default function WatermarkCreator() {
         {/* Kontrol Kiri */}
         <div className="lg:col-span-4 flex flex-col gap-6 p-6 border-[3px] border-foreground bg-surface shadow-[8px_8px_0_0_var(--foreground)] h-fit">
           <div className="flex flex-col gap-2">
-            <label className="font-black uppercase tracking-widest text-sm flex items-center gap-2"><Upload className="w-4 h-4" /> Upload Image</label>
+            <label className="font-black uppercase tracking-widest text-sm flex items-center gap-2"><Upload className="w-4 h-4" /> {dict.toolbox.details.watermark.uploadImage}</label>
             <input 
               type="file" 
               accept="image/*" 
@@ -142,7 +142,7 @@ export default function WatermarkCreator() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="font-black uppercase tracking-widest text-sm flex items-center gap-2"><Type className="w-4 h-4" /> Watermark Text</label>
+            <label className="font-black uppercase tracking-widest text-sm flex items-center gap-2"><Type className="w-4 h-4" /> {dict.toolbox.details.watermark.watermarkText}</label>
             <input 
               type="text" 
               value={watermarkText}
@@ -152,11 +152,11 @@ export default function WatermarkCreator() {
           </div>
 
           <div className="flex flex-col gap-4 border-[3px] border-foreground p-4 bg-background">
-            <label className="font-black uppercase tracking-widest text-sm border-b-[3px] border-foreground pb-2">Appearance</label>
+            <label className="font-black uppercase tracking-widest text-sm border-b-[3px] border-foreground pb-2">{dict.toolbox.details.watermark.appearance}</label>
             
             <div className="flex flex-col gap-2">
               <div className="flex justify-between font-bold text-xs uppercase">
-                <span>Opacity</span>
+                <span>{dict.toolbox.details.watermark.opacity}</span>
                 <span>{opacity}%</span>
               </div>
               <input type="range" min="10" max="100" value={opacity} onChange={(e) => setOpacity(parseInt(e.target.value))} className="accent-foreground h-2 bg-muted rounded-none border-2 border-foreground" />
@@ -164,7 +164,7 @@ export default function WatermarkCreator() {
 
             <div className="flex flex-col gap-2 mt-2">
               <div className="flex justify-between font-bold text-xs uppercase">
-                <span>Size</span>
+                <span>{dict.toolbox.details.watermark.size}</span>
                 <span>{fontSize}%</span>
               </div>
               <input type="range" min="2" max="30" value={fontSize} onChange={(e) => setFontSize(parseInt(e.target.value))} className="accent-foreground h-2 bg-muted rounded-none border-2 border-foreground" />
@@ -172,13 +172,13 @@ export default function WatermarkCreator() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="font-black uppercase tracking-widest text-sm">Position</label>
+            <label className="font-black uppercase tracking-widest text-sm">{dict.toolbox.details.watermark.position}</label>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { id: "top-left", label: "Top Left" },
-                { id: "center", label: "Center" },
-                { id: "bottom-right", label: "Bottom Right" },
-                { id: "tiled", label: "Tiled / Pattern" },
+                { id: "top-left", label: dict.toolbox.details.watermark.positions.topLeft },
+                { id: "center", label: dict.toolbox.details.watermark.positions.center },
+                { id: "bottom-right", label: dict.toolbox.details.watermark.positions.bottomRight },
+                { id: "tiled", label: dict.toolbox.details.watermark.positions.tiled },
               ].map((pos) => (
                 <button
                   key={pos.id}
@@ -197,13 +197,13 @@ export default function WatermarkCreator() {
             className="w-full py-4 mt-4 flex items-center justify-center gap-2 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[6px_6px_0_0_var(--foreground)] transition-all active:translate-y-0 active:shadow-none disabled:opacity-50 disabled:pointer-events-none"
           >
             <Download className="w-5 h-5" />
-            Download Result
+            {dict.toolbox.details.watermark.download}
           </button>
         </div>
         
         {/* Kanvas Kanan */}
         <div className="lg:col-span-8 flex flex-col gap-2 relative">
-          <label className="font-black uppercase tracking-widest text-sm">Live Preview</label>
+          <label className="font-black uppercase tracking-widest text-sm">{dict.toolbox.details.watermark.livePreview}</label>
           <div className={`w-full min-h-[500px] border-[3px] border-foreground flex items-center justify-center bg-muted shadow-[8px_8px_0_0_var(--foreground)] overflow-hidden relative ${!file ? 'border-dashed' : ''}`}>
             
             <canvas 
@@ -215,7 +215,7 @@ export default function WatermarkCreator() {
               <div className="flex flex-col items-center gap-4 opacity-50 text-foreground">
                 <Stamp className="w-16 h-16" />
                 <div className="font-black uppercase tracking-widest text-center">
-                  UPLOAD AN IMAGE TO BEGIN
+                  {dict.toolbox.details.watermark.uploadToBegin}
                 </div>
               </div>
             )}

@@ -260,6 +260,56 @@ export const dictionaries = {
         picker: { title: "Color Picker", desc: "Extract precise colors from any uploaded image." },
         decision: { title: "Decision Maker", desc: "Randomly pick an option from your list. Brutal style." },
         watermark: { title: "Watermark Creator", desc: "Stamp images with your text securely in the browser." },
+      },
+      details: {
+        picker: {
+          uploadImage: "Upload Image",
+          activatePicker: "ACTIVATE PICKER",
+          pickingColor: "PICKING COLOR...",
+          selectedColor: "Selected Color",
+          copyHex: "COPY HEX",
+          copied: "COPIED!",
+          imageView: "Image View",
+          noImage: "NO IMAGE SELECTED",
+          clickAnywhere: "CLICK ANYWHERE ON IMAGE"
+        },
+        decision: {
+          enterOptions: "Enter Options (One per line)",
+          placeholder: "Option 1\nOption 2\nOption 3",
+          randomize: "RANDOMIZE",
+          deciding: "DECIDING...",
+          result: "Result",
+          waiting: "WAITING FOR INPUT...",
+          winnerIs: "THE WINNER IS"
+        },
+        watermark: {
+          uploadImage: "Upload Image",
+          watermarkText: "Watermark Text",
+          appearance: "Appearance",
+          opacity: "Opacity",
+          size: "Size",
+          position: "Position",
+          positions: {
+            topLeft: "Top Left",
+            center: "Center",
+            bottomRight: "Bottom Right",
+            tiled: "Tiled / Pattern"
+          },
+          download: "Download Result",
+          livePreview: "Live Preview",
+          uploadToBegin: "UPLOAD AN IMAGE TO BEGIN"
+        },
+        pomodoro: {
+          work: "Work (25m)",
+          break: "Break (5m)",
+          start: "START",
+          pause: "PAUSE",
+          reset: "RESET"
+        },
+        markdown: {
+          writeHere: "WRITE YOUR MARKDOWN HERE...",
+          preview: "PREVIEW"
+        }
       }
     }
   },
@@ -524,6 +574,56 @@ export const dictionaries = {
         picker: { title: "Pemetik Warna", desc: "Ekstrak warna presisi dari gambar yang diunggah." },
         decision: { title: "Penentu Nasib", desc: "Pilih satu opsi secara acak dari daftar Anda. Gaya brutal." },
         watermark: { title: "Pembuat Watermark", desc: "Beri cap teks pada gambar dengan aman di peramban." },
+      },
+      details: {
+        picker: {
+          uploadImage: "Unggah Gambar",
+          activatePicker: "AKTIFKAN PEMETIK",
+          pickingColor: "MEMETIK WARNA...",
+          selectedColor: "Warna Terpilih",
+          copyHex: "SALIN HEX",
+          copied: "TERSALIN!",
+          imageView: "Tampilan Gambar",
+          noImage: "TIDAK ADA GAMBAR",
+          clickAnywhere: "KLIK DI MANA SAJA PADA GAMBAR"
+        },
+        decision: {
+          enterOptions: "Masukkan Opsi (Satu per baris)",
+          placeholder: "Opsi 1\nOpsi 2\nOpsi 3",
+          randomize: "ACAK SEKARANG",
+          deciding: "MENENTUKAN...",
+          result: "Hasil",
+          waiting: "MENUNGGU MASUKAN...",
+          winnerIs: "PEMENANGNYA ADALAH"
+        },
+        watermark: {
+          uploadImage: "Unggah Gambar",
+          watermarkText: "Teks Watermark",
+          appearance: "Tampilan",
+          opacity: "Transparansi",
+          size: "Ukuran",
+          position: "Posisi",
+          positions: {
+            topLeft: "Kiri Atas",
+            center: "Tengah",
+            bottomRight: "Kanan Bawah",
+            tiled: "Ubin / Penuh"
+          },
+          download: "Unduh Hasil",
+          livePreview: "Pratinjau Langsung",
+          uploadToBegin: "UNGGAH GAMBAR UNTUK MEMULAI"
+        },
+        pomodoro: {
+          work: "Kerja (25m)",
+          break: "Istirahat (5m)",
+          start: "MULAI",
+          pause: "JEDA",
+          reset: "ATUR ULANG"
+        },
+        markdown: {
+          writeHere: "TULIS MARKDOWN ANDA DI SINI...",
+          preview: "PRATINJAU"
+        }
       }
     }
   }

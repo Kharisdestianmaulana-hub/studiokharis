@@ -101,7 +101,7 @@ export default function ColorPicker() {
         {/* Kontrol Kiri */}
         <div className="w-full md:w-[350px] flex flex-col gap-6 p-6 border-[3px] border-foreground bg-surface shadow-[8px_8px_0_0_var(--foreground)] h-fit">
           <div className="flex flex-col gap-2">
-            <label className="font-black uppercase tracking-widest text-sm">Upload Image</label>
+            <label className="font-black uppercase tracking-widest text-sm">{dict.toolbox.details.picker.uploadImage}</label>
             <input 
               type="file" 
               accept="image/*" 
@@ -116,12 +116,12 @@ export default function ColorPicker() {
             className={`py-4 mt-2 font-black uppercase tracking-widest border-[3px] border-foreground transition-all flex items-center justify-center gap-2 ${isPicking ? 'bg-foreground text-background shadow-[inset_0_4px_10px_rgba(0,0,0,0.5)]' : 'bg-background text-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)]'} disabled:opacity-50 disabled:pointer-events-none`}
           >
             <Pipette className="w-5 h-5" />
-            {isPicking ? "PICKING COLOR..." : "ACTIVATE PICKER"}
+            {isPicking ? dict.toolbox.details.picker.pickingColor : dict.toolbox.details.picker.activatePicker}
           </button>
 
           {hexColor && (
             <div className="flex flex-col gap-4 p-4 border-[3px] border-foreground bg-background mt-2">
-              <label className="font-black uppercase tracking-widest text-xs">Selected Color</label>
+              <label className="font-black uppercase tracking-widest text-xs">{dict.toolbox.details.picker.selectedColor}</label>
               
               <div className="flex gap-4 items-center">
                 <div 
@@ -141,7 +141,7 @@ export default function ColorPicker() {
                 className="w-full py-3 mt-2 flex items-center justify-center gap-2 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all"
               >
                 {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-                {copied ? "COPIED!" : "COPY HEX"}
+                {copied ? dict.toolbox.details.picker.copied : dict.toolbox.details.picker.copyHex}
               </button>
             </div>
           )}
@@ -149,7 +149,7 @@ export default function ColorPicker() {
         
         {/* Kanvas Kanan */}
         <div className="flex-1 flex flex-col gap-2 relative">
-          <label className="font-black uppercase tracking-widest text-sm">Image View</label>
+          <label className="font-black uppercase tracking-widest text-sm">{dict.toolbox.details.picker.imageView}</label>
           <div className={`w-full min-h-[400px] border-[3px] border-foreground flex items-center justify-center bg-muted shadow-[6px_6px_0_0_var(--foreground)] overflow-hidden relative ${!file ? 'border-dashed' : ''}`}>
             
             {/* Canvas untuk me-render gambar dan membaca pixel */}
@@ -162,14 +162,14 @@ export default function ColorPicker() {
             {/* Teks placeholder jika belum ada gambar */}
             {!file && (
               <div className="text-foreground font-bold uppercase tracking-widest p-4 text-center">
-                NO IMAGE SELECTED
+                {dict.toolbox.details.picker.noImage}
               </div>
             )}
             
             {/* Overlay instruksi saat mode picker aktif */}
             {file && isPicking && (
               <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-foreground text-background px-4 py-2 font-black uppercase tracking-widest text-sm shadow-[4px_4px_0_0_var(--background)] pointer-events-none animate-in fade-in slide-in-from-top-2">
-                CLICK ANYWHERE ON IMAGE
+                {dict.toolbox.details.picker.clickAnywhere}
               </div>
             )}
           </div>

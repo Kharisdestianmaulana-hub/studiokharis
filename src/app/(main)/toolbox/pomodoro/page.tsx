@@ -47,7 +47,7 @@ export default function PomodoroTimer() {
   const seconds = (timeLeft % 60).toString().padStart(2, "0");
 
   return (
-    <ToolLayout title="Pomodoro Timer" desc="STAY FOCUSED WITH BRUTALIST TIME MANAGEMENT.">
+    <ToolLayout title={dict.toolbox.tools.pomodoro.title} desc={dict.toolbox.tools.pomodoro.desc}>
       <div className="flex flex-col items-center gap-8 border-[3px] border-foreground bg-surface p-8 shadow-[8px_8px_0_0_var(--foreground)]">
         
         <div className="flex gap-4">
@@ -55,13 +55,13 @@ export default function PomodoroTimer() {
             onClick={() => switchMode("work")}
             className={`px-6 py-2 font-black uppercase tracking-widest border-[3px] border-foreground transition-all ${mode === "work" ? "bg-foreground text-background" : "bg-background text-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)]"}`}
           >
-            Work (25m)
+            {dict.toolbox.details.pomodoro.work}
           </button>
           <button 
             onClick={() => switchMode("break")}
             className={`px-6 py-2 font-black uppercase tracking-widest border-[3px] border-foreground transition-all ${mode === "break" ? "bg-foreground text-background" : "bg-background text-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)]"}`}
           >
-            Break (5m)
+            {dict.toolbox.details.pomodoro.break}
           </button>
         </div>
 
@@ -75,14 +75,14 @@ export default function PomodoroTimer() {
             className="flex-1 flex items-center justify-center gap-2 py-4 bg-foreground text-background font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all"
           >
             {isActive ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
-            {isActive ? "PAUSE" : "START"}
+            {isActive ? dict.toolbox.details.pomodoro.pause : dict.toolbox.details.pomodoro.start}
           </button>
           <button 
             onClick={resetTimer}
             className="flex-1 flex items-center justify-center gap-2 py-4 bg-background text-foreground font-black uppercase tracking-widest border-[3px] border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0_0_var(--foreground)] transition-all"
           >
             <RotateCcw className="w-6 h-6" />
-            RESET
+            {dict.toolbox.details.pomodoro.reset}
           </button>
         </div>
       </div>
