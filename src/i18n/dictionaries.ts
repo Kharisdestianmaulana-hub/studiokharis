@@ -255,6 +255,8 @@ export const dictionaries = {
         contrast: { title: "Contrast Checker", desc: "Check if your colors meet WCAG accessibility standards." },
         percentage: { title: "Percentage Calculator", desc: "Calculate percentages and discounts easily." },
         wordCount: { title: "Word & Character Counter", desc: "Count words, characters, and estimate reading time." },
+        pomodoro: { title: "Pomodoro Timer", desc: "Stay focused with Brutalist time management." },
+        markdown: { title: "Markdown Preview", desc: "Write and preview Markdown in real-time." },
       }
     }
   },
@@ -514,6 +516,8 @@ export const dictionaries = {
         contrast: { title: "Pemeriksa Kontras", desc: "Periksa apakah warna Anda memenuhi standar aksesibilitas WCAG." },
         percentage: { title: "Kalkulator Persentase", desc: "Hitung persentase dan diskon dengan mudah." },
         wordCount: { title: "Penghitung Kata & Karakter", desc: "Hitung kata, karakter, dan estimasi waktu membaca." },
+        pomodoro: { title: "Timer Pomodoro", desc: "Tetap fokus dengan manajemen waktu Brutalis." },
+        markdown: { title: "Pratinjau Markdown", desc: "Tulis dan pratinjau Markdown secara instan." },
       }
     }
   }

@@ -87,6 +87,8 @@ const getPageName = (path: string, customTitle: string, dict: any) => {
         'contrast-checker': dict.toolbox.tools.contrast.title,
         'percentage-calculator': dict.toolbox.tools.percentage.title,
         'word-counter': dict.toolbox.tools.wordCount.title,
+        'pomodoro': dict.toolbox.tools.pomodoro.title,
+        'markdown-preview': dict.toolbox.tools.markdown.title,
       };
       if (map[segments[1]]) return `${dict.nav.toolbox || "Toolbox"} / ${map[segments[1]]}`;
     }

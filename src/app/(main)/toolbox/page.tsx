@@ -101,6 +101,22 @@ export default async function ToolboxPage() {
       desc: dict.toolbox.tools.wordCount.desc,
       href: "/toolbox/word-counter",
       color: "bg-foreground text-background"
+    },
+    {
+      id: 'pomodoro',
+      icon: require('lucide-react').Clock,
+      title: dict.toolbox.tools.pomodoro.title,
+      desc: dict.toolbox.tools.pomodoro.desc,
+      href: "/toolbox/pomodoro",
+      color: "bg-foreground text-background"
+    },
+    {
+      id: 'markdown',
+      icon: require('lucide-react').Code,
+      title: dict.toolbox.tools.markdown.title,
+      desc: dict.toolbox.tools.markdown.desc,
+      href: "/toolbox/markdown-preview",
+      color: "bg-foreground text-background"
     }
   ];
 
