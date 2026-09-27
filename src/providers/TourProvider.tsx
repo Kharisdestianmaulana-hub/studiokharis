@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { Joyride, STATUS, Step, TooltipRenderProps } from "react-joyride";
 import { X } from "lucide-react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 interface TourContextType {
   runTour: boolean;
@@ -64,6 +65,7 @@ const CustomTooltip = ({
 };
 
 export function TourProvider({ children }: { children: React.ReactNode }) {
+  const { dict } = useLanguage();
   const [runTour, setRunTour] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [tourKey, setTourKey] = useState(0);
@@ -95,7 +97,7 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
     // Optional: prevent manual start on mobile too, or let them do it if they want
     // But since the targets are hidden, manual start will also break.
     if (window.innerWidth < 768) {
-      alert("Tutorial is only available on desktop screens.");
+      alert(dict.tour.mobileWarning);
       return;
     }
     setTourKey(prev => prev + 1);
@@ -107,8 +109,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "body",
       content: (
         <div className="flex flex-col gap-2 p-2">
-          <h3 className="text-2xl font-black uppercase tracking-widest text-foreground">WELCOME TO STUDIOKHARIS!</h3>
-          <p className="text-sm font-bold opacity-80 uppercase tracking-widest">Let's take a quick tour of this brutalist interface.</p>
+          <h3 className="text-2xl font-black uppercase tracking-widest text-foreground">{dict.tour.welcomeTitle}</h3>
+          <p className="text-sm font-bold opacity-80 uppercase tracking-widest">{dict.tour.welcomeDesc}</p>
         </div>
       ),
       placement: "center",
@@ -117,8 +119,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-collapse",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">TOGGLE SIDEBAR</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Expand or collapse the sidebar for more screen real estate.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.sidebarTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.sidebarDesc}</p>
         </div>
       ),
       placement: "right",
@@ -127,8 +129,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-profile",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">ABOUT ME</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Get to know more about who I am and my background.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.aboutTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.aboutDesc}</p>
         </div>
       ),
       placement: "right",
@@ -137,8 +139,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-home",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">HOME</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Return to the main dashboard anytime.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.homeTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.homeDesc}</p>
         </div>
       ),
       placement: "right",
@@ -147,8 +149,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-projects",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">PROJECTS</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Explore the portfolio of work I've built.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.projectsTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.projectsDesc}</p>
         </div>
       ),
       placement: "right",
@@ -157,8 +159,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-experience",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">EXPERIENCE</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">My professional journey and career history.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.experienceTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.experienceDesc}</p>
         </div>
       ),
       placement: "right",
@@ -167,8 +169,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-tech-stack",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">TECH STACK</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">The tools, languages, and frameworks I use.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.techStackTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.techStackDesc}</p>
         </div>
       ),
       placement: "right",
@@ -177,8 +179,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-articles",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">ARTICLES</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Read my thoughts and tutorials on software development.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.articlesTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.articlesDesc}</p>
         </div>
       ),
       placement: "right",
@@ -187,8 +189,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-visitor-map",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">VISITOR MAP</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">See live visitor locations across the globe.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.visitorMapTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.visitorMapDesc}</p>
         </div>
       ),
       placement: "right",
@@ -197,8 +199,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-guestbook",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">GUESTBOOK</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Leave a message for me and other visitors.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.guestbookTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.guestbookDesc}</p>
         </div>
       ),
       placement: "right",
@@ -207,8 +209,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-timeline",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">TIMELINE</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">A chronological view of my milestones.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.timelineTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.timelineDesc}</p>
         </div>
       ),
       placement: "right",
@@ -217,8 +219,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-contact",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">CONTACT</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Let's connect! Reach out to me here.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.contactTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.contactDesc}</p>
         </div>
       ),
       placement: "right",
@@ -227,8 +229,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-nav-settings",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">SETTINGS</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Customize your experience on this site.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.settingsTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.settingsDesc}</p>
         </div>
       ),
       placement: "right",
@@ -237,8 +239,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-theme",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">THEME SWITCH</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Toggle between light and dark brutalism.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.themeTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.themeDesc}</p>
         </div>
       ),
       placement: "right",
@@ -247,8 +249,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-search",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">GLOBAL SEARCH</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Looking for something? Press <kbd className="px-2 py-0.5 border-[2px] border-foreground bg-foreground text-background font-black mx-1">⌘ K</kbd> anywhere!</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.searchTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.searchDesc} <kbd className="px-2 py-0.5 border-[2px] border-foreground bg-foreground text-background font-black mx-1">⌘ K</kbd></p>
         </div>
       ),
       placement: "bottom",
@@ -257,8 +259,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-visitor",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">VISITOR COUNTER</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Live statistics of people who visited this page.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.visitorTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.visitorDesc}</p>
         </div>
       ),
       placement: "left",
@@ -267,8 +269,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
       target: "#tour-music",
       content: (
         <div className="flex flex-col gap-1 text-left">
-          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">LO-FI PLAYER</h4>
-          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">Need focus? Play some chill beats while browsing.</p>
+          <h4 className="font-black text-lg uppercase tracking-wider text-foreground">{dict.tour.musicTitle}</h4>
+          <p className="text-xs font-bold opacity-80 uppercase tracking-widest">{dict.tour.musicDesc}</p>
         </div>
       ),
       placement: "top-end",
@@ -306,6 +308,13 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
           {...({ showProgress: true, showSkipButton: true } as any)}
           callback={handleJoyrideCallback}
           tooltipComponent={CustomTooltip}
+          locale={{
+            back: dict.tour.back,
+            close: dict.tour.close,
+            last: dict.tour.last,
+            next: dict.tour.next,
+            skip: dict.tour.skip,
+          }}
           styles={{
             options: {
               zIndex: 10000,
