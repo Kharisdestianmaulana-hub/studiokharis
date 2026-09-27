@@ -11,6 +11,7 @@ import {
   Settings,
   MessageSquare,
   Map,
+  Flag
 } from "lucide-react";
 
 export const NAVIGATION_ROUTES = [
@@ -48,6 +49,11 @@ export const NAVIGATION_ROUTES = [
     name: "Guestbook",
     href: "/guestbook",
     icon: MessageSquare,
+  },
+  {
+    name: "Manifesto",
+    href: "/manifesto",
+    icon: Flag,
   },
   {
     name: "Timeline",
