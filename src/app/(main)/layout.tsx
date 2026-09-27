@@ -4,6 +4,7 @@ import { TopNav } from "@/components/layout/TopNav";
 import { Footer } from "@/components/layout/Footer";
 import { MusicPlayer } from "@/components/layout/MusicPlayer";
 import { BackToTop } from "@/components/layout/BackToTop";
+import { MainContainer } from "@/components/layout/MainContainer";
 import { getProfileData } from "@/data/profile";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SettingsProvider } from "@/providers/SettingsProvider";
@@ -24,9 +25,9 @@ export default async function MainLayout({
             <Sidebar profileData={profileData} />
             <div className="flex flex-col flex-1 min-w-0">
               <TopNav profileData={profileData} />
-              <main className="flex-1 w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-8 py-6 md:py-8">
+              <MainContainer>
                 {children}
-              </main>
+              </MainContainer>
               <Footer />
             </div>
           </div>
