@@ -233,6 +233,11 @@ export const dictionaries = {
       last: "Finish",
       next: "Next",
       skip: "Skip"
+    },
+    transition: {
+      welcome: "WELCOME",
+      welcomeBack: "WELCOME BACK",
+      to: "TO"
     }
   },
   id: {
@@ -469,6 +474,11 @@ export const dictionaries = {
       last: "Selesai",
       next: "Lanjut",
       skip: "Lewati"
+    },
+    transition: {
+      welcome: "SELAMAT DATANG",
+      welcomeBack: "SELAMAT DATANG KEMBALI",
+      to: "KE"
     }
   }
 };

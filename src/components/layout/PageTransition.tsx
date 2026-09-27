@@ -31,26 +31,28 @@ const blockVariants: Variants = {
   }),
 };
 
-const getPageName = (path: string, customTitle: string) => {
-  if (path === "/") return "Home";
+import { useLanguage } from "@/components/providers/LanguageProvider";
+
+const getPageName = (path: string, customTitle: string, dict: any) => {
+  if (path === "/") return dict.nav.home;
   
   const exactSections: Record<string, string> = {
-    "/articles": "Articles",
-    "/projects": "Projects",
-    "/experience": "Experience",
-    "/tech-stack": "Tech Stack",
-    "/contact": "Contact",
-    "/guestbook": "Guestbook",
-    "/globe": "Visitor Map",
-    "/about": "About",
-    "/timeline": "Timeline",
-    "/settings": "Settings",
+    "/articles": dict.nav.articles,
+    "/projects": dict.nav.projects,
+    "/experience": dict.nav.experience,
+    "/tech-stack": dict.nav.techStack,
+    "/contact": dict.nav.contact,
+    "/guestbook": dict.nav.guestbook,
+    "/globe": dict.nav.visitorMap,
+    "/about": dict.tour.aboutTitle,
+    "/timeline": dict.nav.timeline,
+    "/settings": dict.nav.settings,
   };
   if (exactSections[path]) return exactSections[path];
 
   const segments = path.split('/').filter(Boolean);
   const name = segments[0];
-  if (!name) return "Home";
+  if (!name) return dict.nav.home;
   
   const sectionName = name.charAt(0).toUpperCase() + name.slice(1).replace('-', ' ');
   
@@ -82,6 +84,7 @@ const getPageName = (path: string, customTitle: string) => {
 import { useRouter } from "next/navigation";
 
 export function PageTransition() {
+  const { dict } = useLanguage();
   const router = useRouter();
   const pathname = usePathname();
   const previousPath = useTransitionStore((state) => state.previousPath);
@@ -116,7 +119,7 @@ export function PageTransition() {
       sessionStorage.setItem('studiokharis_initial_done', 'true');
       
       const hasVisited = localStorage.getItem('studiokharis_visited');
-      const welcomeText = hasVisited ? "WELCOME BACK" : "WELCOME";
+      const welcomeText = hasVisited ? dict.transition.welcomeBack : dict.transition.welcome;
       if (!hasVisited) localStorage.setItem('studiokharis_visited', 'true');
       
       setTitles({ prev: "", next: welcomeText });
@@ -143,8 +146,8 @@ export function PageTransition() {
       setIsInitial(false);
       
       setTitles({
-        prev: getPageName(pathname, ""), 
-        next: getPageName(pendingRoute, transitionTitle)
+        prev: getPageName(pathname, "", dict), 
+        next: getPageName(pendingRoute, transitionTitle, dict)
       });
 
       // Phase 0: Blocks animate IN
@@ -192,8 +195,8 @@ export function PageTransition() {
       setIsInitial(false);
       
       setTitles({
-        prev: getPageName(prevPath, ""), 
-        next: getPageName(pathname, transitionTitle)
+        prev: getPageName(prevPath, "", dict), 
+        next: getPageName(pathname, transitionTitle, dict)
       });
       
       // Since it's instant, just do the normal sequence
@@ -210,9 +213,9 @@ export function PageTransition() {
 
   React.useEffect(() => {
     if (transitionTitle && !isInitial && !pendingRoute) {
-      setTitles(t => ({ ...t, next: getPageName(pathname, transitionTitle) }));
+      setTitles(t => ({ ...t, next: getPageName(pathname, transitionTitle, dict) }));
     }
-  }, [transitionTitle, pathname, isInitial, pendingRoute]);
+  }, [transitionTitle, pathname, isInitial, pendingRoute, dict]);
 
   return (
     <>
@@ -241,7 +244,7 @@ export function PageTransition() {
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="text-4xl md:text-6xl font-black text-foreground tracking-widest uppercase text-center px-4"
                 >
-                  {!isInitial && <span className="text-muted-foreground mr-3 text-2xl md:text-4xl">TO</span>}
+                  {!isInitial && <span className="text-muted-foreground mr-3 text-2xl md:text-4xl">{dict.transition.to}</span>}
                   {titles.next}
                 </motion.div>
               )}
